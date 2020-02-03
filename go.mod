@@ -1,4 +1,4 @@
-module gitlab.com/movienight1/grpc.proto
+module gitlab.com/CastyCo/grpc.proto
 
 go 1.13
 
