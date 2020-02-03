@@ -1,0 +1,23 @@
+syntax = "proto3";
+package messages;
+
+import "google/protobuf/timestamp.proto";
+import "user.proto";
+
+enum NOTIFICATION_TYPE {
+    INVALID            = 0;
+    NEW_FRIEND         = 1;
+    NEW_THEATER_INVITE = 2;
+}
+
+message Notification {
+    string             id        = 1;
+    NOTIFICATION_TYPE  type      = 2;
+    string             title     = 3;
+    string             content   = 4;
+    bool               read      = 5;
+    string             user_id   = 6;
+    User               user      = 7;
+    google.protobuf.Timestamp  created_at  = 12;
+    google.protobuf.Timestamp  updated_at  = 13;
+}
