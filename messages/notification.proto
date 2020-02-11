@@ -1,8 +1,8 @@
 syntax = "proto3";
 package messages;
 
-import "google/protobuf/timestamp.proto";
 import "user.proto";
+import "google/protobuf/timestamp.proto";
 
 enum NOTIFICATION_TYPE {
     INVALID            = 0;
@@ -11,13 +11,13 @@ enum NOTIFICATION_TYPE {
 }
 
 message Notification {
-    string             id        = 1;
-    NOTIFICATION_TYPE  type      = 2;
-    string             title     = 3;
-    string             data      = 4;
-    bool               read      = 5;
-    string             user_id   = 6;
-    User               user      = 7;
+    string                     id          = 1;
+    NOTIFICATION_TYPE          type        = 2;
+    string                     title       = 3;
+    bytes                      data        = 4;
+    bool                       read        = 5;
+    string                     user_id     = 6;
+    User                       user        = 7;
     google.protobuf.Timestamp  created_at  = 12;
     google.protobuf.Timestamp  updated_at  = 13;
 }
