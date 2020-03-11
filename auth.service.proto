@@ -25,7 +25,26 @@ message RefreshTokenRequest {
     bytes refreshed_token = 2;
 }
 
+enum OAUTHService {
+    Invalid  = 0;
+    Google   = 1;
+    Discord  = 2;
+}
+
+message OAUTHRequest {
+
+    enum Service {
+        Invalid  = 0;
+        Google   = 1;
+        Discord  = 2;
+    }
+
+    Service    service   = 1;
+    string     code      = 2;
+}
+
 service AuthService {
     rpc Authenticate(AuthRequest) returns (AuthResponse);
+    rpc CallbackOAUTH(OAUTHRequest) returns (AuthResponse);
     rpc RefreshToken(RefreshTokenRequest) returns (AuthResponse);
 }
