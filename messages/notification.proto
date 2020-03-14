@@ -13,7 +13,7 @@ enum NOTIFICATION_TYPE {
 message Notification {
     string                     id          = 1;
     NOTIFICATION_TYPE          type        = 2;
-    bytes                      data        = 4;
+    string                     data        = 4;
     bool                       read        = 5;
     string                     user_id     = 6;
     User                       user        = 7;
