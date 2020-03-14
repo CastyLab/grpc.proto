@@ -51,10 +51,11 @@ message FriendResponse {
 }
 
 message NotificationResponse {
-    int64         code    = 1;
-    string        status  = 2;
-    string        message = 3;
-    repeated      messages.Notification result  = 4;
+    int64         code          = 1;
+    string        status        = 2;
+    string        message       = 3;
+    int64         unread_count  = 4;
+    repeated      messages.Notification result  = 5;
 }
 
 message SearchUserRequest {

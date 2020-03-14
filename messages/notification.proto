@@ -13,11 +13,11 @@ enum NOTIFICATION_TYPE {
 message Notification {
     string                     id          = 1;
     NOTIFICATION_TYPE          type        = 2;
-    string                     title       = 3;
     bytes                      data        = 4;
     bool                       read        = 5;
     string                     user_id     = 6;
     User                       user        = 7;
-    google.protobuf.Timestamp  created_at  = 12;
-    google.protobuf.Timestamp  updated_at  = 13;
+    google.protobuf.Timestamp  read_at     = 12;
+    google.protobuf.Timestamp  created_at  = 13;
+    google.protobuf.Timestamp  updated_at  = 14;
 }
