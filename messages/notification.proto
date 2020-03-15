@@ -1,6 +1,7 @@
 syntax = "proto3";
 package messages;
 
+import "user.proto";
 import "google/protobuf/timestamp.proto";
 
 enum NOTIFICATION_TYPE {
@@ -15,9 +16,14 @@ message Notification {
     NOTIFICATION_TYPE          type          = 2;
     string                     extra         = 4;
     bool                       read          = 5;
+
     string                     from_user_id  = 6;
-    string                     to_user_id    = 7;
-    google.protobuf.Timestamp  read_at       = 8;
-    google.protobuf.Timestamp  created_at    = 9;
-    google.protobuf.Timestamp  updated_at    = 10;
+    User                       from_user      = 7;
+
+    string                     to_user_id    = 8;
+    User                       to_user       = 9;
+
+    google.protobuf.Timestamp  read_at       = 10;
+    google.protobuf.Timestamp  created_at    = 11;
+    google.protobuf.Timestamp  updated_at    = 12;
 }
