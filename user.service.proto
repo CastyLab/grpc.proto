@@ -4,6 +4,7 @@ package proto;
 import "base.proto";
 import "auth.service.proto";
 import "messages/user.proto";
+import "messages/friend.proto";
 import "messages/notification.proto";
 
 message UpdateStateRequest {
@@ -88,6 +89,7 @@ service UserService {
 
     // FriendZone
     rpc GetFriend(FriendRequest) returns (FriendResponse);
+    rpc GetFriendRequest(FriendRequest) returns (messages.Friend);
     rpc SendFriendRequest(FriendRequest) returns (Response);
     rpc AcceptFriendRequest(FriendRequest) returns (Response);
     rpc GetFriends(AuthenticateRequest) returns (FriendsResponse);
