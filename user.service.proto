@@ -17,8 +17,9 @@ message UpdateActivityRequest {
 }
 
 message FriendRequest {
-    string              friend_id    = 1;
-    AuthenticateRequest auth_request = 2;
+    string              request_id   = 1;
+    string              friend_id    = 2;
+    AuthenticateRequest auth_request = 3;
 }
 
 message CreateUserRequest {
@@ -88,6 +89,7 @@ service UserService {
     // FriendZone
     rpc GetFriend(FriendRequest) returns (FriendResponse);
     rpc SendFriendRequest(FriendRequest) returns (Response);
+    rpc AcceptFriendRequest(FriendRequest) returns (Response);
     rpc GetFriends(AuthenticateRequest) returns (FriendsResponse);
 
     // Notifications
