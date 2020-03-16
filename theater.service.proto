@@ -46,7 +46,14 @@ message GetTheaterMembersRequest {
     proto.AuthenticateRequest auth_request = 3;
 }
 
+message InviteFriendsTheaterRequest {
+    proto.AuthenticateRequest auth_request = 1;
+    string theater_id = 2;
+    repeated string friend_ids = 3;
+}
+
 service TheaterService {
+    rpc Invite(InviteFriendsTheaterRequest) returns (Response);
     rpc GetUserTheaters(GetAllUserTheatersRequest) returns (UserTheatersResponse);
     rpc GetTheater(messages.Theater) returns (UserTheaterResponse);
     rpc CreateTheater(CreateTheaterRequest) returns (Response);
