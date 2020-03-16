@@ -11,7 +11,7 @@ import (
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 	math "math"
-	messages "messages"
+	messages "github.com/CastyLab/grpc.proto/messages"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
