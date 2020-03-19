@@ -77,6 +77,11 @@ message SearchUserResponse {
     repeated messages.User result  = 4;
 }
 
+message UpdateUserRequest {
+    AuthenticateRequest auth_request = 1;
+    messages.User       result       = 2;
+}
+
 service UserService {
 
     // User Profile
@@ -84,6 +89,7 @@ service UserService {
     rpc UpdateActivity(UpdateActivityRequest) returns (Response);
     rpc RemoveActivity(AuthenticateRequest) returns (Response);
     rpc GetUser(AuthenticateRequest) returns (GetUserResponse);
+    rpc UpdateUser(UpdateUserRequest) returns (GetUserResponse);
     rpc Search(SearchUserRequest) returns (SearchUserResponse);
     rpc CreateUser(CreateUserRequest) returns (AuthResponse);
 
