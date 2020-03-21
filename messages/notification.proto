@@ -1,7 +1,7 @@
 syntax = "proto3";
 package messages;
 
-import "user.proto";
+import "messages/user.proto";
 import "google/protobuf/timestamp.proto";
 
 enum NOTIFICATION_TYPE {

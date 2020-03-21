@@ -7,6 +7,10 @@ import "messages/user.proto";
 import "messages/friend.proto";
 import "messages/notification.proto";
 
+message RollbackStatesRequest {
+    repeated string users_ids = 1;
+}
+
 message UpdateStateRequest {
     messages.PERSONAL_STATE state    = 1;
     AuthenticateRequest auth_request = 2;
@@ -83,6 +87,9 @@ message UpdateUserRequest {
 }
 
 service UserService {
+
+    // Websocket requests only
+    rpc RollbackStates(RollbackStatesRequest) returns (Response);
 
     // User Profile
     rpc UpdateState(UpdateStateRequest) returns (Response);
