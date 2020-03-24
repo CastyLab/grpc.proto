@@ -1,0 +1,96 @@
+syntax = "proto3";
+package proto;
+
+import "base.proto";
+import "user.proto";
+import "google/protobuf/timestamp.proto";
+
+enum PRIVACY {
+    PRIVATE  = 0;
+    EVERYONE = 1;
+    PUBLIC   = 2;
+}
+
+message Subtitle {
+    string lang = 1;
+    string file = 2;
+}
+
+message Movie {
+    string   movie_uri = 1;
+    string   poster    = 2;
+    int64    size      = 3;
+    int64    length    = 4;
+    int64    last_played_time   = 5;
+    repeated Subtitle subtitles = 6;
+}
+
+message Theater {
+    string id                   = 1;
+    string title                = 2;
+    string hash                 = 3;
+    PRIVACY privacy             = 4;
+    PRIVACY video_player_access = 5;
+    string user_id              = 6;
+    User user                   = 7;
+    Movie movie                 = 8;
+    google.protobuf.Timestamp created_at  = 9;
+    google.protobuf.Timestamp updated_at  = 10;
+}
+
+message GetAllUserTheatersRequest {
+    AuthenticateRequest auth_request = 1;
+}
+
+message CreateTheaterRequest {
+    Theater theater = 1;
+    AuthenticateRequest auth_request = 2;
+}
+
+message UserTheatersResponse {
+    int64    code    = 1;
+    string   status  = 2;
+    string   message = 3;
+    repeated Theater result = 4;
+}
+
+message UserTheaterResponse {
+    int64    code    = 1;
+    string   status  = 2;
+    string   message = 3;
+    Theater result = 4;
+}
+
+message TheaterMembersResponse {
+    int64    code    = 1;
+    string   status  = 2;
+    string   message = 3;
+    repeated User result = 4;
+}
+
+message AddOrRemoveMemberRequest {
+    string member_id = 1;
+    string theater_id = 2;
+    AuthenticateRequest auth_request = 3;
+}
+
+message GetTheaterMembersRequest {
+    string theater_id = 2;
+    AuthenticateRequest auth_request = 3;
+}
+
+message InviteFriendsTheaterRequest {
+    AuthenticateRequest auth_request = 1;
+    string theater_id = 2;
+    repeated string friend_ids = 3;
+}
+
+service TheaterService {
+    rpc Invite(InviteFriendsTheaterRequest) returns (Response);
+    rpc GetUserTheaters(GetAllUserTheatersRequest) returns (UserTheatersResponse);
+    rpc GetTheater(Theater) returns (UserTheaterResponse);
+    rpc CreateTheater(CreateTheaterRequest) returns (Response);
+    rpc AddMember(AddOrRemoveMemberRequest) returns (Response);
+    rpc RemoveMember(AddOrRemoveMemberRequest) returns (Response);
+    rpc GetMembers(GetTheaterMembersRequest) returns (TheaterMembersResponse);
+}

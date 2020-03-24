@@ -1,14 +1,11 @@
 syntax = "proto3";
 package proto;
 
+import "base.proto";
+
 message AuthRequest {
     string user = 1;
     string pass = 2;
-}
-
-message ValidationError {
-    string field = 1;
-    repeated string errors = 2;
 }
 
 message AuthResponse {
@@ -25,22 +22,14 @@ message RefreshTokenRequest {
     bytes refreshed_token = 2;
 }
 
-enum OAUTHService {
-    Invalid  = 0;
-    Google   = 1;
-    Discord  = 2;
-}
-
 message OAUTHRequest {
-
     enum Service {
         Invalid  = 0;
         Google   = 1;
         Discord  = 2;
     }
-
-    Service    service   = 1;
-    string     code      = 2;
+    Service  service   = 1;
+    string   code      = 2;
 }
 
 service AuthService {
