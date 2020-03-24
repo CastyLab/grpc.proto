@@ -2,31 +2,44 @@ syntax = "proto3";
 package proto;
 
 import "base.proto";
-import "messages/message.proto";
+import "user.proto";
+import "google/protobuf/timestamp.proto";
+
+message Message {
+    string  id          = 1;
+    string  content     = 2;
+    User    sender      = 3;
+    User    reciever    = 4;
+    bool    edited      = 5;
+    bool    deleted     = 6;
+    google.protobuf.Timestamp  created_at  = 7;
+    google.protobuf.Timestamp  updated_at  = 8;
+    google.protobuf.Timestamp  deleted_at  = 9;
+}
 
 message GetMessagesRequest {
     string receiver_id = 1;
-    proto.AuthenticateRequest auth_request = 2;
+    AuthenticateRequest auth_request = 2;
 }
 
 message GetMessagesResponse {
     int64    code    = 1;
     string   status  = 2;
     string   message = 4;
-    repeated messages.Message result  = 3;
+    repeated Message result  = 3;
 }
 
 message CreateMessageRequest {
     string reciever_id = 1;
     string content     = 2;
-    proto.AuthenticateRequest auth_request = 3;
+    AuthenticateRequest auth_request = 3;
 }
 
 message CreateMessageResponse {
     int64    code    = 1;
     string   status  = 2;
     string   message = 4;
-    messages.Message result  = 3;
+    Message result  = 3;
 }
 
 service MessagesService {

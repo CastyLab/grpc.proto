@@ -8,6 +8,11 @@ message Response {
     string  message = 4;
 }
 
+message ValidationError {
+    string field = 1;
+    repeated string errors = 2;
+}
+
 message AuthenticateRequest {
     bytes token = 1;
 }

@@ -2,62 +2,124 @@ syntax = "proto3";
 package proto;
 
 import "base.proto";
-import "auth.service.proto";
-import "messages/user.proto";
-import "messages/friend.proto";
-import "messages/notification.proto";
+import "auth.proto";
+import "google/protobuf/timestamp.proto";
+
+message Friend {
+    string  friend_id  = 1;
+    string  user_id    = 2;
+    bool    accepted   = 3;
+    google.protobuf.Timestamp  created_at  = 4;
+    google.protobuf.Timestamp  updated_at  = 5;
+}
+
+enum PERSONAL_STATE {
+    OFFLINE    = 0;
+    ONLINE     = 1;
+    IDLE       = 2;
+    BUSY       = 3;
+    INVISIBLE  = 4;
+}
+
+message Activity {
+    string  id          = 1;
+    string  activity    = 2;
+}
+
+message User {
+    string           id                    = 1;
+    string           fullname              = 2;
+    string           username              = 3;
+    string           hash                  = 4;
+    string           email                 = 5;
+    string           password              = 6;
+    bool             is_active             = 7;
+    bool             email_verified        = 8;
+    bool             is_staff              = 9;
+    bool             verified              = 10;
+    string           avatar                = 11;
+    Activity         activity              = 12;
+    PERSONAL_STATE   state                 = 13;
+    google.protobuf.Timestamp  last_login  = 14;
+    google.protobuf.Timestamp  joined_at   = 15;
+    google.protobuf.Timestamp  updated_at  = 16;
+}
+
+enum NOTIFICATION_TYPE {
+    INVALID            = 0;
+    NEW_FRIEND         = 1;
+    NEW_THEATER_INVITE = 2;
+    SYSTEM_NOTIFY      = 3;
+}
+
+message Notification {
+    string                     id            = 1;
+    NOTIFICATION_TYPE          type          = 2;
+    string                     extra         = 4;
+    bool                       read          = 5;
+
+    string                     from_user_id  = 6;
+    User                       from_user      = 7;
+
+    string                     to_user_id    = 8;
+    User                       to_user       = 9;
+
+    google.protobuf.Timestamp  read_at       = 10;
+    google.protobuf.Timestamp  created_at    = 11;
+    google.protobuf.Timestamp  updated_at    = 12;
+}
 
 message RollbackStatesRequest {
     repeated string users_ids = 1;
 }
 
 message UpdateStateRequest {
-    messages.PERSONAL_STATE state    = 1;
+    PERSONAL_STATE state = 1;
     AuthenticateRequest auth_request = 2;
 }
 
 message UpdateActivityRequest {
-    messages.Activity   activity     = 1;
+    Activity  activity  = 1;
     AuthenticateRequest auth_request = 2;
 }
 
 message FriendRequest {
-    string              request_id   = 1;
-    string              friend_id    = 2;
+    string  request_id  = 1;
+    string  friend_id   = 2;
     AuthenticateRequest auth_request = 3;
 }
 
 message CreateUserRequest {
-    messages.User user = 1;
+    User user = 1;
 }
 
 message GetFriendRequest {
-    messages.User user = 1;
+    User user = 1;
 }
 
 message GetUserResponse {
     int64    code        = 1;
     string   status      = 2;
     string   message     = 3;
-    messages.User result = 4;
+    User result = 4;
 }
 
 message FriendsResponse {
     int64    code    = 1;
     string   status  = 2;
     string   message = 3;
-    repeated messages.User result = 4;
+    repeated User result = 4;
 }
 
 message FriendResponse {
     int64         code    = 1;
     string        status  = 2;
     string        message = 3;
-    messages.User result  = 4;
+    User result  = 4;
 }
 
 message CreateNotificationRequest {
-    messages.Notification notification = 1;
+    Notification notification = 1;
     AuthenticateRequest   auth_request = 2;
 }
 
@@ -66,7 +128,7 @@ message NotificationResponse {
     string        status        = 2;
     string        message       = 3;
     int64         unread_count  = 4;
-    repeated      messages.Notification result  = 5;
+    repeated      Notification result  = 5;
 }
 
 message SearchUserRequest {
@@ -78,12 +140,12 @@ message SearchUserResponse {
     int64         code    = 1;
     string        status  = 2;
     string        message = 3;
-    repeated messages.User result  = 4;
+    repeated User result  = 4;
 }
 
 message UpdateUserRequest {
     AuthenticateRequest auth_request = 1;
-    messages.User       result       = 2;
+    User       result       = 2;
 }
 
 service UserService {
@@ -102,7 +164,7 @@ service UserService {
 
     // FriendZone
     rpc GetFriend(FriendRequest) returns (FriendResponse);
-    rpc GetFriendRequest(FriendRequest) returns (messages.Friend);
+    rpc GetFriendRequest(FriendRequest) returns (Friend);
     rpc SendFriendRequest(FriendRequest) returns (Response);
     rpc AcceptFriendRequest(FriendRequest) returns (Response);
     rpc GetFriends(AuthenticateRequest) returns (FriendsResponse);
