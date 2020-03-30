@@ -6,11 +6,12 @@ import "auth.proto";
 import "google/protobuf/timestamp.proto";
 
 message Friend {
-    string  friend_id  = 1;
-    string  user_id    = 2;
-    bool    accepted   = 3;
-    google.protobuf.Timestamp  created_at  = 4;
-    google.protobuf.Timestamp  updated_at  = 5;
+    string  id         = 1;
+    string  friend_id  = 2;
+    string  user_id    = 3;
+    bool    accepted   = 4;
+    google.protobuf.Timestamp  created_at  = 5;
+    google.protobuf.Timestamp  updated_at  = 6;
 }
 
 enum PERSONAL_STATE {
@@ -55,15 +56,12 @@ enum NOTIFICATION_TYPE {
 message Notification {
     string                     id            = 1;
     NOTIFICATION_TYPE          type          = 2;
-    string                     extra         = 4;
+    string                     data          = 4;
     bool                       read          = 5;
-
     string                     from_user_id  = 6;
-    User                       from_user      = 7;
-
+    User                       from_user     = 7;
     string                     to_user_id    = 8;
     User                       to_user       = 9;
-
     google.protobuf.Timestamp  read_at       = 10;
     google.protobuf.Timestamp  created_at    = 11;
     google.protobuf.Timestamp  updated_at    = 12;
