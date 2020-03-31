@@ -16,13 +16,22 @@ message Subtitle {
     string file = 2;
 }
 
+enum MovieType {
+    UNKNOWN    = 0;
+    YOUTUBE    = 1;
+    URI        = 2;
+    PIRATE_BAY = 3;
+    LOCAL_PATH = 4;
+}
+
 message Movie {
-    string   movie_uri = 1;
-    string   poster    = 2;
-    int64    size      = 3;
-    int64    length    = 4;
-    int64    last_played_time   = 5;
-    repeated Subtitle subtitles = 6;
+    MovieType   type      = 1;
+    string      uri       = 2;
+    string      poster    = 3;
+    int64       size      = 4;
+    int64       length    = 5;
+    int64       last_played_time   = 6;
+    repeated    Subtitle subtitles = 7;
 }
 
 message Theater {
