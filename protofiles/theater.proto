@@ -56,6 +56,11 @@ message CreateTheaterRequest {
     AuthenticateRequest auth_request = 2;
 }
 
+message TheaterAuthRequest {
+    Theater theater = 1;
+    AuthenticateRequest auth_request = 2;
+}
+
 message UserTheatersResponse {
     int64    code    = 1;
     string   status  = 2;
@@ -99,8 +104,8 @@ service TheaterService {
     rpc GetUserTheaters(GetAllUserTheatersRequest) returns (UserTheatersResponse);
     rpc GetTheater(Theater) returns (UserTheaterResponse);
     rpc CreateTheater(CreateTheaterRequest) returns (Response);
-    rpc RemoveTheater(Theater) returns (Response);
-    rpc EditTheater(Theater) returns (Response);
+    rpc RemoveTheater(TheaterAuthRequest) returns (Response);
+    rpc EditTheater(TheaterAuthRequest) returns (Response);
     rpc AddMember(AddOrRemoveMemberRequest) returns (Response);
     rpc RemoveMember(AddOrRemoveMemberRequest) returns (Response);
     rpc GetMembers(GetTheaterMembersRequest) returns (TheaterMembersResponse);
