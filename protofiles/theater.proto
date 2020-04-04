@@ -99,6 +99,8 @@ service TheaterService {
     rpc GetUserTheaters(GetAllUserTheatersRequest) returns (UserTheatersResponse);
     rpc GetTheater(Theater) returns (UserTheaterResponse);
     rpc CreateTheater(CreateTheaterRequest) returns (Response);
+    rpc RemoveTheater(Theater) returns (Response);
+    rpc EditTheater(Theater) returns (Response);
     rpc AddMember(AddOrRemoveMemberRequest) returns (Response);
     rpc RemoveMember(AddOrRemoveMemberRequest) returns (Response);
     rpc GetMembers(GetTheaterMembersRequest) returns (TheaterMembersResponse);
