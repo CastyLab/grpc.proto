@@ -1,0 +1,20 @@
+syntax = "proto3";
+package proto;
+
+import "ws.enums.proto";
+import "user.proto";
+
+message PingMsgEvent {
+    PERSONAL_STATE state = 1;
+}
+
+message PersonalStateMsgEvent {
+    proto.User            user      = 1;
+    PERSONAL_STATE   state     = 2;
+    Activity              activity  = 3;
+}
+
+message PersonalActivityMsgEvent {
+    User      user      = 1;
+    Activity  activity  = 2;
+}

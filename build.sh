@@ -1,0 +1,1 @@
+protoc -I=protofiles --go_out=plugins=grpc:proto protofiles/*.proto

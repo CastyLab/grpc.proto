@@ -1,0 +1,8 @@
+syntax = "proto3";
+package proto;
+
+import "user.proto";
+
+message TheaterMembers {
+    repeated proto.User members = 1;
+}

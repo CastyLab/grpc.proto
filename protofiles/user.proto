@@ -3,6 +3,7 @@ package proto;
 
 import "base.proto";
 import "auth.proto";
+import "ws.enums.proto";
 import "google/protobuf/timestamp.proto";
 
 message Friend {
@@ -14,46 +15,39 @@ message Friend {
     google.protobuf.Timestamp  updated_at  = 6;
 }
 
-enum PERSONAL_STATE {
-    OFFLINE    = 0;
-    ONLINE     = 1;
-    IDLE       = 2;
-    BUSY       = 3;
-    INVISIBLE  = 4;
-}
-
 message Activity {
     string  id          = 1;
     string  activity    = 2;
 }
 
 message User {
-    string           id                    = 1;
-    string           fullname              = 2;
-    string           username              = 3;
-    string           hash                  = 4;
-    string           email                 = 5;
-    string           password              = 6;
-    bool             is_active             = 7;
-    bool             email_verified        = 8;
-    bool             is_staff              = 9;
-    bool             verified              = 10;
-    string           avatar                = 11;
-    Activity         activity              = 12;
-    PERSONAL_STATE   state                 = 13;
+    string                id               = 1;
+    string                fullname         = 2;
+    string                username         = 3;
+    string                hash             = 4;
+    string                email            = 5;
+    string                password         = 6;
+    bool                  is_active        = 7;
+    bool                  email_verified   = 8;
+    bool                  is_staff         = 9;
+    bool                  verified         = 10;
+    string                avatar           = 11;
+    Activity              activity         = 12;
+    PERSONAL_STATE        state            = 13;
     google.protobuf.Timestamp  last_login  = 14;
     google.protobuf.Timestamp  joined_at   = 15;
     google.protobuf.Timestamp  updated_at  = 16;
 }
 
-enum NOTIFICATION_TYPE {
-    INVALID            = 0;
-    NEW_FRIEND         = 1;
-    NEW_THEATER_INVITE = 2;
-    SYSTEM_NOTIFY      = 3;
-}
-
 message Notification {
+
+    enum NOTIFICATION_TYPE {
+        INVALID            = 0;
+        NEW_FRIEND         = 1;
+        NEW_THEATER_INVITE = 2;
+        SYSTEM_NOTIFY      = 3;
+    }
+
     string                     id            = 1;
     NOTIFICATION_TYPE          type          = 2;
     string                     data          = 4;
