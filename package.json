@@ -1,12 +1,9 @@
 {
-  "name": "@castylab/grpc-proto",
+  "name": "casty-proto",
   "version": "1.0.0",
   "description": "This repository contains common protocol definitions for casty services around gRPC such as user, authentication, theater etc...",
   "scripts": {
     "compile": "pbjs -t static-module -w commonjs -o pbjs/proto.js protofiles/*.proto"
-  },
-  "publishConfig": { 
-    "registry": "https://npm.pkg.github.com/"
   },
   "repository": {
     "type": "git",

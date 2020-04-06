@@ -28,7 +28,7 @@ $ go get github.com/CastyLab/grpc.proto
 
 ## Install package
 ```bash
-$ npm i casty-grpc-proto
+$ npm i casty-proto
 ```
 
 ## Compile protobuffers
