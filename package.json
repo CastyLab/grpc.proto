@@ -5,6 +5,9 @@
   "scripts": {
     "compile": "pbjs -t static-module -w commonjs -o pbjs/proto.js protofiles/*.proto"
   },
+  "publishConfig": { 
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CastyLab/grpc.proto.git"

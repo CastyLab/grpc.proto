@@ -2,6 +2,8 @@
 This repository contains common protocol definitions for casty services
 around gRPC such as user, authentication, theater etc...
 
+# Golang
+
 ## Install protoc-gen-go compiler
 To install `protoc-gen-go` take a look at [this documentation](https://github.com/golang/protobuf#installation)!
 
@@ -20,4 +22,17 @@ protoc -I=protofiles --go_out=plugins=grpc:proto protofiles/*.proto
 To use this package on other Go services, simply use command below to install it.
 ```bash
 $ go get github.com/CastyLab/grpc.proto
+```
+
+# Javascript
+
+## Install package
+```bash
+$ npm i casty-grpc-proto
+```
+
+## Compile protobuffers
+This command will compile `.proto` files of the `/protofiles` dir into `/pbjs/proto.js`
+```bash
+$ npm run compile
 ```
