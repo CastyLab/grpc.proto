@@ -1,12 +1,12 @@
 {
-  "name": "casty-grpc-proto",
+  "name": "@castylab/grpc-proto",
   "version": "1.0.0",
   "description": "This repository contains common protocol definitions for casty services around gRPC such as user, authentication, theater etc...",
   "scripts": {
     "compile": "pbjs -t static-module -w commonjs -o pbjs/proto.js protofiles/*.proto"
   },
   "publishConfig": { 
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,11 @@
     "protobufers",
     "casty"
   ],
-  "author": "Alireza Josheghani <josheghani.dev@gmail.com>",
+  "author": { 
+    "name" : "Alireza Josheghani", 
+    "email" : "josheghani.dev@gmail.com", 
+    "url" : "https://alirezaj.ir"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CastyLab/grpc.proto/issues"
