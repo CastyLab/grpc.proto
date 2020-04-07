@@ -64,7 +64,7 @@ message TheaterAuthRequest {
 }
 
 message AddOrRemoveSubtitleRequest {
-    Theater subtitle = 2;
+    Subtitle subtitle = 2;
     AuthenticateRequest auth_request = 3;
 }
 
@@ -73,6 +73,13 @@ message UserTheatersResponse {
     string   status  = 2;
     string   message = 3;
     repeated Theater result = 4;
+}
+
+message TheaterSubtitlesResponse {
+    int64    code    = 1;
+    string   status  = 2;
+    string   message = 3;
+    repeated Subtitle result = 4;
 }
 
 message UserTheaterResponse {
@@ -95,6 +102,7 @@ service TheaterService {
     rpc CreateTheater(CreateTheaterRequest) returns (Response);
     rpc RemoveTheater(TheaterAuthRequest) returns (Response);
     rpc EditTheater(TheaterAuthRequest) returns (Response);
+    rpc GetSubtitles(TheaterAuthRequest) returns (TheaterSubtitlesResponse);
     rpc AddSubtitle(AddOrRemoveSubtitleRequest) returns (Response);
     rpc RemoveSubtitle(AddOrRemoveSubtitleRequest) returns (Response);
 }

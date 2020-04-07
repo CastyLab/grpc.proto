@@ -10747,7 +10747,7 @@ $root.proto = (function() {
          * Properties of an AddOrRemoveSubtitleRequest.
          * @memberof proto
          * @interface IAddOrRemoveSubtitleRequest
-         * @property {proto.ITheater|null} [subtitle] AddOrRemoveSubtitleRequest subtitle
+         * @property {proto.ISubtitle|null} [subtitle] AddOrRemoveSubtitleRequest subtitle
          * @property {proto.IAuthenticateRequest|null} [authRequest] AddOrRemoveSubtitleRequest authRequest
          */
 
@@ -10768,7 +10768,7 @@ $root.proto = (function() {
 
         /**
          * AddOrRemoveSubtitleRequest subtitle.
-         * @member {proto.ITheater|null|undefined} subtitle
+         * @member {proto.ISubtitle|null|undefined} subtitle
          * @memberof proto.AddOrRemoveSubtitleRequest
          * @instance
          */
@@ -10807,7 +10807,7 @@ $root.proto = (function() {
             if (!writer)
                 writer = $Writer.create();
             if (message.subtitle != null && message.hasOwnProperty("subtitle"))
-                $root.proto.Theater.encode(message.subtitle, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                $root.proto.Subtitle.encode(message.subtitle, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.authRequest != null && message.hasOwnProperty("authRequest"))
                 $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
@@ -10845,7 +10845,7 @@ $root.proto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 2:
-                    message.subtitle = $root.proto.Theater.decode(reader, reader.uint32());
+                    message.subtitle = $root.proto.Subtitle.decode(reader, reader.uint32());
                     break;
                 case 3:
                     message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
@@ -10886,7 +10886,7 @@ $root.proto = (function() {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.subtitle != null && message.hasOwnProperty("subtitle")) {
-                var error = $root.proto.Theater.verify(message.subtitle);
+                var error = $root.proto.Subtitle.verify(message.subtitle);
                 if (error)
                     return "subtitle." + error;
             }
@@ -10913,7 +10913,7 @@ $root.proto = (function() {
             if (object.subtitle != null) {
                 if (typeof object.subtitle !== "object")
                     throw TypeError(".proto.AddOrRemoveSubtitleRequest.subtitle: object expected");
-                message.subtitle = $root.proto.Theater.fromObject(object.subtitle);
+                message.subtitle = $root.proto.Subtitle.fromObject(object.subtitle);
             }
             if (object.authRequest != null) {
                 if (typeof object.authRequest !== "object")
@@ -10941,7 +10941,7 @@ $root.proto = (function() {
                 object.authRequest = null;
             }
             if (message.subtitle != null && message.hasOwnProperty("subtitle"))
-                object.subtitle = $root.proto.Theater.toObject(message.subtitle, options);
+                object.subtitle = $root.proto.Subtitle.toObject(message.subtitle, options);
             if (message.authRequest != null && message.hasOwnProperty("authRequest"))
                 object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
             return object;
@@ -11249,6 +11249,296 @@ $root.proto = (function() {
         };
 
         return UserTheatersResponse;
+    })();
+
+    proto.TheaterSubtitlesResponse = (function() {
+
+        /**
+         * Properties of a TheaterSubtitlesResponse.
+         * @memberof proto
+         * @interface ITheaterSubtitlesResponse
+         * @property {number|Long|null} [code] TheaterSubtitlesResponse code
+         * @property {string|null} [status] TheaterSubtitlesResponse status
+         * @property {string|null} [message] TheaterSubtitlesResponse message
+         * @property {Array.<proto.ISubtitle>|null} [result] TheaterSubtitlesResponse result
+         */
+
+        /**
+         * Constructs a new TheaterSubtitlesResponse.
+         * @memberof proto
+         * @classdesc Represents a TheaterSubtitlesResponse.
+         * @implements ITheaterSubtitlesResponse
+         * @constructor
+         * @param {proto.ITheaterSubtitlesResponse=} [properties] Properties to set
+         */
+        function TheaterSubtitlesResponse(properties) {
+            this.result = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TheaterSubtitlesResponse code.
+         * @member {number|Long} code
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         */
+        TheaterSubtitlesResponse.prototype.code = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * TheaterSubtitlesResponse status.
+         * @member {string} status
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         */
+        TheaterSubtitlesResponse.prototype.status = "";
+
+        /**
+         * TheaterSubtitlesResponse message.
+         * @member {string} message
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         */
+        TheaterSubtitlesResponse.prototype.message = "";
+
+        /**
+         * TheaterSubtitlesResponse result.
+         * @member {Array.<proto.ISubtitle>} result
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         */
+        TheaterSubtitlesResponse.prototype.result = $util.emptyArray;
+
+        /**
+         * Creates a new TheaterSubtitlesResponse instance using the specified properties.
+         * @function create
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {proto.ITheaterSubtitlesResponse=} [properties] Properties to set
+         * @returns {proto.TheaterSubtitlesResponse} TheaterSubtitlesResponse instance
+         */
+        TheaterSubtitlesResponse.create = function create(properties) {
+            return new TheaterSubtitlesResponse(properties);
+        };
+
+        /**
+         * Encodes the specified TheaterSubtitlesResponse message. Does not implicitly {@link proto.TheaterSubtitlesResponse.verify|verify} messages.
+         * @function encode
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {proto.ITheaterSubtitlesResponse} message TheaterSubtitlesResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterSubtitlesResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.code);
+            if (message.status != null && message.hasOwnProperty("status"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.status);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+            if (message.result != null && message.result.length)
+                for (var i = 0; i < message.result.length; ++i)
+                    $root.proto.Subtitle.encode(message.result[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TheaterSubtitlesResponse message, length delimited. Does not implicitly {@link proto.TheaterSubtitlesResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {proto.ITheaterSubtitlesResponse} message TheaterSubtitlesResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterSubtitlesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TheaterSubtitlesResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.TheaterSubtitlesResponse} TheaterSubtitlesResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterSubtitlesResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TheaterSubtitlesResponse();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.code = reader.int64();
+                    break;
+                case 2:
+                    message.status = reader.string();
+                    break;
+                case 3:
+                    message.message = reader.string();
+                    break;
+                case 4:
+                    if (!(message.result && message.result.length))
+                        message.result = [];
+                    message.result.push($root.proto.Subtitle.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TheaterSubtitlesResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.TheaterSubtitlesResponse} TheaterSubtitlesResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterSubtitlesResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TheaterSubtitlesResponse message.
+         * @function verify
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TheaterSubtitlesResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code) && !(message.code && $util.isInteger(message.code.low) && $util.isInteger(message.code.high)))
+                    return "code: integer|Long expected";
+            if (message.status != null && message.hasOwnProperty("status"))
+                if (!$util.isString(message.status))
+                    return "status: string expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            if (message.result != null && message.hasOwnProperty("result")) {
+                if (!Array.isArray(message.result))
+                    return "result: array expected";
+                for (var i = 0; i < message.result.length; ++i) {
+                    var error = $root.proto.Subtitle.verify(message.result[i]);
+                    if (error)
+                        return "result." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a TheaterSubtitlesResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.TheaterSubtitlesResponse} TheaterSubtitlesResponse
+         */
+        TheaterSubtitlesResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.TheaterSubtitlesResponse)
+                return object;
+            var message = new $root.proto.TheaterSubtitlesResponse();
+            if (object.code != null)
+                if ($util.Long)
+                    (message.code = $util.Long.fromValue(object.code)).unsigned = false;
+                else if (typeof object.code === "string")
+                    message.code = parseInt(object.code, 10);
+                else if (typeof object.code === "number")
+                    message.code = object.code;
+                else if (typeof object.code === "object")
+                    message.code = new $util.LongBits(object.code.low >>> 0, object.code.high >>> 0).toNumber();
+            if (object.status != null)
+                message.status = String(object.status);
+            if (object.message != null)
+                message.message = String(object.message);
+            if (object.result) {
+                if (!Array.isArray(object.result))
+                    throw TypeError(".proto.TheaterSubtitlesResponse.result: array expected");
+                message.result = [];
+                for (var i = 0; i < object.result.length; ++i) {
+                    if (typeof object.result[i] !== "object")
+                        throw TypeError(".proto.TheaterSubtitlesResponse.result: object expected");
+                    message.result[i] = $root.proto.Subtitle.fromObject(object.result[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TheaterSubtitlesResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {proto.TheaterSubtitlesResponse} message TheaterSubtitlesResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TheaterSubtitlesResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.result = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.code = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.code = options.longs === String ? "0" : 0;
+                object.status = "";
+                object.message = "";
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (typeof message.code === "number")
+                    object.code = options.longs === String ? String(message.code) : message.code;
+                else
+                    object.code = options.longs === String ? $util.Long.prototype.toString.call(message.code) : options.longs === Number ? new $util.LongBits(message.code.low >>> 0, message.code.high >>> 0).toNumber() : message.code;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            if (message.result && message.result.length) {
+                object.result = [];
+                for (var j = 0; j < message.result.length; ++j)
+                    object.result[j] = $root.proto.Subtitle.toObject(message.result[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this TheaterSubtitlesResponse to JSON.
+         * @function toJSON
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TheaterSubtitlesResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TheaterSubtitlesResponse;
     })();
 
     proto.UserTheaterResponse = (function() {
@@ -12005,6 +12295,39 @@ $root.proto = (function() {
          * @instance
          * @param {proto.ITheaterAuthRequest} request TheaterAuthRequest message or plain object
          * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#getSubtitles}.
+         * @memberof proto.TheaterService
+         * @typedef GetSubtitlesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.TheaterSubtitlesResponse} [response] TheaterSubtitlesResponse
+         */
+
+        /**
+         * Calls GetSubtitles.
+         * @function getSubtitles
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.ITheaterAuthRequest} request TheaterAuthRequest message or plain object
+         * @param {proto.TheaterService.GetSubtitlesCallback} callback Node-style callback called with the error, if any, and TheaterSubtitlesResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.getSubtitles = function getSubtitles(request, callback) {
+            return this.rpcCall(getSubtitles, $root.proto.TheaterAuthRequest, $root.proto.TheaterSubtitlesResponse, request, callback);
+        }, "name", { value: "GetSubtitles" });
+
+        /**
+         * Calls GetSubtitles.
+         * @function getSubtitles
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.ITheaterAuthRequest} request TheaterAuthRequest message or plain object
+         * @returns {Promise<proto.TheaterSubtitlesResponse>} Promise
          * @variation 2
          */
 
