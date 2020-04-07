@@ -28,6 +28,5 @@ enum EMSG {
     THEATER_PLAY               = 15;
     THEATER_PAUSE              = 16;
     NEW_NOTIFICATION           = 17;
-    UPDATED_NOTIFICATION       = 18;
-    READ_ALL_NOTIFICATIONS     = 19;
+    FRIEND_REQUEST_ACCEPTED    = 18;
 }

@@ -8937,8 +8937,7 @@ $root.proto = (function() {
      * @property {number} THEATER_PLAY=15 THEATER_PLAY value
      * @property {number} THEATER_PAUSE=16 THEATER_PAUSE value
      * @property {number} NEW_NOTIFICATION=17 NEW_NOTIFICATION value
-     * @property {number} UPDATED_NOTIFICATION=18 UPDATED_NOTIFICATION value
-     * @property {number} READ_ALL_NOTIFICATIONS=19 READ_ALL_NOTIFICATIONS value
+     * @property {number} FRIEND_REQUEST_ACCEPTED=18 FRIEND_REQUEST_ACCEPTED value
      */
     proto.EMSG = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -8960,8 +8959,7 @@ $root.proto = (function() {
         values[valuesById[15] = "THEATER_PLAY"] = 15;
         values[valuesById[16] = "THEATER_PAUSE"] = 16;
         values[valuesById[17] = "NEW_NOTIFICATION"] = 17;
-        values[valuesById[18] = "UPDATED_NOTIFICATION"] = 18;
-        values[valuesById[19] = "READ_ALL_NOTIFICATIONS"] = 19;
+        values[valuesById[18] = "FRIEND_REQUEST_ACCEPTED"] = 18;
         return values;
     })();
 
@@ -13403,7 +13401,6 @@ $root.proto = (function() {
                 case 16:
                 case 17:
                 case 18:
-                case 19:
                     break;
                 }
             if (message.data != null && message.hasOwnProperty("data"))
@@ -13502,13 +13499,9 @@ $root.proto = (function() {
             case 17:
                 message.type = 17;
                 break;
-            case "UPDATED_NOTIFICATION":
+            case "FRIEND_REQUEST_ACCEPTED":
             case 18:
                 message.type = 18;
-                break;
-            case "READ_ALL_NOTIFICATIONS":
-            case 19:
-                message.type = 19;
                 break;
             }
             if (object.data != null)
@@ -14378,6 +14371,198 @@ $root.proto = (function() {
         };
 
         return NotificationMsgEvent;
+    })();
+
+    proto.FriendRequestAcceptedMsgEvent = (function() {
+
+        /**
+         * Properties of a FriendRequestAcceptedMsgEvent.
+         * @memberof proto
+         * @interface IFriendRequestAcceptedMsgEvent
+         * @property {proto.IUser|null} [friend] FriendRequestAcceptedMsgEvent friend
+         */
+
+        /**
+         * Constructs a new FriendRequestAcceptedMsgEvent.
+         * @memberof proto
+         * @classdesc Represents a FriendRequestAcceptedMsgEvent.
+         * @implements IFriendRequestAcceptedMsgEvent
+         * @constructor
+         * @param {proto.IFriendRequestAcceptedMsgEvent=} [properties] Properties to set
+         */
+        function FriendRequestAcceptedMsgEvent(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * FriendRequestAcceptedMsgEvent friend.
+         * @member {proto.IUser|null|undefined} friend
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @instance
+         */
+        FriendRequestAcceptedMsgEvent.prototype.friend = null;
+
+        /**
+         * Creates a new FriendRequestAcceptedMsgEvent instance using the specified properties.
+         * @function create
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @static
+         * @param {proto.IFriendRequestAcceptedMsgEvent=} [properties] Properties to set
+         * @returns {proto.FriendRequestAcceptedMsgEvent} FriendRequestAcceptedMsgEvent instance
+         */
+        FriendRequestAcceptedMsgEvent.create = function create(properties) {
+            return new FriendRequestAcceptedMsgEvent(properties);
+        };
+
+        /**
+         * Encodes the specified FriendRequestAcceptedMsgEvent message. Does not implicitly {@link proto.FriendRequestAcceptedMsgEvent.verify|verify} messages.
+         * @function encode
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @static
+         * @param {proto.IFriendRequestAcceptedMsgEvent} message FriendRequestAcceptedMsgEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FriendRequestAcceptedMsgEvent.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.friend != null && message.hasOwnProperty("friend"))
+                $root.proto.User.encode(message.friend, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified FriendRequestAcceptedMsgEvent message, length delimited. Does not implicitly {@link proto.FriendRequestAcceptedMsgEvent.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @static
+         * @param {proto.IFriendRequestAcceptedMsgEvent} message FriendRequestAcceptedMsgEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FriendRequestAcceptedMsgEvent.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a FriendRequestAcceptedMsgEvent message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.FriendRequestAcceptedMsgEvent} FriendRequestAcceptedMsgEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FriendRequestAcceptedMsgEvent.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.FriendRequestAcceptedMsgEvent();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.friend = $root.proto.User.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a FriendRequestAcceptedMsgEvent message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.FriendRequestAcceptedMsgEvent} FriendRequestAcceptedMsgEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FriendRequestAcceptedMsgEvent.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a FriendRequestAcceptedMsgEvent message.
+         * @function verify
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        FriendRequestAcceptedMsgEvent.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.friend != null && message.hasOwnProperty("friend")) {
+                var error = $root.proto.User.verify(message.friend);
+                if (error)
+                    return "friend." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a FriendRequestAcceptedMsgEvent message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.FriendRequestAcceptedMsgEvent} FriendRequestAcceptedMsgEvent
+         */
+        FriendRequestAcceptedMsgEvent.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.FriendRequestAcceptedMsgEvent)
+                return object;
+            var message = new $root.proto.FriendRequestAcceptedMsgEvent();
+            if (object.friend != null) {
+                if (typeof object.friend !== "object")
+                    throw TypeError(".proto.FriendRequestAcceptedMsgEvent.friend: object expected");
+                message.friend = $root.proto.User.fromObject(object.friend);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a FriendRequestAcceptedMsgEvent message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @static
+         * @param {proto.FriendRequestAcceptedMsgEvent} message FriendRequestAcceptedMsgEvent
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        FriendRequestAcceptedMsgEvent.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults)
+                object.friend = null;
+            if (message.friend != null && message.hasOwnProperty("friend"))
+                object.friend = $root.proto.User.toObject(message.friend, options);
+            return object;
+        };
+
+        /**
+         * Converts this FriendRequestAcceptedMsgEvent to JSON.
+         * @function toJSON
+         * @memberof proto.FriendRequestAcceptedMsgEvent
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        FriendRequestAcceptedMsgEvent.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return FriendRequestAcceptedMsgEvent;
     })();
 
     proto.PingMsgEvent = (function() {

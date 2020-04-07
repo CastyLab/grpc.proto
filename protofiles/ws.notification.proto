@@ -6,3 +6,7 @@ import "user.proto";
 message NotificationMsgEvent {
     Notification notification = 1;
 }
+
+message FriendRequestAcceptedMsgEvent {
+    User friend = 1;
+}
