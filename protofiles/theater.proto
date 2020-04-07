@@ -12,8 +12,10 @@ enum PRIVACY {
 }
 
 message Subtitle {
-    string lang = 1;
-    string file = 2;
+    string  id          = 1;
+    string  theater_id  = 2;
+    string  lang        = 3;
+    string  file        = 4;
 }
 
 enum MovieType {
@@ -61,6 +63,11 @@ message TheaterAuthRequest {
     AuthenticateRequest auth_request = 2;
 }
 
+message AddOrRemoveSubtitleRequest {
+    Theater subtitle = 2;
+    AuthenticateRequest auth_request = 3;
+}
+
 message UserTheatersResponse {
     int64    code    = 1;
     string   status  = 2;
@@ -73,24 +80,6 @@ message UserTheaterResponse {
     string   status  = 2;
     string   message = 3;
     Theater result = 4;
-}
-
-message TheaterMembersResponse {
-    int64    code    = 1;
-    string   status  = 2;
-    string   message = 3;
-    repeated User result = 4;
-}
-
-message AddOrRemoveMemberRequest {
-    string member_id = 1;
-    string theater_id = 2;
-    AuthenticateRequest auth_request = 3;
-}
-
-message GetTheaterMembersRequest {
-    string theater_id = 2;
-    AuthenticateRequest auth_request = 3;
 }
 
 message InviteFriendsTheaterRequest {
@@ -106,7 +95,6 @@ service TheaterService {
     rpc CreateTheater(CreateTheaterRequest) returns (Response);
     rpc RemoveTheater(TheaterAuthRequest) returns (Response);
     rpc EditTheater(TheaterAuthRequest) returns (Response);
-    rpc AddMember(AddOrRemoveMemberRequest) returns (Response);
-    rpc RemoveMember(AddOrRemoveMemberRequest) returns (Response);
-    rpc GetMembers(GetTheaterMembersRequest) returns (TheaterMembersResponse);
+    rpc AddSubtitle(AddOrRemoveSubtitleRequest) returns (Response);
+    rpc RemoveSubtitle(AddOrRemoveSubtitleRequest) returns (Response);
 }
