@@ -8991,6 +8991,8 @@ $root.proto = (function() {
          * @property {string|null} [theaterId] Subtitle theaterId
          * @property {string|null} [lang] Subtitle lang
          * @property {string|null} [file] Subtitle file
+         * @property {google.protobuf.ITimestamp|null} [createdAt] Subtitle createdAt
+         * @property {google.protobuf.ITimestamp|null} [updatedAt] Subtitle updatedAt
          */
 
         /**
@@ -9041,6 +9043,22 @@ $root.proto = (function() {
         Subtitle.prototype.file = "";
 
         /**
+         * Subtitle createdAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+         * @memberof proto.Subtitle
+         * @instance
+         */
+        Subtitle.prototype.createdAt = null;
+
+        /**
+         * Subtitle updatedAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+         * @memberof proto.Subtitle
+         * @instance
+         */
+        Subtitle.prototype.updatedAt = null;
+
+        /**
          * Creates a new Subtitle instance using the specified properties.
          * @function create
          * @memberof proto.Subtitle
@@ -9072,6 +9090,10 @@ $root.proto = (function() {
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.lang);
             if (message.file != null && message.hasOwnProperty("file"))
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.file);
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             return writer;
         };
 
@@ -9117,6 +9139,12 @@ $root.proto = (function() {
                     break;
                 case 4:
                     message.file = reader.string();
+                    break;
+                case 5:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -9165,6 +9193,16 @@ $root.proto = (function() {
             if (message.file != null && message.hasOwnProperty("file"))
                 if (!$util.isString(message.file))
                     return "file: string expected";
+            if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                if (error)
+                    return "createdAt." + error;
+            }
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                if (error)
+                    return "updatedAt." + error;
+            }
             return null;
         };
 
@@ -9188,6 +9226,16 @@ $root.proto = (function() {
                 message.lang = String(object.lang);
             if (object.file != null)
                 message.file = String(object.file);
+            if (object.createdAt != null) {
+                if (typeof object.createdAt !== "object")
+                    throw TypeError(".proto.Subtitle.createdAt: object expected");
+                message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+            }
+            if (object.updatedAt != null) {
+                if (typeof object.updatedAt !== "object")
+                    throw TypeError(".proto.Subtitle.updatedAt: object expected");
+                message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+            }
             return message;
         };
 
@@ -9209,6 +9257,8 @@ $root.proto = (function() {
                 object.theaterId = "";
                 object.lang = "";
                 object.file = "";
+                object.createdAt = null;
+                object.updatedAt = null;
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
@@ -9218,6 +9268,10 @@ $root.proto = (function() {
                 object.lang = message.lang;
             if (message.file != null && message.hasOwnProperty("file"))
                 object.file = message.file;
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
             return object;
         };
 
