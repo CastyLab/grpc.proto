@@ -1,6 +1,6 @@
 {
   "name": "casty-proto",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "This repository contains common protocol definitions for casty services around gRPC such as user, authentication, theater etc...",
   "scripts": {
     "compile": "pbjs -t static-module -w commonjs -o pbjs/proto.js protofiles/*.proto"
@@ -15,10 +15,10 @@
     "protobufers",
     "casty"
   ],
-  "author": { 
-    "name" : "Alireza Josheghani", 
-    "email" : "josheghani.dev@gmail.com", 
-    "url" : "https://alirezaj.ir"
+  "author": {
+    "name": "Alireza Josheghani",
+    "email": "josheghani.dev@gmail.com",
+    "url": "https://alirezaj.ir"
   },
   "license": "MIT",
   "bugs": {

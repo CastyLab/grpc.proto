@@ -100,6 +100,7 @@ message InviteFriendsTheaterRequest {
 service TheaterService {
     rpc Invite(InviteFriendsTheaterRequest) returns (Response);
     rpc GetUserTheaters(GetAllUserTheatersRequest) returns (UserTheatersResponse);
+    rpc GetUserSharedTheaters(GetAllUserTheatersRequest) returns (UserTheatersResponse);
     rpc GetTheater(Theater) returns (UserTheaterResponse);
     rpc CreateTheater(CreateTheaterRequest) returns (Response);
     rpc RemoveTheater(TheaterAuthRequest) returns (Response);

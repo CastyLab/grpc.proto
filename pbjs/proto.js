@@ -12219,6 +12219,39 @@ $root.proto = (function() {
          */
 
         /**
+         * Callback as used by {@link proto.TheaterService#getUserSharedTheaters}.
+         * @memberof proto.TheaterService
+         * @typedef GetUserSharedTheatersCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.UserTheatersResponse} [response] UserTheatersResponse
+         */
+
+        /**
+         * Calls GetUserSharedTheaters.
+         * @function getUserSharedTheaters
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IGetAllUserTheatersRequest} request GetAllUserTheatersRequest message or plain object
+         * @param {proto.TheaterService.GetUserSharedTheatersCallback} callback Node-style callback called with the error, if any, and UserTheatersResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.getUserSharedTheaters = function getUserSharedTheaters(request, callback) {
+            return this.rpcCall(getUserSharedTheaters, $root.proto.GetAllUserTheatersRequest, $root.proto.UserTheatersResponse, request, callback);
+        }, "name", { value: "GetUserSharedTheaters" });
+
+        /**
+         * Calls GetUserSharedTheaters.
+         * @function getUserSharedTheaters
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IGetAllUserTheatersRequest} request GetAllUserTheatersRequest message or plain object
+         * @returns {Promise<proto.UserTheatersResponse>} Promise
+         * @variation 2
+         */
+
+        /**
          * Callback as used by {@link proto.TheaterService#getTheater}.
          * @memberof proto.TheaterService
          * @typedef GetTheaterCallback
