@@ -29,4 +29,14 @@ enum EMSG {
     THEATER_PAUSE              = 16;
     NEW_NOTIFICATION           = 17;
     FRIEND_REQUEST_ACCEPTED    = 18;
+
+    // Theater video player events
+    SYNC_ME                    = 19;
+    SYNCED                     = 20;
+    BUFFERING                  = 21;
+    BUFFERED                   = 22;
+    WAITING_FOR_CLIENTS        = 23;
+    CLIENTS_SYNCYED            = 24;
+    FINISHED_MOVIE             = 25;
+    PLAYING                    = 26;
 }

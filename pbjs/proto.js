@@ -8938,6 +8938,14 @@ $root.proto = (function() {
      * @property {number} THEATER_PAUSE=16 THEATER_PAUSE value
      * @property {number} NEW_NOTIFICATION=17 NEW_NOTIFICATION value
      * @property {number} FRIEND_REQUEST_ACCEPTED=18 FRIEND_REQUEST_ACCEPTED value
+     * @property {number} SYNC_ME=19 SYNC_ME value
+     * @property {number} SYNCED=20 SYNCED value
+     * @property {number} BUFFERING=21 BUFFERING value
+     * @property {number} BUFFERED=22 BUFFERED value
+     * @property {number} WAITING_FOR_CLIENTS=23 WAITING_FOR_CLIENTS value
+     * @property {number} CLIENTS_SYNCYED=24 CLIENTS_SYNCYED value
+     * @property {number} FINISHED_MOVIE=25 FINISHED_MOVIE value
+     * @property {number} PLAYING=26 PLAYING value
      */
     proto.EMSG = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -8960,6 +8968,14 @@ $root.proto = (function() {
         values[valuesById[16] = "THEATER_PAUSE"] = 16;
         values[valuesById[17] = "NEW_NOTIFICATION"] = 17;
         values[valuesById[18] = "FRIEND_REQUEST_ACCEPTED"] = 18;
+        values[valuesById[19] = "SYNC_ME"] = 19;
+        values[valuesById[20] = "SYNCED"] = 20;
+        values[valuesById[21] = "BUFFERING"] = 21;
+        values[valuesById[22] = "BUFFERED"] = 22;
+        values[valuesById[23] = "WAITING_FOR_CLIENTS"] = 23;
+        values[valuesById[24] = "CLIENTS_SYNCYED"] = 24;
+        values[valuesById[25] = "FINISHED_MOVIE"] = 25;
+        values[valuesById[26] = "PLAYING"] = 26;
         return values;
     })();
 
@@ -13434,6 +13450,14 @@ $root.proto = (function() {
                 case 16:
                 case 17:
                 case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
                     break;
                 }
             if (message.data != null && message.hasOwnProperty("data"))
@@ -13535,6 +13559,38 @@ $root.proto = (function() {
             case "FRIEND_REQUEST_ACCEPTED":
             case 18:
                 message.type = 18;
+                break;
+            case "SYNC_ME":
+            case 19:
+                message.type = 19;
+                break;
+            case "SYNCED":
+            case 20:
+                message.type = 20;
+                break;
+            case "BUFFERING":
+            case 21:
+                message.type = 21;
+                break;
+            case "BUFFERED":
+            case 22:
+                message.type = 22;
+                break;
+            case "WAITING_FOR_CLIENTS":
+            case 23:
+                message.type = 23;
+                break;
+            case "CLIENTS_SYNCYED":
+            case 24:
+                message.type = 24;
+                break;
+            case "FINISHED_MOVIE":
+            case 25:
+                message.type = 25;
+                break;
+            case "PLAYING":
+            case 26:
+                message.type = 26;
                 break;
             }
             if (object.data != null)
