@@ -137,7 +137,7 @@ proto.proto.AuthRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     user: jspb.Message.getFieldWithDefault(msg, 1, ""),
     pass: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    captcha: jspb.Message.getFieldWithDefault(msg, 3, "")
+    recaptcha: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -184,7 +184,7 @@ proto.proto.AuthRequest.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setCaptcha(value);
+      msg.setRecaptcha(value);
       break;
     default:
       reader.skipField();
@@ -229,7 +229,7 @@ proto.proto.AuthRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getCaptcha();
+  f = message.getRecaptcha();
   if (f.length > 0) {
     writer.writeString(
       3,
@@ -276,10 +276,10 @@ proto.proto.AuthRequest.prototype.setPass = function(value) {
 
 
 /**
- * optional string captcha = 3;
+ * optional string recaptcha = 3;
  * @return {string}
  */
-proto.proto.AuthRequest.prototype.getCaptcha = function() {
+proto.proto.AuthRequest.prototype.getRecaptcha = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -288,7 +288,7 @@ proto.proto.AuthRequest.prototype.getCaptcha = function() {
  * @param {string} value
  * @return {!proto.proto.AuthRequest} returns this
  */
-proto.proto.AuthRequest.prototype.setCaptcha = function(value) {
+proto.proto.AuthRequest.prototype.setRecaptcha = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
