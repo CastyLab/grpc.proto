@@ -82,8 +82,7 @@ message FriendRequest {
 }
 
 message CreateUserRequest {
-    User   user    = 1;
-    string captcha = 2;
+    User user = 1;
 }
 
 message GetFriendRequest {

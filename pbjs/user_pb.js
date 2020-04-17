@@ -2890,8 +2890,7 @@ proto.proto.CreateUserRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.proto.CreateUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    user: (f = msg.getUser()) && proto.proto.User.toObject(includeInstance, f),
-    captcha: jspb.Message.getFieldWithDefault(msg, 2, "")
+    user: (f = msg.getUser()) && proto.proto.User.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2933,10 +2932,6 @@ proto.proto.CreateUserRequest.deserializeBinaryFromReader = function(msg, reader
       reader.readMessage(value,proto.proto.User.deserializeBinaryFromReader);
       msg.setUser(value);
       break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setCaptcha(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -2972,13 +2967,6 @@ proto.proto.CreateUserRequest.serializeBinaryToWriter = function(message, writer
       1,
       f,
       proto.proto.User.serializeBinaryToWriter
-    );
-  }
-  f = message.getCaptcha();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
     );
   }
 };
@@ -3018,24 +3006,6 @@ proto.proto.CreateUserRequest.prototype.clearUser = function() {
  */
 proto.proto.CreateUserRequest.prototype.hasUser = function() {
   return jspb.Message.getField(this, 1) != null;
-};
-
-
-/**
- * optional string captcha = 2;
- * @return {string}
- */
-proto.proto.CreateUserRequest.prototype.getCaptcha = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.proto.CreateUserRequest} returns this
- */
-proto.proto.CreateUserRequest.prototype.setCaptcha = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
