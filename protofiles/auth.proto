@@ -4,8 +4,9 @@ package proto;
 import "base.proto";
 
 message AuthRequest {
-    string user = 1;
-    string pass = 2;
+    string user    = 1;
+    string pass    = 2;
+    string captcha = 3;
 }
 
 message AuthResponse {
@@ -19,7 +20,7 @@ message AuthResponse {
 }
 
 message RefreshTokenRequest {
-    bytes refreshed_token = 2;
+    bytes refreshed_token = 1;
 }
 
 message OAUTHRequest {
