@@ -1592,6 +1592,7 @@ proto.proto.CreateTheaterRequest.prototype.toObject = function(opt_includeInstan
 proto.proto.CreateTheaterRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     theater: (f = msg.getTheater()) && proto.proto.Theater.toObject(includeInstance, f),
+    poster: msg.getPoster_asB64(),
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
   };
 
@@ -1635,6 +1636,10 @@ proto.proto.CreateTheaterRequest.deserializeBinaryFromReader = function(msg, rea
       msg.setTheater(value);
       break;
     case 2:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setPoster(value);
+      break;
+    case 3:
       var value = new grpc_base_pb.AuthenticateRequest;
       reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
       msg.setAuthRequest(value);
@@ -1676,10 +1681,17 @@ proto.proto.CreateTheaterRequest.serializeBinaryToWriter = function(message, wri
       proto.proto.Theater.serializeBinaryToWriter
     );
   }
+  f = message.getPoster_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      2,
+      f
+    );
+  }
   f = message.getAuthRequest();
   if (f != null) {
     writer.writeMessage(
-      2,
+      3,
       f,
       grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
@@ -1725,12 +1737,54 @@ proto.proto.CreateTheaterRequest.prototype.hasTheater = function() {
 
 
 /**
- * optional AuthenticateRequest auth_request = 2;
+ * optional bytes poster = 2;
+ * @return {string}
+ */
+proto.proto.CreateTheaterRequest.prototype.getPoster = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * optional bytes poster = 2;
+ * This is a type-conversion wrapper around `getPoster()`
+ * @return {string}
+ */
+proto.proto.CreateTheaterRequest.prototype.getPoster_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getPoster()));
+};
+
+
+/**
+ * optional bytes poster = 2;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getPoster()`
+ * @return {!Uint8Array}
+ */
+proto.proto.CreateTheaterRequest.prototype.getPoster_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getPoster()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.proto.CreateTheaterRequest} returns this
+ */
+proto.proto.CreateTheaterRequest.prototype.setPoster = function(value) {
+  return jspb.Message.setProto3BytesField(this, 2, value);
+};
+
+
+/**
+ * optional AuthenticateRequest auth_request = 3;
  * @return {?proto.proto.AuthenticateRequest}
  */
 proto.proto.CreateTheaterRequest.prototype.getAuthRequest = function() {
   return /** @type{?proto.proto.AuthenticateRequest} */ (
-    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 2));
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 3));
 };
 
 
@@ -1739,7 +1793,7 @@ proto.proto.CreateTheaterRequest.prototype.getAuthRequest = function() {
  * @return {!proto.proto.CreateTheaterRequest} returns this
 */
 proto.proto.CreateTheaterRequest.prototype.setAuthRequest = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
+  return jspb.Message.setWrapperField(this, 3, value);
 };
 
 
@@ -1757,7 +1811,7 @@ proto.proto.CreateTheaterRequest.prototype.clearAuthRequest = function() {
  * @return {boolean}
  */
 proto.proto.CreateTheaterRequest.prototype.hasAuthRequest = function() {
-  return jspb.Message.getField(this, 2) != null;
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -1995,8 +2049,9 @@ proto.proto.AddOrRemoveSubtitleRequest.prototype.toObject = function(opt_include
  */
 proto.proto.AddOrRemoveSubtitleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
+    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f),
     subtitle: (f = msg.getSubtitle()) && proto.proto.Subtitle.toObject(includeInstance, f),
-    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
+    file: msg.getFile_asB64()
   };
 
   if (includeInstance) {
@@ -2033,15 +2088,19 @@ proto.proto.AddOrRemoveSubtitleRequest.deserializeBinaryFromReader = function(ms
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = new grpc_base_pb.AuthenticateRequest;
+      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
+      msg.setAuthRequest(value);
+      break;
     case 2:
       var value = new proto.proto.Subtitle;
       reader.readMessage(value,proto.proto.Subtitle.deserializeBinaryFromReader);
       msg.setSubtitle(value);
       break;
     case 3:
-      var value = new grpc_base_pb.AuthenticateRequest;
-      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
-      msg.setAuthRequest(value);
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setFile(value);
       break;
     default:
       reader.skipField();
@@ -2072,6 +2131,14 @@ proto.proto.AddOrRemoveSubtitleRequest.prototype.serializeBinary = function() {
  */
 proto.proto.AddOrRemoveSubtitleRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getAuthRequest();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
+    );
+  }
   f = message.getSubtitle();
   if (f != null) {
     writer.writeMessage(
@@ -2080,14 +2147,50 @@ proto.proto.AddOrRemoveSubtitleRequest.serializeBinaryToWriter = function(messag
       proto.proto.Subtitle.serializeBinaryToWriter
     );
   }
-  f = message.getAuthRequest();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getFile_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
       3,
-      f,
-      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
+      f
     );
   }
+};
+
+
+/**
+ * optional AuthenticateRequest auth_request = 1;
+ * @return {?proto.proto.AuthenticateRequest}
+ */
+proto.proto.AddOrRemoveSubtitleRequest.prototype.getAuthRequest = function() {
+  return /** @type{?proto.proto.AuthenticateRequest} */ (
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 1));
+};
+
+
+/**
+ * @param {?proto.proto.AuthenticateRequest|undefined} value
+ * @return {!proto.proto.AddOrRemoveSubtitleRequest} returns this
+*/
+proto.proto.AddOrRemoveSubtitleRequest.prototype.setAuthRequest = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.proto.AddOrRemoveSubtitleRequest} returns this
+ */
+proto.proto.AddOrRemoveSubtitleRequest.prototype.clearAuthRequest = function() {
+  return this.setAuthRequest(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.proto.AddOrRemoveSubtitleRequest.prototype.hasAuthRequest = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -2129,39 +2232,44 @@ proto.proto.AddOrRemoveSubtitleRequest.prototype.hasSubtitle = function() {
 
 
 /**
- * optional AuthenticateRequest auth_request = 3;
- * @return {?proto.proto.AuthenticateRequest}
+ * optional bytes file = 3;
+ * @return {string}
  */
-proto.proto.AddOrRemoveSubtitleRequest.prototype.getAuthRequest = function() {
-  return /** @type{?proto.proto.AuthenticateRequest} */ (
-    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 3));
+proto.proto.AddOrRemoveSubtitleRequest.prototype.getFile = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * @param {?proto.proto.AuthenticateRequest|undefined} value
+ * optional bytes file = 3;
+ * This is a type-conversion wrapper around `getFile()`
+ * @return {string}
+ */
+proto.proto.AddOrRemoveSubtitleRequest.prototype.getFile_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getFile()));
+};
+
+
+/**
+ * optional bytes file = 3;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getFile()`
+ * @return {!Uint8Array}
+ */
+proto.proto.AddOrRemoveSubtitleRequest.prototype.getFile_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getFile()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
  * @return {!proto.proto.AddOrRemoveSubtitleRequest} returns this
-*/
-proto.proto.AddOrRemoveSubtitleRequest.prototype.setAuthRequest = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.proto.AddOrRemoveSubtitleRequest} returns this
  */
-proto.proto.AddOrRemoveSubtitleRequest.prototype.clearAuthRequest = function() {
-  return this.setAuthRequest(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.proto.AddOrRemoveSubtitleRequest.prototype.hasAuthRequest = function() {
-  return jspb.Message.getField(this, 3) != null;
+proto.proto.AddOrRemoveSubtitleRequest.prototype.setFile = function(value) {
+  return jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 
