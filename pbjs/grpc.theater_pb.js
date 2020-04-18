@@ -1592,7 +1592,6 @@ proto.proto.CreateTheaterRequest.prototype.toObject = function(opt_includeInstan
 proto.proto.CreateTheaterRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     theater: (f = msg.getTheater()) && proto.proto.Theater.toObject(includeInstance, f),
-    poster: msg.getPoster_asB64(),
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
   };
 
@@ -1635,10 +1634,6 @@ proto.proto.CreateTheaterRequest.deserializeBinaryFromReader = function(msg, rea
       reader.readMessage(value,proto.proto.Theater.deserializeBinaryFromReader);
       msg.setTheater(value);
       break;
-    case 2:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setPoster(value);
-      break;
     case 3:
       var value = new grpc_base_pb.AuthenticateRequest;
       reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
@@ -1679,13 +1674,6 @@ proto.proto.CreateTheaterRequest.serializeBinaryToWriter = function(message, wri
       1,
       f,
       proto.proto.Theater.serializeBinaryToWriter
-    );
-  }
-  f = message.getPoster_asU8();
-  if (f.length > 0) {
-    writer.writeBytes(
-      2,
-      f
     );
   }
   f = message.getAuthRequest();
@@ -1733,48 +1721,6 @@ proto.proto.CreateTheaterRequest.prototype.clearTheater = function() {
  */
 proto.proto.CreateTheaterRequest.prototype.hasTheater = function() {
   return jspb.Message.getField(this, 1) != null;
-};
-
-
-/**
- * optional bytes poster = 2;
- * @return {string}
- */
-proto.proto.CreateTheaterRequest.prototype.getPoster = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * optional bytes poster = 2;
- * This is a type-conversion wrapper around `getPoster()`
- * @return {string}
- */
-proto.proto.CreateTheaterRequest.prototype.getPoster_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getPoster()));
-};
-
-
-/**
- * optional bytes poster = 2;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getPoster()`
- * @return {!Uint8Array}
- */
-proto.proto.CreateTheaterRequest.prototype.getPoster_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getPoster()));
-};
-
-
-/**
- * @param {!(string|Uint8Array)} value
- * @return {!proto.proto.CreateTheaterRequest} returns this
- */
-proto.proto.CreateTheaterRequest.prototype.setPoster = function(value) {
-  return jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 

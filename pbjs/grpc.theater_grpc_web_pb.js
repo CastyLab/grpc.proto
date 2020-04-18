@@ -395,6 +395,86 @@ proto.proto.TheaterServicePromiseClient.prototype.getTheater =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.CreateTheaterRequest,
+ *   !proto.proto.Response>}
+ */
+const methodDescriptor_TheaterService_CreateTheater = new grpc.web.MethodDescriptor(
+  '/proto.TheaterService/CreateTheater',
+  grpc.web.MethodType.UNARY,
+  proto.proto.CreateTheaterRequest,
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.CreateTheaterRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.CreateTheaterRequest,
+ *   !proto.proto.Response>}
+ */
+const methodInfo_TheaterService_CreateTheater = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.CreateTheaterRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.CreateTheaterRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.TheaterServiceClient.prototype.createTheater =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.TheaterService/CreateTheater',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_CreateTheater,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.CreateTheaterRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.TheaterServicePromiseClient.prototype.createTheater =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.TheaterService/CreateTheater',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_CreateTheater);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.TheaterAuthRequest,
  *   !proto.proto.Response>}
  */

@@ -57,7 +57,6 @@ message GetAllUserTheatersRequest {
 
 message CreateTheaterRequest {
     Theater theater = 1;
-    bytes   poster = 2;
     AuthenticateRequest auth_request = 3;
 }
 
@@ -104,7 +103,7 @@ service TheaterService {
     rpc GetUserTheaters(GetAllUserTheatersRequest) returns (UserTheatersResponse);
     rpc GetUserSharedTheaters(GetAllUserTheatersRequest) returns (UserTheatersResponse);
     rpc GetTheater(Theater) returns (UserTheaterResponse);
-    rpc CreateTheater(stream CreateTheaterRequest) returns (Response);
+    rpc CreateTheater(CreateTheaterRequest) returns (Response);
     rpc RemoveTheater(TheaterAuthRequest) returns (Response);
     rpc EditTheater(TheaterAuthRequest) returns (Response);
     rpc GetSubtitles(TheaterAuthRequest) returns (TheaterSubtitlesResponse);
