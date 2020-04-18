@@ -1,4 +1,4 @@
-import {proto} from "./../pbjs/websocket";
+import {proto} from "./../pbjs/ws.bundle";
 import {Reader} from "protobufjs";
 
 const EMsgMask  = 2147483647;
