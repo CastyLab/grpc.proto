@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto;
 
-import "user.proto";
+import "grpc.user.proto";
 
 message NotificationMsgEvent {
     Notification notification = 1;

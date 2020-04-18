@@ -1,4 +1,4 @@
-// source: user.proto
+// source: grpc.user.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -12,10 +12,10 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var base_pb = require('./base_pb.js');
-goog.object.extend(proto, base_pb);
-var auth_pb = require('./auth_pb.js');
-goog.object.extend(proto, auth_pb);
+var grpc_base_pb = require('./grpc.base_pb.js');
+goog.object.extend(proto, grpc_base_pb);
+var grpc_auth_pb = require('./grpc.auth_pb.js');
+goog.object.extend(proto, grpc_auth_pb);
 var ws_enums_pb = require('./ws.enums_pb.js');
 goog.object.extend(proto, ws_enums_pb);
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
@@ -2297,7 +2297,7 @@ proto.proto.UpdateStateRequest.prototype.toObject = function(opt_includeInstance
 proto.proto.UpdateStateRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     state: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    authRequest: (f = msg.getAuthRequest()) && base_pb.AuthenticateRequest.toObject(includeInstance, f)
+    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2339,8 +2339,8 @@ proto.proto.UpdateStateRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setState(value);
       break;
     case 2:
-      var value = new base_pb.AuthenticateRequest;
-      reader.readMessage(value,base_pb.AuthenticateRequest.deserializeBinaryFromReader);
+      var value = new grpc_base_pb.AuthenticateRequest;
+      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
       msg.setAuthRequest(value);
       break;
     default:
@@ -2384,7 +2384,7 @@ proto.proto.UpdateStateRequest.serializeBinaryToWriter = function(message, write
     writer.writeMessage(
       2,
       f,
-      base_pb.AuthenticateRequest.serializeBinaryToWriter
+      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
   }
 };
@@ -2414,7 +2414,7 @@ proto.proto.UpdateStateRequest.prototype.setState = function(value) {
  */
 proto.proto.UpdateStateRequest.prototype.getAuthRequest = function() {
   return /** @type{?proto.proto.AuthenticateRequest} */ (
-    jspb.Message.getWrapperField(this, base_pb.AuthenticateRequest, 2));
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 2));
 };
 
 
@@ -2478,7 +2478,7 @@ proto.proto.UpdateActivityRequest.prototype.toObject = function(opt_includeInsta
 proto.proto.UpdateActivityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     activity: (f = msg.getActivity()) && proto.proto.Activity.toObject(includeInstance, f),
-    authRequest: (f = msg.getAuthRequest()) && base_pb.AuthenticateRequest.toObject(includeInstance, f)
+    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2521,8 +2521,8 @@ proto.proto.UpdateActivityRequest.deserializeBinaryFromReader = function(msg, re
       msg.setActivity(value);
       break;
     case 2:
-      var value = new base_pb.AuthenticateRequest;
-      reader.readMessage(value,base_pb.AuthenticateRequest.deserializeBinaryFromReader);
+      var value = new grpc_base_pb.AuthenticateRequest;
+      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
       msg.setAuthRequest(value);
       break;
     default:
@@ -2567,7 +2567,7 @@ proto.proto.UpdateActivityRequest.serializeBinaryToWriter = function(message, wr
     writer.writeMessage(
       2,
       f,
-      base_pb.AuthenticateRequest.serializeBinaryToWriter
+      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
   }
 };
@@ -2616,7 +2616,7 @@ proto.proto.UpdateActivityRequest.prototype.hasActivity = function() {
  */
 proto.proto.UpdateActivityRequest.prototype.getAuthRequest = function() {
   return /** @type{?proto.proto.AuthenticateRequest} */ (
-    jspb.Message.getWrapperField(this, base_pb.AuthenticateRequest, 2));
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 2));
 };
 
 
@@ -2681,7 +2681,7 @@ proto.proto.FriendRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     requestId: jspb.Message.getFieldWithDefault(msg, 1, ""),
     friendId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    authRequest: (f = msg.getAuthRequest()) && base_pb.AuthenticateRequest.toObject(includeInstance, f)
+    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2727,8 +2727,8 @@ proto.proto.FriendRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setFriendId(value);
       break;
     case 3:
-      var value = new base_pb.AuthenticateRequest;
-      reader.readMessage(value,base_pb.AuthenticateRequest.deserializeBinaryFromReader);
+      var value = new grpc_base_pb.AuthenticateRequest;
+      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
       msg.setAuthRequest(value);
       break;
     default:
@@ -2779,7 +2779,7 @@ proto.proto.FriendRequest.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       3,
       f,
-      base_pb.AuthenticateRequest.serializeBinaryToWriter
+      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
   }
 };
@@ -2827,7 +2827,7 @@ proto.proto.FriendRequest.prototype.setFriendId = function(value) {
  */
 proto.proto.FriendRequest.prototype.getAuthRequest = function() {
   return /** @type{?proto.proto.AuthenticateRequest} */ (
-    jspb.Message.getWrapperField(this, base_pb.AuthenticateRequest, 3));
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 3));
 };
 
 
@@ -3925,7 +3925,7 @@ proto.proto.CreateNotificationRequest.prototype.toObject = function(opt_includeI
 proto.proto.CreateNotificationRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     notification: (f = msg.getNotification()) && proto.proto.Notification.toObject(includeInstance, f),
-    authRequest: (f = msg.getAuthRequest()) && base_pb.AuthenticateRequest.toObject(includeInstance, f)
+    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -3968,8 +3968,8 @@ proto.proto.CreateNotificationRequest.deserializeBinaryFromReader = function(msg
       msg.setNotification(value);
       break;
     case 2:
-      var value = new base_pb.AuthenticateRequest;
-      reader.readMessage(value,base_pb.AuthenticateRequest.deserializeBinaryFromReader);
+      var value = new grpc_base_pb.AuthenticateRequest;
+      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
       msg.setAuthRequest(value);
       break;
     default:
@@ -4014,7 +4014,7 @@ proto.proto.CreateNotificationRequest.serializeBinaryToWriter = function(message
     writer.writeMessage(
       2,
       f,
-      base_pb.AuthenticateRequest.serializeBinaryToWriter
+      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
   }
 };
@@ -4063,7 +4063,7 @@ proto.proto.CreateNotificationRequest.prototype.hasNotification = function() {
  */
 proto.proto.CreateNotificationRequest.prototype.getAuthRequest = function() {
   return /** @type{?proto.proto.AuthenticateRequest} */ (
-    jspb.Message.getWrapperField(this, base_pb.AuthenticateRequest, 2));
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 2));
 };
 
 
@@ -4407,7 +4407,7 @@ proto.proto.SearchUserRequest.prototype.toObject = function(opt_includeInstance)
 proto.proto.SearchUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     keyword: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    authRequest: (f = msg.getAuthRequest()) && base_pb.AuthenticateRequest.toObject(includeInstance, f)
+    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -4449,8 +4449,8 @@ proto.proto.SearchUserRequest.deserializeBinaryFromReader = function(msg, reader
       msg.setKeyword(value);
       break;
     case 2:
-      var value = new base_pb.AuthenticateRequest;
-      reader.readMessage(value,base_pb.AuthenticateRequest.deserializeBinaryFromReader);
+      var value = new grpc_base_pb.AuthenticateRequest;
+      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
       msg.setAuthRequest(value);
       break;
     default:
@@ -4494,7 +4494,7 @@ proto.proto.SearchUserRequest.serializeBinaryToWriter = function(message, writer
     writer.writeMessage(
       2,
       f,
-      base_pb.AuthenticateRequest.serializeBinaryToWriter
+      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
   }
 };
@@ -4524,7 +4524,7 @@ proto.proto.SearchUserRequest.prototype.setKeyword = function(value) {
  */
 proto.proto.SearchUserRequest.prototype.getAuthRequest = function() {
   return /** @type{?proto.proto.AuthenticateRequest} */ (
-    jspb.Message.getWrapperField(this, base_pb.AuthenticateRequest, 2));
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 2));
 };
 
 
@@ -4837,7 +4837,7 @@ proto.proto.UpdateUserRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.proto.UpdateUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    authRequest: (f = msg.getAuthRequest()) && base_pb.AuthenticateRequest.toObject(includeInstance, f),
+    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f),
     result: (f = msg.getResult()) && proto.proto.User.toObject(includeInstance, f)
   };
 
@@ -4876,8 +4876,8 @@ proto.proto.UpdateUserRequest.deserializeBinaryFromReader = function(msg, reader
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new base_pb.AuthenticateRequest;
-      reader.readMessage(value,base_pb.AuthenticateRequest.deserializeBinaryFromReader);
+      var value = new grpc_base_pb.AuthenticateRequest;
+      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
       msg.setAuthRequest(value);
       break;
     case 2:
@@ -4919,7 +4919,7 @@ proto.proto.UpdateUserRequest.serializeBinaryToWriter = function(message, writer
     writer.writeMessage(
       1,
       f,
-      base_pb.AuthenticateRequest.serializeBinaryToWriter
+      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
   }
   f = message.getResult();
@@ -4939,7 +4939,7 @@ proto.proto.UpdateUserRequest.serializeBinaryToWriter = function(message, writer
  */
 proto.proto.UpdateUserRequest.prototype.getAuthRequest = function() {
   return /** @type{?proto.proto.AuthenticateRequest} */ (
-    jspb.Message.getWrapperField(this, base_pb.AuthenticateRequest, 1));
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 1));
 };
 
 

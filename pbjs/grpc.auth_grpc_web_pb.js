@@ -12,9 +12,9 @@ const grpc = {};
 grpc.web = require('grpc-web');
 
 
-var base_pb = require('./base_pb.js')
+var grpc_base_pb = require('./grpc.base_pb.js')
 const proto = {};
-proto.proto = require('./auth_pb.js');
+proto.proto = require('./grpc.auth_pb.js');
 
 /**
  * @param {string} hostname

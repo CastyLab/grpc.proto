@@ -12,15 +12,15 @@ const grpc = {};
 grpc.web = require('grpc-web');
 
 
-var base_pb = require('./base_pb.js')
+var grpc_base_pb = require('./grpc.base_pb.js')
 
-var auth_pb = require('./auth_pb.js')
+var grpc_auth_pb = require('./grpc.auth_pb.js')
 
 var ws_enums_pb = require('./ws.enums_pb.js')
 
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 const proto = {};
-proto.proto = require('./user_pb.js');
+proto.proto = require('./grpc.user_pb.js');
 
 /**
  * @param {string} hostname
@@ -84,7 +84,7 @@ const methodDescriptor_UserService_RollbackStates = new grpc.web.MethodDescripto
   '/proto.UserService/RollbackStates',
   grpc.web.MethodType.UNARY,
   proto.proto.RollbackStatesRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.RollbackStatesRequest} request
    * @return {!Uint8Array}
@@ -92,7 +92,7 @@ const methodDescriptor_UserService_RollbackStates = new grpc.web.MethodDescripto
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -103,7 +103,7 @@ const methodDescriptor_UserService_RollbackStates = new grpc.web.MethodDescripto
  *   !proto.proto.Response>}
  */
 const methodInfo_UserService_RollbackStates = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.RollbackStatesRequest} request
    * @return {!Uint8Array}
@@ -111,7 +111,7 @@ const methodInfo_UserService_RollbackStates = new grpc.web.AbstractClientBase.Me
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -164,7 +164,7 @@ const methodDescriptor_UserService_UpdateState = new grpc.web.MethodDescriptor(
   '/proto.UserService/UpdateState',
   grpc.web.MethodType.UNARY,
   proto.proto.UpdateStateRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.UpdateStateRequest} request
    * @return {!Uint8Array}
@@ -172,7 +172,7 @@ const methodDescriptor_UserService_UpdateState = new grpc.web.MethodDescriptor(
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -183,7 +183,7 @@ const methodDescriptor_UserService_UpdateState = new grpc.web.MethodDescriptor(
  *   !proto.proto.Response>}
  */
 const methodInfo_UserService_UpdateState = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.UpdateStateRequest} request
    * @return {!Uint8Array}
@@ -191,7 +191,7 @@ const methodInfo_UserService_UpdateState = new grpc.web.AbstractClientBase.Metho
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -244,7 +244,7 @@ const methodDescriptor_UserService_UpdateActivity = new grpc.web.MethodDescripto
   '/proto.UserService/UpdateActivity',
   grpc.web.MethodType.UNARY,
   proto.proto.UpdateActivityRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.UpdateActivityRequest} request
    * @return {!Uint8Array}
@@ -252,7 +252,7 @@ const methodDescriptor_UserService_UpdateActivity = new grpc.web.MethodDescripto
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -263,7 +263,7 @@ const methodDescriptor_UserService_UpdateActivity = new grpc.web.MethodDescripto
  *   !proto.proto.Response>}
  */
 const methodInfo_UserService_UpdateActivity = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.UpdateActivityRequest} request
    * @return {!Uint8Array}
@@ -271,7 +271,7 @@ const methodInfo_UserService_UpdateActivity = new grpc.web.AbstractClientBase.Me
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -323,8 +323,8 @@ proto.proto.UserServicePromiseClient.prototype.updateActivity =
 const methodDescriptor_UserService_RemoveActivity = new grpc.web.MethodDescriptor(
   '/proto.UserService/RemoveActivity',
   grpc.web.MethodType.UNARY,
-  base_pb.AuthenticateRequest,
-  base_pb.Response,
+  grpc_base_pb.AuthenticateRequest,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.AuthenticateRequest} request
    * @return {!Uint8Array}
@@ -332,7 +332,7 @@ const methodDescriptor_UserService_RemoveActivity = new grpc.web.MethodDescripto
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -343,7 +343,7 @@ const methodDescriptor_UserService_RemoveActivity = new grpc.web.MethodDescripto
  *   !proto.proto.Response>}
  */
 const methodInfo_UserService_RemoveActivity = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.AuthenticateRequest} request
    * @return {!Uint8Array}
@@ -351,7 +351,7 @@ const methodInfo_UserService_RemoveActivity = new grpc.web.AbstractClientBase.Me
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -403,7 +403,7 @@ proto.proto.UserServicePromiseClient.prototype.removeActivity =
 const methodDescriptor_UserService_GetUser = new grpc.web.MethodDescriptor(
   '/proto.UserService/GetUser',
   grpc.web.MethodType.UNARY,
-  base_pb.AuthenticateRequest,
+  grpc_base_pb.AuthenticateRequest,
   proto.proto.GetUserResponse,
   /**
    * @param {!proto.proto.AuthenticateRequest} request
@@ -644,7 +644,7 @@ const methodDescriptor_UserService_CreateUser = new grpc.web.MethodDescriptor(
   '/proto.UserService/CreateUser',
   grpc.web.MethodType.UNARY,
   proto.proto.CreateUserRequest,
-  auth_pb.AuthResponse,
+  grpc_auth_pb.AuthResponse,
   /**
    * @param {!proto.proto.CreateUserRequest} request
    * @return {!Uint8Array}
@@ -652,7 +652,7 @@ const methodDescriptor_UserService_CreateUser = new grpc.web.MethodDescriptor(
   function(request) {
     return request.serializeBinary();
   },
-  auth_pb.AuthResponse.deserializeBinary
+  grpc_auth_pb.AuthResponse.deserializeBinary
 );
 
 
@@ -663,7 +663,7 @@ const methodDescriptor_UserService_CreateUser = new grpc.web.MethodDescriptor(
  *   !proto.proto.AuthResponse>}
  */
 const methodInfo_UserService_CreateUser = new grpc.web.AbstractClientBase.MethodInfo(
-  auth_pb.AuthResponse,
+  grpc_auth_pb.AuthResponse,
   /**
    * @param {!proto.proto.CreateUserRequest} request
    * @return {!Uint8Array}
@@ -671,7 +671,7 @@ const methodInfo_UserService_CreateUser = new grpc.web.AbstractClientBase.Method
   function(request) {
     return request.serializeBinary();
   },
-  auth_pb.AuthResponse.deserializeBinary
+  grpc_auth_pb.AuthResponse.deserializeBinary
 );
 
 
@@ -884,7 +884,7 @@ const methodDescriptor_UserService_SendFriendRequest = new grpc.web.MethodDescri
   '/proto.UserService/SendFriendRequest',
   grpc.web.MethodType.UNARY,
   proto.proto.FriendRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.FriendRequest} request
    * @return {!Uint8Array}
@@ -892,7 +892,7 @@ const methodDescriptor_UserService_SendFriendRequest = new grpc.web.MethodDescri
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -903,7 +903,7 @@ const methodDescriptor_UserService_SendFriendRequest = new grpc.web.MethodDescri
  *   !proto.proto.Response>}
  */
 const methodInfo_UserService_SendFriendRequest = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.FriendRequest} request
    * @return {!Uint8Array}
@@ -911,7 +911,7 @@ const methodInfo_UserService_SendFriendRequest = new grpc.web.AbstractClientBase
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -964,7 +964,7 @@ const methodDescriptor_UserService_AcceptFriendRequest = new grpc.web.MethodDesc
   '/proto.UserService/AcceptFriendRequest',
   grpc.web.MethodType.UNARY,
   proto.proto.FriendRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.FriendRequest} request
    * @return {!Uint8Array}
@@ -972,7 +972,7 @@ const methodDescriptor_UserService_AcceptFriendRequest = new grpc.web.MethodDesc
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -983,7 +983,7 @@ const methodDescriptor_UserService_AcceptFriendRequest = new grpc.web.MethodDesc
  *   !proto.proto.Response>}
  */
 const methodInfo_UserService_AcceptFriendRequest = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.FriendRequest} request
    * @return {!Uint8Array}
@@ -991,7 +991,7 @@ const methodInfo_UserService_AcceptFriendRequest = new grpc.web.AbstractClientBa
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -1043,7 +1043,7 @@ proto.proto.UserServicePromiseClient.prototype.acceptFriendRequest =
 const methodDescriptor_UserService_GetFriends = new grpc.web.MethodDescriptor(
   '/proto.UserService/GetFriends',
   grpc.web.MethodType.UNARY,
-  base_pb.AuthenticateRequest,
+  grpc_base_pb.AuthenticateRequest,
   proto.proto.FriendsResponse,
   /**
    * @param {!proto.proto.AuthenticateRequest} request
@@ -1123,7 +1123,7 @@ proto.proto.UserServicePromiseClient.prototype.getFriends =
 const methodDescriptor_UserService_GetNotifications = new grpc.web.MethodDescriptor(
   '/proto.UserService/GetNotifications',
   grpc.web.MethodType.UNARY,
-  base_pb.AuthenticateRequest,
+  grpc_base_pb.AuthenticateRequest,
   proto.proto.NotificationResponse,
   /**
    * @param {!proto.proto.AuthenticateRequest} request
@@ -1283,7 +1283,7 @@ proto.proto.UserServicePromiseClient.prototype.createNotification =
 const methodDescriptor_UserService_ReadAllNotifications = new grpc.web.MethodDescriptor(
   '/proto.UserService/ReadAllNotifications',
   grpc.web.MethodType.UNARY,
-  base_pb.AuthenticateRequest,
+  grpc_base_pb.AuthenticateRequest,
   proto.proto.NotificationResponse,
   /**
    * @param {!proto.proto.AuthenticateRequest} request

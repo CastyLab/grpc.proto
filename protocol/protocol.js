@@ -1,5 +1,5 @@
 const ProtoMask = 0x80000000;
-import {proto} from "./ws.enums_pb";
+import {proto} from "./../pbjs/websocket";
 
 function new_client_msg_protobuf(eMsg, type, body) {
     if (eMsg == null){

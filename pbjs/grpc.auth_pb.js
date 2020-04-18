@@ -1,4 +1,4 @@
-// source: auth.proto
+// source: grpc.auth.proto
 /**
  * @fileoverview
  * @enhanceable
@@ -12,8 +12,8 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var base_pb = require('./base_pb.js');
-goog.object.extend(proto, base_pb);
+var grpc_base_pb = require('./grpc.base_pb.js');
+goog.object.extend(proto, grpc_base_pb);
 goog.exportSymbol('proto.proto.AuthRequest', null, global);
 goog.exportSymbol('proto.proto.AuthResponse', null, global);
 goog.exportSymbol('proto.proto.OAUTHRequest', null, global);
@@ -309,7 +309,7 @@ proto.proto.AuthResponse.toObject = function(includeInstance, msg) {
     message: jspb.Message.getFieldWithDefault(msg, 5, ""),
     refreshedToken: msg.getRefreshedToken_asB64(),
     validationErrorList: jspb.Message.toObjectList(msg.getValidationErrorList(),
-    base_pb.ValidationError.toObject, includeInstance)
+    grpc_base_pb.ValidationError.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -371,8 +371,8 @@ proto.proto.AuthResponse.deserializeBinaryFromReader = function(msg, reader) {
       msg.setRefreshedToken(value);
       break;
     case 7:
-      var value = new base_pb.ValidationError;
-      reader.readMessage(value,base_pb.ValidationError.deserializeBinaryFromReader);
+      var value = new grpc_base_pb.ValidationError;
+      reader.readMessage(value,grpc_base_pb.ValidationError.deserializeBinaryFromReader);
       msg.addValidationError(value);
       break;
     default:
@@ -451,7 +451,7 @@ proto.proto.AuthResponse.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       7,
       f,
-      base_pb.ValidationError.serializeBinaryToWriter
+      grpc_base_pb.ValidationError.serializeBinaryToWriter
     );
   }
 };
@@ -619,7 +619,7 @@ proto.proto.AuthResponse.prototype.setRefreshedToken = function(value) {
  */
 proto.proto.AuthResponse.prototype.getValidationErrorList = function() {
   return /** @type{!Array<!proto.proto.ValidationError>} */ (
-    jspb.Message.getRepeatedWrapperField(this, base_pb.ValidationError, 7));
+    jspb.Message.getRepeatedWrapperField(this, grpc_base_pb.ValidationError, 7));
 };
 
 

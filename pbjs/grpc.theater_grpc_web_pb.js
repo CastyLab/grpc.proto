@@ -12,13 +12,13 @@ const grpc = {};
 grpc.web = require('grpc-web');
 
 
-var base_pb = require('./base_pb.js')
+var grpc_base_pb = require('./grpc.base_pb.js')
 
-var user_pb = require('./user_pb.js')
+var grpc_user_pb = require('./grpc.user_pb.js')
 
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 const proto = {};
-proto.proto = require('./theater_pb.js');
+proto.proto = require('./grpc.theater_pb.js');
 
 /**
  * @param {string} hostname
@@ -82,7 +82,7 @@ const methodDescriptor_TheaterService_Invite = new grpc.web.MethodDescriptor(
   '/proto.TheaterService/Invite',
   grpc.web.MethodType.UNARY,
   proto.proto.InviteFriendsTheaterRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.InviteFriendsTheaterRequest} request
    * @return {!Uint8Array}
@@ -90,7 +90,7 @@ const methodDescriptor_TheaterService_Invite = new grpc.web.MethodDescriptor(
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -101,7 +101,7 @@ const methodDescriptor_TheaterService_Invite = new grpc.web.MethodDescriptor(
  *   !proto.proto.Response>}
  */
 const methodInfo_TheaterService_Invite = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.InviteFriendsTheaterRequest} request
    * @return {!Uint8Array}
@@ -109,7 +109,7 @@ const methodInfo_TheaterService_Invite = new grpc.web.AbstractClientBase.MethodI
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -402,7 +402,7 @@ const methodDescriptor_TheaterService_CreateTheater = new grpc.web.MethodDescrip
   '/proto.TheaterService/CreateTheater',
   grpc.web.MethodType.UNARY,
   proto.proto.CreateTheaterRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.CreateTheaterRequest} request
    * @return {!Uint8Array}
@@ -410,7 +410,7 @@ const methodDescriptor_TheaterService_CreateTheater = new grpc.web.MethodDescrip
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -421,7 +421,7 @@ const methodDescriptor_TheaterService_CreateTheater = new grpc.web.MethodDescrip
  *   !proto.proto.Response>}
  */
 const methodInfo_TheaterService_CreateTheater = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.CreateTheaterRequest} request
    * @return {!Uint8Array}
@@ -429,7 +429,7 @@ const methodInfo_TheaterService_CreateTheater = new grpc.web.AbstractClientBase.
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -482,7 +482,7 @@ const methodDescriptor_TheaterService_RemoveTheater = new grpc.web.MethodDescrip
   '/proto.TheaterService/RemoveTheater',
   grpc.web.MethodType.UNARY,
   proto.proto.TheaterAuthRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.TheaterAuthRequest} request
    * @return {!Uint8Array}
@@ -490,7 +490,7 @@ const methodDescriptor_TheaterService_RemoveTheater = new grpc.web.MethodDescrip
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -501,7 +501,7 @@ const methodDescriptor_TheaterService_RemoveTheater = new grpc.web.MethodDescrip
  *   !proto.proto.Response>}
  */
 const methodInfo_TheaterService_RemoveTheater = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.TheaterAuthRequest} request
    * @return {!Uint8Array}
@@ -509,7 +509,7 @@ const methodInfo_TheaterService_RemoveTheater = new grpc.web.AbstractClientBase.
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -562,7 +562,7 @@ const methodDescriptor_TheaterService_EditTheater = new grpc.web.MethodDescripto
   '/proto.TheaterService/EditTheater',
   grpc.web.MethodType.UNARY,
   proto.proto.TheaterAuthRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.TheaterAuthRequest} request
    * @return {!Uint8Array}
@@ -570,7 +570,7 @@ const methodDescriptor_TheaterService_EditTheater = new grpc.web.MethodDescripto
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -581,7 +581,7 @@ const methodDescriptor_TheaterService_EditTheater = new grpc.web.MethodDescripto
  *   !proto.proto.Response>}
  */
 const methodInfo_TheaterService_EditTheater = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.TheaterAuthRequest} request
    * @return {!Uint8Array}
@@ -589,7 +589,7 @@ const methodInfo_TheaterService_EditTheater = new grpc.web.AbstractClientBase.Me
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -722,7 +722,7 @@ const methodDescriptor_TheaterService_AddSubtitle = new grpc.web.MethodDescripto
   '/proto.TheaterService/AddSubtitle',
   grpc.web.MethodType.UNARY,
   proto.proto.AddOrRemoveSubtitleRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.AddOrRemoveSubtitleRequest} request
    * @return {!Uint8Array}
@@ -730,7 +730,7 @@ const methodDescriptor_TheaterService_AddSubtitle = new grpc.web.MethodDescripto
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -741,7 +741,7 @@ const methodDescriptor_TheaterService_AddSubtitle = new grpc.web.MethodDescripto
  *   !proto.proto.Response>}
  */
 const methodInfo_TheaterService_AddSubtitle = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.AddOrRemoveSubtitleRequest} request
    * @return {!Uint8Array}
@@ -749,7 +749,7 @@ const methodInfo_TheaterService_AddSubtitle = new grpc.web.AbstractClientBase.Me
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -802,7 +802,7 @@ const methodDescriptor_TheaterService_RemoveSubtitle = new grpc.web.MethodDescri
   '/proto.TheaterService/RemoveSubtitle',
   grpc.web.MethodType.UNARY,
   proto.proto.AddOrRemoveSubtitleRequest,
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.AddOrRemoveSubtitleRequest} request
    * @return {!Uint8Array}
@@ -810,7 +810,7 @@ const methodDescriptor_TheaterService_RemoveSubtitle = new grpc.web.MethodDescri
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 
@@ -821,7 +821,7 @@ const methodDescriptor_TheaterService_RemoveSubtitle = new grpc.web.MethodDescri
  *   !proto.proto.Response>}
  */
 const methodInfo_TheaterService_RemoveSubtitle = new grpc.web.AbstractClientBase.MethodInfo(
-  base_pb.Response,
+  grpc_base_pb.Response,
   /**
    * @param {!proto.proto.AddOrRemoveSubtitleRequest} request
    * @return {!Uint8Array}
@@ -829,7 +829,7 @@ const methodInfo_TheaterService_RemoveSubtitle = new grpc.web.AbstractClientBase
   function(request) {
     return request.serializeBinary();
   },
-  base_pb.Response.deserializeBinary
+  grpc_base_pb.Response.deserializeBinary
 );
 
 

@@ -2,7 +2,7 @@ syntax = "proto3";
 package proto;
 
 import "ws.enums.proto";
-import "user.proto";
+import "grpc.user.proto";
 
 message PingMsgEvent {
     PERSONAL_STATE state = 1;

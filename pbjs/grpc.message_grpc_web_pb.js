@@ -12,13 +12,13 @@ const grpc = {};
 grpc.web = require('grpc-web');
 
 
-var base_pb = require('./base_pb.js')
+var grpc_base_pb = require('./grpc.base_pb.js')
 
-var user_pb = require('./user_pb.js')
+var grpc_user_pb = require('./grpc.user_pb.js')
 
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js')
 const proto = {};
-proto.proto = require('./message_pb.js');
+proto.proto = require('./grpc.message_pb.js');
 
 /**
  * @param {string} hostname
