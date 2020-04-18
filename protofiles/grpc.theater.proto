@@ -65,7 +65,7 @@ message TheaterAuthRequest {
     AuthenticateRequest auth_request = 2;
 }
 
-message AddOrRemoveSubtitleRequest {
+message RemoveSubtitleRequest {
     AuthenticateRequest auth_request = 1;
     Subtitle subtitle = 2;
     bytes file = 3;
@@ -107,6 +107,5 @@ service TheaterService {
     rpc RemoveTheater(TheaterAuthRequest) returns (Response);
     rpc EditTheater(TheaterAuthRequest) returns (Response);
     rpc GetSubtitles(TheaterAuthRequest) returns (TheaterSubtitlesResponse);
-    rpc AddSubtitle(stream AddOrRemoveSubtitleRequest) returns (Response);
-    rpc RemoveSubtitle(AddOrRemoveSubtitleRequest) returns (Response);
+    rpc RemoveSubtitle(RemoveSubtitleRequest) returns (Response);
 }

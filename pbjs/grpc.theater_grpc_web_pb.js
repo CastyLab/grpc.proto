@@ -715,16 +715,16 @@ proto.proto.TheaterServicePromiseClient.prototype.getSubtitles =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.AddOrRemoveSubtitleRequest,
+ *   !proto.proto.RemoveSubtitleRequest,
  *   !proto.proto.Response>}
  */
 const methodDescriptor_TheaterService_RemoveSubtitle = new grpc.web.MethodDescriptor(
   '/proto.TheaterService/RemoveSubtitle',
   grpc.web.MethodType.UNARY,
-  proto.proto.AddOrRemoveSubtitleRequest,
+  proto.proto.RemoveSubtitleRequest,
   grpc_base_pb.Response,
   /**
-   * @param {!proto.proto.AddOrRemoveSubtitleRequest} request
+   * @param {!proto.proto.RemoveSubtitleRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -737,13 +737,13 @@ const methodDescriptor_TheaterService_RemoveSubtitle = new grpc.web.MethodDescri
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.AddOrRemoveSubtitleRequest,
+ *   !proto.proto.RemoveSubtitleRequest,
  *   !proto.proto.Response>}
  */
 const methodInfo_TheaterService_RemoveSubtitle = new grpc.web.AbstractClientBase.MethodInfo(
   grpc_base_pb.Response,
   /**
-   * @param {!proto.proto.AddOrRemoveSubtitleRequest} request
+   * @param {!proto.proto.RemoveSubtitleRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -754,7 +754,7 @@ const methodInfo_TheaterService_RemoveSubtitle = new grpc.web.AbstractClientBase
 
 
 /**
- * @param {!proto.proto.AddOrRemoveSubtitleRequest} request The
+ * @param {!proto.proto.RemoveSubtitleRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
@@ -775,7 +775,7 @@ proto.proto.TheaterServiceClient.prototype.removeSubtitle =
 
 
 /**
- * @param {!proto.proto.AddOrRemoveSubtitleRequest} request The
+ * @param {!proto.proto.RemoveSubtitleRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
