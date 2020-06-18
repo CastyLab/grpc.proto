@@ -319,16 +319,16 @@ proto.proto.TheaterServicePromiseClient.prototype.updateTheater =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.TheaterAuthRequest,
+ *   !proto.proto.MediaSourceAuthRequest,
  *   !proto.proto.TheaterSubtitlesResponse>}
  */
 const methodDescriptor_TheaterService_GetSubtitles = new grpc.web.MethodDescriptor(
   '/proto.TheaterService/GetSubtitles',
   grpc.web.MethodType.UNARY,
-  proto.proto.TheaterAuthRequest,
+  proto.proto.MediaSourceAuthRequest,
   proto.proto.TheaterSubtitlesResponse,
   /**
-   * @param {!proto.proto.TheaterAuthRequest} request
+   * @param {!proto.proto.MediaSourceAuthRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -341,13 +341,13 @@ const methodDescriptor_TheaterService_GetSubtitles = new grpc.web.MethodDescript
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.TheaterAuthRequest,
+ *   !proto.proto.MediaSourceAuthRequest,
  *   !proto.proto.TheaterSubtitlesResponse>}
  */
 const methodInfo_TheaterService_GetSubtitles = new grpc.web.AbstractClientBase.MethodInfo(
   proto.proto.TheaterSubtitlesResponse,
   /**
-   * @param {!proto.proto.TheaterAuthRequest} request
+   * @param {!proto.proto.MediaSourceAuthRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -358,7 +358,7 @@ const methodInfo_TheaterService_GetSubtitles = new grpc.web.AbstractClientBase.M
 
 
 /**
- * @param {!proto.proto.TheaterAuthRequest} request The
+ * @param {!proto.proto.MediaSourceAuthRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
@@ -379,7 +379,7 @@ proto.proto.TheaterServiceClient.prototype.getSubtitles =
 
 
 /**
- * @param {!proto.proto.TheaterAuthRequest} request The
+ * @param {!proto.proto.MediaSourceAuthRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata

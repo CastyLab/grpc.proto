@@ -14,10 +14,10 @@ enum PRIVACY {
 }
 
 message Subtitle {
-    string  id          = 1;
-    string  theater_id  = 2;
-    string  lang        = 3;
-    string  file        = 4;
+    string  id               = 1;
+    string  media_source_id  = 2;
+    string  lang             = 3;
+    string  file             = 4;
     google.protobuf.Timestamp  created_at  = 5;
     google.protobuf.Timestamp  updated_at  = 6;
 }
@@ -67,8 +67,8 @@ message TheaterAuthRequest {
 
 message RemoveSubtitleRequest {
     AuthenticateRequest auth_request = 1;
-    Subtitle subtitle = 2;
-    bytes file = 3;
+    string subtitle_id     = 2;
+    string media_source_id = 3;
 }
 
 message TheaterSubtitlesResponse {
@@ -93,10 +93,11 @@ message InviteFriendsTheaterRequest {
 
 // Start of MediaSource requests and responses
 message MediaSourceAuthRequest {
-    AuthenticateRequest auth_request = 1;
-    uint64   limit     = 2;
-    uint64   page      = 3;
-    uint64   per_page  = 4;
+    AuthenticateRequest   auth_request     = 1;
+    MediaSource           media_source_id  = 2;
+    uint64                limit            = 3;
+    uint64                page             = 4;
+    uint64                per_page         = 5;
 }
 
 message MediaSourceRemoveRequest {
@@ -116,7 +117,7 @@ service TheaterService {
     rpc Invite(InviteFriendsTheaterRequest) returns (Response);
     rpc GetTheater(Theater) returns (UserTheaterResponse);
     rpc UpdateTheater(TheaterAuthRequest) returns (Response);
-    rpc GetSubtitles(TheaterAuthRequest) returns (TheaterSubtitlesResponse);
+    rpc GetSubtitles(MediaSourceAuthRequest) returns (TheaterSubtitlesResponse);
     rpc GetMediaSources(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
     rpc RemoveMediaSource(MediaSourceRemoveRequest) returns (Response);
     rpc RemoveSubtitle(RemoveSubtitleRequest) returns (Response);

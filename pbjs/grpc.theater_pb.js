@@ -317,7 +317,7 @@ proto.proto.Subtitle.prototype.toObject = function(opt_includeInstance) {
 proto.proto.Subtitle.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    theaterId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    mediaSourceId: jspb.Message.getFieldWithDefault(msg, 2, ""),
     lang: jspb.Message.getFieldWithDefault(msg, 3, ""),
     file: jspb.Message.getFieldWithDefault(msg, 4, ""),
     createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
@@ -364,7 +364,7 @@ proto.proto.Subtitle.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTheaterId(value);
+      msg.setMediaSourceId(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -420,7 +420,7 @@ proto.proto.Subtitle.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getTheaterId();
+  f = message.getMediaSourceId();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -479,10 +479,10 @@ proto.proto.Subtitle.prototype.setId = function(value) {
 
 
 /**
- * optional string theater_id = 2;
+ * optional string media_source_id = 2;
  * @return {string}
  */
-proto.proto.Subtitle.prototype.getTheaterId = function() {
+proto.proto.Subtitle.prototype.getMediaSourceId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -491,7 +491,7 @@ proto.proto.Subtitle.prototype.getTheaterId = function() {
  * @param {string} value
  * @return {!proto.proto.Subtitle} returns this
  */
-proto.proto.Subtitle.prototype.setTheaterId = function(value) {
+proto.proto.Subtitle.prototype.setMediaSourceId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -1969,8 +1969,8 @@ proto.proto.RemoveSubtitleRequest.prototype.toObject = function(opt_includeInsta
 proto.proto.RemoveSubtitleRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f),
-    subtitle: (f = msg.getSubtitle()) && proto.proto.Subtitle.toObject(includeInstance, f),
-    file: msg.getFile_asB64()
+    subtitleId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    mediaSourceId: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -2013,13 +2013,12 @@ proto.proto.RemoveSubtitleRequest.deserializeBinaryFromReader = function(msg, re
       msg.setAuthRequest(value);
       break;
     case 2:
-      var value = new proto.proto.Subtitle;
-      reader.readMessage(value,proto.proto.Subtitle.deserializeBinaryFromReader);
-      msg.setSubtitle(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSubtitleId(value);
       break;
     case 3:
-      var value = /** @type {!Uint8Array} */ (reader.readBytes());
-      msg.setFile(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMediaSourceId(value);
       break;
     default:
       reader.skipField();
@@ -2058,17 +2057,16 @@ proto.proto.RemoveSubtitleRequest.serializeBinaryToWriter = function(message, wr
       grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
   }
-  f = message.getSubtitle();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getSubtitleId();
+  if (f.length > 0) {
+    writer.writeString(
       2,
-      f,
-      proto.proto.Subtitle.serializeBinaryToWriter
+      f
     );
   }
-  f = message.getFile_asU8();
+  f = message.getMediaSourceId();
   if (f.length > 0) {
-    writer.writeBytes(
+    writer.writeString(
       3,
       f
     );
@@ -2114,81 +2112,38 @@ proto.proto.RemoveSubtitleRequest.prototype.hasAuthRequest = function() {
 
 
 /**
- * optional Subtitle subtitle = 2;
- * @return {?proto.proto.Subtitle}
- */
-proto.proto.RemoveSubtitleRequest.prototype.getSubtitle = function() {
-  return /** @type{?proto.proto.Subtitle} */ (
-    jspb.Message.getWrapperField(this, proto.proto.Subtitle, 2));
-};
-
-
-/**
- * @param {?proto.proto.Subtitle|undefined} value
- * @return {!proto.proto.RemoveSubtitleRequest} returns this
-*/
-proto.proto.RemoveSubtitleRequest.prototype.setSubtitle = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.proto.RemoveSubtitleRequest} returns this
- */
-proto.proto.RemoveSubtitleRequest.prototype.clearSubtitle = function() {
-  return this.setSubtitle(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.proto.RemoveSubtitleRequest.prototype.hasSubtitle = function() {
-  return jspb.Message.getField(this, 2) != null;
-};
-
-
-/**
- * optional bytes file = 3;
+ * optional string subtitle_id = 2;
  * @return {string}
  */
-proto.proto.RemoveSubtitleRequest.prototype.getFile = function() {
+proto.proto.RemoveSubtitleRequest.prototype.getSubtitleId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.proto.RemoveSubtitleRequest} returns this
+ */
+proto.proto.RemoveSubtitleRequest.prototype.setSubtitleId = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string media_source_id = 3;
+ * @return {string}
+ */
+proto.proto.RemoveSubtitleRequest.prototype.getMediaSourceId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * optional bytes file = 3;
- * This is a type-conversion wrapper around `getFile()`
- * @return {string}
- */
-proto.proto.RemoveSubtitleRequest.prototype.getFile_asB64 = function() {
-  return /** @type {string} */ (jspb.Message.bytesAsB64(
-      this.getFile()));
-};
-
-
-/**
- * optional bytes file = 3;
- * Note that Uint8Array is not supported on all browsers.
- * @see http://caniuse.com/Uint8Array
- * This is a type-conversion wrapper around `getFile()`
- * @return {!Uint8Array}
- */
-proto.proto.RemoveSubtitleRequest.prototype.getFile_asU8 = function() {
-  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
-      this.getFile()));
-};
-
-
-/**
- * @param {!(string|Uint8Array)} value
+ * @param {string} value
  * @return {!proto.proto.RemoveSubtitleRequest} returns this
  */
-proto.proto.RemoveSubtitleRequest.prototype.setFile = function(value) {
-  return jspb.Message.setProto3BytesField(this, 3, value);
+proto.proto.RemoveSubtitleRequest.prototype.setMediaSourceId = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -2953,9 +2908,10 @@ proto.proto.MediaSourceAuthRequest.prototype.toObject = function(opt_includeInst
 proto.proto.MediaSourceAuthRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f),
-    limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    page: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    perPage: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    mediaSourceId: (f = msg.getMediaSourceId()) && proto.proto.MediaSource.toObject(includeInstance, f),
+    limit: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    page: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    perPage: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -2998,14 +2954,19 @@ proto.proto.MediaSourceAuthRequest.deserializeBinaryFromReader = function(msg, r
       msg.setAuthRequest(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readUint64());
-      msg.setLimit(value);
+      var value = new proto.proto.MediaSource;
+      reader.readMessage(value,proto.proto.MediaSource.deserializeBinaryFromReader);
+      msg.setMediaSourceId(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readUint64());
-      msg.setPage(value);
+      msg.setLimit(value);
       break;
     case 4:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setPage(value);
+      break;
+    case 5:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setPerPage(value);
       break;
@@ -3046,24 +3007,32 @@ proto.proto.MediaSourceAuthRequest.serializeBinaryToWriter = function(message, w
       grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
   }
-  f = message.getLimit();
-  if (f !== 0) {
-    writer.writeUint64(
+  f = message.getMediaSourceId();
+  if (f != null) {
+    writer.writeMessage(
       2,
-      f
+      f,
+      proto.proto.MediaSource.serializeBinaryToWriter
     );
   }
-  f = message.getPage();
+  f = message.getLimit();
   if (f !== 0) {
     writer.writeUint64(
       3,
       f
     );
   }
-  f = message.getPerPage();
+  f = message.getPage();
   if (f !== 0) {
     writer.writeUint64(
       4,
+      f
+    );
+  }
+  f = message.getPerPage();
+  if (f !== 0) {
+    writer.writeUint64(
+      5,
       f
     );
   }
@@ -3108,28 +3077,47 @@ proto.proto.MediaSourceAuthRequest.prototype.hasAuthRequest = function() {
 
 
 /**
- * optional uint64 limit = 2;
+ * optional MediaSource media_source_id = 2;
+ * @return {?proto.proto.MediaSource}
+ */
+proto.proto.MediaSourceAuthRequest.prototype.getMediaSourceId = function() {
+  return /** @type{?proto.proto.MediaSource} */ (
+    jspb.Message.getWrapperField(this, proto.proto.MediaSource, 2));
+};
+
+
+/**
+ * @param {?proto.proto.MediaSource|undefined} value
+ * @return {!proto.proto.MediaSourceAuthRequest} returns this
+*/
+proto.proto.MediaSourceAuthRequest.prototype.setMediaSourceId = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.proto.MediaSourceAuthRequest} returns this
+ */
+proto.proto.MediaSourceAuthRequest.prototype.clearMediaSourceId = function() {
+  return this.setMediaSourceId(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.proto.MediaSourceAuthRequest.prototype.hasMediaSourceId = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional uint64 limit = 3;
  * @return {number}
  */
 proto.proto.MediaSourceAuthRequest.prototype.getLimit = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.proto.MediaSourceAuthRequest} returns this
- */
-proto.proto.MediaSourceAuthRequest.prototype.setLimit = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
-};
-
-
-/**
- * optional uint64 page = 3;
- * @return {number}
- */
-proto.proto.MediaSourceAuthRequest.prototype.getPage = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
@@ -3138,16 +3126,16 @@ proto.proto.MediaSourceAuthRequest.prototype.getPage = function() {
  * @param {number} value
  * @return {!proto.proto.MediaSourceAuthRequest} returns this
  */
-proto.proto.MediaSourceAuthRequest.prototype.setPage = function(value) {
+proto.proto.MediaSourceAuthRequest.prototype.setLimit = function(value) {
   return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * optional uint64 per_page = 4;
+ * optional uint64 page = 4;
  * @return {number}
  */
-proto.proto.MediaSourceAuthRequest.prototype.getPerPage = function() {
+proto.proto.MediaSourceAuthRequest.prototype.getPage = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
@@ -3156,8 +3144,26 @@ proto.proto.MediaSourceAuthRequest.prototype.getPerPage = function() {
  * @param {number} value
  * @return {!proto.proto.MediaSourceAuthRequest} returns this
  */
-proto.proto.MediaSourceAuthRequest.prototype.setPerPage = function(value) {
+proto.proto.MediaSourceAuthRequest.prototype.setPage = function(value) {
   return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional uint64 per_page = 5;
+ * @return {number}
+ */
+proto.proto.MediaSourceAuthRequest.prototype.getPerPage = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.proto.MediaSourceAuthRequest} returns this
+ */
+proto.proto.MediaSourceAuthRequest.prototype.setPerPage = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
