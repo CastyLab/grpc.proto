@@ -3164,7 +3164,7 @@ proto.proto.MediaSourceRemoveRequest.prototype.toObject = function(opt_includeIn
 proto.proto.MediaSourceRemoveRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f),
-    mediaSourceId: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    mediaSourceId: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -3207,7 +3207,7 @@ proto.proto.MediaSourceRemoveRequest.deserializeBinaryFromReader = function(msg,
       msg.setAuthRequest(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {string} */ (reader.readString());
       msg.setMediaSourceId(value);
       break;
     default:
@@ -3248,8 +3248,8 @@ proto.proto.MediaSourceRemoveRequest.serializeBinaryToWriter = function(message,
     );
   }
   f = message.getMediaSourceId();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -3295,20 +3295,20 @@ proto.proto.MediaSourceRemoveRequest.prototype.hasAuthRequest = function() {
 
 
 /**
- * optional uint64 media_source_id = 2;
- * @return {number}
+ * optional string media_source_id = 2;
+ * @return {string}
  */
 proto.proto.MediaSourceRemoveRequest.prototype.getMediaSourceId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.proto.MediaSourceRemoveRequest} returns this
  */
 proto.proto.MediaSourceRemoveRequest.prototype.setMediaSourceId = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

@@ -100,7 +100,7 @@ message MediaSourceAuthRequest {
 
 message MediaSourceRemoveRequest {
     AuthenticateRequest auth_request = 1;
-    uint64   media_source_id         = 2;
+    string   media_source_id         = 2;
 }
 
 message TheaterMediaSourcesResponse {
