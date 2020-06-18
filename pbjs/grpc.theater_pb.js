@@ -612,7 +612,7 @@ proto.proto.Subtitle.prototype.hasUpdatedAt = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.proto.MediaSource.repeatedFields_ = [5];
+proto.proto.MediaSource.repeatedFields_ = [6];
 
 
 
@@ -645,12 +645,15 @@ proto.proto.MediaSource.prototype.toObject = function(opt_includeInstance) {
  */
 proto.proto.MediaSource.toObject = function(includeInstance, msg) {
   var f, obj = {
-    type: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    banner: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    uri: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    lastPlayedTime: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    type: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    banner: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    uri: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    lastPlayedTime: jspb.Message.getFieldWithDefault(msg, 5, 0),
     subtitlesList: jspb.Message.toObjectList(msg.getSubtitlesList(),
-    proto.proto.Subtitle.toObject, includeInstance)
+    proto.proto.Subtitle.toObject, includeInstance),
+    createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+    updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -688,25 +691,39 @@ proto.proto.MediaSource.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setId(value);
+      break;
+    case 2:
       var value = /** @type {!proto.proto.MediaSource.Type} */ (reader.readEnum());
       msg.setType(value);
       break;
-    case 2:
+    case 3:
       var value = /** @type {string} */ (reader.readString());
       msg.setBanner(value);
       break;
-    case 3:
+    case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setUri(value);
       break;
-    case 4:
+    case 5:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setLastPlayedTime(value);
       break;
-    case 5:
+    case 6:
       var value = new proto.proto.Subtitle;
       reader.readMessage(value,proto.proto.Subtitle.deserializeBinaryFromReader);
       msg.addSubtitles(value);
+      break;
+    case 7:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setCreatedAt(value);
+      break;
+    case 8:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setUpdatedAt(value);
       break;
     default:
       reader.skipField();
@@ -737,40 +754,63 @@ proto.proto.MediaSource.prototype.serializeBinary = function() {
  */
 proto.proto.MediaSource.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getId();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
   f = message.getType();
   if (f !== 0.0) {
     writer.writeEnum(
-      1,
+      2,
       f
     );
   }
   f = message.getBanner();
   if (f.length > 0) {
     writer.writeString(
-      2,
+      3,
       f
     );
   }
   f = message.getUri();
   if (f.length > 0) {
     writer.writeString(
-      3,
+      4,
       f
     );
   }
   f = message.getLastPlayedTime();
   if (f !== 0) {
     writer.writeInt64(
-      4,
+      5,
       f
     );
   }
   f = message.getSubtitlesList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      5,
+      6,
       f,
       proto.proto.Subtitle.serializeBinaryToWriter
+    );
+  }
+  f = message.getCreatedAt();
+  if (f != null) {
+    writer.writeMessage(
+      7,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
+  f = message.getUpdatedAt();
+  if (f != null) {
+    writer.writeMessage(
+      8,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -1009,11 +1049,29 @@ proto.proto.MediaSource.File.prototype.setTitle = function(value) {
 
 
 /**
- * optional Type type = 1;
+ * optional string id = 1;
+ * @return {string}
+ */
+proto.proto.MediaSource.prototype.getId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.proto.MediaSource} returns this
+ */
+proto.proto.MediaSource.prototype.setId = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional Type type = 2;
  * @return {!proto.proto.MediaSource.Type}
  */
 proto.proto.MediaSource.prototype.getType = function() {
-  return /** @type {!proto.proto.MediaSource.Type} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {!proto.proto.MediaSource.Type} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
@@ -1022,33 +1080,15 @@ proto.proto.MediaSource.prototype.getType = function() {
  * @return {!proto.proto.MediaSource} returns this
  */
 proto.proto.MediaSource.prototype.setType = function(value) {
-  return jspb.Message.setProto3EnumField(this, 1, value);
+  return jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
 /**
- * optional string banner = 2;
+ * optional string banner = 3;
  * @return {string}
  */
 proto.proto.MediaSource.prototype.getBanner = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.proto.MediaSource} returns this
- */
-proto.proto.MediaSource.prototype.setBanner = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional string uri = 3;
- * @return {string}
- */
-proto.proto.MediaSource.prototype.getUri = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -1057,17 +1097,35 @@ proto.proto.MediaSource.prototype.getUri = function() {
  * @param {string} value
  * @return {!proto.proto.MediaSource} returns this
  */
-proto.proto.MediaSource.prototype.setUri = function(value) {
+proto.proto.MediaSource.prototype.setBanner = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional int64 last_played_time = 4;
+ * optional string uri = 4;
+ * @return {string}
+ */
+proto.proto.MediaSource.prototype.getUri = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.proto.MediaSource} returns this
+ */
+proto.proto.MediaSource.prototype.setUri = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional int64 last_played_time = 5;
  * @return {number}
  */
 proto.proto.MediaSource.prototype.getLastPlayedTime = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -1076,17 +1134,17 @@ proto.proto.MediaSource.prototype.getLastPlayedTime = function() {
  * @return {!proto.proto.MediaSource} returns this
  */
 proto.proto.MediaSource.prototype.setLastPlayedTime = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * repeated Subtitle subtitles = 5;
+ * repeated Subtitle subtitles = 6;
  * @return {!Array<!proto.proto.Subtitle>}
  */
 proto.proto.MediaSource.prototype.getSubtitlesList = function() {
   return /** @type{!Array<!proto.proto.Subtitle>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.proto.Subtitle, 5));
+    jspb.Message.getRepeatedWrapperField(this, proto.proto.Subtitle, 6));
 };
 
 
@@ -1095,7 +1153,7 @@ proto.proto.MediaSource.prototype.getSubtitlesList = function() {
  * @return {!proto.proto.MediaSource} returns this
 */
 proto.proto.MediaSource.prototype.setSubtitlesList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+  return jspb.Message.setRepeatedWrapperField(this, 6, value);
 };
 
 
@@ -1105,7 +1163,7 @@ proto.proto.MediaSource.prototype.setSubtitlesList = function(value) {
  * @return {!proto.proto.Subtitle}
  */
 proto.proto.MediaSource.prototype.addSubtitles = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.proto.Subtitle, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.proto.Subtitle, opt_index);
 };
 
 
@@ -1115,6 +1173,80 @@ proto.proto.MediaSource.prototype.addSubtitles = function(opt_value, opt_index) 
  */
 proto.proto.MediaSource.prototype.clearSubtitlesList = function() {
   return this.setSubtitlesList([]);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp created_at = 7;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.proto.MediaSource.prototype.getCreatedAt = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 7));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.proto.MediaSource} returns this
+*/
+proto.proto.MediaSource.prototype.setCreatedAt = function(value) {
+  return jspb.Message.setWrapperField(this, 7, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.proto.MediaSource} returns this
+ */
+proto.proto.MediaSource.prototype.clearCreatedAt = function() {
+  return this.setCreatedAt(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.proto.MediaSource.prototype.hasCreatedAt = function() {
+  return jspb.Message.getField(this, 7) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp updated_at = 8;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.proto.MediaSource.prototype.getUpdatedAt = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 8));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.proto.MediaSource} returns this
+*/
+proto.proto.MediaSource.prototype.setUpdatedAt = function(value) {
+  return jspb.Message.setWrapperField(this, 8, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.proto.MediaSource} returns this
+ */
+proto.proto.MediaSource.prototype.clearUpdatedAt = function() {
+  return this.setUpdatedAt(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.proto.MediaSource.prototype.hasUpdatedAt = function() {
+  return jspb.Message.getField(this, 8) != null;
 };
 
 

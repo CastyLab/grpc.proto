@@ -37,11 +37,14 @@ message MediaSource {
         uint64   size     = 3;
         string   title    = 4;
     }
-    Type      type                = 1;
-    string    banner              = 2;
-    string    uri                 = 3;
-    int64     last_played_time    = 4;
-    repeated  Subtitle subtitles  = 5;
+    string    id                  = 1;
+    Type      type                = 2;
+    string    banner              = 3;
+    string    uri                 = 4;
+    int64     last_played_time    = 5;
+    repeated  Subtitle subtitles  = 6;
+    google.protobuf.Timestamp  created_at  = 7;
+    google.protobuf.Timestamp  updated_at  = 8;
 }
 
 message Theater {
