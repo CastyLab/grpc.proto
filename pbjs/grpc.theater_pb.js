@@ -1156,7 +1156,7 @@ proto.proto.Theater.toObject = function(includeInstance, msg) {
     videoPlayerAccess: jspb.Message.getFieldWithDefault(msg, 5, 0),
     userId: jspb.Message.getFieldWithDefault(msg, 6, ""),
     user: (f = msg.getUser()) && grpc_user_pb.User.toObject(includeInstance, f),
-    mediaSourceId: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    mediaSource: (f = msg.getMediaSource()) && proto.proto.MediaSource.toObject(includeInstance, f),
     createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
@@ -1221,8 +1221,9 @@ proto.proto.Theater.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUser(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMediaSourceId(value);
+      var value = new proto.proto.MediaSource;
+      reader.readMessage(value,proto.proto.MediaSource.deserializeBinaryFromReader);
+      msg.setMediaSource(value);
       break;
     case 9:
       var value = new google_protobuf_timestamp_pb.Timestamp;
@@ -1306,11 +1307,12 @@ proto.proto.Theater.serializeBinaryToWriter = function(message, writer) {
       grpc_user_pb.User.serializeBinaryToWriter
     );
   }
-  f = message.getMediaSourceId();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getMediaSource();
+  if (f != null) {
+    writer.writeMessage(
       8,
-      f
+      f,
+      proto.proto.MediaSource.serializeBinaryToWriter
     );
   }
   f = message.getCreatedAt();
@@ -1460,20 +1462,39 @@ proto.proto.Theater.prototype.hasUser = function() {
 
 
 /**
- * optional string media_source_id = 8;
- * @return {string}
+ * optional MediaSource media_source = 8;
+ * @return {?proto.proto.MediaSource}
  */
-proto.proto.Theater.prototype.getMediaSourceId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+proto.proto.Theater.prototype.getMediaSource = function() {
+  return /** @type{?proto.proto.MediaSource} */ (
+    jspb.Message.getWrapperField(this, proto.proto.MediaSource, 8));
 };
 
 
 /**
- * @param {string} value
+ * @param {?proto.proto.MediaSource|undefined} value
+ * @return {!proto.proto.Theater} returns this
+*/
+proto.proto.Theater.prototype.setMediaSource = function(value) {
+  return jspb.Message.setWrapperField(this, 8, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.proto.Theater} returns this
  */
-proto.proto.Theater.prototype.setMediaSourceId = function(value) {
-  return jspb.Message.setProto3StringField(this, 8, value);
+proto.proto.Theater.prototype.clearMediaSource = function() {
+  return this.setMediaSource(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.proto.Theater.prototype.hasMediaSource = function() {
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
