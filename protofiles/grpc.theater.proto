@@ -43,8 +43,9 @@ message MediaSource {
     string    uri                 = 4;
     int64     last_played_time    = 5;
     repeated  Subtitle subtitles  = 6;
-    google.protobuf.Timestamp  created_at  = 7;
-    google.protobuf.Timestamp  updated_at  = 8;
+    string    user_id             = 7;
+    google.protobuf.Timestamp  created_at  = 8;
+    google.protobuf.Timestamp  updated_at  = 9;
 }
 
 message Theater {
