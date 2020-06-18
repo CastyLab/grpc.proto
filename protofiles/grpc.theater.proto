@@ -130,9 +130,13 @@ message TheaterMediaSourcesResponse {
 }
 // End of MediaSource requests and responses
 
+message GetTheaterRequest {
+    string user = 1;
+}
+
 service TheaterService {
     rpc Invite(InviteFriendsTheaterRequest) returns (Response);
-    rpc GetTheater(Theater) returns (UserTheaterResponse);
+    rpc GetTheater(GetTheaterRequest) returns (UserTheaterResponse);
     rpc UpdateTheater(TheaterAuthRequest) returns (Response);
     rpc GetSubtitles(MediaSourceAuthRequest) returns (TheaterSubtitlesResponse);
     rpc GetMediaSources(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);

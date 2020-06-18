@@ -159,16 +159,16 @@ proto.proto.TheaterServicePromiseClient.prototype.invite =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.Theater,
+ *   !proto.proto.GetTheaterRequest,
  *   !proto.proto.UserTheaterResponse>}
  */
 const methodDescriptor_TheaterService_GetTheater = new grpc.web.MethodDescriptor(
   '/proto.TheaterService/GetTheater',
   grpc.web.MethodType.UNARY,
-  proto.proto.Theater,
+  proto.proto.GetTheaterRequest,
   proto.proto.UserTheaterResponse,
   /**
-   * @param {!proto.proto.Theater} request
+   * @param {!proto.proto.GetTheaterRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -181,13 +181,13 @@ const methodDescriptor_TheaterService_GetTheater = new grpc.web.MethodDescriptor
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.Theater,
+ *   !proto.proto.GetTheaterRequest,
  *   !proto.proto.UserTheaterResponse>}
  */
 const methodInfo_TheaterService_GetTheater = new grpc.web.AbstractClientBase.MethodInfo(
   proto.proto.UserTheaterResponse,
   /**
-   * @param {!proto.proto.Theater} request
+   * @param {!proto.proto.GetTheaterRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -198,7 +198,7 @@ const methodInfo_TheaterService_GetTheater = new grpc.web.AbstractClientBase.Met
 
 
 /**
- * @param {!proto.proto.Theater} request The
+ * @param {!proto.proto.GetTheaterRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
@@ -219,7 +219,7 @@ proto.proto.TheaterServiceClient.prototype.getTheater =
 
 
 /**
- * @param {!proto.proto.Theater} request The
+ * @param {!proto.proto.GetTheaterRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
