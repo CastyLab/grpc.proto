@@ -479,6 +479,86 @@ proto.proto.TheaterServicePromiseClient.prototype.getMediaSources =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.MediaSourceAuthRequest,
+ *   !proto.proto.Response>}
+ */
+const methodDescriptor_TheaterService_RemoveMediaSource = new grpc.web.MethodDescriptor(
+  '/proto.TheaterService/RemoveMediaSource',
+  grpc.web.MethodType.UNARY,
+  proto.proto.MediaSourceAuthRequest,
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.MediaSourceAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.MediaSourceAuthRequest,
+ *   !proto.proto.Response>}
+ */
+const methodInfo_TheaterService_RemoveMediaSource = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.MediaSourceAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.MediaSourceAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.TheaterServiceClient.prototype.removeMediaSource =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.TheaterService/RemoveMediaSource',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_RemoveMediaSource,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.MediaSourceAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.TheaterServicePromiseClient.prototype.removeMediaSource =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.TheaterService/RemoveMediaSource',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_RemoveMediaSource);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.RemoveSubtitleRequest,
  *   !proto.proto.Response>}
  */
