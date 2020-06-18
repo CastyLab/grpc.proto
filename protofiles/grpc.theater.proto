@@ -13,6 +13,23 @@ enum PRIVACY {
     PUBLIC   = 2;
 }
 
+enum VIDEO_PLAYER_ACCESS {
+    ACCESS_BY_USER        = 0;
+    ACCESS_BY_EVERYONE    = 1;
+    ACCESS_BY_FRIENDS     = 2;
+    ACCESS_BY_ROLES       = 3;
+}
+
+message TheaterRole {
+    string   id           = 1;
+    string   theater_id   = 2;
+    string   title        = 3;
+}
+
+message VideoPlayerAccessByRoles {
+    repeated TheaterRole roles = 1;
+}
+
 message Subtitle {
     string  id               = 1;
     string  media_source_id  = 2;
@@ -49,15 +66,15 @@ message MediaSource {
 }
 
 message Theater {
-    string        id                      = 1;
-    string        title                   = 2;
-    PRIVACY       privacy                 = 4;
-    PRIVACY       video_player_access     = 5;
-    string        user_id                 = 6;
-    User          user                    = 7;
-    MediaSource   media_source            = 8;
-    google.protobuf.Timestamp created_at  = 9;
-    google.protobuf.Timestamp updated_at  = 10;
+    string                      id                      = 1;
+    string                      title                   = 2;
+    PRIVACY                     privacy                 = 4;
+    VIDEO_PLAYER_ACCESS         video_player_access     = 5;
+    string                      user_id                 = 6;
+    User                        user                    = 7;
+    MediaSource                 media_source            = 8;
+    google.protobuf.Timestamp   created_at              = 9;
+    google.protobuf.Timestamp   updated_at              = 10;
 }
 
 message TheaterAuthRequest {
