@@ -1,6 +1,8 @@
 syntax = "proto3";
 package proto;
 
+option go_package = ".;proto";
+
 enum PERSONAL_STATE {
     OFFLINE    = 0;
     ONLINE     = 1;
