@@ -111,7 +111,7 @@ message InviteFriendsTheaterRequest {
 // Start of MediaSource requests and responses
 message MediaSourceAuthRequest {
     AuthenticateRequest   auth_request     = 1;
-    MediaSource           media_source_id  = 2;
+    MediaSource           media            = 2;
     uint64                limit            = 3;
     uint64                page             = 4;
     uint64                per_page         = 5;
@@ -137,5 +137,6 @@ service TheaterService {
     rpc GetSubtitles(MediaSourceAuthRequest) returns (TheaterSubtitlesResponse);
     rpc GetMediaSources(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
     rpc RemoveMediaSource(MediaSourceRemoveRequest) returns (Response);
+    rpc AddMediaSource(MediaSourceAuthRequest) returns (Response);
     rpc RemoveSubtitle(RemoveSubtitleRequest) returns (Response);
 }

@@ -3303,7 +3303,7 @@ proto.proto.MediaSourceAuthRequest.prototype.toObject = function(opt_includeInst
 proto.proto.MediaSourceAuthRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f),
-    mediaSourceId: (f = msg.getMediaSourceId()) && proto.proto.MediaSource.toObject(includeInstance, f),
+    media: (f = msg.getMedia()) && proto.proto.MediaSource.toObject(includeInstance, f),
     limit: jspb.Message.getFieldWithDefault(msg, 3, 0),
     page: jspb.Message.getFieldWithDefault(msg, 4, 0),
     perPage: jspb.Message.getFieldWithDefault(msg, 5, 0)
@@ -3351,7 +3351,7 @@ proto.proto.MediaSourceAuthRequest.deserializeBinaryFromReader = function(msg, r
     case 2:
       var value = new proto.proto.MediaSource;
       reader.readMessage(value,proto.proto.MediaSource.deserializeBinaryFromReader);
-      msg.setMediaSourceId(value);
+      msg.setMedia(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readUint64());
@@ -3402,7 +3402,7 @@ proto.proto.MediaSourceAuthRequest.serializeBinaryToWriter = function(message, w
       grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
     );
   }
-  f = message.getMediaSourceId();
+  f = message.getMedia();
   if (f != null) {
     writer.writeMessage(
       2,
@@ -3472,10 +3472,10 @@ proto.proto.MediaSourceAuthRequest.prototype.hasAuthRequest = function() {
 
 
 /**
- * optional MediaSource media_source_id = 2;
+ * optional MediaSource media = 2;
  * @return {?proto.proto.MediaSource}
  */
-proto.proto.MediaSourceAuthRequest.prototype.getMediaSourceId = function() {
+proto.proto.MediaSourceAuthRequest.prototype.getMedia = function() {
   return /** @type{?proto.proto.MediaSource} */ (
     jspb.Message.getWrapperField(this, proto.proto.MediaSource, 2));
 };
@@ -3485,7 +3485,7 @@ proto.proto.MediaSourceAuthRequest.prototype.getMediaSourceId = function() {
  * @param {?proto.proto.MediaSource|undefined} value
  * @return {!proto.proto.MediaSourceAuthRequest} returns this
 */
-proto.proto.MediaSourceAuthRequest.prototype.setMediaSourceId = function(value) {
+proto.proto.MediaSourceAuthRequest.prototype.setMedia = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
@@ -3494,8 +3494,8 @@ proto.proto.MediaSourceAuthRequest.prototype.setMediaSourceId = function(value) 
  * Clears the message field making it undefined.
  * @return {!proto.proto.MediaSourceAuthRequest} returns this
  */
-proto.proto.MediaSourceAuthRequest.prototype.clearMediaSourceId = function() {
-  return this.setMediaSourceId(undefined);
+proto.proto.MediaSourceAuthRequest.prototype.clearMedia = function() {
+  return this.setMedia(undefined);
 };
 
 
@@ -3503,7 +3503,7 @@ proto.proto.MediaSourceAuthRequest.prototype.clearMediaSourceId = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.proto.MediaSourceAuthRequest.prototype.hasMediaSourceId = function() {
+proto.proto.MediaSourceAuthRequest.prototype.hasMedia = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
