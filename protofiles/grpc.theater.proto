@@ -114,6 +114,6 @@ service TheaterService {
     rpc UpdateTheater(TheaterAuthRequest) returns (Response);
     rpc GetSubtitles(TheaterAuthRequest) returns (TheaterSubtitlesResponse);
     rpc GetMediaSources(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
-    rpc RemoveMediaSource(MediaSourceAuthRequest) returns (Response);
+    rpc RemoveMediaSource(MediaSourceRemoveRequest) returns (Response);
     rpc RemoveSubtitle(RemoveSubtitleRequest) returns (Response);
 }

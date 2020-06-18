@@ -479,16 +479,16 @@ proto.proto.TheaterServicePromiseClient.prototype.getMediaSources =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.MediaSourceAuthRequest,
+ *   !proto.proto.MediaSourceRemoveRequest,
  *   !proto.proto.Response>}
  */
 const methodDescriptor_TheaterService_RemoveMediaSource = new grpc.web.MethodDescriptor(
   '/proto.TheaterService/RemoveMediaSource',
   grpc.web.MethodType.UNARY,
-  proto.proto.MediaSourceAuthRequest,
+  proto.proto.MediaSourceRemoveRequest,
   grpc_base_pb.Response,
   /**
-   * @param {!proto.proto.MediaSourceAuthRequest} request
+   * @param {!proto.proto.MediaSourceRemoveRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -501,13 +501,13 @@ const methodDescriptor_TheaterService_RemoveMediaSource = new grpc.web.MethodDes
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.MediaSourceAuthRequest,
+ *   !proto.proto.MediaSourceRemoveRequest,
  *   !proto.proto.Response>}
  */
 const methodInfo_TheaterService_RemoveMediaSource = new grpc.web.AbstractClientBase.MethodInfo(
   grpc_base_pb.Response,
   /**
-   * @param {!proto.proto.MediaSourceAuthRequest} request
+   * @param {!proto.proto.MediaSourceRemoveRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -518,7 +518,7 @@ const methodInfo_TheaterService_RemoveMediaSource = new grpc.web.AbstractClientB
 
 
 /**
- * @param {!proto.proto.MediaSourceAuthRequest} request The
+ * @param {!proto.proto.MediaSourceRemoveRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
@@ -539,7 +539,7 @@ proto.proto.TheaterServiceClient.prototype.removeMediaSource =
 
 
 /**
- * @param {!proto.proto.MediaSourceAuthRequest} request The
+ * @param {!proto.proto.MediaSourceRemoveRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
