@@ -7,6 +7,10 @@
 // GENERATED CODE -- DO NOT EDIT!
 
 
+/* eslint-disable */
+// @ts-nocheck
+
+
 
 const grpc = {};
 grpc.web = require('grpc-web');
@@ -155,166 +159,6 @@ proto.proto.TheaterServicePromiseClient.prototype.invite =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.GetAllUserTheatersRequest,
- *   !proto.proto.UserTheatersResponse>}
- */
-const methodDescriptor_TheaterService_GetUserTheaters = new grpc.web.MethodDescriptor(
-  '/proto.TheaterService/GetUserTheaters',
-  grpc.web.MethodType.UNARY,
-  proto.proto.GetAllUserTheatersRequest,
-  proto.proto.UserTheatersResponse,
-  /**
-   * @param {!proto.proto.GetAllUserTheatersRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.proto.UserTheatersResponse.deserializeBinary
-);
-
-
-/**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.GetAllUserTheatersRequest,
- *   !proto.proto.UserTheatersResponse>}
- */
-const methodInfo_TheaterService_GetUserTheaters = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.proto.UserTheatersResponse,
-  /**
-   * @param {!proto.proto.GetAllUserTheatersRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.proto.UserTheatersResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.proto.GetAllUserTheatersRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.Error, ?proto.proto.UserTheatersResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.proto.UserTheatersResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.proto.TheaterServiceClient.prototype.getUserTheaters =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/proto.TheaterService/GetUserTheaters',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_GetUserTheaters,
-      callback);
-};
-
-
-/**
- * @param {!proto.proto.GetAllUserTheatersRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.proto.UserTheatersResponse>}
- *     A native promise that resolves to the response
- */
-proto.proto.TheaterServicePromiseClient.prototype.getUserTheaters =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/proto.TheaterService/GetUserTheaters',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_GetUserTheaters);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.GetAllUserTheatersRequest,
- *   !proto.proto.UserTheatersResponse>}
- */
-const methodDescriptor_TheaterService_GetUserSharedTheaters = new grpc.web.MethodDescriptor(
-  '/proto.TheaterService/GetUserSharedTheaters',
-  grpc.web.MethodType.UNARY,
-  proto.proto.GetAllUserTheatersRequest,
-  proto.proto.UserTheatersResponse,
-  /**
-   * @param {!proto.proto.GetAllUserTheatersRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.proto.UserTheatersResponse.deserializeBinary
-);
-
-
-/**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.GetAllUserTheatersRequest,
- *   !proto.proto.UserTheatersResponse>}
- */
-const methodInfo_TheaterService_GetUserSharedTheaters = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.proto.UserTheatersResponse,
-  /**
-   * @param {!proto.proto.GetAllUserTheatersRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  proto.proto.UserTheatersResponse.deserializeBinary
-);
-
-
-/**
- * @param {!proto.proto.GetAllUserTheatersRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.Error, ?proto.proto.UserTheatersResponse)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.proto.UserTheatersResponse>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.proto.TheaterServiceClient.prototype.getUserSharedTheaters =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/proto.TheaterService/GetUserSharedTheaters',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_GetUserSharedTheaters,
-      callback);
-};
-
-
-/**
- * @param {!proto.proto.GetAllUserTheatersRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.proto.UserTheatersResponse>}
- *     A native promise that resolves to the response
- */
-proto.proto.TheaterServicePromiseClient.prototype.getUserSharedTheaters =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/proto.TheaterService/GetUserSharedTheaters',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_GetUserSharedTheaters);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.Theater,
  *   !proto.proto.UserTheaterResponse>}
  */
@@ -395,91 +239,11 @@ proto.proto.TheaterServicePromiseClient.prototype.getTheater =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.CreateTheaterRequest,
- *   !proto.proto.Response>}
- */
-const methodDescriptor_TheaterService_CreateTheater = new grpc.web.MethodDescriptor(
-  '/proto.TheaterService/CreateTheater',
-  grpc.web.MethodType.UNARY,
-  proto.proto.CreateTheaterRequest,
-  grpc_base_pb.Response,
-  /**
-   * @param {!proto.proto.CreateTheaterRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  grpc_base_pb.Response.deserializeBinary
-);
-
-
-/**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.CreateTheaterRequest,
- *   !proto.proto.Response>}
- */
-const methodInfo_TheaterService_CreateTheater = new grpc.web.AbstractClientBase.MethodInfo(
-  grpc_base_pb.Response,
-  /**
-   * @param {!proto.proto.CreateTheaterRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  grpc_base_pb.Response.deserializeBinary
-);
-
-
-/**
- * @param {!proto.proto.CreateTheaterRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.Error, ?proto.proto.Response)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.proto.TheaterServiceClient.prototype.createTheater =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/proto.TheaterService/CreateTheater',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_CreateTheater,
-      callback);
-};
-
-
-/**
- * @param {!proto.proto.CreateTheaterRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.proto.Response>}
- *     A native promise that resolves to the response
- */
-proto.proto.TheaterServicePromiseClient.prototype.createTheater =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/proto.TheaterService/CreateTheater',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_CreateTheater);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.TheaterAuthRequest,
  *   !proto.proto.Response>}
  */
-const methodDescriptor_TheaterService_RemoveTheater = new grpc.web.MethodDescriptor(
-  '/proto.TheaterService/RemoveTheater',
+const methodDescriptor_TheaterService_UpdateTheater = new grpc.web.MethodDescriptor(
+  '/proto.TheaterService/UpdateTheater',
   grpc.web.MethodType.UNARY,
   proto.proto.TheaterAuthRequest,
   grpc_base_pb.Response,
@@ -500,7 +264,7 @@ const methodDescriptor_TheaterService_RemoveTheater = new grpc.web.MethodDescrip
  *   !proto.proto.TheaterAuthRequest,
  *   !proto.proto.Response>}
  */
-const methodInfo_TheaterService_RemoveTheater = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_TheaterService_UpdateTheater = new grpc.web.AbstractClientBase.MethodInfo(
   grpc_base_pb.Response,
   /**
    * @param {!proto.proto.TheaterAuthRequest} request
@@ -523,13 +287,13 @@ const methodInfo_TheaterService_RemoveTheater = new grpc.web.AbstractClientBase.
  * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.proto.TheaterServiceClient.prototype.removeTheater =
+proto.proto.TheaterServiceClient.prototype.updateTheater =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/proto.TheaterService/RemoveTheater',
+      '/proto.TheaterService/UpdateTheater',
       request,
       metadata || {},
-      methodDescriptor_TheaterService_RemoveTheater,
+      methodDescriptor_TheaterService_UpdateTheater,
       callback);
 };
 
@@ -542,93 +306,13 @@ proto.proto.TheaterServiceClient.prototype.removeTheater =
  * @return {!Promise<!proto.proto.Response>}
  *     A native promise that resolves to the response
  */
-proto.proto.TheaterServicePromiseClient.prototype.removeTheater =
+proto.proto.TheaterServicePromiseClient.prototype.updateTheater =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/proto.TheaterService/RemoveTheater',
+      '/proto.TheaterService/UpdateTheater',
       request,
       metadata || {},
-      methodDescriptor_TheaterService_RemoveTheater);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.TheaterAuthRequest,
- *   !proto.proto.Response>}
- */
-const methodDescriptor_TheaterService_EditTheater = new grpc.web.MethodDescriptor(
-  '/proto.TheaterService/EditTheater',
-  grpc.web.MethodType.UNARY,
-  proto.proto.TheaterAuthRequest,
-  grpc_base_pb.Response,
-  /**
-   * @param {!proto.proto.TheaterAuthRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  grpc_base_pb.Response.deserializeBinary
-);
-
-
-/**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.TheaterAuthRequest,
- *   !proto.proto.Response>}
- */
-const methodInfo_TheaterService_EditTheater = new grpc.web.AbstractClientBase.MethodInfo(
-  grpc_base_pb.Response,
-  /**
-   * @param {!proto.proto.TheaterAuthRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  grpc_base_pb.Response.deserializeBinary
-);
-
-
-/**
- * @param {!proto.proto.TheaterAuthRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.Error, ?proto.proto.Response)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.proto.TheaterServiceClient.prototype.editTheater =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/proto.TheaterService/EditTheater',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_EditTheater,
-      callback);
-};
-
-
-/**
- * @param {!proto.proto.TheaterAuthRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.proto.Response>}
- *     A native promise that resolves to the response
- */
-proto.proto.TheaterServicePromiseClient.prototype.editTheater =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/proto.TheaterService/EditTheater',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_EditTheater);
+      methodDescriptor_TheaterService_UpdateTheater);
 };
 
 
@@ -709,6 +393,86 @@ proto.proto.TheaterServicePromiseClient.prototype.getSubtitles =
       request,
       metadata || {},
       methodDescriptor_TheaterService_GetSubtitles);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.MediaSourceAuthRequest,
+ *   !proto.proto.TheaterMediaSourcesResponse>}
+ */
+const methodDescriptor_TheaterService_GetMediaSources = new grpc.web.MethodDescriptor(
+  '/proto.TheaterService/GetMediaSources',
+  grpc.web.MethodType.UNARY,
+  proto.proto.MediaSourceAuthRequest,
+  proto.proto.TheaterMediaSourcesResponse,
+  /**
+   * @param {!proto.proto.MediaSourceAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.TheaterMediaSourcesResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.MediaSourceAuthRequest,
+ *   !proto.proto.TheaterMediaSourcesResponse>}
+ */
+const methodInfo_TheaterService_GetMediaSources = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.proto.TheaterMediaSourcesResponse,
+  /**
+   * @param {!proto.proto.MediaSourceAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.TheaterMediaSourcesResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.MediaSourceAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.TheaterMediaSourcesResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.TheaterMediaSourcesResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.TheaterServiceClient.prototype.getMediaSources =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.TheaterService/GetMediaSources',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_GetMediaSources,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.MediaSourceAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.TheaterMediaSourcesResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.TheaterServicePromiseClient.prototype.getMediaSources =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.TheaterService/GetMediaSources',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_GetMediaSources);
 };
 
 
