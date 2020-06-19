@@ -131,7 +131,8 @@ message TheaterMediaSourcesResponse {
 // End of MediaSource requests and responses
 
 message GetTheaterRequest {
-    string user = 1;
+    AuthenticateRequest auth_request = 1;
+    string user = 2;
 }
 
 service TheaterService {

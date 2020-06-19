@@ -4047,7 +4047,8 @@ proto.proto.GetTheaterRequest.prototype.toObject = function(opt_includeInstance)
  */
 proto.proto.GetTheaterRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    user: jspb.Message.getFieldWithDefault(msg, 1, "")
+    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f),
+    user: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -4085,6 +4086,11 @@ proto.proto.GetTheaterRequest.deserializeBinaryFromReader = function(msg, reader
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = new grpc_base_pb.AuthenticateRequest;
+      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
+      msg.setAuthRequest(value);
+      break;
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setUser(value);
       break;
@@ -4117,10 +4123,18 @@ proto.proto.GetTheaterRequest.prototype.serializeBinary = function() {
  */
 proto.proto.GetTheaterRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getAuthRequest();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
+    );
+  }
   f = message.getUser();
   if (f.length > 0) {
     writer.writeString(
-      1,
+      2,
       f
     );
   }
@@ -4128,11 +4142,48 @@ proto.proto.GetTheaterRequest.serializeBinaryToWriter = function(message, writer
 
 
 /**
- * optional string user = 1;
+ * optional AuthenticateRequest auth_request = 1;
+ * @return {?proto.proto.AuthenticateRequest}
+ */
+proto.proto.GetTheaterRequest.prototype.getAuthRequest = function() {
+  return /** @type{?proto.proto.AuthenticateRequest} */ (
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 1));
+};
+
+
+/**
+ * @param {?proto.proto.AuthenticateRequest|undefined} value
+ * @return {!proto.proto.GetTheaterRequest} returns this
+*/
+proto.proto.GetTheaterRequest.prototype.setAuthRequest = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.proto.GetTheaterRequest} returns this
+ */
+proto.proto.GetTheaterRequest.prototype.clearAuthRequest = function() {
+  return this.setAuthRequest(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.proto.GetTheaterRequest.prototype.hasAuthRequest = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string user = 2;
  * @return {string}
  */
 proto.proto.GetTheaterRequest.prototype.getUser = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -4141,7 +4192,7 @@ proto.proto.GetTheaterRequest.prototype.getUser = function() {
  * @return {!proto.proto.GetTheaterRequest} returns this
  */
 proto.proto.GetTheaterRequest.prototype.setUser = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
