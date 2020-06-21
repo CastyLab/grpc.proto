@@ -56,8 +56,9 @@ message MediaSource {
     int64     last_played_time    = 6;
     repeated  Subtitle subtitles  = 7;
     string    user_id             = 8;
-    google.protobuf.Timestamp  created_at  = 9;
-    google.protobuf.Timestamp  updated_at  = 10;
+    int64     length              = 9;
+    google.protobuf.Timestamp  created_at  = 10;
+    google.protobuf.Timestamp  updated_at  = 11;
 }
 
 message Theater {
