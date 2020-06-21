@@ -48,21 +48,16 @@ message MediaSource {
         DOWNLOAD_URI  = 4;
         LOCAL_PATH    = 5;
     }
-    message File {
-        string   id       = 1;
-        uint64   length   = 2;
-        uint64   size     = 3;
-        string   title    = 4;
-    }
     string    id                  = 1;
-    Type      type                = 2;
-    string    banner              = 3;
-    string    uri                 = 4;
-    int64     last_played_time    = 5;
-    repeated  Subtitle subtitles  = 6;
-    string    user_id             = 7;
-    google.protobuf.Timestamp  created_at  = 8;
-    google.protobuf.Timestamp  updated_at  = 9;
+    string    title               = 2;
+    Type      type                = 3;
+    string    banner              = 4;
+    string    uri                 = 5;
+    int64     last_played_time    = 6;
+    repeated  Subtitle subtitles  = 7;
+    string    user_id             = 8;
+    google.protobuf.Timestamp  created_at  = 9;
+    google.protobuf.Timestamp  updated_at  = 10;
 }
 
 message Theater {
