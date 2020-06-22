@@ -63,7 +63,7 @@ message MediaSource {
 
 message Theater {
     string                      id                      = 1;
-    string                      title                   = 2;
+    string                      description             = 2;
     PRIVACY                     privacy                 = 4;
     VIDEO_PLAYER_ACCESS         video_player_access     = 5;
     string                      user_id                 = 6;

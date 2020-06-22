@@ -1548,7 +1548,7 @@ proto.proto.Theater.prototype.toObject = function(opt_includeInstance) {
 proto.proto.Theater.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    title: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 2, ""),
     privacy: jspb.Message.getFieldWithDefault(msg, 4, 0),
     videoPlayerAccess: jspb.Message.getFieldWithDefault(msg, 5, 0),
     userId: jspb.Message.getFieldWithDefault(msg, 6, ""),
@@ -1598,7 +1598,7 @@ proto.proto.Theater.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTitle(value);
+      msg.setDescription(value);
       break;
     case 4:
       var value = /** @type {!proto.proto.PRIVACY} */ (reader.readEnum());
@@ -1668,7 +1668,7 @@ proto.proto.Theater.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getTitle();
+  f = message.getDescription();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -1750,10 +1750,10 @@ proto.proto.Theater.prototype.setId = function(value) {
 
 
 /**
- * optional string title = 2;
+ * optional string description = 2;
  * @return {string}
  */
-proto.proto.Theater.prototype.getTitle = function() {
+proto.proto.Theater.prototype.getDescription = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1762,7 +1762,7 @@ proto.proto.Theater.prototype.getTitle = function() {
  * @param {string} value
  * @return {!proto.proto.Theater} returns this
  */
-proto.proto.Theater.prototype.setTitle = function(value) {
+proto.proto.Theater.prototype.setDescription = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
