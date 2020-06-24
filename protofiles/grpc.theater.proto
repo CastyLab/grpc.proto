@@ -129,6 +129,7 @@ message TheaterMediaSourcesResponse {
 message GetTheaterRequest {
     AuthenticateRequest auth_request = 1;
     string user = 2;
+    string theater_id = 3;
 }
 
 service TheaterService {

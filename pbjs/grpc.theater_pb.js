@@ -3866,7 +3866,8 @@ proto.proto.GetTheaterRequest.prototype.toObject = function(opt_includeInstance)
 proto.proto.GetTheaterRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f),
-    user: jspb.Message.getFieldWithDefault(msg, 2, "")
+    user: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    theaterId: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -3912,6 +3913,10 @@ proto.proto.GetTheaterRequest.deserializeBinaryFromReader = function(msg, reader
       var value = /** @type {string} */ (reader.readString());
       msg.setUser(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTheaterId(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -3953,6 +3958,13 @@ proto.proto.GetTheaterRequest.serializeBinaryToWriter = function(message, writer
   if (f.length > 0) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = message.getTheaterId();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
       f
     );
   }
@@ -4011,6 +4023,24 @@ proto.proto.GetTheaterRequest.prototype.getUser = function() {
  */
 proto.proto.GetTheaterRequest.prototype.setUser = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string theater_id = 3;
+ * @return {string}
+ */
+proto.proto.GetTheaterRequest.prototype.getTheaterId = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.proto.GetTheaterRequest} returns this
+ */
+proto.proto.GetTheaterRequest.prototype.setTheaterId = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
