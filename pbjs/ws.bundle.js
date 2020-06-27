@@ -10339,9 +10339,9 @@ $root.proto = (function() {
          * @memberof proto
          * @interface ITheaterVideoPlayer
          * @property {string|null} [theaterId] TheaterVideoPlayer theaterId
-         * @property {string|null} [source] TheaterVideoPlayer source
-         * @property {string|null} [poster] TheaterVideoPlayer poster
+         * @property {proto.IMediaSource|null} [mediaSource] TheaterVideoPlayer mediaSource
          * @property {number|null} [currentTime] TheaterVideoPlayer currentTime
+         * @property {proto.TheaterVideoPlayer.State|null} [state] TheaterVideoPlayer state
          * @property {string|null} [userId] TheaterVideoPlayer userId
          * @property {google.protobuf.ITimestamp|null} [sentAt] TheaterVideoPlayer sentAt
          */
@@ -10370,20 +10370,12 @@ $root.proto = (function() {
         TheaterVideoPlayer.prototype.theaterId = "";
 
         /**
-         * TheaterVideoPlayer source.
-         * @member {string} source
+         * TheaterVideoPlayer mediaSource.
+         * @member {proto.IMediaSource|null|undefined} mediaSource
          * @memberof proto.TheaterVideoPlayer
          * @instance
          */
-        TheaterVideoPlayer.prototype.source = "";
-
-        /**
-         * TheaterVideoPlayer poster.
-         * @member {string} poster
-         * @memberof proto.TheaterVideoPlayer
-         * @instance
-         */
-        TheaterVideoPlayer.prototype.poster = "";
+        TheaterVideoPlayer.prototype.mediaSource = null;
 
         /**
          * TheaterVideoPlayer currentTime.
@@ -10392,6 +10384,14 @@ $root.proto = (function() {
          * @instance
          */
         TheaterVideoPlayer.prototype.currentTime = 0;
+
+        /**
+         * TheaterVideoPlayer state.
+         * @member {proto.TheaterVideoPlayer.State} state
+         * @memberof proto.TheaterVideoPlayer
+         * @instance
+         */
+        TheaterVideoPlayer.prototype.state = 0;
 
         /**
          * TheaterVideoPlayer userId.
@@ -10435,16 +10435,16 @@ $root.proto = (function() {
                 writer = $Writer.create();
             if (message.theaterId != null && message.hasOwnProperty("theaterId"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.theaterId);
-            if (message.source != null && message.hasOwnProperty("source"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.source);
-            if (message.poster != null && message.hasOwnProperty("poster"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.poster);
+            if (message.mediaSource != null && message.hasOwnProperty("mediaSource"))
+                $root.proto.MediaSource.encode(message.mediaSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
             if (message.currentTime != null && message.hasOwnProperty("currentTime"))
                 writer.uint32(/* id 4, wireType 5 =*/37).float(message.currentTime);
+            if (message.state != null && message.hasOwnProperty("state"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
             if (message.userId != null && message.hasOwnProperty("userId"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.userId);
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.userId);
             if (message.sentAt != null && message.hasOwnProperty("sentAt"))
-                $root.google.protobuf.Timestamp.encode(message.sentAt, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.sentAt, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
             return writer;
         };
 
@@ -10483,18 +10483,18 @@ $root.proto = (function() {
                     message.theaterId = reader.string();
                     break;
                 case 2:
-                    message.source = reader.string();
-                    break;
-                case 3:
-                    message.poster = reader.string();
+                    message.mediaSource = $root.proto.MediaSource.decode(reader, reader.uint32());
                     break;
                 case 4:
                     message.currentTime = reader.float();
                     break;
                 case 5:
-                    message.userId = reader.string();
+                    message.state = reader.int32();
                     break;
                 case 6:
+                    message.userId = reader.string();
+                    break;
+                case 7:
                     message.sentAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 default:
@@ -10535,15 +10535,23 @@ $root.proto = (function() {
             if (message.theaterId != null && message.hasOwnProperty("theaterId"))
                 if (!$util.isString(message.theaterId))
                     return "theaterId: string expected";
-            if (message.source != null && message.hasOwnProperty("source"))
-                if (!$util.isString(message.source))
-                    return "source: string expected";
-            if (message.poster != null && message.hasOwnProperty("poster"))
-                if (!$util.isString(message.poster))
-                    return "poster: string expected";
+            if (message.mediaSource != null && message.hasOwnProperty("mediaSource")) {
+                var error = $root.proto.MediaSource.verify(message.mediaSource);
+                if (error)
+                    return "mediaSource." + error;
+            }
             if (message.currentTime != null && message.hasOwnProperty("currentTime"))
                 if (typeof message.currentTime !== "number")
                     return "currentTime: number expected";
+            if (message.state != null && message.hasOwnProperty("state"))
+                switch (message.state) {
+                default:
+                    return "state: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
             if (message.userId != null && message.hasOwnProperty("userId"))
                 if (!$util.isString(message.userId))
                     return "userId: string expected";
@@ -10569,12 +10577,27 @@ $root.proto = (function() {
             var message = new $root.proto.TheaterVideoPlayer();
             if (object.theaterId != null)
                 message.theaterId = String(object.theaterId);
-            if (object.source != null)
-                message.source = String(object.source);
-            if (object.poster != null)
-                message.poster = String(object.poster);
+            if (object.mediaSource != null) {
+                if (typeof object.mediaSource !== "object")
+                    throw TypeError(".proto.TheaterVideoPlayer.mediaSource: object expected");
+                message.mediaSource = $root.proto.MediaSource.fromObject(object.mediaSource);
+            }
             if (object.currentTime != null)
                 message.currentTime = Number(object.currentTime);
+            switch (object.state) {
+            case "INVALID":
+            case 0:
+                message.state = 0;
+                break;
+            case "PLAYING":
+            case 1:
+                message.state = 1;
+                break;
+            case "PAUSED":
+            case 2:
+                message.state = 2;
+                break;
+            }
             if (object.userId != null)
                 message.userId = String(object.userId);
             if (object.sentAt != null) {
@@ -10600,20 +10623,20 @@ $root.proto = (function() {
             var object = {};
             if (options.defaults) {
                 object.theaterId = "";
-                object.source = "";
-                object.poster = "";
+                object.mediaSource = null;
                 object.currentTime = 0;
+                object.state = options.enums === String ? "INVALID" : 0;
                 object.userId = "";
                 object.sentAt = null;
             }
             if (message.theaterId != null && message.hasOwnProperty("theaterId"))
                 object.theaterId = message.theaterId;
-            if (message.source != null && message.hasOwnProperty("source"))
-                object.source = message.source;
-            if (message.poster != null && message.hasOwnProperty("poster"))
-                object.poster = message.poster;
+            if (message.mediaSource != null && message.hasOwnProperty("mediaSource"))
+                object.mediaSource = $root.proto.MediaSource.toObject(message.mediaSource, options);
             if (message.currentTime != null && message.hasOwnProperty("currentTime"))
                 object.currentTime = options.json && !isFinite(message.currentTime) ? String(message.currentTime) : message.currentTime;
+            if (message.state != null && message.hasOwnProperty("state"))
+                object.state = options.enums === String ? $root.proto.TheaterVideoPlayer.State[message.state] : message.state;
             if (message.userId != null && message.hasOwnProperty("userId"))
                 object.userId = message.userId;
             if (message.sentAt != null && message.hasOwnProperty("sentAt"))
@@ -10632,7 +10655,4429 @@ $root.proto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
+        /**
+         * State enum.
+         * @name proto.TheaterVideoPlayer.State
+         * @enum {string}
+         * @property {number} INVALID=0 INVALID value
+         * @property {number} PLAYING=1 PLAYING value
+         * @property {number} PAUSED=2 PAUSED value
+         */
+        TheaterVideoPlayer.State = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "INVALID"] = 0;
+            values[valuesById[1] = "PLAYING"] = 1;
+            values[valuesById[2] = "PAUSED"] = 2;
+            return values;
+        })();
+
         return TheaterVideoPlayer;
+    })();
+
+    /**
+     * PRIVACY enum.
+     * @name proto.PRIVACY
+     * @enum {string}
+     * @property {number} PRIVATE=0 PRIVATE value
+     * @property {number} EVERYONE=1 EVERYONE value
+     * @property {number} PUBLIC=2 PUBLIC value
+     */
+    proto.PRIVACY = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "PRIVATE"] = 0;
+        values[valuesById[1] = "EVERYONE"] = 1;
+        values[valuesById[2] = "PUBLIC"] = 2;
+        return values;
+    })();
+
+    /**
+     * VIDEO_PLAYER_ACCESS enum.
+     * @name proto.VIDEO_PLAYER_ACCESS
+     * @enum {string}
+     * @property {number} ACCESS_BY_USER=0 ACCESS_BY_USER value
+     * @property {number} ACCESS_BY_EVERYONE=1 ACCESS_BY_EVERYONE value
+     * @property {number} ACCESS_BY_FRIENDS=2 ACCESS_BY_FRIENDS value
+     * @property {number} ACCESS_BY_ROLES=3 ACCESS_BY_ROLES value
+     */
+    proto.VIDEO_PLAYER_ACCESS = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "ACCESS_BY_USER"] = 0;
+        values[valuesById[1] = "ACCESS_BY_EVERYONE"] = 1;
+        values[valuesById[2] = "ACCESS_BY_FRIENDS"] = 2;
+        values[valuesById[3] = "ACCESS_BY_ROLES"] = 3;
+        return values;
+    })();
+
+    proto.TheaterRole = (function() {
+
+        /**
+         * Properties of a TheaterRole.
+         * @memberof proto
+         * @interface ITheaterRole
+         * @property {string|null} [id] TheaterRole id
+         * @property {string|null} [theaterId] TheaterRole theaterId
+         * @property {string|null} [title] TheaterRole title
+         */
+
+        /**
+         * Constructs a new TheaterRole.
+         * @memberof proto
+         * @classdesc Represents a TheaterRole.
+         * @implements ITheaterRole
+         * @constructor
+         * @param {proto.ITheaterRole=} [properties] Properties to set
+         */
+        function TheaterRole(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TheaterRole id.
+         * @member {string} id
+         * @memberof proto.TheaterRole
+         * @instance
+         */
+        TheaterRole.prototype.id = "";
+
+        /**
+         * TheaterRole theaterId.
+         * @member {string} theaterId
+         * @memberof proto.TheaterRole
+         * @instance
+         */
+        TheaterRole.prototype.theaterId = "";
+
+        /**
+         * TheaterRole title.
+         * @member {string} title
+         * @memberof proto.TheaterRole
+         * @instance
+         */
+        TheaterRole.prototype.title = "";
+
+        /**
+         * Creates a new TheaterRole instance using the specified properties.
+         * @function create
+         * @memberof proto.TheaterRole
+         * @static
+         * @param {proto.ITheaterRole=} [properties] Properties to set
+         * @returns {proto.TheaterRole} TheaterRole instance
+         */
+        TheaterRole.create = function create(properties) {
+            return new TheaterRole(properties);
+        };
+
+        /**
+         * Encodes the specified TheaterRole message. Does not implicitly {@link proto.TheaterRole.verify|verify} messages.
+         * @function encode
+         * @memberof proto.TheaterRole
+         * @static
+         * @param {proto.ITheaterRole} message TheaterRole message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterRole.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.theaterId);
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.title);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TheaterRole message, length delimited. Does not implicitly {@link proto.TheaterRole.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.TheaterRole
+         * @static
+         * @param {proto.ITheaterRole} message TheaterRole message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterRole.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TheaterRole message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.TheaterRole
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.TheaterRole} TheaterRole
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterRole.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TheaterRole();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.string();
+                    break;
+                case 2:
+                    message.theaterId = reader.string();
+                    break;
+                case 3:
+                    message.title = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TheaterRole message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.TheaterRole
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.TheaterRole} TheaterRole
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterRole.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TheaterRole message.
+         * @function verify
+         * @memberof proto.TheaterRole
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TheaterRole.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                if (!$util.isString(message.theaterId))
+                    return "theaterId: string expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a TheaterRole message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.TheaterRole
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.TheaterRole} TheaterRole
+         */
+        TheaterRole.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.TheaterRole)
+                return object;
+            var message = new $root.proto.TheaterRole();
+            if (object.id != null)
+                message.id = String(object.id);
+            if (object.theaterId != null)
+                message.theaterId = String(object.theaterId);
+            if (object.title != null)
+                message.title = String(object.title);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TheaterRole message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.TheaterRole
+         * @static
+         * @param {proto.TheaterRole} message TheaterRole
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TheaterRole.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = "";
+                object.theaterId = "";
+                object.title = "";
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                object.theaterId = message.theaterId;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            return object;
+        };
+
+        /**
+         * Converts this TheaterRole to JSON.
+         * @function toJSON
+         * @memberof proto.TheaterRole
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TheaterRole.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TheaterRole;
+    })();
+
+    proto.VideoPlayerAccessByRoles = (function() {
+
+        /**
+         * Properties of a VideoPlayerAccessByRoles.
+         * @memberof proto
+         * @interface IVideoPlayerAccessByRoles
+         * @property {Array.<proto.ITheaterRole>|null} [roles] VideoPlayerAccessByRoles roles
+         */
+
+        /**
+         * Constructs a new VideoPlayerAccessByRoles.
+         * @memberof proto
+         * @classdesc Represents a VideoPlayerAccessByRoles.
+         * @implements IVideoPlayerAccessByRoles
+         * @constructor
+         * @param {proto.IVideoPlayerAccessByRoles=} [properties] Properties to set
+         */
+        function VideoPlayerAccessByRoles(properties) {
+            this.roles = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * VideoPlayerAccessByRoles roles.
+         * @member {Array.<proto.ITheaterRole>} roles
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @instance
+         */
+        VideoPlayerAccessByRoles.prototype.roles = $util.emptyArray;
+
+        /**
+         * Creates a new VideoPlayerAccessByRoles instance using the specified properties.
+         * @function create
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @static
+         * @param {proto.IVideoPlayerAccessByRoles=} [properties] Properties to set
+         * @returns {proto.VideoPlayerAccessByRoles} VideoPlayerAccessByRoles instance
+         */
+        VideoPlayerAccessByRoles.create = function create(properties) {
+            return new VideoPlayerAccessByRoles(properties);
+        };
+
+        /**
+         * Encodes the specified VideoPlayerAccessByRoles message. Does not implicitly {@link proto.VideoPlayerAccessByRoles.verify|verify} messages.
+         * @function encode
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @static
+         * @param {proto.IVideoPlayerAccessByRoles} message VideoPlayerAccessByRoles message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        VideoPlayerAccessByRoles.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.roles != null && message.roles.length)
+                for (var i = 0; i < message.roles.length; ++i)
+                    $root.proto.TheaterRole.encode(message.roles[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified VideoPlayerAccessByRoles message, length delimited. Does not implicitly {@link proto.VideoPlayerAccessByRoles.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @static
+         * @param {proto.IVideoPlayerAccessByRoles} message VideoPlayerAccessByRoles message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        VideoPlayerAccessByRoles.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a VideoPlayerAccessByRoles message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.VideoPlayerAccessByRoles} VideoPlayerAccessByRoles
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        VideoPlayerAccessByRoles.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.VideoPlayerAccessByRoles();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    if (!(message.roles && message.roles.length))
+                        message.roles = [];
+                    message.roles.push($root.proto.TheaterRole.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a VideoPlayerAccessByRoles message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.VideoPlayerAccessByRoles} VideoPlayerAccessByRoles
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        VideoPlayerAccessByRoles.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a VideoPlayerAccessByRoles message.
+         * @function verify
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        VideoPlayerAccessByRoles.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.roles != null && message.hasOwnProperty("roles")) {
+                if (!Array.isArray(message.roles))
+                    return "roles: array expected";
+                for (var i = 0; i < message.roles.length; ++i) {
+                    var error = $root.proto.TheaterRole.verify(message.roles[i]);
+                    if (error)
+                        return "roles." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a VideoPlayerAccessByRoles message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.VideoPlayerAccessByRoles} VideoPlayerAccessByRoles
+         */
+        VideoPlayerAccessByRoles.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.VideoPlayerAccessByRoles)
+                return object;
+            var message = new $root.proto.VideoPlayerAccessByRoles();
+            if (object.roles) {
+                if (!Array.isArray(object.roles))
+                    throw TypeError(".proto.VideoPlayerAccessByRoles.roles: array expected");
+                message.roles = [];
+                for (var i = 0; i < object.roles.length; ++i) {
+                    if (typeof object.roles[i] !== "object")
+                        throw TypeError(".proto.VideoPlayerAccessByRoles.roles: object expected");
+                    message.roles[i] = $root.proto.TheaterRole.fromObject(object.roles[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a VideoPlayerAccessByRoles message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @static
+         * @param {proto.VideoPlayerAccessByRoles} message VideoPlayerAccessByRoles
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        VideoPlayerAccessByRoles.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.roles = [];
+            if (message.roles && message.roles.length) {
+                object.roles = [];
+                for (var j = 0; j < message.roles.length; ++j)
+                    object.roles[j] = $root.proto.TheaterRole.toObject(message.roles[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this VideoPlayerAccessByRoles to JSON.
+         * @function toJSON
+         * @memberof proto.VideoPlayerAccessByRoles
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        VideoPlayerAccessByRoles.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return VideoPlayerAccessByRoles;
+    })();
+
+    proto.Subtitle = (function() {
+
+        /**
+         * Properties of a Subtitle.
+         * @memberof proto
+         * @interface ISubtitle
+         * @property {string|null} [id] Subtitle id
+         * @property {string|null} [mediaSourceId] Subtitle mediaSourceId
+         * @property {string|null} [lang] Subtitle lang
+         * @property {string|null} [file] Subtitle file
+         * @property {google.protobuf.ITimestamp|null} [createdAt] Subtitle createdAt
+         * @property {google.protobuf.ITimestamp|null} [updatedAt] Subtitle updatedAt
+         */
+
+        /**
+         * Constructs a new Subtitle.
+         * @memberof proto
+         * @classdesc Represents a Subtitle.
+         * @implements ISubtitle
+         * @constructor
+         * @param {proto.ISubtitle=} [properties] Properties to set
+         */
+        function Subtitle(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Subtitle id.
+         * @member {string} id
+         * @memberof proto.Subtitle
+         * @instance
+         */
+        Subtitle.prototype.id = "";
+
+        /**
+         * Subtitle mediaSourceId.
+         * @member {string} mediaSourceId
+         * @memberof proto.Subtitle
+         * @instance
+         */
+        Subtitle.prototype.mediaSourceId = "";
+
+        /**
+         * Subtitle lang.
+         * @member {string} lang
+         * @memberof proto.Subtitle
+         * @instance
+         */
+        Subtitle.prototype.lang = "";
+
+        /**
+         * Subtitle file.
+         * @member {string} file
+         * @memberof proto.Subtitle
+         * @instance
+         */
+        Subtitle.prototype.file = "";
+
+        /**
+         * Subtitle createdAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+         * @memberof proto.Subtitle
+         * @instance
+         */
+        Subtitle.prototype.createdAt = null;
+
+        /**
+         * Subtitle updatedAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+         * @memberof proto.Subtitle
+         * @instance
+         */
+        Subtitle.prototype.updatedAt = null;
+
+        /**
+         * Creates a new Subtitle instance using the specified properties.
+         * @function create
+         * @memberof proto.Subtitle
+         * @static
+         * @param {proto.ISubtitle=} [properties] Properties to set
+         * @returns {proto.Subtitle} Subtitle instance
+         */
+        Subtitle.create = function create(properties) {
+            return new Subtitle(properties);
+        };
+
+        /**
+         * Encodes the specified Subtitle message. Does not implicitly {@link proto.Subtitle.verify|verify} messages.
+         * @function encode
+         * @memberof proto.Subtitle
+         * @static
+         * @param {proto.ISubtitle} message Subtitle message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Subtitle.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.mediaSourceId);
+            if (message.lang != null && message.hasOwnProperty("lang"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.lang);
+            if (message.file != null && message.hasOwnProperty("file"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.file);
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Subtitle message, length delimited. Does not implicitly {@link proto.Subtitle.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.Subtitle
+         * @static
+         * @param {proto.ISubtitle} message Subtitle message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Subtitle.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Subtitle message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.Subtitle
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.Subtitle} Subtitle
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Subtitle.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.Subtitle();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.string();
+                    break;
+                case 2:
+                    message.mediaSourceId = reader.string();
+                    break;
+                case 3:
+                    message.lang = reader.string();
+                    break;
+                case 4:
+                    message.file = reader.string();
+                    break;
+                case 5:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Subtitle message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.Subtitle
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.Subtitle} Subtitle
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Subtitle.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Subtitle message.
+         * @function verify
+         * @memberof proto.Subtitle
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Subtitle.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                if (!$util.isString(message.mediaSourceId))
+                    return "mediaSourceId: string expected";
+            if (message.lang != null && message.hasOwnProperty("lang"))
+                if (!$util.isString(message.lang))
+                    return "lang: string expected";
+            if (message.file != null && message.hasOwnProperty("file"))
+                if (!$util.isString(message.file))
+                    return "file: string expected";
+            if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                if (error)
+                    return "createdAt." + error;
+            }
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                if (error)
+                    return "updatedAt." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a Subtitle message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.Subtitle
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.Subtitle} Subtitle
+         */
+        Subtitle.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.Subtitle)
+                return object;
+            var message = new $root.proto.Subtitle();
+            if (object.id != null)
+                message.id = String(object.id);
+            if (object.mediaSourceId != null)
+                message.mediaSourceId = String(object.mediaSourceId);
+            if (object.lang != null)
+                message.lang = String(object.lang);
+            if (object.file != null)
+                message.file = String(object.file);
+            if (object.createdAt != null) {
+                if (typeof object.createdAt !== "object")
+                    throw TypeError(".proto.Subtitle.createdAt: object expected");
+                message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+            }
+            if (object.updatedAt != null) {
+                if (typeof object.updatedAt !== "object")
+                    throw TypeError(".proto.Subtitle.updatedAt: object expected");
+                message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Subtitle message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.Subtitle
+         * @static
+         * @param {proto.Subtitle} message Subtitle
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Subtitle.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = "";
+                object.mediaSourceId = "";
+                object.lang = "";
+                object.file = "";
+                object.createdAt = null;
+                object.updatedAt = null;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                object.mediaSourceId = message.mediaSourceId;
+            if (message.lang != null && message.hasOwnProperty("lang"))
+                object.lang = message.lang;
+            if (message.file != null && message.hasOwnProperty("file"))
+                object.file = message.file;
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
+            return object;
+        };
+
+        /**
+         * Converts this Subtitle to JSON.
+         * @function toJSON
+         * @memberof proto.Subtitle
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Subtitle.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Subtitle;
+    })();
+
+    proto.MediaSource = (function() {
+
+        /**
+         * Properties of a MediaSource.
+         * @memberof proto
+         * @interface IMediaSource
+         * @property {string|null} [id] MediaSource id
+         * @property {string|null} [title] MediaSource title
+         * @property {proto.MediaSource.Type|null} [type] MediaSource type
+         * @property {string|null} [banner] MediaSource banner
+         * @property {string|null} [uri] MediaSource uri
+         * @property {number|Long|null} [lastPlayedTime] MediaSource lastPlayedTime
+         * @property {Array.<proto.ISubtitle>|null} [subtitles] MediaSource subtitles
+         * @property {string|null} [userId] MediaSource userId
+         * @property {number|Long|null} [length] MediaSource length
+         * @property {google.protobuf.ITimestamp|null} [createdAt] MediaSource createdAt
+         * @property {google.protobuf.ITimestamp|null} [updatedAt] MediaSource updatedAt
+         */
+
+        /**
+         * Constructs a new MediaSource.
+         * @memberof proto
+         * @classdesc Represents a MediaSource.
+         * @implements IMediaSource
+         * @constructor
+         * @param {proto.IMediaSource=} [properties] Properties to set
+         */
+        function MediaSource(properties) {
+            this.subtitles = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MediaSource id.
+         * @member {string} id
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.id = "";
+
+        /**
+         * MediaSource title.
+         * @member {string} title
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.title = "";
+
+        /**
+         * MediaSource type.
+         * @member {proto.MediaSource.Type} type
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.type = 0;
+
+        /**
+         * MediaSource banner.
+         * @member {string} banner
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.banner = "";
+
+        /**
+         * MediaSource uri.
+         * @member {string} uri
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.uri = "";
+
+        /**
+         * MediaSource lastPlayedTime.
+         * @member {number|Long} lastPlayedTime
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.lastPlayedTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * MediaSource subtitles.
+         * @member {Array.<proto.ISubtitle>} subtitles
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.subtitles = $util.emptyArray;
+
+        /**
+         * MediaSource userId.
+         * @member {string} userId
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.userId = "";
+
+        /**
+         * MediaSource length.
+         * @member {number|Long} length
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.length = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * MediaSource createdAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.createdAt = null;
+
+        /**
+         * MediaSource updatedAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.updatedAt = null;
+
+        /**
+         * Creates a new MediaSource instance using the specified properties.
+         * @function create
+         * @memberof proto.MediaSource
+         * @static
+         * @param {proto.IMediaSource=} [properties] Properties to set
+         * @returns {proto.MediaSource} MediaSource instance
+         */
+        MediaSource.create = function create(properties) {
+            return new MediaSource(properties);
+        };
+
+        /**
+         * Encodes the specified MediaSource message. Does not implicitly {@link proto.MediaSource.verify|verify} messages.
+         * @function encode
+         * @memberof proto.MediaSource
+         * @static
+         * @param {proto.IMediaSource} message MediaSource message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediaSource.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.title != null && message.hasOwnProperty("title"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+            if (message.type != null && message.hasOwnProperty("type"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+            if (message.banner != null && message.hasOwnProperty("banner"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.banner);
+            if (message.uri != null && message.hasOwnProperty("uri"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.uri);
+            if (message.lastPlayedTime != null && message.hasOwnProperty("lastPlayedTime"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.lastPlayedTime);
+            if (message.subtitles != null && message.subtitles.length)
+                for (var i = 0; i < message.subtitles.length; ++i)
+                    $root.proto.Subtitle.encode(message.subtitles[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.userId);
+            if (message.length != null && message.hasOwnProperty("length"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.length);
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MediaSource message, length delimited. Does not implicitly {@link proto.MediaSource.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.MediaSource
+         * @static
+         * @param {proto.IMediaSource} message MediaSource message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediaSource.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MediaSource message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.MediaSource
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.MediaSource} MediaSource
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediaSource.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.MediaSource();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.string();
+                    break;
+                case 2:
+                    message.title = reader.string();
+                    break;
+                case 3:
+                    message.type = reader.int32();
+                    break;
+                case 4:
+                    message.banner = reader.string();
+                    break;
+                case 5:
+                    message.uri = reader.string();
+                    break;
+                case 6:
+                    message.lastPlayedTime = reader.int64();
+                    break;
+                case 7:
+                    if (!(message.subtitles && message.subtitles.length))
+                        message.subtitles = [];
+                    message.subtitles.push($root.proto.Subtitle.decode(reader, reader.uint32()));
+                    break;
+                case 8:
+                    message.userId = reader.string();
+                    break;
+                case 9:
+                    message.length = reader.int64();
+                    break;
+                case 10:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 11:
+                    message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MediaSource message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.MediaSource
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.MediaSource} MediaSource
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediaSource.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MediaSource message.
+         * @function verify
+         * @memberof proto.MediaSource
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MediaSource.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            if (message.title != null && message.hasOwnProperty("title"))
+                if (!$util.isString(message.title))
+                    return "title: string expected";
+            if (message.type != null && message.hasOwnProperty("type"))
+                switch (message.type) {
+                default:
+                    return "type: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    break;
+                }
+            if (message.banner != null && message.hasOwnProperty("banner"))
+                if (!$util.isString(message.banner))
+                    return "banner: string expected";
+            if (message.uri != null && message.hasOwnProperty("uri"))
+                if (!$util.isString(message.uri))
+                    return "uri: string expected";
+            if (message.lastPlayedTime != null && message.hasOwnProperty("lastPlayedTime"))
+                if (!$util.isInteger(message.lastPlayedTime) && !(message.lastPlayedTime && $util.isInteger(message.lastPlayedTime.low) && $util.isInteger(message.lastPlayedTime.high)))
+                    return "lastPlayedTime: integer|Long expected";
+            if (message.subtitles != null && message.hasOwnProperty("subtitles")) {
+                if (!Array.isArray(message.subtitles))
+                    return "subtitles: array expected";
+                for (var i = 0; i < message.subtitles.length; ++i) {
+                    var error = $root.proto.Subtitle.verify(message.subtitles[i]);
+                    if (error)
+                        return "subtitles." + error;
+                }
+            }
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                if (!$util.isString(message.userId))
+                    return "userId: string expected";
+            if (message.length != null && message.hasOwnProperty("length"))
+                if (!$util.isInteger(message.length) && !(message.length && $util.isInteger(message.length.low) && $util.isInteger(message.length.high)))
+                    return "length: integer|Long expected";
+            if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                if (error)
+                    return "createdAt." + error;
+            }
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                if (error)
+                    return "updatedAt." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a MediaSource message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.MediaSource
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.MediaSource} MediaSource
+         */
+        MediaSource.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.MediaSource)
+                return object;
+            var message = new $root.proto.MediaSource();
+            if (object.id != null)
+                message.id = String(object.id);
+            if (object.title != null)
+                message.title = String(object.title);
+            switch (object.type) {
+            case "UNKNOWN":
+            case 0:
+                message.type = 0;
+                break;
+            case "YOUTUBE":
+            case 1:
+                message.type = 1;
+                break;
+            case "TORRENT":
+            case 2:
+                message.type = 2;
+                break;
+            case "SOUND_CLOUD":
+            case 3:
+                message.type = 3;
+                break;
+            case "DOWNLOAD_URI":
+            case 4:
+                message.type = 4;
+                break;
+            case "LOCAL_PATH":
+            case 5:
+                message.type = 5;
+                break;
+            }
+            if (object.banner != null)
+                message.banner = String(object.banner);
+            if (object.uri != null)
+                message.uri = String(object.uri);
+            if (object.lastPlayedTime != null)
+                if ($util.Long)
+                    (message.lastPlayedTime = $util.Long.fromValue(object.lastPlayedTime)).unsigned = false;
+                else if (typeof object.lastPlayedTime === "string")
+                    message.lastPlayedTime = parseInt(object.lastPlayedTime, 10);
+                else if (typeof object.lastPlayedTime === "number")
+                    message.lastPlayedTime = object.lastPlayedTime;
+                else if (typeof object.lastPlayedTime === "object")
+                    message.lastPlayedTime = new $util.LongBits(object.lastPlayedTime.low >>> 0, object.lastPlayedTime.high >>> 0).toNumber();
+            if (object.subtitles) {
+                if (!Array.isArray(object.subtitles))
+                    throw TypeError(".proto.MediaSource.subtitles: array expected");
+                message.subtitles = [];
+                for (var i = 0; i < object.subtitles.length; ++i) {
+                    if (typeof object.subtitles[i] !== "object")
+                        throw TypeError(".proto.MediaSource.subtitles: object expected");
+                    message.subtitles[i] = $root.proto.Subtitle.fromObject(object.subtitles[i]);
+                }
+            }
+            if (object.userId != null)
+                message.userId = String(object.userId);
+            if (object.length != null)
+                if ($util.Long)
+                    (message.length = $util.Long.fromValue(object.length)).unsigned = false;
+                else if (typeof object.length === "string")
+                    message.length = parseInt(object.length, 10);
+                else if (typeof object.length === "number")
+                    message.length = object.length;
+                else if (typeof object.length === "object")
+                    message.length = new $util.LongBits(object.length.low >>> 0, object.length.high >>> 0).toNumber();
+            if (object.createdAt != null) {
+                if (typeof object.createdAt !== "object")
+                    throw TypeError(".proto.MediaSource.createdAt: object expected");
+                message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+            }
+            if (object.updatedAt != null) {
+                if (typeof object.updatedAt !== "object")
+                    throw TypeError(".proto.MediaSource.updatedAt: object expected");
+                message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MediaSource message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.MediaSource
+         * @static
+         * @param {proto.MediaSource} message MediaSource
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MediaSource.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.subtitles = [];
+            if (options.defaults) {
+                object.id = "";
+                object.title = "";
+                object.type = options.enums === String ? "UNKNOWN" : 0;
+                object.banner = "";
+                object.uri = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.lastPlayedTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.lastPlayedTime = options.longs === String ? "0" : 0;
+                object.userId = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.length = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.length = options.longs === String ? "0" : 0;
+                object.createdAt = null;
+                object.updatedAt = null;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.title != null && message.hasOwnProperty("title"))
+                object.title = message.title;
+            if (message.type != null && message.hasOwnProperty("type"))
+                object.type = options.enums === String ? $root.proto.MediaSource.Type[message.type] : message.type;
+            if (message.banner != null && message.hasOwnProperty("banner"))
+                object.banner = message.banner;
+            if (message.uri != null && message.hasOwnProperty("uri"))
+                object.uri = message.uri;
+            if (message.lastPlayedTime != null && message.hasOwnProperty("lastPlayedTime"))
+                if (typeof message.lastPlayedTime === "number")
+                    object.lastPlayedTime = options.longs === String ? String(message.lastPlayedTime) : message.lastPlayedTime;
+                else
+                    object.lastPlayedTime = options.longs === String ? $util.Long.prototype.toString.call(message.lastPlayedTime) : options.longs === Number ? new $util.LongBits(message.lastPlayedTime.low >>> 0, message.lastPlayedTime.high >>> 0).toNumber() : message.lastPlayedTime;
+            if (message.subtitles && message.subtitles.length) {
+                object.subtitles = [];
+                for (var j = 0; j < message.subtitles.length; ++j)
+                    object.subtitles[j] = $root.proto.Subtitle.toObject(message.subtitles[j], options);
+            }
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                object.userId = message.userId;
+            if (message.length != null && message.hasOwnProperty("length"))
+                if (typeof message.length === "number")
+                    object.length = options.longs === String ? String(message.length) : message.length;
+                else
+                    object.length = options.longs === String ? $util.Long.prototype.toString.call(message.length) : options.longs === Number ? new $util.LongBits(message.length.low >>> 0, message.length.high >>> 0).toNumber() : message.length;
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
+            return object;
+        };
+
+        /**
+         * Converts this MediaSource to JSON.
+         * @function toJSON
+         * @memberof proto.MediaSource
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MediaSource.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        /**
+         * Type enum.
+         * @name proto.MediaSource.Type
+         * @enum {string}
+         * @property {number} UNKNOWN=0 UNKNOWN value
+         * @property {number} YOUTUBE=1 YOUTUBE value
+         * @property {number} TORRENT=2 TORRENT value
+         * @property {number} SOUND_CLOUD=3 SOUND_CLOUD value
+         * @property {number} DOWNLOAD_URI=4 DOWNLOAD_URI value
+         * @property {number} LOCAL_PATH=5 LOCAL_PATH value
+         */
+        MediaSource.Type = (function() {
+            var valuesById = {}, values = Object.create(valuesById);
+            values[valuesById[0] = "UNKNOWN"] = 0;
+            values[valuesById[1] = "YOUTUBE"] = 1;
+            values[valuesById[2] = "TORRENT"] = 2;
+            values[valuesById[3] = "SOUND_CLOUD"] = 3;
+            values[valuesById[4] = "DOWNLOAD_URI"] = 4;
+            values[valuesById[5] = "LOCAL_PATH"] = 5;
+            return values;
+        })();
+
+        return MediaSource;
+    })();
+
+    proto.Theater = (function() {
+
+        /**
+         * Properties of a Theater.
+         * @memberof proto
+         * @interface ITheater
+         * @property {string|null} [id] Theater id
+         * @property {string|null} [description] Theater description
+         * @property {proto.PRIVACY|null} [privacy] Theater privacy
+         * @property {proto.VIDEO_PLAYER_ACCESS|null} [videoPlayerAccess] Theater videoPlayerAccess
+         * @property {string|null} [userId] Theater userId
+         * @property {proto.IUser|null} [user] Theater user
+         * @property {proto.IMediaSource|null} [mediaSource] Theater mediaSource
+         * @property {google.protobuf.ITimestamp|null} [createdAt] Theater createdAt
+         * @property {google.protobuf.ITimestamp|null} [updatedAt] Theater updatedAt
+         */
+
+        /**
+         * Constructs a new Theater.
+         * @memberof proto
+         * @classdesc Represents a Theater.
+         * @implements ITheater
+         * @constructor
+         * @param {proto.ITheater=} [properties] Properties to set
+         */
+        function Theater(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Theater id.
+         * @member {string} id
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.id = "";
+
+        /**
+         * Theater description.
+         * @member {string} description
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.description = "";
+
+        /**
+         * Theater privacy.
+         * @member {proto.PRIVACY} privacy
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.privacy = 0;
+
+        /**
+         * Theater videoPlayerAccess.
+         * @member {proto.VIDEO_PLAYER_ACCESS} videoPlayerAccess
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.videoPlayerAccess = 0;
+
+        /**
+         * Theater userId.
+         * @member {string} userId
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.userId = "";
+
+        /**
+         * Theater user.
+         * @member {proto.IUser|null|undefined} user
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.user = null;
+
+        /**
+         * Theater mediaSource.
+         * @member {proto.IMediaSource|null|undefined} mediaSource
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.mediaSource = null;
+
+        /**
+         * Theater createdAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.createdAt = null;
+
+        /**
+         * Theater updatedAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.updatedAt = null;
+
+        /**
+         * Creates a new Theater instance using the specified properties.
+         * @function create
+         * @memberof proto.Theater
+         * @static
+         * @param {proto.ITheater=} [properties] Properties to set
+         * @returns {proto.Theater} Theater instance
+         */
+        Theater.create = function create(properties) {
+            return new Theater(properties);
+        };
+
+        /**
+         * Encodes the specified Theater message. Does not implicitly {@link proto.Theater.verify|verify} messages.
+         * @function encode
+         * @memberof proto.Theater
+         * @static
+         * @param {proto.ITheater} message Theater message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Theater.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.description != null && message.hasOwnProperty("description"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+            if (message.privacy != null && message.hasOwnProperty("privacy"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.privacy);
+            if (message.videoPlayerAccess != null && message.hasOwnProperty("videoPlayerAccess"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.videoPlayerAccess);
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.userId);
+            if (message.user != null && message.hasOwnProperty("user"))
+                $root.proto.User.encode(message.user, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (message.mediaSource != null && message.hasOwnProperty("mediaSource"))
+                $root.proto.MediaSource.encode(message.mediaSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Theater message, length delimited. Does not implicitly {@link proto.Theater.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.Theater
+         * @static
+         * @param {proto.ITheater} message Theater message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Theater.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Theater message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.Theater
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.Theater} Theater
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Theater.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.Theater();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.string();
+                    break;
+                case 2:
+                    message.description = reader.string();
+                    break;
+                case 4:
+                    message.privacy = reader.int32();
+                    break;
+                case 5:
+                    message.videoPlayerAccess = reader.int32();
+                    break;
+                case 6:
+                    message.userId = reader.string();
+                    break;
+                case 7:
+                    message.user = $root.proto.User.decode(reader, reader.uint32());
+                    break;
+                case 8:
+                    message.mediaSource = $root.proto.MediaSource.decode(reader, reader.uint32());
+                    break;
+                case 9:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 10:
+                    message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Theater message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.Theater
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.Theater} Theater
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Theater.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Theater message.
+         * @function verify
+         * @memberof proto.Theater
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Theater.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            if (message.description != null && message.hasOwnProperty("description"))
+                if (!$util.isString(message.description))
+                    return "description: string expected";
+            if (message.privacy != null && message.hasOwnProperty("privacy"))
+                switch (message.privacy) {
+                default:
+                    return "privacy: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                    break;
+                }
+            if (message.videoPlayerAccess != null && message.hasOwnProperty("videoPlayerAccess"))
+                switch (message.videoPlayerAccess) {
+                default:
+                    return "videoPlayerAccess: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    break;
+                }
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                if (!$util.isString(message.userId))
+                    return "userId: string expected";
+            if (message.user != null && message.hasOwnProperty("user")) {
+                var error = $root.proto.User.verify(message.user);
+                if (error)
+                    return "user." + error;
+            }
+            if (message.mediaSource != null && message.hasOwnProperty("mediaSource")) {
+                var error = $root.proto.MediaSource.verify(message.mediaSource);
+                if (error)
+                    return "mediaSource." + error;
+            }
+            if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                if (error)
+                    return "createdAt." + error;
+            }
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                if (error)
+                    return "updatedAt." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a Theater message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.Theater
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.Theater} Theater
+         */
+        Theater.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.Theater)
+                return object;
+            var message = new $root.proto.Theater();
+            if (object.id != null)
+                message.id = String(object.id);
+            if (object.description != null)
+                message.description = String(object.description);
+            switch (object.privacy) {
+            case "PRIVATE":
+            case 0:
+                message.privacy = 0;
+                break;
+            case "EVERYONE":
+            case 1:
+                message.privacy = 1;
+                break;
+            case "PUBLIC":
+            case 2:
+                message.privacy = 2;
+                break;
+            }
+            switch (object.videoPlayerAccess) {
+            case "ACCESS_BY_USER":
+            case 0:
+                message.videoPlayerAccess = 0;
+                break;
+            case "ACCESS_BY_EVERYONE":
+            case 1:
+                message.videoPlayerAccess = 1;
+                break;
+            case "ACCESS_BY_FRIENDS":
+            case 2:
+                message.videoPlayerAccess = 2;
+                break;
+            case "ACCESS_BY_ROLES":
+            case 3:
+                message.videoPlayerAccess = 3;
+                break;
+            }
+            if (object.userId != null)
+                message.userId = String(object.userId);
+            if (object.user != null) {
+                if (typeof object.user !== "object")
+                    throw TypeError(".proto.Theater.user: object expected");
+                message.user = $root.proto.User.fromObject(object.user);
+            }
+            if (object.mediaSource != null) {
+                if (typeof object.mediaSource !== "object")
+                    throw TypeError(".proto.Theater.mediaSource: object expected");
+                message.mediaSource = $root.proto.MediaSource.fromObject(object.mediaSource);
+            }
+            if (object.createdAt != null) {
+                if (typeof object.createdAt !== "object")
+                    throw TypeError(".proto.Theater.createdAt: object expected");
+                message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+            }
+            if (object.updatedAt != null) {
+                if (typeof object.updatedAt !== "object")
+                    throw TypeError(".proto.Theater.updatedAt: object expected");
+                message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Theater message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.Theater
+         * @static
+         * @param {proto.Theater} message Theater
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Theater.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = "";
+                object.description = "";
+                object.privacy = options.enums === String ? "PRIVATE" : 0;
+                object.videoPlayerAccess = options.enums === String ? "ACCESS_BY_USER" : 0;
+                object.userId = "";
+                object.user = null;
+                object.mediaSource = null;
+                object.createdAt = null;
+                object.updatedAt = null;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.description != null && message.hasOwnProperty("description"))
+                object.description = message.description;
+            if (message.privacy != null && message.hasOwnProperty("privacy"))
+                object.privacy = options.enums === String ? $root.proto.PRIVACY[message.privacy] : message.privacy;
+            if (message.videoPlayerAccess != null && message.hasOwnProperty("videoPlayerAccess"))
+                object.videoPlayerAccess = options.enums === String ? $root.proto.VIDEO_PLAYER_ACCESS[message.videoPlayerAccess] : message.videoPlayerAccess;
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                object.userId = message.userId;
+            if (message.user != null && message.hasOwnProperty("user"))
+                object.user = $root.proto.User.toObject(message.user, options);
+            if (message.mediaSource != null && message.hasOwnProperty("mediaSource"))
+                object.mediaSource = $root.proto.MediaSource.toObject(message.mediaSource, options);
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
+            return object;
+        };
+
+        /**
+         * Converts this Theater to JSON.
+         * @function toJSON
+         * @memberof proto.Theater
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Theater.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Theater;
+    })();
+
+    proto.TheaterAuthRequest = (function() {
+
+        /**
+         * Properties of a TheaterAuthRequest.
+         * @memberof proto
+         * @interface ITheaterAuthRequest
+         * @property {proto.ITheater|null} [theater] TheaterAuthRequest theater
+         * @property {proto.IAuthenticateRequest|null} [authRequest] TheaterAuthRequest authRequest
+         */
+
+        /**
+         * Constructs a new TheaterAuthRequest.
+         * @memberof proto
+         * @classdesc Represents a TheaterAuthRequest.
+         * @implements ITheaterAuthRequest
+         * @constructor
+         * @param {proto.ITheaterAuthRequest=} [properties] Properties to set
+         */
+        function TheaterAuthRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TheaterAuthRequest theater.
+         * @member {proto.ITheater|null|undefined} theater
+         * @memberof proto.TheaterAuthRequest
+         * @instance
+         */
+        TheaterAuthRequest.prototype.theater = null;
+
+        /**
+         * TheaterAuthRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.TheaterAuthRequest
+         * @instance
+         */
+        TheaterAuthRequest.prototype.authRequest = null;
+
+        /**
+         * Creates a new TheaterAuthRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.TheaterAuthRequest
+         * @static
+         * @param {proto.ITheaterAuthRequest=} [properties] Properties to set
+         * @returns {proto.TheaterAuthRequest} TheaterAuthRequest instance
+         */
+        TheaterAuthRequest.create = function create(properties) {
+            return new TheaterAuthRequest(properties);
+        };
+
+        /**
+         * Encodes the specified TheaterAuthRequest message. Does not implicitly {@link proto.TheaterAuthRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.TheaterAuthRequest
+         * @static
+         * @param {proto.ITheaterAuthRequest} message TheaterAuthRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterAuthRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.theater != null && message.hasOwnProperty("theater"))
+                $root.proto.Theater.encode(message.theater, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TheaterAuthRequest message, length delimited. Does not implicitly {@link proto.TheaterAuthRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.TheaterAuthRequest
+         * @static
+         * @param {proto.ITheaterAuthRequest} message TheaterAuthRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterAuthRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TheaterAuthRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.TheaterAuthRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.TheaterAuthRequest} TheaterAuthRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterAuthRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TheaterAuthRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.theater = $root.proto.Theater.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TheaterAuthRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.TheaterAuthRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.TheaterAuthRequest} TheaterAuthRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterAuthRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TheaterAuthRequest message.
+         * @function verify
+         * @memberof proto.TheaterAuthRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TheaterAuthRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.theater != null && message.hasOwnProperty("theater")) {
+                var error = $root.proto.Theater.verify(message.theater);
+                if (error)
+                    return "theater." + error;
+            }
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a TheaterAuthRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.TheaterAuthRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.TheaterAuthRequest} TheaterAuthRequest
+         */
+        TheaterAuthRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.TheaterAuthRequest)
+                return object;
+            var message = new $root.proto.TheaterAuthRequest();
+            if (object.theater != null) {
+                if (typeof object.theater !== "object")
+                    throw TypeError(".proto.TheaterAuthRequest.theater: object expected");
+                message.theater = $root.proto.Theater.fromObject(object.theater);
+            }
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.TheaterAuthRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TheaterAuthRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.TheaterAuthRequest
+         * @static
+         * @param {proto.TheaterAuthRequest} message TheaterAuthRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TheaterAuthRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.theater = null;
+                object.authRequest = null;
+            }
+            if (message.theater != null && message.hasOwnProperty("theater"))
+                object.theater = $root.proto.Theater.toObject(message.theater, options);
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            return object;
+        };
+
+        /**
+         * Converts this TheaterAuthRequest to JSON.
+         * @function toJSON
+         * @memberof proto.TheaterAuthRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TheaterAuthRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TheaterAuthRequest;
+    })();
+
+    proto.RemoveSubtitleRequest = (function() {
+
+        /**
+         * Properties of a RemoveSubtitleRequest.
+         * @memberof proto
+         * @interface IRemoveSubtitleRequest
+         * @property {proto.IAuthenticateRequest|null} [authRequest] RemoveSubtitleRequest authRequest
+         * @property {string|null} [subtitleId] RemoveSubtitleRequest subtitleId
+         * @property {string|null} [mediaSourceId] RemoveSubtitleRequest mediaSourceId
+         */
+
+        /**
+         * Constructs a new RemoveSubtitleRequest.
+         * @memberof proto
+         * @classdesc Represents a RemoveSubtitleRequest.
+         * @implements IRemoveSubtitleRequest
+         * @constructor
+         * @param {proto.IRemoveSubtitleRequest=} [properties] Properties to set
+         */
+        function RemoveSubtitleRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RemoveSubtitleRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.RemoveSubtitleRequest
+         * @instance
+         */
+        RemoveSubtitleRequest.prototype.authRequest = null;
+
+        /**
+         * RemoveSubtitleRequest subtitleId.
+         * @member {string} subtitleId
+         * @memberof proto.RemoveSubtitleRequest
+         * @instance
+         */
+        RemoveSubtitleRequest.prototype.subtitleId = "";
+
+        /**
+         * RemoveSubtitleRequest mediaSourceId.
+         * @member {string} mediaSourceId
+         * @memberof proto.RemoveSubtitleRequest
+         * @instance
+         */
+        RemoveSubtitleRequest.prototype.mediaSourceId = "";
+
+        /**
+         * Creates a new RemoveSubtitleRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.RemoveSubtitleRequest
+         * @static
+         * @param {proto.IRemoveSubtitleRequest=} [properties] Properties to set
+         * @returns {proto.RemoveSubtitleRequest} RemoveSubtitleRequest instance
+         */
+        RemoveSubtitleRequest.create = function create(properties) {
+            return new RemoveSubtitleRequest(properties);
+        };
+
+        /**
+         * Encodes the specified RemoveSubtitleRequest message. Does not implicitly {@link proto.RemoveSubtitleRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.RemoveSubtitleRequest
+         * @static
+         * @param {proto.IRemoveSubtitleRequest} message RemoveSubtitleRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RemoveSubtitleRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.subtitleId != null && message.hasOwnProperty("subtitleId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.subtitleId);
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.mediaSourceId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RemoveSubtitleRequest message, length delimited. Does not implicitly {@link proto.RemoveSubtitleRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.RemoveSubtitleRequest
+         * @static
+         * @param {proto.IRemoveSubtitleRequest} message RemoveSubtitleRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RemoveSubtitleRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RemoveSubtitleRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.RemoveSubtitleRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.RemoveSubtitleRequest} RemoveSubtitleRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RemoveSubtitleRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.RemoveSubtitleRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.subtitleId = reader.string();
+                    break;
+                case 3:
+                    message.mediaSourceId = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a RemoveSubtitleRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.RemoveSubtitleRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.RemoveSubtitleRequest} RemoveSubtitleRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RemoveSubtitleRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RemoveSubtitleRequest message.
+         * @function verify
+         * @memberof proto.RemoveSubtitleRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RemoveSubtitleRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            if (message.subtitleId != null && message.hasOwnProperty("subtitleId"))
+                if (!$util.isString(message.subtitleId))
+                    return "subtitleId: string expected";
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                if (!$util.isString(message.mediaSourceId))
+                    return "mediaSourceId: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a RemoveSubtitleRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.RemoveSubtitleRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.RemoveSubtitleRequest} RemoveSubtitleRequest
+         */
+        RemoveSubtitleRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.RemoveSubtitleRequest)
+                return object;
+            var message = new $root.proto.RemoveSubtitleRequest();
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.RemoveSubtitleRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            if (object.subtitleId != null)
+                message.subtitleId = String(object.subtitleId);
+            if (object.mediaSourceId != null)
+                message.mediaSourceId = String(object.mediaSourceId);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RemoveSubtitleRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.RemoveSubtitleRequest
+         * @static
+         * @param {proto.RemoveSubtitleRequest} message RemoveSubtitleRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RemoveSubtitleRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.authRequest = null;
+                object.subtitleId = "";
+                object.mediaSourceId = "";
+            }
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            if (message.subtitleId != null && message.hasOwnProperty("subtitleId"))
+                object.subtitleId = message.subtitleId;
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                object.mediaSourceId = message.mediaSourceId;
+            return object;
+        };
+
+        /**
+         * Converts this RemoveSubtitleRequest to JSON.
+         * @function toJSON
+         * @memberof proto.RemoveSubtitleRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RemoveSubtitleRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RemoveSubtitleRequest;
+    })();
+
+    proto.TheaterSubtitlesResponse = (function() {
+
+        /**
+         * Properties of a TheaterSubtitlesResponse.
+         * @memberof proto
+         * @interface ITheaterSubtitlesResponse
+         * @property {number|Long|null} [code] TheaterSubtitlesResponse code
+         * @property {string|null} [status] TheaterSubtitlesResponse status
+         * @property {string|null} [message] TheaterSubtitlesResponse message
+         * @property {Array.<proto.ISubtitle>|null} [result] TheaterSubtitlesResponse result
+         */
+
+        /**
+         * Constructs a new TheaterSubtitlesResponse.
+         * @memberof proto
+         * @classdesc Represents a TheaterSubtitlesResponse.
+         * @implements ITheaterSubtitlesResponse
+         * @constructor
+         * @param {proto.ITheaterSubtitlesResponse=} [properties] Properties to set
+         */
+        function TheaterSubtitlesResponse(properties) {
+            this.result = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TheaterSubtitlesResponse code.
+         * @member {number|Long} code
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         */
+        TheaterSubtitlesResponse.prototype.code = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * TheaterSubtitlesResponse status.
+         * @member {string} status
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         */
+        TheaterSubtitlesResponse.prototype.status = "";
+
+        /**
+         * TheaterSubtitlesResponse message.
+         * @member {string} message
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         */
+        TheaterSubtitlesResponse.prototype.message = "";
+
+        /**
+         * TheaterSubtitlesResponse result.
+         * @member {Array.<proto.ISubtitle>} result
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         */
+        TheaterSubtitlesResponse.prototype.result = $util.emptyArray;
+
+        /**
+         * Creates a new TheaterSubtitlesResponse instance using the specified properties.
+         * @function create
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {proto.ITheaterSubtitlesResponse=} [properties] Properties to set
+         * @returns {proto.TheaterSubtitlesResponse} TheaterSubtitlesResponse instance
+         */
+        TheaterSubtitlesResponse.create = function create(properties) {
+            return new TheaterSubtitlesResponse(properties);
+        };
+
+        /**
+         * Encodes the specified TheaterSubtitlesResponse message. Does not implicitly {@link proto.TheaterSubtitlesResponse.verify|verify} messages.
+         * @function encode
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {proto.ITheaterSubtitlesResponse} message TheaterSubtitlesResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterSubtitlesResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.code);
+            if (message.status != null && message.hasOwnProperty("status"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.status);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+            if (message.result != null && message.result.length)
+                for (var i = 0; i < message.result.length; ++i)
+                    $root.proto.Subtitle.encode(message.result[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TheaterSubtitlesResponse message, length delimited. Does not implicitly {@link proto.TheaterSubtitlesResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {proto.ITheaterSubtitlesResponse} message TheaterSubtitlesResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterSubtitlesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TheaterSubtitlesResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.TheaterSubtitlesResponse} TheaterSubtitlesResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterSubtitlesResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TheaterSubtitlesResponse();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.code = reader.int64();
+                    break;
+                case 2:
+                    message.status = reader.string();
+                    break;
+                case 3:
+                    message.message = reader.string();
+                    break;
+                case 4:
+                    if (!(message.result && message.result.length))
+                        message.result = [];
+                    message.result.push($root.proto.Subtitle.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TheaterSubtitlesResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.TheaterSubtitlesResponse} TheaterSubtitlesResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterSubtitlesResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TheaterSubtitlesResponse message.
+         * @function verify
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TheaterSubtitlesResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code) && !(message.code && $util.isInteger(message.code.low) && $util.isInteger(message.code.high)))
+                    return "code: integer|Long expected";
+            if (message.status != null && message.hasOwnProperty("status"))
+                if (!$util.isString(message.status))
+                    return "status: string expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            if (message.result != null && message.hasOwnProperty("result")) {
+                if (!Array.isArray(message.result))
+                    return "result: array expected";
+                for (var i = 0; i < message.result.length; ++i) {
+                    var error = $root.proto.Subtitle.verify(message.result[i]);
+                    if (error)
+                        return "result." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a TheaterSubtitlesResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.TheaterSubtitlesResponse} TheaterSubtitlesResponse
+         */
+        TheaterSubtitlesResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.TheaterSubtitlesResponse)
+                return object;
+            var message = new $root.proto.TheaterSubtitlesResponse();
+            if (object.code != null)
+                if ($util.Long)
+                    (message.code = $util.Long.fromValue(object.code)).unsigned = false;
+                else if (typeof object.code === "string")
+                    message.code = parseInt(object.code, 10);
+                else if (typeof object.code === "number")
+                    message.code = object.code;
+                else if (typeof object.code === "object")
+                    message.code = new $util.LongBits(object.code.low >>> 0, object.code.high >>> 0).toNumber();
+            if (object.status != null)
+                message.status = String(object.status);
+            if (object.message != null)
+                message.message = String(object.message);
+            if (object.result) {
+                if (!Array.isArray(object.result))
+                    throw TypeError(".proto.TheaterSubtitlesResponse.result: array expected");
+                message.result = [];
+                for (var i = 0; i < object.result.length; ++i) {
+                    if (typeof object.result[i] !== "object")
+                        throw TypeError(".proto.TheaterSubtitlesResponse.result: object expected");
+                    message.result[i] = $root.proto.Subtitle.fromObject(object.result[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TheaterSubtitlesResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.TheaterSubtitlesResponse
+         * @static
+         * @param {proto.TheaterSubtitlesResponse} message TheaterSubtitlesResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TheaterSubtitlesResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.result = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.code = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.code = options.longs === String ? "0" : 0;
+                object.status = "";
+                object.message = "";
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (typeof message.code === "number")
+                    object.code = options.longs === String ? String(message.code) : message.code;
+                else
+                    object.code = options.longs === String ? $util.Long.prototype.toString.call(message.code) : options.longs === Number ? new $util.LongBits(message.code.low >>> 0, message.code.high >>> 0).toNumber() : message.code;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            if (message.result && message.result.length) {
+                object.result = [];
+                for (var j = 0; j < message.result.length; ++j)
+                    object.result[j] = $root.proto.Subtitle.toObject(message.result[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this TheaterSubtitlesResponse to JSON.
+         * @function toJSON
+         * @memberof proto.TheaterSubtitlesResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TheaterSubtitlesResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TheaterSubtitlesResponse;
+    })();
+
+    proto.UserTheaterResponse = (function() {
+
+        /**
+         * Properties of a UserTheaterResponse.
+         * @memberof proto
+         * @interface IUserTheaterResponse
+         * @property {number|Long|null} [code] UserTheaterResponse code
+         * @property {string|null} [status] UserTheaterResponse status
+         * @property {string|null} [message] UserTheaterResponse message
+         * @property {proto.ITheater|null} [result] UserTheaterResponse result
+         */
+
+        /**
+         * Constructs a new UserTheaterResponse.
+         * @memberof proto
+         * @classdesc Represents a UserTheaterResponse.
+         * @implements IUserTheaterResponse
+         * @constructor
+         * @param {proto.IUserTheaterResponse=} [properties] Properties to set
+         */
+        function UserTheaterResponse(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserTheaterResponse code.
+         * @member {number|Long} code
+         * @memberof proto.UserTheaterResponse
+         * @instance
+         */
+        UserTheaterResponse.prototype.code = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * UserTheaterResponse status.
+         * @member {string} status
+         * @memberof proto.UserTheaterResponse
+         * @instance
+         */
+        UserTheaterResponse.prototype.status = "";
+
+        /**
+         * UserTheaterResponse message.
+         * @member {string} message
+         * @memberof proto.UserTheaterResponse
+         * @instance
+         */
+        UserTheaterResponse.prototype.message = "";
+
+        /**
+         * UserTheaterResponse result.
+         * @member {proto.ITheater|null|undefined} result
+         * @memberof proto.UserTheaterResponse
+         * @instance
+         */
+        UserTheaterResponse.prototype.result = null;
+
+        /**
+         * Creates a new UserTheaterResponse instance using the specified properties.
+         * @function create
+         * @memberof proto.UserTheaterResponse
+         * @static
+         * @param {proto.IUserTheaterResponse=} [properties] Properties to set
+         * @returns {proto.UserTheaterResponse} UserTheaterResponse instance
+         */
+        UserTheaterResponse.create = function create(properties) {
+            return new UserTheaterResponse(properties);
+        };
+
+        /**
+         * Encodes the specified UserTheaterResponse message. Does not implicitly {@link proto.UserTheaterResponse.verify|verify} messages.
+         * @function encode
+         * @memberof proto.UserTheaterResponse
+         * @static
+         * @param {proto.IUserTheaterResponse} message UserTheaterResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserTheaterResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.code);
+            if (message.status != null && message.hasOwnProperty("status"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.status);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+            if (message.result != null && message.hasOwnProperty("result"))
+                $root.proto.Theater.encode(message.result, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UserTheaterResponse message, length delimited. Does not implicitly {@link proto.UserTheaterResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.UserTheaterResponse
+         * @static
+         * @param {proto.IUserTheaterResponse} message UserTheaterResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserTheaterResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a UserTheaterResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.UserTheaterResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.UserTheaterResponse} UserTheaterResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserTheaterResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UserTheaterResponse();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.code = reader.int64();
+                    break;
+                case 2:
+                    message.status = reader.string();
+                    break;
+                case 3:
+                    message.message = reader.string();
+                    break;
+                case 4:
+                    message.result = $root.proto.Theater.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a UserTheaterResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.UserTheaterResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.UserTheaterResponse} UserTheaterResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserTheaterResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a UserTheaterResponse message.
+         * @function verify
+         * @memberof proto.UserTheaterResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UserTheaterResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code) && !(message.code && $util.isInteger(message.code.low) && $util.isInteger(message.code.high)))
+                    return "code: integer|Long expected";
+            if (message.status != null && message.hasOwnProperty("status"))
+                if (!$util.isString(message.status))
+                    return "status: string expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            if (message.result != null && message.hasOwnProperty("result")) {
+                var error = $root.proto.Theater.verify(message.result);
+                if (error)
+                    return "result." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a UserTheaterResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.UserTheaterResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.UserTheaterResponse} UserTheaterResponse
+         */
+        UserTheaterResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.UserTheaterResponse)
+                return object;
+            var message = new $root.proto.UserTheaterResponse();
+            if (object.code != null)
+                if ($util.Long)
+                    (message.code = $util.Long.fromValue(object.code)).unsigned = false;
+                else if (typeof object.code === "string")
+                    message.code = parseInt(object.code, 10);
+                else if (typeof object.code === "number")
+                    message.code = object.code;
+                else if (typeof object.code === "object")
+                    message.code = new $util.LongBits(object.code.low >>> 0, object.code.high >>> 0).toNumber();
+            if (object.status != null)
+                message.status = String(object.status);
+            if (object.message != null)
+                message.message = String(object.message);
+            if (object.result != null) {
+                if (typeof object.result !== "object")
+                    throw TypeError(".proto.UserTheaterResponse.result: object expected");
+                message.result = $root.proto.Theater.fromObject(object.result);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a UserTheaterResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.UserTheaterResponse
+         * @static
+         * @param {proto.UserTheaterResponse} message UserTheaterResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UserTheaterResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.code = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.code = options.longs === String ? "0" : 0;
+                object.status = "";
+                object.message = "";
+                object.result = null;
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (typeof message.code === "number")
+                    object.code = options.longs === String ? String(message.code) : message.code;
+                else
+                    object.code = options.longs === String ? $util.Long.prototype.toString.call(message.code) : options.longs === Number ? new $util.LongBits(message.code.low >>> 0, message.code.high >>> 0).toNumber() : message.code;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            if (message.result != null && message.hasOwnProperty("result"))
+                object.result = $root.proto.Theater.toObject(message.result, options);
+            return object;
+        };
+
+        /**
+         * Converts this UserTheaterResponse to JSON.
+         * @function toJSON
+         * @memberof proto.UserTheaterResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UserTheaterResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UserTheaterResponse;
+    })();
+
+    proto.InviteFriendsTheaterRequest = (function() {
+
+        /**
+         * Properties of an InviteFriendsTheaterRequest.
+         * @memberof proto
+         * @interface IInviteFriendsTheaterRequest
+         * @property {proto.IAuthenticateRequest|null} [authRequest] InviteFriendsTheaterRequest authRequest
+         * @property {string|null} [theaterId] InviteFriendsTheaterRequest theaterId
+         * @property {Array.<string>|null} [friendIds] InviteFriendsTheaterRequest friendIds
+         */
+
+        /**
+         * Constructs a new InviteFriendsTheaterRequest.
+         * @memberof proto
+         * @classdesc Represents an InviteFriendsTheaterRequest.
+         * @implements IInviteFriendsTheaterRequest
+         * @constructor
+         * @param {proto.IInviteFriendsTheaterRequest=} [properties] Properties to set
+         */
+        function InviteFriendsTheaterRequest(properties) {
+            this.friendIds = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * InviteFriendsTheaterRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @instance
+         */
+        InviteFriendsTheaterRequest.prototype.authRequest = null;
+
+        /**
+         * InviteFriendsTheaterRequest theaterId.
+         * @member {string} theaterId
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @instance
+         */
+        InviteFriendsTheaterRequest.prototype.theaterId = "";
+
+        /**
+         * InviteFriendsTheaterRequest friendIds.
+         * @member {Array.<string>} friendIds
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @instance
+         */
+        InviteFriendsTheaterRequest.prototype.friendIds = $util.emptyArray;
+
+        /**
+         * Creates a new InviteFriendsTheaterRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @static
+         * @param {proto.IInviteFriendsTheaterRequest=} [properties] Properties to set
+         * @returns {proto.InviteFriendsTheaterRequest} InviteFriendsTheaterRequest instance
+         */
+        InviteFriendsTheaterRequest.create = function create(properties) {
+            return new InviteFriendsTheaterRequest(properties);
+        };
+
+        /**
+         * Encodes the specified InviteFriendsTheaterRequest message. Does not implicitly {@link proto.InviteFriendsTheaterRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @static
+         * @param {proto.IInviteFriendsTheaterRequest} message InviteFriendsTheaterRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        InviteFriendsTheaterRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.theaterId);
+            if (message.friendIds != null && message.friendIds.length)
+                for (var i = 0; i < message.friendIds.length; ++i)
+                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.friendIds[i]);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified InviteFriendsTheaterRequest message, length delimited. Does not implicitly {@link proto.InviteFriendsTheaterRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @static
+         * @param {proto.IInviteFriendsTheaterRequest} message InviteFriendsTheaterRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        InviteFriendsTheaterRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an InviteFriendsTheaterRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.InviteFriendsTheaterRequest} InviteFriendsTheaterRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        InviteFriendsTheaterRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.InviteFriendsTheaterRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.theaterId = reader.string();
+                    break;
+                case 3:
+                    if (!(message.friendIds && message.friendIds.length))
+                        message.friendIds = [];
+                    message.friendIds.push(reader.string());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an InviteFriendsTheaterRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.InviteFriendsTheaterRequest} InviteFriendsTheaterRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        InviteFriendsTheaterRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an InviteFriendsTheaterRequest message.
+         * @function verify
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        InviteFriendsTheaterRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                if (!$util.isString(message.theaterId))
+                    return "theaterId: string expected";
+            if (message.friendIds != null && message.hasOwnProperty("friendIds")) {
+                if (!Array.isArray(message.friendIds))
+                    return "friendIds: array expected";
+                for (var i = 0; i < message.friendIds.length; ++i)
+                    if (!$util.isString(message.friendIds[i]))
+                        return "friendIds: string[] expected";
+            }
+            return null;
+        };
+
+        /**
+         * Creates an InviteFriendsTheaterRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.InviteFriendsTheaterRequest} InviteFriendsTheaterRequest
+         */
+        InviteFriendsTheaterRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.InviteFriendsTheaterRequest)
+                return object;
+            var message = new $root.proto.InviteFriendsTheaterRequest();
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.InviteFriendsTheaterRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            if (object.theaterId != null)
+                message.theaterId = String(object.theaterId);
+            if (object.friendIds) {
+                if (!Array.isArray(object.friendIds))
+                    throw TypeError(".proto.InviteFriendsTheaterRequest.friendIds: array expected");
+                message.friendIds = [];
+                for (var i = 0; i < object.friendIds.length; ++i)
+                    message.friendIds[i] = String(object.friendIds[i]);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an InviteFriendsTheaterRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @static
+         * @param {proto.InviteFriendsTheaterRequest} message InviteFriendsTheaterRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        InviteFriendsTheaterRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.friendIds = [];
+            if (options.defaults) {
+                object.authRequest = null;
+                object.theaterId = "";
+            }
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                object.theaterId = message.theaterId;
+            if (message.friendIds && message.friendIds.length) {
+                object.friendIds = [];
+                for (var j = 0; j < message.friendIds.length; ++j)
+                    object.friendIds[j] = message.friendIds[j];
+            }
+            return object;
+        };
+
+        /**
+         * Converts this InviteFriendsTheaterRequest to JSON.
+         * @function toJSON
+         * @memberof proto.InviteFriendsTheaterRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        InviteFriendsTheaterRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return InviteFriendsTheaterRequest;
+    })();
+
+    proto.MediaSourceAuthRequest = (function() {
+
+        /**
+         * Properties of a MediaSourceAuthRequest.
+         * @memberof proto
+         * @interface IMediaSourceAuthRequest
+         * @property {proto.IAuthenticateRequest|null} [authRequest] MediaSourceAuthRequest authRequest
+         * @property {proto.IMediaSource|null} [media] MediaSourceAuthRequest media
+         * @property {number|Long|null} [limit] MediaSourceAuthRequest limit
+         * @property {number|Long|null} [page] MediaSourceAuthRequest page
+         * @property {number|Long|null} [perPage] MediaSourceAuthRequest perPage
+         */
+
+        /**
+         * Constructs a new MediaSourceAuthRequest.
+         * @memberof proto
+         * @classdesc Represents a MediaSourceAuthRequest.
+         * @implements IMediaSourceAuthRequest
+         * @constructor
+         * @param {proto.IMediaSourceAuthRequest=} [properties] Properties to set
+         */
+        function MediaSourceAuthRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MediaSourceAuthRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.MediaSourceAuthRequest
+         * @instance
+         */
+        MediaSourceAuthRequest.prototype.authRequest = null;
+
+        /**
+         * MediaSourceAuthRequest media.
+         * @member {proto.IMediaSource|null|undefined} media
+         * @memberof proto.MediaSourceAuthRequest
+         * @instance
+         */
+        MediaSourceAuthRequest.prototype.media = null;
+
+        /**
+         * MediaSourceAuthRequest limit.
+         * @member {number|Long} limit
+         * @memberof proto.MediaSourceAuthRequest
+         * @instance
+         */
+        MediaSourceAuthRequest.prototype.limit = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        /**
+         * MediaSourceAuthRequest page.
+         * @member {number|Long} page
+         * @memberof proto.MediaSourceAuthRequest
+         * @instance
+         */
+        MediaSourceAuthRequest.prototype.page = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        /**
+         * MediaSourceAuthRequest perPage.
+         * @member {number|Long} perPage
+         * @memberof proto.MediaSourceAuthRequest
+         * @instance
+         */
+        MediaSourceAuthRequest.prototype.perPage = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        /**
+         * Creates a new MediaSourceAuthRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.MediaSourceAuthRequest
+         * @static
+         * @param {proto.IMediaSourceAuthRequest=} [properties] Properties to set
+         * @returns {proto.MediaSourceAuthRequest} MediaSourceAuthRequest instance
+         */
+        MediaSourceAuthRequest.create = function create(properties) {
+            return new MediaSourceAuthRequest(properties);
+        };
+
+        /**
+         * Encodes the specified MediaSourceAuthRequest message. Does not implicitly {@link proto.MediaSourceAuthRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.MediaSourceAuthRequest
+         * @static
+         * @param {proto.IMediaSourceAuthRequest} message MediaSourceAuthRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediaSourceAuthRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.media != null && message.hasOwnProperty("media"))
+                $root.proto.MediaSource.encode(message.media, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            if (message.limit != null && message.hasOwnProperty("limit"))
+                writer.uint32(/* id 3, wireType 0 =*/24).uint64(message.limit);
+            if (message.page != null && message.hasOwnProperty("page"))
+                writer.uint32(/* id 4, wireType 0 =*/32).uint64(message.page);
+            if (message.perPage != null && message.hasOwnProperty("perPage"))
+                writer.uint32(/* id 5, wireType 0 =*/40).uint64(message.perPage);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MediaSourceAuthRequest message, length delimited. Does not implicitly {@link proto.MediaSourceAuthRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.MediaSourceAuthRequest
+         * @static
+         * @param {proto.IMediaSourceAuthRequest} message MediaSourceAuthRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediaSourceAuthRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MediaSourceAuthRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.MediaSourceAuthRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.MediaSourceAuthRequest} MediaSourceAuthRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediaSourceAuthRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.MediaSourceAuthRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.media = $root.proto.MediaSource.decode(reader, reader.uint32());
+                    break;
+                case 3:
+                    message.limit = reader.uint64();
+                    break;
+                case 4:
+                    message.page = reader.uint64();
+                    break;
+                case 5:
+                    message.perPage = reader.uint64();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MediaSourceAuthRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.MediaSourceAuthRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.MediaSourceAuthRequest} MediaSourceAuthRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediaSourceAuthRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MediaSourceAuthRequest message.
+         * @function verify
+         * @memberof proto.MediaSourceAuthRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MediaSourceAuthRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            if (message.media != null && message.hasOwnProperty("media")) {
+                var error = $root.proto.MediaSource.verify(message.media);
+                if (error)
+                    return "media." + error;
+            }
+            if (message.limit != null && message.hasOwnProperty("limit"))
+                if (!$util.isInteger(message.limit) && !(message.limit && $util.isInteger(message.limit.low) && $util.isInteger(message.limit.high)))
+                    return "limit: integer|Long expected";
+            if (message.page != null && message.hasOwnProperty("page"))
+                if (!$util.isInteger(message.page) && !(message.page && $util.isInteger(message.page.low) && $util.isInteger(message.page.high)))
+                    return "page: integer|Long expected";
+            if (message.perPage != null && message.hasOwnProperty("perPage"))
+                if (!$util.isInteger(message.perPage) && !(message.perPage && $util.isInteger(message.perPage.low) && $util.isInteger(message.perPage.high)))
+                    return "perPage: integer|Long expected";
+            return null;
+        };
+
+        /**
+         * Creates a MediaSourceAuthRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.MediaSourceAuthRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.MediaSourceAuthRequest} MediaSourceAuthRequest
+         */
+        MediaSourceAuthRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.MediaSourceAuthRequest)
+                return object;
+            var message = new $root.proto.MediaSourceAuthRequest();
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.MediaSourceAuthRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            if (object.media != null) {
+                if (typeof object.media !== "object")
+                    throw TypeError(".proto.MediaSourceAuthRequest.media: object expected");
+                message.media = $root.proto.MediaSource.fromObject(object.media);
+            }
+            if (object.limit != null)
+                if ($util.Long)
+                    (message.limit = $util.Long.fromValue(object.limit)).unsigned = true;
+                else if (typeof object.limit === "string")
+                    message.limit = parseInt(object.limit, 10);
+                else if (typeof object.limit === "number")
+                    message.limit = object.limit;
+                else if (typeof object.limit === "object")
+                    message.limit = new $util.LongBits(object.limit.low >>> 0, object.limit.high >>> 0).toNumber(true);
+            if (object.page != null)
+                if ($util.Long)
+                    (message.page = $util.Long.fromValue(object.page)).unsigned = true;
+                else if (typeof object.page === "string")
+                    message.page = parseInt(object.page, 10);
+                else if (typeof object.page === "number")
+                    message.page = object.page;
+                else if (typeof object.page === "object")
+                    message.page = new $util.LongBits(object.page.low >>> 0, object.page.high >>> 0).toNumber(true);
+            if (object.perPage != null)
+                if ($util.Long)
+                    (message.perPage = $util.Long.fromValue(object.perPage)).unsigned = true;
+                else if (typeof object.perPage === "string")
+                    message.perPage = parseInt(object.perPage, 10);
+                else if (typeof object.perPage === "number")
+                    message.perPage = object.perPage;
+                else if (typeof object.perPage === "object")
+                    message.perPage = new $util.LongBits(object.perPage.low >>> 0, object.perPage.high >>> 0).toNumber(true);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MediaSourceAuthRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.MediaSourceAuthRequest
+         * @static
+         * @param {proto.MediaSourceAuthRequest} message MediaSourceAuthRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MediaSourceAuthRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.authRequest = null;
+                object.media = null;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.limit = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.limit = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.page = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.page = options.longs === String ? "0" : 0;
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, true);
+                    object.perPage = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.perPage = options.longs === String ? "0" : 0;
+            }
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            if (message.media != null && message.hasOwnProperty("media"))
+                object.media = $root.proto.MediaSource.toObject(message.media, options);
+            if (message.limit != null && message.hasOwnProperty("limit"))
+                if (typeof message.limit === "number")
+                    object.limit = options.longs === String ? String(message.limit) : message.limit;
+                else
+                    object.limit = options.longs === String ? $util.Long.prototype.toString.call(message.limit) : options.longs === Number ? new $util.LongBits(message.limit.low >>> 0, message.limit.high >>> 0).toNumber(true) : message.limit;
+            if (message.page != null && message.hasOwnProperty("page"))
+                if (typeof message.page === "number")
+                    object.page = options.longs === String ? String(message.page) : message.page;
+                else
+                    object.page = options.longs === String ? $util.Long.prototype.toString.call(message.page) : options.longs === Number ? new $util.LongBits(message.page.low >>> 0, message.page.high >>> 0).toNumber(true) : message.page;
+            if (message.perPage != null && message.hasOwnProperty("perPage"))
+                if (typeof message.perPage === "number")
+                    object.perPage = options.longs === String ? String(message.perPage) : message.perPage;
+                else
+                    object.perPage = options.longs === String ? $util.Long.prototype.toString.call(message.perPage) : options.longs === Number ? new $util.LongBits(message.perPage.low >>> 0, message.perPage.high >>> 0).toNumber(true) : message.perPage;
+            return object;
+        };
+
+        /**
+         * Converts this MediaSourceAuthRequest to JSON.
+         * @function toJSON
+         * @memberof proto.MediaSourceAuthRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MediaSourceAuthRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return MediaSourceAuthRequest;
+    })();
+
+    proto.MediaSourceRemoveRequest = (function() {
+
+        /**
+         * Properties of a MediaSourceRemoveRequest.
+         * @memberof proto
+         * @interface IMediaSourceRemoveRequest
+         * @property {proto.IAuthenticateRequest|null} [authRequest] MediaSourceRemoveRequest authRequest
+         * @property {string|null} [mediaSourceId] MediaSourceRemoveRequest mediaSourceId
+         */
+
+        /**
+         * Constructs a new MediaSourceRemoveRequest.
+         * @memberof proto
+         * @classdesc Represents a MediaSourceRemoveRequest.
+         * @implements IMediaSourceRemoveRequest
+         * @constructor
+         * @param {proto.IMediaSourceRemoveRequest=} [properties] Properties to set
+         */
+        function MediaSourceRemoveRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MediaSourceRemoveRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.MediaSourceRemoveRequest
+         * @instance
+         */
+        MediaSourceRemoveRequest.prototype.authRequest = null;
+
+        /**
+         * MediaSourceRemoveRequest mediaSourceId.
+         * @member {string} mediaSourceId
+         * @memberof proto.MediaSourceRemoveRequest
+         * @instance
+         */
+        MediaSourceRemoveRequest.prototype.mediaSourceId = "";
+
+        /**
+         * Creates a new MediaSourceRemoveRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.MediaSourceRemoveRequest
+         * @static
+         * @param {proto.IMediaSourceRemoveRequest=} [properties] Properties to set
+         * @returns {proto.MediaSourceRemoveRequest} MediaSourceRemoveRequest instance
+         */
+        MediaSourceRemoveRequest.create = function create(properties) {
+            return new MediaSourceRemoveRequest(properties);
+        };
+
+        /**
+         * Encodes the specified MediaSourceRemoveRequest message. Does not implicitly {@link proto.MediaSourceRemoveRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.MediaSourceRemoveRequest
+         * @static
+         * @param {proto.IMediaSourceRemoveRequest} message MediaSourceRemoveRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediaSourceRemoveRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.mediaSourceId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MediaSourceRemoveRequest message, length delimited. Does not implicitly {@link proto.MediaSourceRemoveRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.MediaSourceRemoveRequest
+         * @static
+         * @param {proto.IMediaSourceRemoveRequest} message MediaSourceRemoveRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediaSourceRemoveRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MediaSourceRemoveRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.MediaSourceRemoveRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.MediaSourceRemoveRequest} MediaSourceRemoveRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediaSourceRemoveRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.MediaSourceRemoveRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.mediaSourceId = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MediaSourceRemoveRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.MediaSourceRemoveRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.MediaSourceRemoveRequest} MediaSourceRemoveRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediaSourceRemoveRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MediaSourceRemoveRequest message.
+         * @function verify
+         * @memberof proto.MediaSourceRemoveRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MediaSourceRemoveRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                if (!$util.isString(message.mediaSourceId))
+                    return "mediaSourceId: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a MediaSourceRemoveRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.MediaSourceRemoveRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.MediaSourceRemoveRequest} MediaSourceRemoveRequest
+         */
+        MediaSourceRemoveRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.MediaSourceRemoveRequest)
+                return object;
+            var message = new $root.proto.MediaSourceRemoveRequest();
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.MediaSourceRemoveRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            if (object.mediaSourceId != null)
+                message.mediaSourceId = String(object.mediaSourceId);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MediaSourceRemoveRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.MediaSourceRemoveRequest
+         * @static
+         * @param {proto.MediaSourceRemoveRequest} message MediaSourceRemoveRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MediaSourceRemoveRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.authRequest = null;
+                object.mediaSourceId = "";
+            }
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                object.mediaSourceId = message.mediaSourceId;
+            return object;
+        };
+
+        /**
+         * Converts this MediaSourceRemoveRequest to JSON.
+         * @function toJSON
+         * @memberof proto.MediaSourceRemoveRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MediaSourceRemoveRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return MediaSourceRemoveRequest;
+    })();
+
+    proto.TheaterMediaSourcesResponse = (function() {
+
+        /**
+         * Properties of a TheaterMediaSourcesResponse.
+         * @memberof proto
+         * @interface ITheaterMediaSourcesResponse
+         * @property {number|Long|null} [code] TheaterMediaSourcesResponse code
+         * @property {string|null} [status] TheaterMediaSourcesResponse status
+         * @property {string|null} [message] TheaterMediaSourcesResponse message
+         * @property {Array.<proto.IMediaSource>|null} [result] TheaterMediaSourcesResponse result
+         */
+
+        /**
+         * Constructs a new TheaterMediaSourcesResponse.
+         * @memberof proto
+         * @classdesc Represents a TheaterMediaSourcesResponse.
+         * @implements ITheaterMediaSourcesResponse
+         * @constructor
+         * @param {proto.ITheaterMediaSourcesResponse=} [properties] Properties to set
+         */
+        function TheaterMediaSourcesResponse(properties) {
+            this.result = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TheaterMediaSourcesResponse code.
+         * @member {number|Long} code
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @instance
+         */
+        TheaterMediaSourcesResponse.prototype.code = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * TheaterMediaSourcesResponse status.
+         * @member {string} status
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @instance
+         */
+        TheaterMediaSourcesResponse.prototype.status = "";
+
+        /**
+         * TheaterMediaSourcesResponse message.
+         * @member {string} message
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @instance
+         */
+        TheaterMediaSourcesResponse.prototype.message = "";
+
+        /**
+         * TheaterMediaSourcesResponse result.
+         * @member {Array.<proto.IMediaSource>} result
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @instance
+         */
+        TheaterMediaSourcesResponse.prototype.result = $util.emptyArray;
+
+        /**
+         * Creates a new TheaterMediaSourcesResponse instance using the specified properties.
+         * @function create
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @static
+         * @param {proto.ITheaterMediaSourcesResponse=} [properties] Properties to set
+         * @returns {proto.TheaterMediaSourcesResponse} TheaterMediaSourcesResponse instance
+         */
+        TheaterMediaSourcesResponse.create = function create(properties) {
+            return new TheaterMediaSourcesResponse(properties);
+        };
+
+        /**
+         * Encodes the specified TheaterMediaSourcesResponse message. Does not implicitly {@link proto.TheaterMediaSourcesResponse.verify|verify} messages.
+         * @function encode
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @static
+         * @param {proto.ITheaterMediaSourcesResponse} message TheaterMediaSourcesResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterMediaSourcesResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.code);
+            if (message.status != null && message.hasOwnProperty("status"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.status);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+            if (message.result != null && message.result.length)
+                for (var i = 0; i < message.result.length; ++i)
+                    $root.proto.MediaSource.encode(message.result[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TheaterMediaSourcesResponse message, length delimited. Does not implicitly {@link proto.TheaterMediaSourcesResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @static
+         * @param {proto.ITheaterMediaSourcesResponse} message TheaterMediaSourcesResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TheaterMediaSourcesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TheaterMediaSourcesResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.TheaterMediaSourcesResponse} TheaterMediaSourcesResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterMediaSourcesResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TheaterMediaSourcesResponse();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.code = reader.int64();
+                    break;
+                case 2:
+                    message.status = reader.string();
+                    break;
+                case 3:
+                    message.message = reader.string();
+                    break;
+                case 4:
+                    if (!(message.result && message.result.length))
+                        message.result = [];
+                    message.result.push($root.proto.MediaSource.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TheaterMediaSourcesResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.TheaterMediaSourcesResponse} TheaterMediaSourcesResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TheaterMediaSourcesResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TheaterMediaSourcesResponse message.
+         * @function verify
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TheaterMediaSourcesResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code) && !(message.code && $util.isInteger(message.code.low) && $util.isInteger(message.code.high)))
+                    return "code: integer|Long expected";
+            if (message.status != null && message.hasOwnProperty("status"))
+                if (!$util.isString(message.status))
+                    return "status: string expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            if (message.result != null && message.hasOwnProperty("result")) {
+                if (!Array.isArray(message.result))
+                    return "result: array expected";
+                for (var i = 0; i < message.result.length; ++i) {
+                    var error = $root.proto.MediaSource.verify(message.result[i]);
+                    if (error)
+                        return "result." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a TheaterMediaSourcesResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.TheaterMediaSourcesResponse} TheaterMediaSourcesResponse
+         */
+        TheaterMediaSourcesResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.TheaterMediaSourcesResponse)
+                return object;
+            var message = new $root.proto.TheaterMediaSourcesResponse();
+            if (object.code != null)
+                if ($util.Long)
+                    (message.code = $util.Long.fromValue(object.code)).unsigned = false;
+                else if (typeof object.code === "string")
+                    message.code = parseInt(object.code, 10);
+                else if (typeof object.code === "number")
+                    message.code = object.code;
+                else if (typeof object.code === "object")
+                    message.code = new $util.LongBits(object.code.low >>> 0, object.code.high >>> 0).toNumber();
+            if (object.status != null)
+                message.status = String(object.status);
+            if (object.message != null)
+                message.message = String(object.message);
+            if (object.result) {
+                if (!Array.isArray(object.result))
+                    throw TypeError(".proto.TheaterMediaSourcesResponse.result: array expected");
+                message.result = [];
+                for (var i = 0; i < object.result.length; ++i) {
+                    if (typeof object.result[i] !== "object")
+                        throw TypeError(".proto.TheaterMediaSourcesResponse.result: object expected");
+                    message.result[i] = $root.proto.MediaSource.fromObject(object.result[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TheaterMediaSourcesResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @static
+         * @param {proto.TheaterMediaSourcesResponse} message TheaterMediaSourcesResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TheaterMediaSourcesResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.result = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.code = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.code = options.longs === String ? "0" : 0;
+                object.status = "";
+                object.message = "";
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (typeof message.code === "number")
+                    object.code = options.longs === String ? String(message.code) : message.code;
+                else
+                    object.code = options.longs === String ? $util.Long.prototype.toString.call(message.code) : options.longs === Number ? new $util.LongBits(message.code.low >>> 0, message.code.high >>> 0).toNumber() : message.code;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            if (message.result && message.result.length) {
+                object.result = [];
+                for (var j = 0; j < message.result.length; ++j)
+                    object.result[j] = $root.proto.MediaSource.toObject(message.result[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this TheaterMediaSourcesResponse to JSON.
+         * @function toJSON
+         * @memberof proto.TheaterMediaSourcesResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TheaterMediaSourcesResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TheaterMediaSourcesResponse;
+    })();
+
+    proto.GetTheaterRequest = (function() {
+
+        /**
+         * Properties of a GetTheaterRequest.
+         * @memberof proto
+         * @interface IGetTheaterRequest
+         * @property {proto.IAuthenticateRequest|null} [authRequest] GetTheaterRequest authRequest
+         * @property {string|null} [user] GetTheaterRequest user
+         * @property {string|null} [theaterId] GetTheaterRequest theaterId
+         */
+
+        /**
+         * Constructs a new GetTheaterRequest.
+         * @memberof proto
+         * @classdesc Represents a GetTheaterRequest.
+         * @implements IGetTheaterRequest
+         * @constructor
+         * @param {proto.IGetTheaterRequest=} [properties] Properties to set
+         */
+        function GetTheaterRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GetTheaterRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.GetTheaterRequest
+         * @instance
+         */
+        GetTheaterRequest.prototype.authRequest = null;
+
+        /**
+         * GetTheaterRequest user.
+         * @member {string} user
+         * @memberof proto.GetTheaterRequest
+         * @instance
+         */
+        GetTheaterRequest.prototype.user = "";
+
+        /**
+         * GetTheaterRequest theaterId.
+         * @member {string} theaterId
+         * @memberof proto.GetTheaterRequest
+         * @instance
+         */
+        GetTheaterRequest.prototype.theaterId = "";
+
+        /**
+         * Creates a new GetTheaterRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.GetTheaterRequest
+         * @static
+         * @param {proto.IGetTheaterRequest=} [properties] Properties to set
+         * @returns {proto.GetTheaterRequest} GetTheaterRequest instance
+         */
+        GetTheaterRequest.create = function create(properties) {
+            return new GetTheaterRequest(properties);
+        };
+
+        /**
+         * Encodes the specified GetTheaterRequest message. Does not implicitly {@link proto.GetTheaterRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.GetTheaterRequest
+         * @static
+         * @param {proto.IGetTheaterRequest} message GetTheaterRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetTheaterRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.user != null && message.hasOwnProperty("user"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.user);
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.theaterId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GetTheaterRequest message, length delimited. Does not implicitly {@link proto.GetTheaterRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.GetTheaterRequest
+         * @static
+         * @param {proto.IGetTheaterRequest} message GetTheaterRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetTheaterRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GetTheaterRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.GetTheaterRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.GetTheaterRequest} GetTheaterRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetTheaterRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.GetTheaterRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.user = reader.string();
+                    break;
+                case 3:
+                    message.theaterId = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GetTheaterRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.GetTheaterRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.GetTheaterRequest} GetTheaterRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetTheaterRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GetTheaterRequest message.
+         * @function verify
+         * @memberof proto.GetTheaterRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GetTheaterRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            if (message.user != null && message.hasOwnProperty("user"))
+                if (!$util.isString(message.user))
+                    return "user: string expected";
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                if (!$util.isString(message.theaterId))
+                    return "theaterId: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a GetTheaterRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.GetTheaterRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.GetTheaterRequest} GetTheaterRequest
+         */
+        GetTheaterRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.GetTheaterRequest)
+                return object;
+            var message = new $root.proto.GetTheaterRequest();
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.GetTheaterRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            if (object.user != null)
+                message.user = String(object.user);
+            if (object.theaterId != null)
+                message.theaterId = String(object.theaterId);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GetTheaterRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.GetTheaterRequest
+         * @static
+         * @param {proto.GetTheaterRequest} message GetTheaterRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GetTheaterRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.authRequest = null;
+                object.user = "";
+                object.theaterId = "";
+            }
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            if (message.user != null && message.hasOwnProperty("user"))
+                object.user = message.user;
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                object.theaterId = message.theaterId;
+            return object;
+        };
+
+        /**
+         * Converts this GetTheaterRequest to JSON.
+         * @function toJSON
+         * @memberof proto.GetTheaterRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GetTheaterRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetTheaterRequest;
+    })();
+
+    proto.TheaterService = (function() {
+
+        /**
+         * Constructs a new TheaterService service.
+         * @memberof proto
+         * @classdesc Represents a TheaterService
+         * @extends $protobuf.rpc.Service
+         * @constructor
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         */
+        function TheaterService(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+
+        (TheaterService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = TheaterService;
+
+        /**
+         * Creates new TheaterService service using the specified rpc implementation.
+         * @function create
+         * @memberof proto.TheaterService
+         * @static
+         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+         * @returns {TheaterService} RPC service. Useful where requests and/or responses are streamed.
+         */
+        TheaterService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+            return new this(rpcImpl, requestDelimited, responseDelimited);
+        };
+
+        /**
+         * Callback as used by {@link proto.TheaterService#invite}.
+         * @memberof proto.TheaterService
+         * @typedef InviteCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls Invite.
+         * @function invite
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IInviteFriendsTheaterRequest} request InviteFriendsTheaterRequest message or plain object
+         * @param {proto.TheaterService.InviteCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.invite = function invite(request, callback) {
+            return this.rpcCall(invite, $root.proto.InviteFriendsTheaterRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "Invite" });
+
+        /**
+         * Calls Invite.
+         * @function invite
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IInviteFriendsTheaterRequest} request InviteFriendsTheaterRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#getTheater}.
+         * @memberof proto.TheaterService
+         * @typedef GetTheaterCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.UserTheaterResponse} [response] UserTheaterResponse
+         */
+
+        /**
+         * Calls GetTheater.
+         * @function getTheater
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IGetTheaterRequest} request GetTheaterRequest message or plain object
+         * @param {proto.TheaterService.GetTheaterCallback} callback Node-style callback called with the error, if any, and UserTheaterResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.getTheater = function getTheater(request, callback) {
+            return this.rpcCall(getTheater, $root.proto.GetTheaterRequest, $root.proto.UserTheaterResponse, request, callback);
+        }, "name", { value: "GetTheater" });
+
+        /**
+         * Calls GetTheater.
+         * @function getTheater
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IGetTheaterRequest} request GetTheaterRequest message or plain object
+         * @returns {Promise<proto.UserTheaterResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#updateTheater}.
+         * @memberof proto.TheaterService
+         * @typedef UpdateTheaterCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls UpdateTheater.
+         * @function updateTheater
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.ITheaterAuthRequest} request TheaterAuthRequest message or plain object
+         * @param {proto.TheaterService.UpdateTheaterCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.updateTheater = function updateTheater(request, callback) {
+            return this.rpcCall(updateTheater, $root.proto.TheaterAuthRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "UpdateTheater" });
+
+        /**
+         * Calls UpdateTheater.
+         * @function updateTheater
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.ITheaterAuthRequest} request TheaterAuthRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#getSubtitles}.
+         * @memberof proto.TheaterService
+         * @typedef GetSubtitlesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.TheaterSubtitlesResponse} [response] TheaterSubtitlesResponse
+         */
+
+        /**
+         * Calls GetSubtitles.
+         * @function getSubtitles
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @param {proto.TheaterService.GetSubtitlesCallback} callback Node-style callback called with the error, if any, and TheaterSubtitlesResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.getSubtitles = function getSubtitles(request, callback) {
+            return this.rpcCall(getSubtitles, $root.proto.MediaSourceAuthRequest, $root.proto.TheaterSubtitlesResponse, request, callback);
+        }, "name", { value: "GetSubtitles" });
+
+        /**
+         * Calls GetSubtitles.
+         * @function getSubtitles
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @returns {Promise<proto.TheaterSubtitlesResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#getMediaSources}.
+         * @memberof proto.TheaterService
+         * @typedef GetMediaSourcesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.TheaterMediaSourcesResponse} [response] TheaterMediaSourcesResponse
+         */
+
+        /**
+         * Calls GetMediaSources.
+         * @function getMediaSources
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @param {proto.TheaterService.GetMediaSourcesCallback} callback Node-style callback called with the error, if any, and TheaterMediaSourcesResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.getMediaSources = function getMediaSources(request, callback) {
+            return this.rpcCall(getMediaSources, $root.proto.MediaSourceAuthRequest, $root.proto.TheaterMediaSourcesResponse, request, callback);
+        }, "name", { value: "GetMediaSources" });
+
+        /**
+         * Calls GetMediaSources.
+         * @function getMediaSources
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @returns {Promise<proto.TheaterMediaSourcesResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#selectMediaSource}.
+         * @memberof proto.TheaterService
+         * @typedef SelectMediaSourceCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls SelectMediaSource.
+         * @function selectMediaSource
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @param {proto.TheaterService.SelectMediaSourceCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.selectMediaSource = function selectMediaSource(request, callback) {
+            return this.rpcCall(selectMediaSource, $root.proto.MediaSourceAuthRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "SelectMediaSource" });
+
+        /**
+         * Calls SelectMediaSource.
+         * @function selectMediaSource
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#removeMediaSource}.
+         * @memberof proto.TheaterService
+         * @typedef RemoveMediaSourceCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls RemoveMediaSource.
+         * @function removeMediaSource
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceRemoveRequest} request MediaSourceRemoveRequest message or plain object
+         * @param {proto.TheaterService.RemoveMediaSourceCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.removeMediaSource = function removeMediaSource(request, callback) {
+            return this.rpcCall(removeMediaSource, $root.proto.MediaSourceRemoveRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "RemoveMediaSource" });
+
+        /**
+         * Calls RemoveMediaSource.
+         * @function removeMediaSource
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceRemoveRequest} request MediaSourceRemoveRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#addMediaSource}.
+         * @memberof proto.TheaterService
+         * @typedef AddMediaSourceCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls AddMediaSource.
+         * @function addMediaSource
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @param {proto.TheaterService.AddMediaSourceCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.addMediaSource = function addMediaSource(request, callback) {
+            return this.rpcCall(addMediaSource, $root.proto.MediaSourceAuthRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "AddMediaSource" });
+
+        /**
+         * Calls AddMediaSource.
+         * @function addMediaSource
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#removeSubtitle}.
+         * @memberof proto.TheaterService
+         * @typedef RemoveSubtitleCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls RemoveSubtitle.
+         * @function removeSubtitle
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IRemoveSubtitleRequest} request RemoveSubtitleRequest message or plain object
+         * @param {proto.TheaterService.RemoveSubtitleCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.removeSubtitle = function removeSubtitle(request, callback) {
+            return this.rpcCall(removeSubtitle, $root.proto.RemoveSubtitleRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "RemoveSubtitle" });
+
+        /**
+         * Calls RemoveSubtitle.
+         * @function removeSubtitle
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IRemoveSubtitleRequest} request RemoveSubtitleRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        return TheaterService;
     })();
 
     return proto;

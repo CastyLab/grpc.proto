@@ -4,12 +4,18 @@ package proto;
 option go_package = ".;proto";
 
 import "google/protobuf/timestamp.proto";
+import "grpc.theater.proto";
 
 message TheaterVideoPlayer {
-    string  theater_id    = 1;
-    string  source        = 2;
-    string  poster        = 3;
-    float   current_time  = 4;
-    string  user_id       = 5;
-    google.protobuf.Timestamp sent_at = 6;
+    enum State {
+        INVALID  = 0;
+        PLAYING  = 1;
+        PAUSED   = 2;
+    }
+    string                     theater_id    = 1;
+    MediaSource                media_source  = 2;
+    float                      current_time  = 4;
+    State                      state         = 5;
+    string                     user_id       = 6;
+    google.protobuf.Timestamp  sent_at       = 7;
 }
