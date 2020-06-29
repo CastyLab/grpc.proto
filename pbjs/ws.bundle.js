@@ -975,6 +975,7 @@ $root.proto = (function() {
                 case 24:
                 case 25:
                 case 26:
+                case 27:
                     break;
                 }
             if (message.data != null && message.hasOwnProperty("data"))
@@ -1109,6 +1110,10 @@ $root.proto = (function() {
             case 26:
                 message.type = 26;
                 break;
+            case "CLIENT_READY":
+            case 27:
+                message.type = 27;
+                break;
             }
             if (object.data != null)
                 if (typeof object.data === "string")
@@ -1221,6 +1226,7 @@ $root.proto = (function() {
      * @property {number} CLIENTS_SYNCYED=24 CLIENTS_SYNCYED value
      * @property {number} FINISHED_MOVIE=25 FINISHED_MOVIE value
      * @property {number} PLAYING=26 PLAYING value
+     * @property {number} CLIENT_READY=27 CLIENT_READY value
      */
     proto.EMSG = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -1251,6 +1257,7 @@ $root.proto = (function() {
         values[valuesById[24] = "CLIENTS_SYNCYED"] = 24;
         values[valuesById[25] = "FINISHED_MOVIE"] = 25;
         values[valuesById[26] = "PLAYING"] = 26;
+        values[valuesById[27] = "CLIENT_READY"] = 27;
         return values;
     })();
 

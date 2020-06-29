@@ -41,4 +41,5 @@ enum EMSG {
     CLIENTS_SYNCYED            = 24;
     FINISHED_MOVIE             = 25;
     PLAYING                    = 26;
+    CLIENT_READY               = 27;
 }

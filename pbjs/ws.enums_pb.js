@@ -55,7 +55,8 @@ proto.proto.EMSG = {
   WAITING_FOR_CLIENTS: 23,
   CLIENTS_SYNCYED: 24,
   FINISHED_MOVIE: 25,
-  PLAYING: 26
+  PLAYING: 26,
+  CLIENT_READY: 27
 };
 
 goog.object.extend(exports, proto.proto);
