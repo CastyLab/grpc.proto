@@ -69,8 +69,9 @@ message Theater {
     string                      user_id                 = 6;
     User                        user                    = 7;
     MediaSource                 media_source            = 8;
-    google.protobuf.Timestamp   created_at              = 9;
-    google.protobuf.Timestamp   updated_at              = 10;
+    bool                        followed                = 9;
+    google.protobuf.Timestamp   created_at              = 10;
+    google.protobuf.Timestamp   updated_at              = 11;
 }
 
 message TheaterAuthRequest {

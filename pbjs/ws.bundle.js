@@ -11999,6 +11999,7 @@ $root.proto = (function() {
          * @property {string|null} [userId] Theater userId
          * @property {proto.IUser|null} [user] Theater user
          * @property {proto.IMediaSource|null} [mediaSource] Theater mediaSource
+         * @property {boolean|null} [followed] Theater followed
          * @property {google.protobuf.ITimestamp|null} [createdAt] Theater createdAt
          * @property {google.protobuf.ITimestamp|null} [updatedAt] Theater updatedAt
          */
@@ -12075,6 +12076,14 @@ $root.proto = (function() {
         Theater.prototype.mediaSource = null;
 
         /**
+         * Theater followed.
+         * @member {boolean} followed
+         * @memberof proto.Theater
+         * @instance
+         */
+        Theater.prototype.followed = false;
+
+        /**
          * Theater createdAt.
          * @member {google.protobuf.ITimestamp|null|undefined} createdAt
          * @memberof proto.Theater
@@ -12128,10 +12137,12 @@ $root.proto = (function() {
                 $root.proto.User.encode(message.user, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
             if (message.mediaSource != null && message.hasOwnProperty("mediaSource"))
                 $root.proto.MediaSource.encode(message.mediaSource, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (message.followed != null && message.hasOwnProperty("followed"))
+                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.followed);
             if (message.createdAt != null && message.hasOwnProperty("createdAt"))
-                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
-                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             return writer;
         };
 
@@ -12188,9 +12199,12 @@ $root.proto = (function() {
                     message.mediaSource = $root.proto.MediaSource.decode(reader, reader.uint32());
                     break;
                 case 9:
-                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    message.followed = reader.bool();
                     break;
                 case 10:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 11:
                     message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 default:
@@ -12266,6 +12280,9 @@ $root.proto = (function() {
                 if (error)
                     return "mediaSource." + error;
             }
+            if (message.followed != null && message.hasOwnProperty("followed"))
+                if (typeof message.followed !== "boolean")
+                    return "followed: boolean expected";
             if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
                 var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
                 if (error)
@@ -12339,6 +12356,8 @@ $root.proto = (function() {
                     throw TypeError(".proto.Theater.mediaSource: object expected");
                 message.mediaSource = $root.proto.MediaSource.fromObject(object.mediaSource);
             }
+            if (object.followed != null)
+                message.followed = Boolean(object.followed);
             if (object.createdAt != null) {
                 if (typeof object.createdAt !== "object")
                     throw TypeError(".proto.Theater.createdAt: object expected");
@@ -12373,6 +12392,7 @@ $root.proto = (function() {
                 object.userId = "";
                 object.user = null;
                 object.mediaSource = null;
+                object.followed = false;
                 object.createdAt = null;
                 object.updatedAt = null;
             }
@@ -12390,6 +12410,8 @@ $root.proto = (function() {
                 object.user = $root.proto.User.toObject(message.user, options);
             if (message.mediaSource != null && message.hasOwnProperty("mediaSource"))
                 object.mediaSource = $root.proto.MediaSource.toObject(message.mediaSource, options);
+            if (message.followed != null && message.hasOwnProperty("followed"))
+                object.followed = message.followed;
             if (message.createdAt != null && message.hasOwnProperty("createdAt"))
                 object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
             if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))

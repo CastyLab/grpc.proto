@@ -1598,6 +1598,7 @@ proto.proto.Theater.toObject = function(includeInstance, msg) {
     userId: jspb.Message.getFieldWithDefault(msg, 6, ""),
     user: (f = msg.getUser()) && grpc_user_pb.User.toObject(includeInstance, f),
     mediaSource: (f = msg.getMediaSource()) && proto.proto.MediaSource.toObject(includeInstance, f),
+    followed: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
     createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
@@ -1667,11 +1668,15 @@ proto.proto.Theater.deserializeBinaryFromReader = function(msg, reader) {
       msg.setMediaSource(value);
       break;
     case 9:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setFollowed(value);
+      break;
+    case 10:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setCreatedAt(value);
       break;
-    case 10:
+    case 11:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setUpdatedAt(value);
@@ -1756,10 +1761,17 @@ proto.proto.Theater.serializeBinaryToWriter = function(message, writer) {
       proto.proto.MediaSource.serializeBinaryToWriter
     );
   }
+  f = message.getFollowed();
+  if (f) {
+    writer.writeBool(
+      9,
+      f
+    );
+  }
   f = message.getCreatedAt();
   if (f != null) {
     writer.writeMessage(
-      9,
+      10,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -1767,7 +1779,7 @@ proto.proto.Theater.serializeBinaryToWriter = function(message, writer) {
   f = message.getUpdatedAt();
   if (f != null) {
     writer.writeMessage(
-      10,
+      11,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -1940,12 +1952,30 @@ proto.proto.Theater.prototype.hasMediaSource = function() {
 
 
 /**
- * optional google.protobuf.Timestamp created_at = 9;
+ * optional bool followed = 9;
+ * @return {boolean}
+ */
+proto.proto.Theater.prototype.getFollowed = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 9, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.proto.Theater} returns this
+ */
+proto.proto.Theater.prototype.setFollowed = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 9, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp created_at = 10;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.Theater.prototype.getCreatedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 10));
 };
 
 
@@ -1954,7 +1984,7 @@ proto.proto.Theater.prototype.getCreatedAt = function() {
  * @return {!proto.proto.Theater} returns this
 */
 proto.proto.Theater.prototype.setCreatedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 9, value);
+  return jspb.Message.setWrapperField(this, 10, value);
 };
 
 
@@ -1972,17 +2002,17 @@ proto.proto.Theater.prototype.clearCreatedAt = function() {
  * @return {boolean}
  */
 proto.proto.Theater.prototype.hasCreatedAt = function() {
-  return jspb.Message.getField(this, 9) != null;
+  return jspb.Message.getField(this, 10) != null;
 };
 
 
 /**
- * optional google.protobuf.Timestamp updated_at = 10;
+ * optional google.protobuf.Timestamp updated_at = 11;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.Theater.prototype.getUpdatedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 10));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 11));
 };
 
 
@@ -1991,7 +2021,7 @@ proto.proto.Theater.prototype.getUpdatedAt = function() {
  * @return {!proto.proto.Theater} returns this
 */
 proto.proto.Theater.prototype.setUpdatedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 10, value);
+  return jspb.Message.setWrapperField(this, 11, value);
 };
 
 
@@ -2009,7 +2039,7 @@ proto.proto.Theater.prototype.clearUpdatedAt = function() {
  * @return {boolean}
  */
 proto.proto.Theater.prototype.hasUpdatedAt = function() {
-  return jspb.Message.getField(this, 10) != null;
+  return jspb.Message.getField(this, 11) != null;
 };
 
 
