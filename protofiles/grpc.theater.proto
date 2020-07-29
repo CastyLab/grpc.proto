@@ -132,8 +132,29 @@ message GetTheaterRequest {
     string theater_id = 3;
 }
 
+message Follow {
+    string  id                             = 1;
+    string  theater_id                     = 2;
+    Theater theater                        = 3;
+    string  user_id                        = 4;
+    User    user                           = 5;
+    bool    email_notification             = 6;
+    bool    push_notification              = 7;
+    bool    muted                          = 8;
+    google.protobuf.Timestamp  created_at  = 9;
+    google.protobuf.Timestamp  updated_at  = 10;
+}
+
+message FollowedTheatersResponse {
+    int64    code           = 1;
+    string   status         = 2;
+    string   message        = 3;
+    repeated Theater result = 4;
+}
+
 service TheaterService {
     rpc Invite(InviteFriendsTheaterRequest) returns (Response);
+    rpc GetFollowedTheaters(AuthenticateRequest) returns (FollowedTheatersResponse);
     rpc Follow(TheaterAuthRequest) returns (Response);
     rpc Unfollow(TheaterAuthRequest) returns (Response);
     rpc GetTheater(GetTheaterRequest) returns (UserTheaterResponse);

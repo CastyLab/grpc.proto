@@ -14755,6 +14755,702 @@ $root.proto = (function() {
         return GetTheaterRequest;
     })();
 
+    proto.Follow = (function() {
+
+        /**
+         * Properties of a Follow.
+         * @memberof proto
+         * @interface IFollow
+         * @property {string|null} [id] Follow id
+         * @property {string|null} [theaterId] Follow theaterId
+         * @property {proto.ITheater|null} [theater] Follow theater
+         * @property {string|null} [userId] Follow userId
+         * @property {proto.IUser|null} [user] Follow user
+         * @property {boolean|null} [emailNotification] Follow emailNotification
+         * @property {boolean|null} [pushNotification] Follow pushNotification
+         * @property {boolean|null} [muted] Follow muted
+         * @property {google.protobuf.ITimestamp|null} [createdAt] Follow createdAt
+         * @property {google.protobuf.ITimestamp|null} [updatedAt] Follow updatedAt
+         */
+
+        /**
+         * Constructs a new Follow.
+         * @memberof proto
+         * @classdesc Represents a Follow.
+         * @implements IFollow
+         * @constructor
+         * @param {proto.IFollow=} [properties] Properties to set
+         */
+        function Follow(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Follow id.
+         * @member {string} id
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.id = "";
+
+        /**
+         * Follow theaterId.
+         * @member {string} theaterId
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.theaterId = "";
+
+        /**
+         * Follow theater.
+         * @member {proto.ITheater|null|undefined} theater
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.theater = null;
+
+        /**
+         * Follow userId.
+         * @member {string} userId
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.userId = "";
+
+        /**
+         * Follow user.
+         * @member {proto.IUser|null|undefined} user
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.user = null;
+
+        /**
+         * Follow emailNotification.
+         * @member {boolean} emailNotification
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.emailNotification = false;
+
+        /**
+         * Follow pushNotification.
+         * @member {boolean} pushNotification
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.pushNotification = false;
+
+        /**
+         * Follow muted.
+         * @member {boolean} muted
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.muted = false;
+
+        /**
+         * Follow createdAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.createdAt = null;
+
+        /**
+         * Follow updatedAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} updatedAt
+         * @memberof proto.Follow
+         * @instance
+         */
+        Follow.prototype.updatedAt = null;
+
+        /**
+         * Creates a new Follow instance using the specified properties.
+         * @function create
+         * @memberof proto.Follow
+         * @static
+         * @param {proto.IFollow=} [properties] Properties to set
+         * @returns {proto.Follow} Follow instance
+         */
+        Follow.create = function create(properties) {
+            return new Follow(properties);
+        };
+
+        /**
+         * Encodes the specified Follow message. Does not implicitly {@link proto.Follow.verify|verify} messages.
+         * @function encode
+         * @memberof proto.Follow
+         * @static
+         * @param {proto.IFollow} message Follow message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Follow.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.theaterId);
+            if (message.theater != null && message.hasOwnProperty("theater"))
+                $root.proto.Theater.encode(message.theater, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.userId);
+            if (message.user != null && message.hasOwnProperty("user"))
+                $root.proto.User.encode(message.user, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.emailNotification != null && message.hasOwnProperty("emailNotification"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.emailNotification);
+            if (message.pushNotification != null && message.hasOwnProperty("pushNotification"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.pushNotification);
+            if (message.muted != null && message.hasOwnProperty("muted"))
+                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.muted);
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified Follow message, length delimited. Does not implicitly {@link proto.Follow.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.Follow
+         * @static
+         * @param {proto.IFollow} message Follow message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Follow.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a Follow message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.Follow
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.Follow} Follow
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Follow.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.Follow();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.string();
+                    break;
+                case 2:
+                    message.theaterId = reader.string();
+                    break;
+                case 3:
+                    message.theater = $root.proto.Theater.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.userId = reader.string();
+                    break;
+                case 5:
+                    message.user = $root.proto.User.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.emailNotification = reader.bool();
+                    break;
+                case 7:
+                    message.pushNotification = reader.bool();
+                    break;
+                case 8:
+                    message.muted = reader.bool();
+                    break;
+                case 9:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 10:
+                    message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a Follow message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.Follow
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.Follow} Follow
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Follow.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a Follow message.
+         * @function verify
+         * @memberof proto.Follow
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        Follow.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                if (!$util.isString(message.theaterId))
+                    return "theaterId: string expected";
+            if (message.theater != null && message.hasOwnProperty("theater")) {
+                var error = $root.proto.Theater.verify(message.theater);
+                if (error)
+                    return "theater." + error;
+            }
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                if (!$util.isString(message.userId))
+                    return "userId: string expected";
+            if (message.user != null && message.hasOwnProperty("user")) {
+                var error = $root.proto.User.verify(message.user);
+                if (error)
+                    return "user." + error;
+            }
+            if (message.emailNotification != null && message.hasOwnProperty("emailNotification"))
+                if (typeof message.emailNotification !== "boolean")
+                    return "emailNotification: boolean expected";
+            if (message.pushNotification != null && message.hasOwnProperty("pushNotification"))
+                if (typeof message.pushNotification !== "boolean")
+                    return "pushNotification: boolean expected";
+            if (message.muted != null && message.hasOwnProperty("muted"))
+                if (typeof message.muted !== "boolean")
+                    return "muted: boolean expected";
+            if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                if (error)
+                    return "createdAt." + error;
+            }
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.updatedAt);
+                if (error)
+                    return "updatedAt." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a Follow message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.Follow
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.Follow} Follow
+         */
+        Follow.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.Follow)
+                return object;
+            var message = new $root.proto.Follow();
+            if (object.id != null)
+                message.id = String(object.id);
+            if (object.theaterId != null)
+                message.theaterId = String(object.theaterId);
+            if (object.theater != null) {
+                if (typeof object.theater !== "object")
+                    throw TypeError(".proto.Follow.theater: object expected");
+                message.theater = $root.proto.Theater.fromObject(object.theater);
+            }
+            if (object.userId != null)
+                message.userId = String(object.userId);
+            if (object.user != null) {
+                if (typeof object.user !== "object")
+                    throw TypeError(".proto.Follow.user: object expected");
+                message.user = $root.proto.User.fromObject(object.user);
+            }
+            if (object.emailNotification != null)
+                message.emailNotification = Boolean(object.emailNotification);
+            if (object.pushNotification != null)
+                message.pushNotification = Boolean(object.pushNotification);
+            if (object.muted != null)
+                message.muted = Boolean(object.muted);
+            if (object.createdAt != null) {
+                if (typeof object.createdAt !== "object")
+                    throw TypeError(".proto.Follow.createdAt: object expected");
+                message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+            }
+            if (object.updatedAt != null) {
+                if (typeof object.updatedAt !== "object")
+                    throw TypeError(".proto.Follow.updatedAt: object expected");
+                message.updatedAt = $root.google.protobuf.Timestamp.fromObject(object.updatedAt);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a Follow message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.Follow
+         * @static
+         * @param {proto.Follow} message Follow
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        Follow.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = "";
+                object.theaterId = "";
+                object.theater = null;
+                object.userId = "";
+                object.user = null;
+                object.emailNotification = false;
+                object.pushNotification = false;
+                object.muted = false;
+                object.createdAt = null;
+                object.updatedAt = null;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                object.theaterId = message.theaterId;
+            if (message.theater != null && message.hasOwnProperty("theater"))
+                object.theater = $root.proto.Theater.toObject(message.theater, options);
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                object.userId = message.userId;
+            if (message.user != null && message.hasOwnProperty("user"))
+                object.user = $root.proto.User.toObject(message.user, options);
+            if (message.emailNotification != null && message.hasOwnProperty("emailNotification"))
+                object.emailNotification = message.emailNotification;
+            if (message.pushNotification != null && message.hasOwnProperty("pushNotification"))
+                object.pushNotification = message.pushNotification;
+            if (message.muted != null && message.hasOwnProperty("muted"))
+                object.muted = message.muted;
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+            if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
+                object.updatedAt = $root.google.protobuf.Timestamp.toObject(message.updatedAt, options);
+            return object;
+        };
+
+        /**
+         * Converts this Follow to JSON.
+         * @function toJSON
+         * @memberof proto.Follow
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        Follow.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Follow;
+    })();
+
+    proto.FollowedTheatersResponse = (function() {
+
+        /**
+         * Properties of a FollowedTheatersResponse.
+         * @memberof proto
+         * @interface IFollowedTheatersResponse
+         * @property {number|Long|null} [code] FollowedTheatersResponse code
+         * @property {string|null} [status] FollowedTheatersResponse status
+         * @property {string|null} [message] FollowedTheatersResponse message
+         * @property {Array.<proto.ITheater>|null} [result] FollowedTheatersResponse result
+         */
+
+        /**
+         * Constructs a new FollowedTheatersResponse.
+         * @memberof proto
+         * @classdesc Represents a FollowedTheatersResponse.
+         * @implements IFollowedTheatersResponse
+         * @constructor
+         * @param {proto.IFollowedTheatersResponse=} [properties] Properties to set
+         */
+        function FollowedTheatersResponse(properties) {
+            this.result = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * FollowedTheatersResponse code.
+         * @member {number|Long} code
+         * @memberof proto.FollowedTheatersResponse
+         * @instance
+         */
+        FollowedTheatersResponse.prototype.code = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * FollowedTheatersResponse status.
+         * @member {string} status
+         * @memberof proto.FollowedTheatersResponse
+         * @instance
+         */
+        FollowedTheatersResponse.prototype.status = "";
+
+        /**
+         * FollowedTheatersResponse message.
+         * @member {string} message
+         * @memberof proto.FollowedTheatersResponse
+         * @instance
+         */
+        FollowedTheatersResponse.prototype.message = "";
+
+        /**
+         * FollowedTheatersResponse result.
+         * @member {Array.<proto.ITheater>} result
+         * @memberof proto.FollowedTheatersResponse
+         * @instance
+         */
+        FollowedTheatersResponse.prototype.result = $util.emptyArray;
+
+        /**
+         * Creates a new FollowedTheatersResponse instance using the specified properties.
+         * @function create
+         * @memberof proto.FollowedTheatersResponse
+         * @static
+         * @param {proto.IFollowedTheatersResponse=} [properties] Properties to set
+         * @returns {proto.FollowedTheatersResponse} FollowedTheatersResponse instance
+         */
+        FollowedTheatersResponse.create = function create(properties) {
+            return new FollowedTheatersResponse(properties);
+        };
+
+        /**
+         * Encodes the specified FollowedTheatersResponse message. Does not implicitly {@link proto.FollowedTheatersResponse.verify|verify} messages.
+         * @function encode
+         * @memberof proto.FollowedTheatersResponse
+         * @static
+         * @param {proto.IFollowedTheatersResponse} message FollowedTheatersResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FollowedTheatersResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.code);
+            if (message.status != null && message.hasOwnProperty("status"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.status);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+            if (message.result != null && message.result.length)
+                for (var i = 0; i < message.result.length; ++i)
+                    $root.proto.Theater.encode(message.result[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified FollowedTheatersResponse message, length delimited. Does not implicitly {@link proto.FollowedTheatersResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.FollowedTheatersResponse
+         * @static
+         * @param {proto.IFollowedTheatersResponse} message FollowedTheatersResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        FollowedTheatersResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a FollowedTheatersResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.FollowedTheatersResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.FollowedTheatersResponse} FollowedTheatersResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FollowedTheatersResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.FollowedTheatersResponse();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.code = reader.int64();
+                    break;
+                case 2:
+                    message.status = reader.string();
+                    break;
+                case 3:
+                    message.message = reader.string();
+                    break;
+                case 4:
+                    if (!(message.result && message.result.length))
+                        message.result = [];
+                    message.result.push($root.proto.Theater.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a FollowedTheatersResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.FollowedTheatersResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.FollowedTheatersResponse} FollowedTheatersResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        FollowedTheatersResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a FollowedTheatersResponse message.
+         * @function verify
+         * @memberof proto.FollowedTheatersResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        FollowedTheatersResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code) && !(message.code && $util.isInteger(message.code.low) && $util.isInteger(message.code.high)))
+                    return "code: integer|Long expected";
+            if (message.status != null && message.hasOwnProperty("status"))
+                if (!$util.isString(message.status))
+                    return "status: string expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            if (message.result != null && message.hasOwnProperty("result")) {
+                if (!Array.isArray(message.result))
+                    return "result: array expected";
+                for (var i = 0; i < message.result.length; ++i) {
+                    var error = $root.proto.Theater.verify(message.result[i]);
+                    if (error)
+                        return "result." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a FollowedTheatersResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.FollowedTheatersResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.FollowedTheatersResponse} FollowedTheatersResponse
+         */
+        FollowedTheatersResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.FollowedTheatersResponse)
+                return object;
+            var message = new $root.proto.FollowedTheatersResponse();
+            if (object.code != null)
+                if ($util.Long)
+                    (message.code = $util.Long.fromValue(object.code)).unsigned = false;
+                else if (typeof object.code === "string")
+                    message.code = parseInt(object.code, 10);
+                else if (typeof object.code === "number")
+                    message.code = object.code;
+                else if (typeof object.code === "object")
+                    message.code = new $util.LongBits(object.code.low >>> 0, object.code.high >>> 0).toNumber();
+            if (object.status != null)
+                message.status = String(object.status);
+            if (object.message != null)
+                message.message = String(object.message);
+            if (object.result) {
+                if (!Array.isArray(object.result))
+                    throw TypeError(".proto.FollowedTheatersResponse.result: array expected");
+                message.result = [];
+                for (var i = 0; i < object.result.length; ++i) {
+                    if (typeof object.result[i] !== "object")
+                        throw TypeError(".proto.FollowedTheatersResponse.result: object expected");
+                    message.result[i] = $root.proto.Theater.fromObject(object.result[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a FollowedTheatersResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.FollowedTheatersResponse
+         * @static
+         * @param {proto.FollowedTheatersResponse} message FollowedTheatersResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        FollowedTheatersResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.result = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.code = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.code = options.longs === String ? "0" : 0;
+                object.status = "";
+                object.message = "";
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (typeof message.code === "number")
+                    object.code = options.longs === String ? String(message.code) : message.code;
+                else
+                    object.code = options.longs === String ? $util.Long.prototype.toString.call(message.code) : options.longs === Number ? new $util.LongBits(message.code.low >>> 0, message.code.high >>> 0).toNumber() : message.code;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            if (message.result && message.result.length) {
+                object.result = [];
+                for (var j = 0; j < message.result.length; ++j)
+                    object.result[j] = $root.proto.Theater.toObject(message.result[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this FollowedTheatersResponse to JSON.
+         * @function toJSON
+         * @memberof proto.FollowedTheatersResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        FollowedTheatersResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return FollowedTheatersResponse;
+    })();
+
     proto.TheaterService = (function() {
 
         /**
@@ -14817,6 +15513,39 @@ $root.proto = (function() {
          * @instance
          * @param {proto.IInviteFriendsTheaterRequest} request InviteFriendsTheaterRequest message or plain object
          * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#getFollowedTheaters}.
+         * @memberof proto.TheaterService
+         * @typedef GetFollowedTheatersCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.FollowedTheatersResponse} [response] FollowedTheatersResponse
+         */
+
+        /**
+         * Calls GetFollowedTheaters.
+         * @function getFollowedTheaters
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IAuthenticateRequest} request AuthenticateRequest message or plain object
+         * @param {proto.TheaterService.GetFollowedTheatersCallback} callback Node-style callback called with the error, if any, and FollowedTheatersResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.getFollowedTheaters = function getFollowedTheaters(request, callback) {
+            return this.rpcCall(getFollowedTheaters, $root.proto.AuthenticateRequest, $root.proto.FollowedTheatersResponse, request, callback);
+        }, "name", { value: "GetFollowedTheaters" });
+
+        /**
+         * Calls GetFollowedTheaters.
+         * @function getFollowedTheaters
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IAuthenticateRequest} request AuthenticateRequest message or plain object
+         * @returns {Promise<proto.FollowedTheatersResponse>} Promise
          * @variation 2
          */
 
