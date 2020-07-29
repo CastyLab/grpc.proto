@@ -159,6 +159,166 @@ proto.proto.TheaterServicePromiseClient.prototype.invite =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.TheaterAuthRequest,
+ *   !proto.proto.Response>}
+ */
+const methodDescriptor_TheaterService_Follow = new grpc.web.MethodDescriptor(
+  '/proto.TheaterService/Follow',
+  grpc.web.MethodType.UNARY,
+  proto.proto.TheaterAuthRequest,
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.TheaterAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.TheaterAuthRequest,
+ *   !proto.proto.Response>}
+ */
+const methodInfo_TheaterService_Follow = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.TheaterAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.TheaterAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.TheaterServiceClient.prototype.follow =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.TheaterService/Follow',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_Follow,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.TheaterAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.TheaterServicePromiseClient.prototype.follow =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.TheaterService/Follow',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_Follow);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.TheaterAuthRequest,
+ *   !proto.proto.Response>}
+ */
+const methodDescriptor_TheaterService_Unfollow = new grpc.web.MethodDescriptor(
+  '/proto.TheaterService/Unfollow',
+  grpc.web.MethodType.UNARY,
+  proto.proto.TheaterAuthRequest,
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.TheaterAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.TheaterAuthRequest,
+ *   !proto.proto.Response>}
+ */
+const methodInfo_TheaterService_Unfollow = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.TheaterAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.TheaterAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.TheaterServiceClient.prototype.unfollow =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.TheaterService/Unfollow',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_Unfollow,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.TheaterAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.TheaterServicePromiseClient.prototype.unfollow =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.TheaterService/Unfollow',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_Unfollow);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.GetTheaterRequest,
  *   !proto.proto.UserTheaterResponse>}
  */

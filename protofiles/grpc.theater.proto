@@ -134,6 +134,8 @@ message GetTheaterRequest {
 
 service TheaterService {
     rpc Invite(InviteFriendsTheaterRequest) returns (Response);
+    rpc Follow(TheaterAuthRequest) returns (Response);
+    rpc Unfollow(TheaterAuthRequest) returns (Response);
     rpc GetTheater(GetTheaterRequest) returns (UserTheaterResponse);
     rpc UpdateTheater(TheaterAuthRequest) returns (Response);
     rpc GetSubtitles(MediaSourceAuthRequest) returns (TheaterSubtitlesResponse);

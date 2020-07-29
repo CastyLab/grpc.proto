@@ -14821,6 +14821,72 @@ $root.proto = (function() {
          */
 
         /**
+         * Callback as used by {@link proto.TheaterService#follow}.
+         * @memberof proto.TheaterService
+         * @typedef FollowCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls Follow.
+         * @function follow
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.ITheaterAuthRequest} request TheaterAuthRequest message or plain object
+         * @param {proto.TheaterService.FollowCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.follow = function follow(request, callback) {
+            return this.rpcCall(follow, $root.proto.TheaterAuthRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "Follow" });
+
+        /**
+         * Calls Follow.
+         * @function follow
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.ITheaterAuthRequest} request TheaterAuthRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#unfollow}.
+         * @memberof proto.TheaterService
+         * @typedef UnfollowCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls Unfollow.
+         * @function unfollow
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.ITheaterAuthRequest} request TheaterAuthRequest message or plain object
+         * @param {proto.TheaterService.UnfollowCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.unfollow = function unfollow(request, callback) {
+            return this.rpcCall(unfollow, $root.proto.TheaterAuthRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "Unfollow" });
+
+        /**
+         * Calls Unfollow.
+         * @function unfollow
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.ITheaterAuthRequest} request TheaterAuthRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
          * Callback as used by {@link proto.TheaterService#getTheater}.
          * @memberof proto.TheaterService
          * @typedef GetTheaterCallback
