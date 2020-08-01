@@ -159,7 +159,7 @@ message RecoveryCodesResponse {
     repeated User result = 4;
 }
 
-message TwoFactorAuthenticationRequest {
+message TwoFactorAuthRequest {
     string              code         = 1;
     AuthenticateRequest auth_request = 2;
 }
@@ -180,7 +180,8 @@ service UserService {
     rpc CreateUser(CreateUserRequest) returns (AuthResponse);
 
     rpc GenerateRecoveryCodes(AuthenticateRequest) returns(RecoveryCodesResponse);
-    rpc EnableTwoFactorAuthentication(TwoFactorAuthenticationRequest) returns (Response);
+    rpc EnableTwoFactorAuth(TwoFactorAuthRequest) returns (Response);
+    rpc DisableTwoFactorAuth(TwoFactorAuthRequest) returns (Response);
 
     // FriendZone
     rpc GetFriend(FriendRequest) returns (FriendResponse);

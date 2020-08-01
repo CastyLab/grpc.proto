@@ -801,16 +801,16 @@ proto.proto.UserServicePromiseClient.prototype.generateRecoveryCodes =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.TwoFactorAuthenticationRequest,
+ *   !proto.proto.TwoFactorAuthRequest,
  *   !proto.proto.Response>}
  */
-const methodDescriptor_UserService_EnableTwoFactorAuthentication = new grpc.web.MethodDescriptor(
-  '/proto.UserService/EnableTwoFactorAuthentication',
+const methodDescriptor_UserService_EnableTwoFactorAuth = new grpc.web.MethodDescriptor(
+  '/proto.UserService/EnableTwoFactorAuth',
   grpc.web.MethodType.UNARY,
-  proto.proto.TwoFactorAuthenticationRequest,
+  proto.proto.TwoFactorAuthRequest,
   grpc_base_pb.Response,
   /**
-   * @param {!proto.proto.TwoFactorAuthenticationRequest} request
+   * @param {!proto.proto.TwoFactorAuthRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -823,13 +823,13 @@ const methodDescriptor_UserService_EnableTwoFactorAuthentication = new grpc.web.
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.TwoFactorAuthenticationRequest,
+ *   !proto.proto.TwoFactorAuthRequest,
  *   !proto.proto.Response>}
  */
-const methodInfo_UserService_EnableTwoFactorAuthentication = new grpc.web.AbstractClientBase.MethodInfo(
+const methodInfo_UserService_EnableTwoFactorAuth = new grpc.web.AbstractClientBase.MethodInfo(
   grpc_base_pb.Response,
   /**
-   * @param {!proto.proto.TwoFactorAuthenticationRequest} request
+   * @param {!proto.proto.TwoFactorAuthRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -840,7 +840,7 @@ const methodInfo_UserService_EnableTwoFactorAuthentication = new grpc.web.Abstra
 
 
 /**
- * @param {!proto.proto.TwoFactorAuthenticationRequest} request The
+ * @param {!proto.proto.TwoFactorAuthRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
@@ -849,32 +849,112 @@ const methodInfo_UserService_EnableTwoFactorAuthentication = new grpc.web.Abstra
  * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
  *     The XHR Node Readable Stream
  */
-proto.proto.UserServiceClient.prototype.enableTwoFactorAuthentication =
+proto.proto.UserServiceClient.prototype.enableTwoFactorAuth =
     function(request, metadata, callback) {
   return this.client_.rpcCall(this.hostname_ +
-      '/proto.UserService/EnableTwoFactorAuthentication',
+      '/proto.UserService/EnableTwoFactorAuth',
       request,
       metadata || {},
-      methodDescriptor_UserService_EnableTwoFactorAuthentication,
+      methodDescriptor_UserService_EnableTwoFactorAuth,
       callback);
 };
 
 
 /**
- * @param {!proto.proto.TwoFactorAuthenticationRequest} request The
+ * @param {!proto.proto.TwoFactorAuthRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
  * @return {!Promise<!proto.proto.Response>}
  *     A native promise that resolves to the response
  */
-proto.proto.UserServicePromiseClient.prototype.enableTwoFactorAuthentication =
+proto.proto.UserServicePromiseClient.prototype.enableTwoFactorAuth =
     function(request, metadata) {
   return this.client_.unaryCall(this.hostname_ +
-      '/proto.UserService/EnableTwoFactorAuthentication',
+      '/proto.UserService/EnableTwoFactorAuth',
       request,
       metadata || {},
-      methodDescriptor_UserService_EnableTwoFactorAuthentication);
+      methodDescriptor_UserService_EnableTwoFactorAuth);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.TwoFactorAuthRequest,
+ *   !proto.proto.Response>}
+ */
+const methodDescriptor_UserService_DisableTwoFactorAuth = new grpc.web.MethodDescriptor(
+  '/proto.UserService/DisableTwoFactorAuth',
+  grpc.web.MethodType.UNARY,
+  proto.proto.TwoFactorAuthRequest,
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.TwoFactorAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.TwoFactorAuthRequest,
+ *   !proto.proto.Response>}
+ */
+const methodInfo_UserService_DisableTwoFactorAuth = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.TwoFactorAuthRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.TwoFactorAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.UserServiceClient.prototype.disableTwoFactorAuth =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.UserService/DisableTwoFactorAuth',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_DisableTwoFactorAuth,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.TwoFactorAuthRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.UserServicePromiseClient.prototype.disableTwoFactorAuth =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.UserService/DisableTwoFactorAuth',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_DisableTwoFactorAuth);
 };
 
 

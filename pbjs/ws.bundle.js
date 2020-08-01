@@ -7193,25 +7193,25 @@ $root.proto = (function() {
         return RecoveryCodesResponse;
     })();
 
-    proto.TwoFactorAuthenticationRequest = (function() {
+    proto.TwoFactorAuthRequest = (function() {
 
         /**
-         * Properties of a TwoFactorAuthenticationRequest.
+         * Properties of a TwoFactorAuthRequest.
          * @memberof proto
-         * @interface ITwoFactorAuthenticationRequest
-         * @property {string|null} [code] TwoFactorAuthenticationRequest code
-         * @property {proto.IAuthenticateRequest|null} [authRequest] TwoFactorAuthenticationRequest authRequest
+         * @interface ITwoFactorAuthRequest
+         * @property {string|null} [code] TwoFactorAuthRequest code
+         * @property {proto.IAuthenticateRequest|null} [authRequest] TwoFactorAuthRequest authRequest
          */
 
         /**
-         * Constructs a new TwoFactorAuthenticationRequest.
+         * Constructs a new TwoFactorAuthRequest.
          * @memberof proto
-         * @classdesc Represents a TwoFactorAuthenticationRequest.
-         * @implements ITwoFactorAuthenticationRequest
+         * @classdesc Represents a TwoFactorAuthRequest.
+         * @implements ITwoFactorAuthRequest
          * @constructor
-         * @param {proto.ITwoFactorAuthenticationRequest=} [properties] Properties to set
+         * @param {proto.ITwoFactorAuthRequest=} [properties] Properties to set
          */
-        function TwoFactorAuthenticationRequest(properties) {
+        function TwoFactorAuthRequest(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -7219,43 +7219,43 @@ $root.proto = (function() {
         }
 
         /**
-         * TwoFactorAuthenticationRequest code.
+         * TwoFactorAuthRequest code.
          * @member {string} code
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @instance
          */
-        TwoFactorAuthenticationRequest.prototype.code = "";
+        TwoFactorAuthRequest.prototype.code = "";
 
         /**
-         * TwoFactorAuthenticationRequest authRequest.
+         * TwoFactorAuthRequest authRequest.
          * @member {proto.IAuthenticateRequest|null|undefined} authRequest
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @instance
          */
-        TwoFactorAuthenticationRequest.prototype.authRequest = null;
+        TwoFactorAuthRequest.prototype.authRequest = null;
 
         /**
-         * Creates a new TwoFactorAuthenticationRequest instance using the specified properties.
+         * Creates a new TwoFactorAuthRequest instance using the specified properties.
          * @function create
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @static
-         * @param {proto.ITwoFactorAuthenticationRequest=} [properties] Properties to set
-         * @returns {proto.TwoFactorAuthenticationRequest} TwoFactorAuthenticationRequest instance
+         * @param {proto.ITwoFactorAuthRequest=} [properties] Properties to set
+         * @returns {proto.TwoFactorAuthRequest} TwoFactorAuthRequest instance
          */
-        TwoFactorAuthenticationRequest.create = function create(properties) {
-            return new TwoFactorAuthenticationRequest(properties);
+        TwoFactorAuthRequest.create = function create(properties) {
+            return new TwoFactorAuthRequest(properties);
         };
 
         /**
-         * Encodes the specified TwoFactorAuthenticationRequest message. Does not implicitly {@link proto.TwoFactorAuthenticationRequest.verify|verify} messages.
+         * Encodes the specified TwoFactorAuthRequest message. Does not implicitly {@link proto.TwoFactorAuthRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @static
-         * @param {proto.ITwoFactorAuthenticationRequest} message TwoFactorAuthenticationRequest message or plain object to encode
+         * @param {proto.ITwoFactorAuthRequest} message TwoFactorAuthRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        TwoFactorAuthenticationRequest.encode = function encode(message, writer) {
+        TwoFactorAuthRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.code != null && message.hasOwnProperty("code"))
@@ -7266,33 +7266,33 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified TwoFactorAuthenticationRequest message, length delimited. Does not implicitly {@link proto.TwoFactorAuthenticationRequest.verify|verify} messages.
+         * Encodes the specified TwoFactorAuthRequest message, length delimited. Does not implicitly {@link proto.TwoFactorAuthRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @static
-         * @param {proto.ITwoFactorAuthenticationRequest} message TwoFactorAuthenticationRequest message or plain object to encode
+         * @param {proto.ITwoFactorAuthRequest} message TwoFactorAuthRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        TwoFactorAuthenticationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+        TwoFactorAuthRequest.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a TwoFactorAuthenticationRequest message from the specified reader or buffer.
+         * Decodes a TwoFactorAuthRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.TwoFactorAuthenticationRequest} TwoFactorAuthenticationRequest
+         * @returns {proto.TwoFactorAuthRequest} TwoFactorAuthRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        TwoFactorAuthenticationRequest.decode = function decode(reader, length) {
+        TwoFactorAuthRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TwoFactorAuthenticationRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TwoFactorAuthRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -7311,30 +7311,30 @@ $root.proto = (function() {
         };
 
         /**
-         * Decodes a TwoFactorAuthenticationRequest message from the specified reader or buffer, length delimited.
+         * Decodes a TwoFactorAuthRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.TwoFactorAuthenticationRequest} TwoFactorAuthenticationRequest
+         * @returns {proto.TwoFactorAuthRequest} TwoFactorAuthRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        TwoFactorAuthenticationRequest.decodeDelimited = function decodeDelimited(reader) {
+        TwoFactorAuthRequest.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a TwoFactorAuthenticationRequest message.
+         * Verifies a TwoFactorAuthRequest message.
          * @function verify
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        TwoFactorAuthenticationRequest.verify = function verify(message) {
+        TwoFactorAuthRequest.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.code != null && message.hasOwnProperty("code"))
@@ -7349,37 +7349,37 @@ $root.proto = (function() {
         };
 
         /**
-         * Creates a TwoFactorAuthenticationRequest message from a plain object. Also converts values to their respective internal types.
+         * Creates a TwoFactorAuthRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.TwoFactorAuthenticationRequest} TwoFactorAuthenticationRequest
+         * @returns {proto.TwoFactorAuthRequest} TwoFactorAuthRequest
          */
-        TwoFactorAuthenticationRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.TwoFactorAuthenticationRequest)
+        TwoFactorAuthRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.TwoFactorAuthRequest)
                 return object;
-            var message = new $root.proto.TwoFactorAuthenticationRequest();
+            var message = new $root.proto.TwoFactorAuthRequest();
             if (object.code != null)
                 message.code = String(object.code);
             if (object.authRequest != null) {
                 if (typeof object.authRequest !== "object")
-                    throw TypeError(".proto.TwoFactorAuthenticationRequest.authRequest: object expected");
+                    throw TypeError(".proto.TwoFactorAuthRequest.authRequest: object expected");
                 message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
             }
             return message;
         };
 
         /**
-         * Creates a plain object from a TwoFactorAuthenticationRequest message. Also converts values to other types if specified.
+         * Creates a plain object from a TwoFactorAuthRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @static
-         * @param {proto.TwoFactorAuthenticationRequest} message TwoFactorAuthenticationRequest
+         * @param {proto.TwoFactorAuthRequest} message TwoFactorAuthRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        TwoFactorAuthenticationRequest.toObject = function toObject(message, options) {
+        TwoFactorAuthRequest.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -7395,17 +7395,17 @@ $root.proto = (function() {
         };
 
         /**
-         * Converts this TwoFactorAuthenticationRequest to JSON.
+         * Converts this TwoFactorAuthRequest to JSON.
          * @function toJSON
-         * @memberof proto.TwoFactorAuthenticationRequest
+         * @memberof proto.TwoFactorAuthRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        TwoFactorAuthenticationRequest.prototype.toJSON = function toJSON() {
+        TwoFactorAuthRequest.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return TwoFactorAuthenticationRequest;
+        return TwoFactorAuthRequest;
     })();
 
     proto.UserService = (function() {
@@ -7738,34 +7738,67 @@ $root.proto = (function() {
          */
 
         /**
-         * Callback as used by {@link proto.UserService#enableTwoFactorAuthentication}.
+         * Callback as used by {@link proto.UserService#enableTwoFactorAuth}.
          * @memberof proto.UserService
-         * @typedef EnableTwoFactorAuthenticationCallback
+         * @typedef EnableTwoFactorAuthCallback
          * @type {function}
          * @param {Error|null} error Error, if any
          * @param {proto.Response} [response] Response
          */
 
         /**
-         * Calls EnableTwoFactorAuthentication.
-         * @function enableTwoFactorAuthentication
+         * Calls EnableTwoFactorAuth.
+         * @function enableTwoFactorAuth
          * @memberof proto.UserService
          * @instance
-         * @param {proto.ITwoFactorAuthenticationRequest} request TwoFactorAuthenticationRequest message or plain object
-         * @param {proto.UserService.EnableTwoFactorAuthenticationCallback} callback Node-style callback called with the error, if any, and Response
+         * @param {proto.ITwoFactorAuthRequest} request TwoFactorAuthRequest message or plain object
+         * @param {proto.UserService.EnableTwoFactorAuthCallback} callback Node-style callback called with the error, if any, and Response
          * @returns {undefined}
          * @variation 1
          */
-        Object.defineProperty(UserService.prototype.enableTwoFactorAuthentication = function enableTwoFactorAuthentication(request, callback) {
-            return this.rpcCall(enableTwoFactorAuthentication, $root.proto.TwoFactorAuthenticationRequest, $root.proto.Response, request, callback);
-        }, "name", { value: "EnableTwoFactorAuthentication" });
+        Object.defineProperty(UserService.prototype.enableTwoFactorAuth = function enableTwoFactorAuth(request, callback) {
+            return this.rpcCall(enableTwoFactorAuth, $root.proto.TwoFactorAuthRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "EnableTwoFactorAuth" });
 
         /**
-         * Calls EnableTwoFactorAuthentication.
-         * @function enableTwoFactorAuthentication
+         * Calls EnableTwoFactorAuth.
+         * @function enableTwoFactorAuth
          * @memberof proto.UserService
          * @instance
-         * @param {proto.ITwoFactorAuthenticationRequest} request TwoFactorAuthenticationRequest message or plain object
+         * @param {proto.ITwoFactorAuthRequest} request TwoFactorAuthRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.UserService#disableTwoFactorAuth}.
+         * @memberof proto.UserService
+         * @typedef DisableTwoFactorAuthCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls DisableTwoFactorAuth.
+         * @function disableTwoFactorAuth
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.ITwoFactorAuthRequest} request TwoFactorAuthRequest message or plain object
+         * @param {proto.UserService.DisableTwoFactorAuthCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserService.prototype.disableTwoFactorAuth = function disableTwoFactorAuth(request, callback) {
+            return this.rpcCall(disableTwoFactorAuth, $root.proto.TwoFactorAuthRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "DisableTwoFactorAuth" });
+
+        /**
+         * Calls DisableTwoFactorAuth.
+         * @function disableTwoFactorAuth
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.ITwoFactorAuthRequest} request TwoFactorAuthRequest message or plain object
          * @returns {Promise<proto.Response>} Promise
          * @variation 2
          */

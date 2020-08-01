@@ -37,7 +37,7 @@ goog.exportSymbol('proto.proto.RecoveryCodesResponse', null, global);
 goog.exportSymbol('proto.proto.RollbackStatesRequest', null, global);
 goog.exportSymbol('proto.proto.SearchUserRequest', null, global);
 goog.exportSymbol('proto.proto.SearchUserResponse', null, global);
-goog.exportSymbol('proto.proto.TwoFactorAuthenticationRequest', null, global);
+goog.exportSymbol('proto.proto.TwoFactorAuthRequest', null, global);
 goog.exportSymbol('proto.proto.UpdateActivityRequest', null, global);
 goog.exportSymbol('proto.proto.UpdateStateRequest', null, global);
 goog.exportSymbol('proto.proto.UpdateUserRequest', null, global);
@@ -472,16 +472,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.proto.TwoFactorAuthenticationRequest = function(opt_data) {
+proto.proto.TwoFactorAuthRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.proto.TwoFactorAuthenticationRequest, jspb.Message);
+goog.inherits(proto.proto.TwoFactorAuthRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.proto.TwoFactorAuthenticationRequest.displayName = 'proto.proto.TwoFactorAuthenticationRequest';
+  proto.proto.TwoFactorAuthRequest.displayName = 'proto.proto.TwoFactorAuthRequest';
 }
 
 
@@ -5610,8 +5610,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.proto.TwoFactorAuthenticationRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.proto.TwoFactorAuthenticationRequest.toObject(opt_includeInstance, this);
+proto.proto.TwoFactorAuthRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.TwoFactorAuthRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -5620,11 +5620,11 @@ proto.proto.TwoFactorAuthenticationRequest.prototype.toObject = function(opt_inc
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.proto.TwoFactorAuthenticationRequest} msg The msg instance to transform.
+ * @param {!proto.proto.TwoFactorAuthRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.proto.TwoFactorAuthenticationRequest.toObject = function(includeInstance, msg) {
+proto.proto.TwoFactorAuthRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     code: jspb.Message.getFieldWithDefault(msg, 1, ""),
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
@@ -5641,23 +5641,23 @@ proto.proto.TwoFactorAuthenticationRequest.toObject = function(includeInstance, 
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.proto.TwoFactorAuthenticationRequest}
+ * @return {!proto.proto.TwoFactorAuthRequest}
  */
-proto.proto.TwoFactorAuthenticationRequest.deserializeBinary = function(bytes) {
+proto.proto.TwoFactorAuthRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.proto.TwoFactorAuthenticationRequest;
-  return proto.proto.TwoFactorAuthenticationRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.proto.TwoFactorAuthRequest;
+  return proto.proto.TwoFactorAuthRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.proto.TwoFactorAuthenticationRequest} msg The message object to deserialize into.
+ * @param {!proto.proto.TwoFactorAuthRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.proto.TwoFactorAuthenticationRequest}
+ * @return {!proto.proto.TwoFactorAuthRequest}
  */
-proto.proto.TwoFactorAuthenticationRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.proto.TwoFactorAuthRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -5686,9 +5686,9 @@ proto.proto.TwoFactorAuthenticationRequest.deserializeBinaryFromReader = functio
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.proto.TwoFactorAuthenticationRequest.prototype.serializeBinary = function() {
+proto.proto.TwoFactorAuthRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.proto.TwoFactorAuthenticationRequest.serializeBinaryToWriter(this, writer);
+  proto.proto.TwoFactorAuthRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -5696,11 +5696,11 @@ proto.proto.TwoFactorAuthenticationRequest.prototype.serializeBinary = function(
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.proto.TwoFactorAuthenticationRequest} message
+ * @param {!proto.proto.TwoFactorAuthRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.proto.TwoFactorAuthenticationRequest.serializeBinaryToWriter = function(message, writer) {
+proto.proto.TwoFactorAuthRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getCode();
   if (f.length > 0) {
@@ -5724,16 +5724,16 @@ proto.proto.TwoFactorAuthenticationRequest.serializeBinaryToWriter = function(me
  * optional string code = 1;
  * @return {string}
  */
-proto.proto.TwoFactorAuthenticationRequest.prototype.getCode = function() {
+proto.proto.TwoFactorAuthRequest.prototype.getCode = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.proto.TwoFactorAuthenticationRequest} returns this
+ * @return {!proto.proto.TwoFactorAuthRequest} returns this
  */
-proto.proto.TwoFactorAuthenticationRequest.prototype.setCode = function(value) {
+proto.proto.TwoFactorAuthRequest.prototype.setCode = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -5742,7 +5742,7 @@ proto.proto.TwoFactorAuthenticationRequest.prototype.setCode = function(value) {
  * optional AuthenticateRequest auth_request = 2;
  * @return {?proto.proto.AuthenticateRequest}
  */
-proto.proto.TwoFactorAuthenticationRequest.prototype.getAuthRequest = function() {
+proto.proto.TwoFactorAuthRequest.prototype.getAuthRequest = function() {
   return /** @type{?proto.proto.AuthenticateRequest} */ (
     jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 2));
 };
@@ -5750,18 +5750,18 @@ proto.proto.TwoFactorAuthenticationRequest.prototype.getAuthRequest = function()
 
 /**
  * @param {?proto.proto.AuthenticateRequest|undefined} value
- * @return {!proto.proto.TwoFactorAuthenticationRequest} returns this
+ * @return {!proto.proto.TwoFactorAuthRequest} returns this
 */
-proto.proto.TwoFactorAuthenticationRequest.prototype.setAuthRequest = function(value) {
+proto.proto.TwoFactorAuthRequest.prototype.setAuthRequest = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.proto.TwoFactorAuthenticationRequest} returns this
+ * @return {!proto.proto.TwoFactorAuthRequest} returns this
  */
-proto.proto.TwoFactorAuthenticationRequest.prototype.clearAuthRequest = function() {
+proto.proto.TwoFactorAuthRequest.prototype.clearAuthRequest = function() {
   return this.setAuthRequest(undefined);
 };
 
@@ -5770,7 +5770,7 @@ proto.proto.TwoFactorAuthenticationRequest.prototype.clearAuthRequest = function
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.proto.TwoFactorAuthenticationRequest.prototype.hasAuthRequest = function() {
+proto.proto.TwoFactorAuthRequest.prototype.hasAuthRequest = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
