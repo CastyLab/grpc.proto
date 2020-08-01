@@ -157,7 +157,7 @@ message RecoveryCodesResponse {
     int64    code    = 1;
     string   status  = 2;
     string   message = 3;
-    repeated User result = 4;
+    repeated RecoveryCode result = 4;
 }
 
 message TwoFactorAuthRequest {

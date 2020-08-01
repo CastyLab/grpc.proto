@@ -6934,7 +6934,7 @@ $root.proto = (function() {
          * @property {number|Long|null} [code] RecoveryCodesResponse code
          * @property {string|null} [status] RecoveryCodesResponse status
          * @property {string|null} [message] RecoveryCodesResponse message
-         * @property {Array.<proto.IUser>|null} [result] RecoveryCodesResponse result
+         * @property {Array.<proto.IRecoveryCode>|null} [result] RecoveryCodesResponse result
          */
 
         /**
@@ -6979,7 +6979,7 @@ $root.proto = (function() {
 
         /**
          * RecoveryCodesResponse result.
-         * @member {Array.<proto.IUser>} result
+         * @member {Array.<proto.IRecoveryCode>} result
          * @memberof proto.RecoveryCodesResponse
          * @instance
          */
@@ -7017,7 +7017,7 @@ $root.proto = (function() {
                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
             if (message.result != null && message.result.length)
                 for (var i = 0; i < message.result.length; ++i)
-                    $root.proto.User.encode(message.result[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    $root.proto.RecoveryCode.encode(message.result[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -7064,7 +7064,7 @@ $root.proto = (function() {
                 case 4:
                     if (!(message.result && message.result.length))
                         message.result = [];
-                    message.result.push($root.proto.User.decode(reader, reader.uint32()));
+                    message.result.push($root.proto.RecoveryCode.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -7114,7 +7114,7 @@ $root.proto = (function() {
                 if (!Array.isArray(message.result))
                     return "result: array expected";
                 for (var i = 0; i < message.result.length; ++i) {
-                    var error = $root.proto.User.verify(message.result[i]);
+                    var error = $root.proto.RecoveryCode.verify(message.result[i]);
                     if (error)
                         return "result." + error;
                 }
@@ -7154,7 +7154,7 @@ $root.proto = (function() {
                 for (var i = 0; i < object.result.length; ++i) {
                     if (typeof object.result[i] !== "object")
                         throw TypeError(".proto.RecoveryCodesResponse.result: object expected");
-                    message.result[i] = $root.proto.User.fromObject(object.result[i]);
+                    message.result[i] = $root.proto.RecoveryCode.fromObject(object.result[i]);
                 }
             }
             return message;
@@ -7196,7 +7196,7 @@ $root.proto = (function() {
             if (message.result && message.result.length) {
                 object.result = [];
                 for (var j = 0; j < message.result.length; ++j)
-                    object.result[j] = $root.proto.User.toObject(message.result[j], options);
+                    object.result[j] = $root.proto.RecoveryCode.toObject(message.result[j], options);
             }
             return object;
         };

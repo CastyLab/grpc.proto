@@ -5417,7 +5417,7 @@ proto.proto.RecoveryCodesResponse.toObject = function(includeInstance, msg) {
     status: jspb.Message.getFieldWithDefault(msg, 2, ""),
     message: jspb.Message.getFieldWithDefault(msg, 3, ""),
     resultList: jspb.Message.toObjectList(msg.getResultList(),
-    proto.proto.User.toObject, includeInstance)
+    proto.proto.RecoveryCode.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -5467,8 +5467,8 @@ proto.proto.RecoveryCodesResponse.deserializeBinaryFromReader = function(msg, re
       msg.setMessage(value);
       break;
     case 4:
-      var value = new proto.proto.User;
-      reader.readMessage(value,proto.proto.User.deserializeBinaryFromReader);
+      var value = new proto.proto.RecoveryCode;
+      reader.readMessage(value,proto.proto.RecoveryCode.deserializeBinaryFromReader);
       msg.addResult(value);
       break;
     default:
@@ -5526,7 +5526,7 @@ proto.proto.RecoveryCodesResponse.serializeBinaryToWriter = function(message, wr
     writer.writeRepeatedMessage(
       4,
       f,
-      proto.proto.User.serializeBinaryToWriter
+      proto.proto.RecoveryCode.serializeBinaryToWriter
     );
   }
 };
@@ -5587,17 +5587,17 @@ proto.proto.RecoveryCodesResponse.prototype.setMessage = function(value) {
 
 
 /**
- * repeated User result = 4;
- * @return {!Array<!proto.proto.User>}
+ * repeated RecoveryCode result = 4;
+ * @return {!Array<!proto.proto.RecoveryCode>}
  */
 proto.proto.RecoveryCodesResponse.prototype.getResultList = function() {
-  return /** @type{!Array<!proto.proto.User>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.proto.User, 4));
+  return /** @type{!Array<!proto.proto.RecoveryCode>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.proto.RecoveryCode, 4));
 };
 
 
 /**
- * @param {!Array<!proto.proto.User>} value
+ * @param {!Array<!proto.proto.RecoveryCode>} value
  * @return {!proto.proto.RecoveryCodesResponse} returns this
 */
 proto.proto.RecoveryCodesResponse.prototype.setResultList = function(value) {
@@ -5606,12 +5606,12 @@ proto.proto.RecoveryCodesResponse.prototype.setResultList = function(value) {
 
 
 /**
- * @param {!proto.proto.User=} opt_value
+ * @param {!proto.proto.RecoveryCode=} opt_value
  * @param {number=} opt_index
- * @return {!proto.proto.User}
+ * @return {!proto.proto.RecoveryCode}
  */
 proto.proto.RecoveryCodesResponse.prototype.addResult = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.proto.User, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.proto.RecoveryCode, opt_index);
 };
 
 
