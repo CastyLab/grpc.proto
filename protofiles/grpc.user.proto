@@ -23,22 +23,23 @@ message Activity {
 }
 
 message User {
-    string                id               = 1;
-    string                fullname         = 2;
-    string                username         = 3;
-    string                hash             = 4;
-    string                email            = 5;
-    string                password         = 6;
-    bool                  is_active        = 7;
-    bool                  email_verified   = 8;
-    bool                  is_staff         = 9;
-    bool                  verified         = 10;
-    string                avatar           = 11;
-    Activity              activity         = 12;
-    PERSONAL_STATE        state            = 13;
-    google.protobuf.Timestamp  last_login  = 14;
-    google.protobuf.Timestamp  joined_at   = 15;
-    google.protobuf.Timestamp  updated_at  = 16;
+    string                     id               = 1;
+    string                     fullname         = 2;
+    string                     username         = 3;
+    string                     hash             = 4;
+    string                     email            = 5;
+    string                     password         = 6;
+    bool                       is_active        = 7;
+    bool                       email_verified   = 8;
+    bool                       is_staff         = 9;
+    bool                       verified         = 10;
+    string                     avatar           = 11;
+    Activity                   activity         = 12;
+    PERSONAL_STATE             state            = 13;
+    bool                       two_fa_enabled   = 14;
+    google.protobuf.Timestamp  last_login       = 15;
+    google.protobuf.Timestamp  joined_at        = 16;
+    google.protobuf.Timestamp  updated_at       = 17;
 }
 
 message Notification {
@@ -61,6 +62,7 @@ message Notification {
     google.protobuf.Timestamp  read_at       = 10;
     google.protobuf.Timestamp  created_at    = 11;
     google.protobuf.Timestamp  updated_at    = 12;
+
 }
 
 message RollbackStatesRequest {
@@ -92,10 +94,10 @@ message GetFriendRequest {
 }
 
 message GetUserResponse {
-    int64    code        = 1;
-    string   status      = 2;
-    string   message     = 3;
-    User result = 4;
+    int64    code     = 1;
+    string   status   = 2;
+    string   message  = 3;
+    User     result   = 4;
 }
 
 message FriendsResponse {
@@ -142,6 +144,27 @@ message UpdateUserRequest {
     User       result       = 2;
 }
 
+// start of two factor authentication messages
+message RecoveryCode {
+    string                     id          = 1;
+    string                     code        = 2;
+    string                     user_id     = 3;
+    google.protobuf.Timestamp  created_at  = 4;
+}
+
+message RecoveryCodesResponse {
+    int64    code    = 1;
+    string   status  = 2;
+    string   message = 3;
+    repeated User result = 4;
+}
+
+message TwoFactorAuthenticationRequest {
+    string              code         = 1;
+    AuthenticateRequest auth_request = 2;
+}
+// end of two factor authentication messages
+
 service UserService {
 
     // Websocket requests only
@@ -155,6 +178,9 @@ service UserService {
     rpc UpdateUser(UpdateUserRequest) returns (GetUserResponse);
     rpc Search(SearchUserRequest) returns (SearchUserResponse);
     rpc CreateUser(CreateUserRequest) returns (AuthResponse);
+
+    rpc GenerateRecoveryCodes(AuthenticateRequest) returns(RecoveryCodesResponse);
+    rpc EnableTwoFactorAuthentication(TwoFactorAuthenticationRequest) returns (Response);
 
     // FriendZone
     rpc GetFriend(FriendRequest) returns (FriendResponse);

@@ -2207,6 +2207,7 @@ $root.proto = (function() {
          * @property {string|null} [avatar] User avatar
          * @property {proto.IActivity|null} [activity] User activity
          * @property {proto.PERSONAL_STATE|null} [state] User state
+         * @property {boolean|null} [twoFaEnabled] User twoFaEnabled
          * @property {google.protobuf.ITimestamp|null} [lastLogin] User lastLogin
          * @property {google.protobuf.ITimestamp|null} [joinedAt] User joinedAt
          * @property {google.protobuf.ITimestamp|null} [updatedAt] User updatedAt
@@ -2332,6 +2333,14 @@ $root.proto = (function() {
         User.prototype.state = 0;
 
         /**
+         * User twoFaEnabled.
+         * @member {boolean} twoFaEnabled
+         * @memberof proto.User
+         * @instance
+         */
+        User.prototype.twoFaEnabled = false;
+
+        /**
          * User lastLogin.
          * @member {google.protobuf.ITimestamp|null|undefined} lastLogin
          * @memberof proto.User
@@ -2405,12 +2414,14 @@ $root.proto = (function() {
                 $root.proto.Activity.encode(message.activity, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
             if (message.state != null && message.hasOwnProperty("state"))
                 writer.uint32(/* id 13, wireType 0 =*/104).int32(message.state);
+            if (message.twoFaEnabled != null && message.hasOwnProperty("twoFaEnabled"))
+                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.twoFaEnabled);
             if (message.lastLogin != null && message.hasOwnProperty("lastLogin"))
-                $root.google.protobuf.Timestamp.encode(message.lastLogin, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.lastLogin, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
             if (message.joinedAt != null && message.hasOwnProperty("joinedAt"))
-                $root.google.protobuf.Timestamp.encode(message.joinedAt, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.joinedAt, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
-                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
             return writer;
         };
 
@@ -2485,12 +2496,15 @@ $root.proto = (function() {
                     message.state = reader.int32();
                     break;
                 case 14:
-                    message.lastLogin = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    message.twoFaEnabled = reader.bool();
                     break;
                 case 15:
-                    message.joinedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    message.lastLogin = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 case 16:
+                    message.joinedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 17:
                     message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 default:
@@ -2577,6 +2591,9 @@ $root.proto = (function() {
                 case 4:
                     break;
                 }
+            if (message.twoFaEnabled != null && message.hasOwnProperty("twoFaEnabled"))
+                if (typeof message.twoFaEnabled !== "boolean")
+                    return "twoFaEnabled: boolean expected";
             if (message.lastLogin != null && message.hasOwnProperty("lastLogin")) {
                 var error = $root.google.protobuf.Timestamp.verify(message.lastLogin);
                 if (error)
@@ -2656,6 +2673,8 @@ $root.proto = (function() {
                 message.state = 4;
                 break;
             }
+            if (object.twoFaEnabled != null)
+                message.twoFaEnabled = Boolean(object.twoFaEnabled);
             if (object.lastLogin != null) {
                 if (typeof object.lastLogin !== "object")
                     throw TypeError(".proto.User.lastLogin: object expected");
@@ -2701,6 +2720,7 @@ $root.proto = (function() {
                 object.avatar = "";
                 object.activity = null;
                 object.state = options.enums === String ? "OFFLINE" : 0;
+                object.twoFaEnabled = false;
                 object.lastLogin = null;
                 object.joinedAt = null;
                 object.updatedAt = null;
@@ -2731,6 +2751,8 @@ $root.proto = (function() {
                 object.activity = $root.proto.Activity.toObject(message.activity, options);
             if (message.state != null && message.hasOwnProperty("state"))
                 object.state = options.enums === String ? $root.proto.PERSONAL_STATE[message.state] : message.state;
+            if (message.twoFaEnabled != null && message.hasOwnProperty("twoFaEnabled"))
+                object.twoFaEnabled = message.twoFaEnabled;
             if (message.lastLogin != null && message.hasOwnProperty("lastLogin"))
                 object.lastLogin = $root.google.protobuf.Timestamp.toObject(message.lastLogin, options);
             if (message.joinedAt != null && message.hasOwnProperty("joinedAt"))
@@ -6622,6 +6644,770 @@ $root.proto = (function() {
         return UpdateUserRequest;
     })();
 
+    proto.RecoveryCode = (function() {
+
+        /**
+         * Properties of a RecoveryCode.
+         * @memberof proto
+         * @interface IRecoveryCode
+         * @property {string|null} [id] RecoveryCode id
+         * @property {string|null} [code] RecoveryCode code
+         * @property {string|null} [userId] RecoveryCode userId
+         * @property {google.protobuf.ITimestamp|null} [createdAt] RecoveryCode createdAt
+         */
+
+        /**
+         * Constructs a new RecoveryCode.
+         * @memberof proto
+         * @classdesc Represents a RecoveryCode.
+         * @implements IRecoveryCode
+         * @constructor
+         * @param {proto.IRecoveryCode=} [properties] Properties to set
+         */
+        function RecoveryCode(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RecoveryCode id.
+         * @member {string} id
+         * @memberof proto.RecoveryCode
+         * @instance
+         */
+        RecoveryCode.prototype.id = "";
+
+        /**
+         * RecoveryCode code.
+         * @member {string} code
+         * @memberof proto.RecoveryCode
+         * @instance
+         */
+        RecoveryCode.prototype.code = "";
+
+        /**
+         * RecoveryCode userId.
+         * @member {string} userId
+         * @memberof proto.RecoveryCode
+         * @instance
+         */
+        RecoveryCode.prototype.userId = "";
+
+        /**
+         * RecoveryCode createdAt.
+         * @member {google.protobuf.ITimestamp|null|undefined} createdAt
+         * @memberof proto.RecoveryCode
+         * @instance
+         */
+        RecoveryCode.prototype.createdAt = null;
+
+        /**
+         * Creates a new RecoveryCode instance using the specified properties.
+         * @function create
+         * @memberof proto.RecoveryCode
+         * @static
+         * @param {proto.IRecoveryCode=} [properties] Properties to set
+         * @returns {proto.RecoveryCode} RecoveryCode instance
+         */
+        RecoveryCode.create = function create(properties) {
+            return new RecoveryCode(properties);
+        };
+
+        /**
+         * Encodes the specified RecoveryCode message. Does not implicitly {@link proto.RecoveryCode.verify|verify} messages.
+         * @function encode
+         * @memberof proto.RecoveryCode
+         * @static
+         * @param {proto.IRecoveryCode} message RecoveryCode message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RecoveryCode.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && message.hasOwnProperty("id"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.code);
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.userId);
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RecoveryCode message, length delimited. Does not implicitly {@link proto.RecoveryCode.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.RecoveryCode
+         * @static
+         * @param {proto.IRecoveryCode} message RecoveryCode message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RecoveryCode.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RecoveryCode message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.RecoveryCode
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.RecoveryCode} RecoveryCode
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RecoveryCode.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.RecoveryCode();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.id = reader.string();
+                    break;
+                case 2:
+                    message.code = reader.string();
+                    break;
+                case 3:
+                    message.userId = reader.string();
+                    break;
+                case 4:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a RecoveryCode message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.RecoveryCode
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.RecoveryCode} RecoveryCode
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RecoveryCode.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RecoveryCode message.
+         * @function verify
+         * @memberof proto.RecoveryCode
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RecoveryCode.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.id != null && message.hasOwnProperty("id"))
+                if (!$util.isString(message.id))
+                    return "id: string expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isString(message.code))
+                    return "code: string expected";
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                if (!$util.isString(message.userId))
+                    return "userId: string expected";
+            if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
+                var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
+                if (error)
+                    return "createdAt." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a RecoveryCode message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.RecoveryCode
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.RecoveryCode} RecoveryCode
+         */
+        RecoveryCode.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.RecoveryCode)
+                return object;
+            var message = new $root.proto.RecoveryCode();
+            if (object.id != null)
+                message.id = String(object.id);
+            if (object.code != null)
+                message.code = String(object.code);
+            if (object.userId != null)
+                message.userId = String(object.userId);
+            if (object.createdAt != null) {
+                if (typeof object.createdAt !== "object")
+                    throw TypeError(".proto.RecoveryCode.createdAt: object expected");
+                message.createdAt = $root.google.protobuf.Timestamp.fromObject(object.createdAt);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RecoveryCode message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.RecoveryCode
+         * @static
+         * @param {proto.RecoveryCode} message RecoveryCode
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RecoveryCode.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.id = "";
+                object.code = "";
+                object.userId = "";
+                object.createdAt = null;
+            }
+            if (message.id != null && message.hasOwnProperty("id"))
+                object.id = message.id;
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            if (message.userId != null && message.hasOwnProperty("userId"))
+                object.userId = message.userId;
+            if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
+            return object;
+        };
+
+        /**
+         * Converts this RecoveryCode to JSON.
+         * @function toJSON
+         * @memberof proto.RecoveryCode
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RecoveryCode.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RecoveryCode;
+    })();
+
+    proto.RecoveryCodesResponse = (function() {
+
+        /**
+         * Properties of a RecoveryCodesResponse.
+         * @memberof proto
+         * @interface IRecoveryCodesResponse
+         * @property {number|Long|null} [code] RecoveryCodesResponse code
+         * @property {string|null} [status] RecoveryCodesResponse status
+         * @property {string|null} [message] RecoveryCodesResponse message
+         * @property {Array.<proto.IUser>|null} [result] RecoveryCodesResponse result
+         */
+
+        /**
+         * Constructs a new RecoveryCodesResponse.
+         * @memberof proto
+         * @classdesc Represents a RecoveryCodesResponse.
+         * @implements IRecoveryCodesResponse
+         * @constructor
+         * @param {proto.IRecoveryCodesResponse=} [properties] Properties to set
+         */
+        function RecoveryCodesResponse(properties) {
+            this.result = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RecoveryCodesResponse code.
+         * @member {number|Long} code
+         * @memberof proto.RecoveryCodesResponse
+         * @instance
+         */
+        RecoveryCodesResponse.prototype.code = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * RecoveryCodesResponse status.
+         * @member {string} status
+         * @memberof proto.RecoveryCodesResponse
+         * @instance
+         */
+        RecoveryCodesResponse.prototype.status = "";
+
+        /**
+         * RecoveryCodesResponse message.
+         * @member {string} message
+         * @memberof proto.RecoveryCodesResponse
+         * @instance
+         */
+        RecoveryCodesResponse.prototype.message = "";
+
+        /**
+         * RecoveryCodesResponse result.
+         * @member {Array.<proto.IUser>} result
+         * @memberof proto.RecoveryCodesResponse
+         * @instance
+         */
+        RecoveryCodesResponse.prototype.result = $util.emptyArray;
+
+        /**
+         * Creates a new RecoveryCodesResponse instance using the specified properties.
+         * @function create
+         * @memberof proto.RecoveryCodesResponse
+         * @static
+         * @param {proto.IRecoveryCodesResponse=} [properties] Properties to set
+         * @returns {proto.RecoveryCodesResponse} RecoveryCodesResponse instance
+         */
+        RecoveryCodesResponse.create = function create(properties) {
+            return new RecoveryCodesResponse(properties);
+        };
+
+        /**
+         * Encodes the specified RecoveryCodesResponse message. Does not implicitly {@link proto.RecoveryCodesResponse.verify|verify} messages.
+         * @function encode
+         * @memberof proto.RecoveryCodesResponse
+         * @static
+         * @param {proto.IRecoveryCodesResponse} message RecoveryCodesResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RecoveryCodesResponse.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.code);
+            if (message.status != null && message.hasOwnProperty("status"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.status);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+            if (message.result != null && message.result.length)
+                for (var i = 0; i < message.result.length; ++i)
+                    $root.proto.User.encode(message.result[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified RecoveryCodesResponse message, length delimited. Does not implicitly {@link proto.RecoveryCodesResponse.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.RecoveryCodesResponse
+         * @static
+         * @param {proto.IRecoveryCodesResponse} message RecoveryCodesResponse message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RecoveryCodesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a RecoveryCodesResponse message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.RecoveryCodesResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.RecoveryCodesResponse} RecoveryCodesResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RecoveryCodesResponse.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.RecoveryCodesResponse();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.code = reader.int64();
+                    break;
+                case 2:
+                    message.status = reader.string();
+                    break;
+                case 3:
+                    message.message = reader.string();
+                    break;
+                case 4:
+                    if (!(message.result && message.result.length))
+                        message.result = [];
+                    message.result.push($root.proto.User.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a RecoveryCodesResponse message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.RecoveryCodesResponse
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.RecoveryCodesResponse} RecoveryCodesResponse
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RecoveryCodesResponse.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a RecoveryCodesResponse message.
+         * @function verify
+         * @memberof proto.RecoveryCodesResponse
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        RecoveryCodesResponse.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code) && !(message.code && $util.isInteger(message.code.low) && $util.isInteger(message.code.high)))
+                    return "code: integer|Long expected";
+            if (message.status != null && message.hasOwnProperty("status"))
+                if (!$util.isString(message.status))
+                    return "status: string expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            if (message.result != null && message.hasOwnProperty("result")) {
+                if (!Array.isArray(message.result))
+                    return "result: array expected";
+                for (var i = 0; i < message.result.length; ++i) {
+                    var error = $root.proto.User.verify(message.result[i]);
+                    if (error)
+                        return "result." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a RecoveryCodesResponse message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.RecoveryCodesResponse
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.RecoveryCodesResponse} RecoveryCodesResponse
+         */
+        RecoveryCodesResponse.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.RecoveryCodesResponse)
+                return object;
+            var message = new $root.proto.RecoveryCodesResponse();
+            if (object.code != null)
+                if ($util.Long)
+                    (message.code = $util.Long.fromValue(object.code)).unsigned = false;
+                else if (typeof object.code === "string")
+                    message.code = parseInt(object.code, 10);
+                else if (typeof object.code === "number")
+                    message.code = object.code;
+                else if (typeof object.code === "object")
+                    message.code = new $util.LongBits(object.code.low >>> 0, object.code.high >>> 0).toNumber();
+            if (object.status != null)
+                message.status = String(object.status);
+            if (object.message != null)
+                message.message = String(object.message);
+            if (object.result) {
+                if (!Array.isArray(object.result))
+                    throw TypeError(".proto.RecoveryCodesResponse.result: array expected");
+                message.result = [];
+                for (var i = 0; i < object.result.length; ++i) {
+                    if (typeof object.result[i] !== "object")
+                        throw TypeError(".proto.RecoveryCodesResponse.result: object expected");
+                    message.result[i] = $root.proto.User.fromObject(object.result[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a RecoveryCodesResponse message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.RecoveryCodesResponse
+         * @static
+         * @param {proto.RecoveryCodesResponse} message RecoveryCodesResponse
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        RecoveryCodesResponse.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.result = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.code = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.code = options.longs === String ? "0" : 0;
+                object.status = "";
+                object.message = "";
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (typeof message.code === "number")
+                    object.code = options.longs === String ? String(message.code) : message.code;
+                else
+                    object.code = options.longs === String ? $util.Long.prototype.toString.call(message.code) : options.longs === Number ? new $util.LongBits(message.code.low >>> 0, message.code.high >>> 0).toNumber() : message.code;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            if (message.result && message.result.length) {
+                object.result = [];
+                for (var j = 0; j < message.result.length; ++j)
+                    object.result[j] = $root.proto.User.toObject(message.result[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this RecoveryCodesResponse to JSON.
+         * @function toJSON
+         * @memberof proto.RecoveryCodesResponse
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        RecoveryCodesResponse.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RecoveryCodesResponse;
+    })();
+
+    proto.TwoFactorAuthenticationRequest = (function() {
+
+        /**
+         * Properties of a TwoFactorAuthenticationRequest.
+         * @memberof proto
+         * @interface ITwoFactorAuthenticationRequest
+         * @property {string|null} [code] TwoFactorAuthenticationRequest code
+         * @property {proto.IAuthenticateRequest|null} [authRequest] TwoFactorAuthenticationRequest authRequest
+         */
+
+        /**
+         * Constructs a new TwoFactorAuthenticationRequest.
+         * @memberof proto
+         * @classdesc Represents a TwoFactorAuthenticationRequest.
+         * @implements ITwoFactorAuthenticationRequest
+         * @constructor
+         * @param {proto.ITwoFactorAuthenticationRequest=} [properties] Properties to set
+         */
+        function TwoFactorAuthenticationRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * TwoFactorAuthenticationRequest code.
+         * @member {string} code
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @instance
+         */
+        TwoFactorAuthenticationRequest.prototype.code = "";
+
+        /**
+         * TwoFactorAuthenticationRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @instance
+         */
+        TwoFactorAuthenticationRequest.prototype.authRequest = null;
+
+        /**
+         * Creates a new TwoFactorAuthenticationRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @static
+         * @param {proto.ITwoFactorAuthenticationRequest=} [properties] Properties to set
+         * @returns {proto.TwoFactorAuthenticationRequest} TwoFactorAuthenticationRequest instance
+         */
+        TwoFactorAuthenticationRequest.create = function create(properties) {
+            return new TwoFactorAuthenticationRequest(properties);
+        };
+
+        /**
+         * Encodes the specified TwoFactorAuthenticationRequest message. Does not implicitly {@link proto.TwoFactorAuthenticationRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @static
+         * @param {proto.ITwoFactorAuthenticationRequest} message TwoFactorAuthenticationRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TwoFactorAuthenticationRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.code);
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified TwoFactorAuthenticationRequest message, length delimited. Does not implicitly {@link proto.TwoFactorAuthenticationRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @static
+         * @param {proto.ITwoFactorAuthenticationRequest} message TwoFactorAuthenticationRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        TwoFactorAuthenticationRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a TwoFactorAuthenticationRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.TwoFactorAuthenticationRequest} TwoFactorAuthenticationRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TwoFactorAuthenticationRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.TwoFactorAuthenticationRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.code = reader.string();
+                    break;
+                case 2:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a TwoFactorAuthenticationRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.TwoFactorAuthenticationRequest} TwoFactorAuthenticationRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        TwoFactorAuthenticationRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a TwoFactorAuthenticationRequest message.
+         * @function verify
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        TwoFactorAuthenticationRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isString(message.code))
+                    return "code: string expected";
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a TwoFactorAuthenticationRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.TwoFactorAuthenticationRequest} TwoFactorAuthenticationRequest
+         */
+        TwoFactorAuthenticationRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.TwoFactorAuthenticationRequest)
+                return object;
+            var message = new $root.proto.TwoFactorAuthenticationRequest();
+            if (object.code != null)
+                message.code = String(object.code);
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.TwoFactorAuthenticationRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a TwoFactorAuthenticationRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @static
+         * @param {proto.TwoFactorAuthenticationRequest} message TwoFactorAuthenticationRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        TwoFactorAuthenticationRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.code = "";
+                object.authRequest = null;
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                object.code = message.code;
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            return object;
+        };
+
+        /**
+         * Converts this TwoFactorAuthenticationRequest to JSON.
+         * @function toJSON
+         * @memberof proto.TwoFactorAuthenticationRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        TwoFactorAuthenticationRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return TwoFactorAuthenticationRequest;
+    })();
+
     proto.UserService = (function() {
 
         /**
@@ -6915,6 +7701,72 @@ $root.proto = (function() {
          * @instance
          * @param {proto.ICreateUserRequest} request CreateUserRequest message or plain object
          * @returns {Promise<proto.AuthResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.UserService#generateRecoveryCodes}.
+         * @memberof proto.UserService
+         * @typedef GenerateRecoveryCodesCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.RecoveryCodesResponse} [response] RecoveryCodesResponse
+         */
+
+        /**
+         * Calls GenerateRecoveryCodes.
+         * @function generateRecoveryCodes
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IAuthenticateRequest} request AuthenticateRequest message or plain object
+         * @param {proto.UserService.GenerateRecoveryCodesCallback} callback Node-style callback called with the error, if any, and RecoveryCodesResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserService.prototype.generateRecoveryCodes = function generateRecoveryCodes(request, callback) {
+            return this.rpcCall(generateRecoveryCodes, $root.proto.AuthenticateRequest, $root.proto.RecoveryCodesResponse, request, callback);
+        }, "name", { value: "GenerateRecoveryCodes" });
+
+        /**
+         * Calls GenerateRecoveryCodes.
+         * @function generateRecoveryCodes
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IAuthenticateRequest} request AuthenticateRequest message or plain object
+         * @returns {Promise<proto.RecoveryCodesResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.UserService#enableTwoFactorAuthentication}.
+         * @memberof proto.UserService
+         * @typedef EnableTwoFactorAuthenticationCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls EnableTwoFactorAuthentication.
+         * @function enableTwoFactorAuthentication
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.ITwoFactorAuthenticationRequest} request TwoFactorAuthenticationRequest message or plain object
+         * @param {proto.UserService.EnableTwoFactorAuthenticationCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserService.prototype.enableTwoFactorAuthentication = function enableTwoFactorAuthentication(request, callback) {
+            return this.rpcCall(enableTwoFactorAuthentication, $root.proto.TwoFactorAuthenticationRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "EnableTwoFactorAuthentication" });
+
+        /**
+         * Calls EnableTwoFactorAuthentication.
+         * @function enableTwoFactorAuthentication
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.ITwoFactorAuthenticationRequest} request TwoFactorAuthenticationRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
          * @variation 2
          */
 
