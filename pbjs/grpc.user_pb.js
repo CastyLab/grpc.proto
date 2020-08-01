@@ -1011,6 +1011,7 @@ proto.proto.User.toObject = function(includeInstance, msg) {
     activity: (f = msg.getActivity()) && proto.proto.Activity.toObject(includeInstance, f),
     state: jspb.Message.getFieldWithDefault(msg, 13, 0),
     twoFaEnabled: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
+    twoFaToken: jspb.Message.getFieldWithDefault(msg, 15, ""),
     lastLogin: (f = msg.getLastLogin()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     joinedAt: (f = msg.getJoinedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
@@ -1108,16 +1109,20 @@ proto.proto.User.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTwoFaEnabled(value);
       break;
     case 15:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setLastLogin(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTwoFaToken(value);
       break;
     case 16:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setJoinedAt(value);
+      msg.setLastLogin(value);
       break;
     case 17:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setJoinedAt(value);
+      break;
+    case 18:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setUpdatedAt(value);
@@ -1250,15 +1255,14 @@ proto.proto.User.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getLastLogin();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getTwoFaToken();
+  if (f.length > 0) {
+    writer.writeString(
       15,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+      f
     );
   }
-  f = message.getJoinedAt();
+  f = message.getLastLogin();
   if (f != null) {
     writer.writeMessage(
       16,
@@ -1266,10 +1270,18 @@ proto.proto.User.serializeBinaryToWriter = function(message, writer) {
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
-  f = message.getUpdatedAt();
+  f = message.getJoinedAt();
   if (f != null) {
     writer.writeMessage(
       17,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
+  f = message.getUpdatedAt();
+  if (f != null) {
+    writer.writeMessage(
+      18,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -1549,12 +1561,30 @@ proto.proto.User.prototype.setTwoFaEnabled = function(value) {
 
 
 /**
- * optional google.protobuf.Timestamp last_login = 15;
+ * optional string two_fa_token = 15;
+ * @return {string}
+ */
+proto.proto.User.prototype.getTwoFaToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.proto.User} returns this
+ */
+proto.proto.User.prototype.setTwoFaToken = function(value) {
+  return jspb.Message.setProto3StringField(this, 15, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp last_login = 16;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.User.prototype.getLastLogin = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 15));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 16));
 };
 
 
@@ -1563,7 +1593,7 @@ proto.proto.User.prototype.getLastLogin = function() {
  * @return {!proto.proto.User} returns this
 */
 proto.proto.User.prototype.setLastLogin = function(value) {
-  return jspb.Message.setWrapperField(this, 15, value);
+  return jspb.Message.setWrapperField(this, 16, value);
 };
 
 
@@ -1581,17 +1611,17 @@ proto.proto.User.prototype.clearLastLogin = function() {
  * @return {boolean}
  */
 proto.proto.User.prototype.hasLastLogin = function() {
-  return jspb.Message.getField(this, 15) != null;
+  return jspb.Message.getField(this, 16) != null;
 };
 
 
 /**
- * optional google.protobuf.Timestamp joined_at = 16;
+ * optional google.protobuf.Timestamp joined_at = 17;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.User.prototype.getJoinedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 16));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 17));
 };
 
 
@@ -1600,7 +1630,7 @@ proto.proto.User.prototype.getJoinedAt = function() {
  * @return {!proto.proto.User} returns this
 */
 proto.proto.User.prototype.setJoinedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 16, value);
+  return jspb.Message.setWrapperField(this, 17, value);
 };
 
 
@@ -1618,17 +1648,17 @@ proto.proto.User.prototype.clearJoinedAt = function() {
  * @return {boolean}
  */
 proto.proto.User.prototype.hasJoinedAt = function() {
-  return jspb.Message.getField(this, 16) != null;
+  return jspb.Message.getField(this, 17) != null;
 };
 
 
 /**
- * optional google.protobuf.Timestamp updated_at = 17;
+ * optional google.protobuf.Timestamp updated_at = 18;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.User.prototype.getUpdatedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 17));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 18));
 };
 
 
@@ -1637,7 +1667,7 @@ proto.proto.User.prototype.getUpdatedAt = function() {
  * @return {!proto.proto.User} returns this
 */
 proto.proto.User.prototype.setUpdatedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 17, value);
+  return jspb.Message.setWrapperField(this, 18, value);
 };
 
 
@@ -1655,7 +1685,7 @@ proto.proto.User.prototype.clearUpdatedAt = function() {
  * @return {boolean}
  */
 proto.proto.User.prototype.hasUpdatedAt = function() {
-  return jspb.Message.getField(this, 17) != null;
+  return jspb.Message.getField(this, 18) != null;
 };
 
 

@@ -37,9 +37,10 @@ message User {
     Activity                   activity         = 12;
     PERSONAL_STATE             state            = 13;
     bool                       two_fa_enabled   = 14;
-    google.protobuf.Timestamp  last_login       = 15;
-    google.protobuf.Timestamp  joined_at        = 16;
-    google.protobuf.Timestamp  updated_at       = 17;
+    string                     two_fa_token     = 15;
+    google.protobuf.Timestamp  last_login       = 16;
+    google.protobuf.Timestamp  joined_at        = 17;
+    google.protobuf.Timestamp  updated_at       = 18;
 }
 
 message Notification {
