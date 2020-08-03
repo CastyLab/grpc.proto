@@ -11885,14 +11885,16 @@ $root.proto = (function() {
      * @name proto.PRIVACY
      * @enum {string}
      * @property {number} PRIVATE=0 PRIVATE value
-     * @property {number} EVERYONE=1 EVERYONE value
-     * @property {number} PUBLIC=2 PUBLIC value
+     * @property {number} FRIENDS=2 FRIENDS value
+     * @property {number} CHOOSEN_FRIENDS=3 CHOOSEN_FRIENDS value
+     * @property {number} PUBLIC=4 PUBLIC value
      */
     proto.PRIVACY = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "PRIVATE"] = 0;
-        values[valuesById[1] = "EVERYONE"] = 1;
-        values[valuesById[2] = "PUBLIC"] = 2;
+        values[valuesById[2] = "FRIENDS"] = 2;
+        values[valuesById[3] = "CHOOSEN_FRIENDS"] = 3;
+        values[valuesById[4] = "PUBLIC"] = 4;
         return values;
     })();
 
@@ -13452,8 +13454,9 @@ $root.proto = (function() {
                 default:
                     return "privacy: enum value expected";
                 case 0:
-                case 1:
                 case 2:
+                case 3:
+                case 4:
                     break;
                 }
             if (message.videoPlayerAccess != null && message.hasOwnProperty("videoPlayerAccess"))
@@ -13516,13 +13519,17 @@ $root.proto = (function() {
             case 0:
                 message.privacy = 0;
                 break;
-            case "EVERYONE":
-            case 1:
-                message.privacy = 1;
-                break;
-            case "PUBLIC":
+            case "FRIENDS":
             case 2:
                 message.privacy = 2;
+                break;
+            case "CHOOSEN_FRIENDS":
+            case 3:
+                message.privacy = 3;
+                break;
+            case "PUBLIC":
+            case 4:
+                message.privacy = 4;
                 break;
             }
             switch (object.videoPlayerAccess) {

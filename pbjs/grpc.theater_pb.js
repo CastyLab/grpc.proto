@@ -4857,8 +4857,9 @@ proto.proto.FollowedTheatersResponse.prototype.clearResultList = function() {
  */
 proto.proto.PRIVACY = {
   PRIVATE: 0,
-  EVERYONE: 1,
-  PUBLIC: 2
+  FRIENDS: 2,
+  CHOOSEN_FRIENDS: 3,
+  PUBLIC: 4
 };
 
 /**

@@ -8,9 +8,10 @@ import "grpc.user.proto";
 import "google/protobuf/timestamp.proto";
 
 enum PRIVACY {
-    PRIVATE  = 0;
-    EVERYONE = 1;
-    PUBLIC   = 2;
+    PRIVATE          = 0;
+    FRIENDS          = 2;
+    CHOOSEN_FRIENDS  = 3;
+    PUBLIC           = 4;
 }
 
 enum VIDEO_PLAYER_ACCESS {
