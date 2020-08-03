@@ -4867,10 +4867,11 @@ proto.proto.PRIVACY = {
  * @enum {number}
  */
 proto.proto.VIDEO_PLAYER_ACCESS = {
-  ACCESS_BY_USER: 0,
-  ACCESS_BY_EVERYONE: 1,
-  ACCESS_BY_FRIENDS: 2,
-  ACCESS_BY_ROLES: 3
+  ACCESS_UNKNOWN: 0,
+  ACCESS_BY_USER: 1,
+  ACCESS_BY_EVERYONE: 2,
+  ACCESS_BY_FRIENDS: 3,
+  ACCESS_BY_CHOOSEN_FRIENDS: 4
 };
 
 goog.object.extend(exports, proto.proto);

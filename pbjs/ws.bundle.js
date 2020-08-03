@@ -11904,17 +11904,19 @@ $root.proto = (function() {
      * VIDEO_PLAYER_ACCESS enum.
      * @name proto.VIDEO_PLAYER_ACCESS
      * @enum {string}
-     * @property {number} ACCESS_BY_USER=0 ACCESS_BY_USER value
-     * @property {number} ACCESS_BY_EVERYONE=1 ACCESS_BY_EVERYONE value
-     * @property {number} ACCESS_BY_FRIENDS=2 ACCESS_BY_FRIENDS value
-     * @property {number} ACCESS_BY_ROLES=3 ACCESS_BY_ROLES value
+     * @property {number} ACCESS_UNKNOWN=0 ACCESS_UNKNOWN value
+     * @property {number} ACCESS_BY_USER=1 ACCESS_BY_USER value
+     * @property {number} ACCESS_BY_EVERYONE=2 ACCESS_BY_EVERYONE value
+     * @property {number} ACCESS_BY_FRIENDS=3 ACCESS_BY_FRIENDS value
+     * @property {number} ACCESS_BY_CHOOSEN_FRIENDS=4 ACCESS_BY_CHOOSEN_FRIENDS value
      */
     proto.VIDEO_PLAYER_ACCESS = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "ACCESS_BY_USER"] = 0;
-        values[valuesById[1] = "ACCESS_BY_EVERYONE"] = 1;
-        values[valuesById[2] = "ACCESS_BY_FRIENDS"] = 2;
-        values[valuesById[3] = "ACCESS_BY_ROLES"] = 3;
+        values[valuesById[0] = "ACCESS_UNKNOWN"] = 0;
+        values[valuesById[1] = "ACCESS_BY_USER"] = 1;
+        values[valuesById[2] = "ACCESS_BY_EVERYONE"] = 2;
+        values[valuesById[3] = "ACCESS_BY_FRIENDS"] = 3;
+        values[valuesById[4] = "ACCESS_BY_CHOOSEN_FRIENDS"] = 4;
         return values;
     })();
 
@@ -13470,6 +13472,7 @@ $root.proto = (function() {
                 case 1:
                 case 2:
                 case 3:
+                case 4:
                     break;
                 }
             if (message.userId != null && message.hasOwnProperty("userId"))
@@ -13540,21 +13543,25 @@ $root.proto = (function() {
                 break;
             }
             switch (object.videoPlayerAccess) {
-            case "ACCESS_BY_USER":
+            case "ACCESS_UNKNOWN":
             case 0:
                 message.videoPlayerAccess = 0;
                 break;
-            case "ACCESS_BY_EVERYONE":
+            case "ACCESS_BY_USER":
             case 1:
                 message.videoPlayerAccess = 1;
                 break;
-            case "ACCESS_BY_FRIENDS":
+            case "ACCESS_BY_EVERYONE":
             case 2:
                 message.videoPlayerAccess = 2;
                 break;
-            case "ACCESS_BY_ROLES":
+            case "ACCESS_BY_FRIENDS":
             case 3:
                 message.videoPlayerAccess = 3;
+                break;
+            case "ACCESS_BY_CHOOSEN_FRIENDS":
+            case 4:
+                message.videoPlayerAccess = 4;
                 break;
             }
             if (object.userId != null)
@@ -13601,7 +13608,7 @@ $root.proto = (function() {
                 object.id = "";
                 object.description = "";
                 object.privacy = options.enums === String ? "UNKNOWN" : 0;
-                object.videoPlayerAccess = options.enums === String ? "ACCESS_BY_USER" : 0;
+                object.videoPlayerAccess = options.enums === String ? "ACCESS_UNKNOWN" : 0;
                 object.userId = "";
                 object.user = null;
                 object.mediaSource = null;
