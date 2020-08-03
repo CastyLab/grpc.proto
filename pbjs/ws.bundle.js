@@ -11884,17 +11884,19 @@ $root.proto = (function() {
      * PRIVACY enum.
      * @name proto.PRIVACY
      * @enum {string}
-     * @property {number} PUBLIC=0 PUBLIC value
-     * @property {number} PRIVATE=1 PRIVATE value
-     * @property {number} FRIENDS=2 FRIENDS value
-     * @property {number} CHOOSEN_FRIENDS=3 CHOOSEN_FRIENDS value
+     * @property {number} UNKNOWN=0 UNKNOWN value
+     * @property {number} PUBLIC=1 PUBLIC value
+     * @property {number} PRIVATE=2 PRIVATE value
+     * @property {number} FRIENDS=3 FRIENDS value
+     * @property {number} CHOOSEN_FRIENDS=4 CHOOSEN_FRIENDS value
      */
     proto.PRIVACY = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "PUBLIC"] = 0;
-        values[valuesById[1] = "PRIVATE"] = 1;
-        values[valuesById[2] = "FRIENDS"] = 2;
-        values[valuesById[3] = "CHOOSEN_FRIENDS"] = 3;
+        values[valuesById[0] = "UNKNOWN"] = 0;
+        values[valuesById[1] = "PUBLIC"] = 1;
+        values[valuesById[2] = "PRIVATE"] = 2;
+        values[valuesById[3] = "FRIENDS"] = 3;
+        values[valuesById[4] = "CHOOSEN_FRIENDS"] = 4;
         return values;
     })();
 
@@ -13457,6 +13459,7 @@ $root.proto = (function() {
                 case 1:
                 case 2:
                 case 3:
+                case 4:
                     break;
                 }
             if (message.videoPlayerAccess != null && message.hasOwnProperty("videoPlayerAccess"))
@@ -13515,21 +13518,25 @@ $root.proto = (function() {
             if (object.description != null)
                 message.description = String(object.description);
             switch (object.privacy) {
-            case "PUBLIC":
+            case "UNKNOWN":
             case 0:
                 message.privacy = 0;
                 break;
-            case "PRIVATE":
+            case "PUBLIC":
             case 1:
                 message.privacy = 1;
                 break;
-            case "FRIENDS":
+            case "PRIVATE":
             case 2:
                 message.privacy = 2;
                 break;
-            case "CHOOSEN_FRIENDS":
+            case "FRIENDS":
             case 3:
                 message.privacy = 3;
+                break;
+            case "CHOOSEN_FRIENDS":
+            case 4:
+                message.privacy = 4;
                 break;
             }
             switch (object.videoPlayerAccess) {
@@ -13593,7 +13600,7 @@ $root.proto = (function() {
             if (options.defaults) {
                 object.id = "";
                 object.description = "";
-                object.privacy = options.enums === String ? "PUBLIC" : 0;
+                object.privacy = options.enums === String ? "UNKNOWN" : 0;
                 object.videoPlayerAccess = options.enums === String ? "ACCESS_BY_USER" : 0;
                 object.userId = "";
                 object.user = null;
