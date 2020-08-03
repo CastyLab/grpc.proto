@@ -4856,10 +4856,10 @@ proto.proto.FollowedTheatersResponse.prototype.clearResultList = function() {
  * @enum {number}
  */
 proto.proto.PRIVACY = {
-  PRIVATE: 0,
+  PUBLIC: 0,
+  PRIVATE: 1,
   FRIENDS: 2,
-  CHOOSEN_FRIENDS: 3,
-  PUBLIC: 4
+  CHOOSEN_FRIENDS: 3
 };
 
 /**
