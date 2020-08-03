@@ -6666,6 +6666,265 @@ $root.proto = (function() {
         return UpdateUserRequest;
     })();
 
+    proto.UpdatePasswordRequest = (function() {
+
+        /**
+         * Properties of an UpdatePasswordRequest.
+         * @memberof proto
+         * @interface IUpdatePasswordRequest
+         * @property {proto.IAuthenticateRequest|null} [authRequest] UpdatePasswordRequest authRequest
+         * @property {string|null} [currentPassword] UpdatePasswordRequest currentPassword
+         * @property {string|null} [newPassword] UpdatePasswordRequest newPassword
+         * @property {string|null} [verifyNewPassword] UpdatePasswordRequest verifyNewPassword
+         */
+
+        /**
+         * Constructs a new UpdatePasswordRequest.
+         * @memberof proto
+         * @classdesc Represents an UpdatePasswordRequest.
+         * @implements IUpdatePasswordRequest
+         * @constructor
+         * @param {proto.IUpdatePasswordRequest=} [properties] Properties to set
+         */
+        function UpdatePasswordRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UpdatePasswordRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.UpdatePasswordRequest
+         * @instance
+         */
+        UpdatePasswordRequest.prototype.authRequest = null;
+
+        /**
+         * UpdatePasswordRequest currentPassword.
+         * @member {string} currentPassword
+         * @memberof proto.UpdatePasswordRequest
+         * @instance
+         */
+        UpdatePasswordRequest.prototype.currentPassword = "";
+
+        /**
+         * UpdatePasswordRequest newPassword.
+         * @member {string} newPassword
+         * @memberof proto.UpdatePasswordRequest
+         * @instance
+         */
+        UpdatePasswordRequest.prototype.newPassword = "";
+
+        /**
+         * UpdatePasswordRequest verifyNewPassword.
+         * @member {string} verifyNewPassword
+         * @memberof proto.UpdatePasswordRequest
+         * @instance
+         */
+        UpdatePasswordRequest.prototype.verifyNewPassword = "";
+
+        /**
+         * Creates a new UpdatePasswordRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.UpdatePasswordRequest
+         * @static
+         * @param {proto.IUpdatePasswordRequest=} [properties] Properties to set
+         * @returns {proto.UpdatePasswordRequest} UpdatePasswordRequest instance
+         */
+        UpdatePasswordRequest.create = function create(properties) {
+            return new UpdatePasswordRequest(properties);
+        };
+
+        /**
+         * Encodes the specified UpdatePasswordRequest message. Does not implicitly {@link proto.UpdatePasswordRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.UpdatePasswordRequest
+         * @static
+         * @param {proto.IUpdatePasswordRequest} message UpdatePasswordRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UpdatePasswordRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.currentPassword != null && message.hasOwnProperty("currentPassword"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.currentPassword);
+            if (message.newPassword != null && message.hasOwnProperty("newPassword"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.newPassword);
+            if (message.verifyNewPassword != null && message.hasOwnProperty("verifyNewPassword"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verifyNewPassword);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UpdatePasswordRequest message, length delimited. Does not implicitly {@link proto.UpdatePasswordRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.UpdatePasswordRequest
+         * @static
+         * @param {proto.IUpdatePasswordRequest} message UpdatePasswordRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UpdatePasswordRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an UpdatePasswordRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.UpdatePasswordRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.UpdatePasswordRequest} UpdatePasswordRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UpdatePasswordRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UpdatePasswordRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.currentPassword = reader.string();
+                    break;
+                case 3:
+                    message.newPassword = reader.string();
+                    break;
+                case 4:
+                    message.verifyNewPassword = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an UpdatePasswordRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.UpdatePasswordRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.UpdatePasswordRequest} UpdatePasswordRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UpdatePasswordRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an UpdatePasswordRequest message.
+         * @function verify
+         * @memberof proto.UpdatePasswordRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UpdatePasswordRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            if (message.currentPassword != null && message.hasOwnProperty("currentPassword"))
+                if (!$util.isString(message.currentPassword))
+                    return "currentPassword: string expected";
+            if (message.newPassword != null && message.hasOwnProperty("newPassword"))
+                if (!$util.isString(message.newPassword))
+                    return "newPassword: string expected";
+            if (message.verifyNewPassword != null && message.hasOwnProperty("verifyNewPassword"))
+                if (!$util.isString(message.verifyNewPassword))
+                    return "verifyNewPassword: string expected";
+            return null;
+        };
+
+        /**
+         * Creates an UpdatePasswordRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.UpdatePasswordRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.UpdatePasswordRequest} UpdatePasswordRequest
+         */
+        UpdatePasswordRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.UpdatePasswordRequest)
+                return object;
+            var message = new $root.proto.UpdatePasswordRequest();
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.UpdatePasswordRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            if (object.currentPassword != null)
+                message.currentPassword = String(object.currentPassword);
+            if (object.newPassword != null)
+                message.newPassword = String(object.newPassword);
+            if (object.verifyNewPassword != null)
+                message.verifyNewPassword = String(object.verifyNewPassword);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an UpdatePasswordRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.UpdatePasswordRequest
+         * @static
+         * @param {proto.UpdatePasswordRequest} message UpdatePasswordRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UpdatePasswordRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.authRequest = null;
+                object.currentPassword = "";
+                object.newPassword = "";
+                object.verifyNewPassword = "";
+            }
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            if (message.currentPassword != null && message.hasOwnProperty("currentPassword"))
+                object.currentPassword = message.currentPassword;
+            if (message.newPassword != null && message.hasOwnProperty("newPassword"))
+                object.newPassword = message.newPassword;
+            if (message.verifyNewPassword != null && message.hasOwnProperty("verifyNewPassword"))
+                object.verifyNewPassword = message.verifyNewPassword;
+            return object;
+        };
+
+        /**
+         * Converts this UpdatePasswordRequest to JSON.
+         * @function toJSON
+         * @memberof proto.UpdatePasswordRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UpdatePasswordRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UpdatePasswordRequest;
+    })();
+
     proto.RecoveryCode = (function() {
 
         /**
@@ -7657,6 +7916,39 @@ $root.proto = (function() {
          * @instance
          * @param {proto.IUpdateUserRequest} request UpdateUserRequest message or plain object
          * @returns {Promise<proto.GetUserResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.UserService#updatePassword}.
+         * @memberof proto.UserService
+         * @typedef UpdatePasswordCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls UpdatePassword.
+         * @function updatePassword
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IUpdatePasswordRequest} request UpdatePasswordRequest message or plain object
+         * @param {proto.UserService.UpdatePasswordCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserService.prototype.updatePassword = function updatePassword(request, callback) {
+            return this.rpcCall(updatePassword, $root.proto.UpdatePasswordRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "UpdatePassword" });
+
+        /**
+         * Calls UpdatePassword.
+         * @function updatePassword
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IUpdatePasswordRequest} request UpdatePasswordRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
          * @variation 2
          */
 

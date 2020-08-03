@@ -561,6 +561,86 @@ proto.proto.UserServicePromiseClient.prototype.updateUser =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.UpdatePasswordRequest,
+ *   !proto.proto.Response>}
+ */
+const methodDescriptor_UserService_UpdatePassword = new grpc.web.MethodDescriptor(
+  '/proto.UserService/UpdatePassword',
+  grpc.web.MethodType.UNARY,
+  proto.proto.UpdatePasswordRequest,
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.UpdatePasswordRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.UpdatePasswordRequest,
+ *   !proto.proto.Response>}
+ */
+const methodInfo_UserService_UpdatePassword = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.UpdatePasswordRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.UpdatePasswordRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.UserServiceClient.prototype.updatePassword =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.UserService/UpdatePassword',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_UpdatePassword,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.UpdatePasswordRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.UserServicePromiseClient.prototype.updatePassword =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.UserService/UpdatePassword',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_UpdatePassword);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.SearchUserRequest,
  *   !proto.proto.SearchUserResponse>}
  */

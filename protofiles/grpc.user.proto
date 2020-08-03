@@ -145,6 +145,13 @@ message UpdateUserRequest {
     User       result       = 2;
 }
 
+message UpdatePasswordRequest {
+    AuthenticateRequest auth_request = 1;
+    string current_password    = 2;
+    string new_password        = 3;
+    string verify_new_password = 4;
+}
+
 // start of two factor authentication messages
 message RecoveryCode {
     string                     id          = 1;
@@ -177,6 +184,7 @@ service UserService {
     rpc RemoveActivity(AuthenticateRequest) returns (Response);
     rpc GetUser(AuthenticateRequest) returns (GetUserResponse);
     rpc UpdateUser(UpdateUserRequest) returns (GetUserResponse);
+    rpc UpdatePassword(UpdatePasswordRequest) returns (Response);
     rpc Search(SearchUserRequest) returns (SearchUserResponse);
     rpc CreateUser(CreateUserRequest) returns (AuthResponse);
 
