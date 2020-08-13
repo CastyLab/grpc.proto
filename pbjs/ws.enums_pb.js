@@ -62,7 +62,9 @@ proto.proto.EMSG = {
   FINISHED_MOVIE: 30,
   PLAYING: 31,
   CLIENT_READY: 32,
-  USER_UPDATED: 33
+  MESSAGE_EDITED: 33,
+  MESSAGE_DELETED: 34,
+  USER_UPDATED: 35
 };
 
 goog.object.extend(exports, proto.proto);

@@ -982,6 +982,8 @@ $root.proto = (function() {
                 case 31:
                 case 32:
                 case 33:
+                case 34:
+                case 35:
                     break;
                 }
             if (message.data != null && message.hasOwnProperty("data"))
@@ -1140,9 +1142,17 @@ $root.proto = (function() {
             case 32:
                 message.type = 32;
                 break;
-            case "USER_UPDATED":
+            case "MESSAGE_EDITED":
             case 33:
                 message.type = 33;
+                break;
+            case "MESSAGE_DELETED":
+            case 34:
+                message.type = 34;
+                break;
+            case "USER_UPDATED":
+            case 35:
+                message.type = 35;
                 break;
             }
             if (object.data != null)
@@ -1262,7 +1272,9 @@ $root.proto = (function() {
      * @property {number} FINISHED_MOVIE=30 FINISHED_MOVIE value
      * @property {number} PLAYING=31 PLAYING value
      * @property {number} CLIENT_READY=32 CLIENT_READY value
-     * @property {number} USER_UPDATED=33 USER_UPDATED value
+     * @property {number} MESSAGE_EDITED=33 MESSAGE_EDITED value
+     * @property {number} MESSAGE_DELETED=34 MESSAGE_DELETED value
+     * @property {number} USER_UPDATED=35 USER_UPDATED value
      */
     proto.EMSG = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -1299,7 +1311,9 @@ $root.proto = (function() {
         values[valuesById[30] = "FINISHED_MOVIE"] = 30;
         values[valuesById[31] = "PLAYING"] = 31;
         values[valuesById[32] = "CLIENT_READY"] = 32;
-        values[valuesById[33] = "USER_UPDATED"] = 33;
+        values[valuesById[33] = "MESSAGE_EDITED"] = 33;
+        values[valuesById[34] = "MESSAGE_DELETED"] = 34;
+        values[valuesById[35] = "USER_UPDATED"] = 35;
         return values;
     })();
 

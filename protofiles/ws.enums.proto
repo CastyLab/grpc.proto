@@ -50,6 +50,10 @@ enum EMSG {
     PLAYING                             = 31;
     CLIENT_READY                        = 32;
 
+    // messages
+    MESSAGE_EDITED                      = 33;
+    MESSAGE_DELETED                     = 34;
+
     // USER events
-    USER_UPDATED                        = 33;
+    USER_UPDATED                        = 35;
 }
