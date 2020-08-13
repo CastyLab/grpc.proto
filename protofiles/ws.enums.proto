@@ -37,16 +37,19 @@ enum EMSG {
     THEATER_DESCRIPTION_CHANGED         = 20;
     THEATER_VIDEO_PLAYER_ACCESS_CHANGED = 21;
     THEATER_PRIVACY_CHANGED             = 22;
+    THEATER_MEDIA_SOURCE_CHANGED        = 23;
 
     // Theater video player events
-    SYNC_ME                             = 23;
-    SYNCED                              = 24;
-    BUFFERING                           = 25;
-    BUFFERED                            = 26;
-    WAITING_FOR_CLIENTS                 = 27;
-    CLIENTS_SYNCYED                     = 28;
-    FINISHED_MOVIE                      = 29;
-    PLAYING                             = 30;
-    CLIENT_READY                        = 31;
+    SYNC_ME                             = 24;
+    SYNCED                              = 25;
+    BUFFERING                           = 26;
+    BUFFERED                            = 27;
+    WAITING_FOR_CLIENTS                 = 28;
+    CLIENTS_SYNCYED                     = 29;
+    FINISHED_MOVIE                      = 30;
+    PLAYING                             = 31;
+    CLIENT_READY                        = 32;
 
+    // USER events
+    USER_UPDATED                        = 33;
 }
