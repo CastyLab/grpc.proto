@@ -34,26 +34,24 @@ enum EMSG {
     THEATER_PAUSE                       = 17;
     NEW_NOTIFICATION                    = 18;
     FRIEND_REQUEST_ACCEPTED             = 19;
-    THEATER_DESCRIPTION_CHANGED         = 20;
-    THEATER_VIDEO_PLAYER_ACCESS_CHANGED = 21;
-    THEATER_PRIVACY_CHANGED             = 22;
-    THEATER_MEDIA_SOURCE_CHANGED        = 23;
+    THEATER_UPDATED                     = 20;
+    THEATER_MEDIA_SOURCE_CHANGED        = 21;
 
     // Theater video player events
-    SYNC_ME                             = 24;
-    SYNCED                              = 25;
-    BUFFERING                           = 26;
-    BUFFERED                            = 27;
-    WAITING_FOR_CLIENTS                 = 28;
-    CLIENTS_SYNCYED                     = 29;
-    FINISHED_MOVIE                      = 30;
-    PLAYING                             = 31;
-    CLIENT_READY                        = 32;
+    SYNC_ME                             = 22;
+    SYNCED                              = 23;
+    BUFFERING                           = 24;
+    BUFFERED                            = 25;
+    WAITING_FOR_CLIENTS                 = 26;
+    CLIENTS_SYNCYED                     = 27;
+    FINISHED_MOVIE                      = 28;
+    PLAYING                             = 29;
+    CLIENT_READY                        = 30;
 
     // messages
-    MESSAGE_EDITED                      = 33;
-    MESSAGE_DELETED                     = 34;
+    MESSAGE_EDITED                      = 31;
+    MESSAGE_DELETED                     = 32;
 
     // USER events
-    USER_UPDATED                        = 35;
+    USER_UPDATED                        = 33;
 }

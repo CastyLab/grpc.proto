@@ -982,8 +982,6 @@ $root.proto = (function() {
                 case 31:
                 case 32:
                 case 33:
-                case 34:
-                case 35:
                     break;
                 }
             if (message.data != null && message.hasOwnProperty("data"))
@@ -1090,69 +1088,61 @@ $root.proto = (function() {
             case 19:
                 message.type = 19;
                 break;
-            case "THEATER_DESCRIPTION_CHANGED":
+            case "THEATER_UPDATED":
             case 20:
                 message.type = 20;
                 break;
-            case "THEATER_VIDEO_PLAYER_ACCESS_CHANGED":
+            case "THEATER_MEDIA_SOURCE_CHANGED":
             case 21:
                 message.type = 21;
                 break;
-            case "THEATER_PRIVACY_CHANGED":
+            case "SYNC_ME":
             case 22:
                 message.type = 22;
                 break;
-            case "THEATER_MEDIA_SOURCE_CHANGED":
+            case "SYNCED":
             case 23:
                 message.type = 23;
                 break;
-            case "SYNC_ME":
+            case "BUFFERING":
             case 24:
                 message.type = 24;
                 break;
-            case "SYNCED":
+            case "BUFFERED":
             case 25:
                 message.type = 25;
                 break;
-            case "BUFFERING":
+            case "WAITING_FOR_CLIENTS":
             case 26:
                 message.type = 26;
                 break;
-            case "BUFFERED":
+            case "CLIENTS_SYNCYED":
             case 27:
                 message.type = 27;
                 break;
-            case "WAITING_FOR_CLIENTS":
+            case "FINISHED_MOVIE":
             case 28:
                 message.type = 28;
                 break;
-            case "CLIENTS_SYNCYED":
+            case "PLAYING":
             case 29:
                 message.type = 29;
                 break;
-            case "FINISHED_MOVIE":
+            case "CLIENT_READY":
             case 30:
                 message.type = 30;
                 break;
-            case "PLAYING":
+            case "MESSAGE_EDITED":
             case 31:
                 message.type = 31;
                 break;
-            case "CLIENT_READY":
+            case "MESSAGE_DELETED":
             case 32:
                 message.type = 32;
                 break;
-            case "MESSAGE_EDITED":
+            case "USER_UPDATED":
             case 33:
                 message.type = 33;
-                break;
-            case "MESSAGE_DELETED":
-            case 34:
-                message.type = 34;
-                break;
-            case "USER_UPDATED":
-            case 35:
-                message.type = 35;
                 break;
             }
             if (object.data != null)
@@ -1259,22 +1249,20 @@ $root.proto = (function() {
      * @property {number} THEATER_PAUSE=17 THEATER_PAUSE value
      * @property {number} NEW_NOTIFICATION=18 NEW_NOTIFICATION value
      * @property {number} FRIEND_REQUEST_ACCEPTED=19 FRIEND_REQUEST_ACCEPTED value
-     * @property {number} THEATER_DESCRIPTION_CHANGED=20 THEATER_DESCRIPTION_CHANGED value
-     * @property {number} THEATER_VIDEO_PLAYER_ACCESS_CHANGED=21 THEATER_VIDEO_PLAYER_ACCESS_CHANGED value
-     * @property {number} THEATER_PRIVACY_CHANGED=22 THEATER_PRIVACY_CHANGED value
-     * @property {number} THEATER_MEDIA_SOURCE_CHANGED=23 THEATER_MEDIA_SOURCE_CHANGED value
-     * @property {number} SYNC_ME=24 SYNC_ME value
-     * @property {number} SYNCED=25 SYNCED value
-     * @property {number} BUFFERING=26 BUFFERING value
-     * @property {number} BUFFERED=27 BUFFERED value
-     * @property {number} WAITING_FOR_CLIENTS=28 WAITING_FOR_CLIENTS value
-     * @property {number} CLIENTS_SYNCYED=29 CLIENTS_SYNCYED value
-     * @property {number} FINISHED_MOVIE=30 FINISHED_MOVIE value
-     * @property {number} PLAYING=31 PLAYING value
-     * @property {number} CLIENT_READY=32 CLIENT_READY value
-     * @property {number} MESSAGE_EDITED=33 MESSAGE_EDITED value
-     * @property {number} MESSAGE_DELETED=34 MESSAGE_DELETED value
-     * @property {number} USER_UPDATED=35 USER_UPDATED value
+     * @property {number} THEATER_UPDATED=20 THEATER_UPDATED value
+     * @property {number} THEATER_MEDIA_SOURCE_CHANGED=21 THEATER_MEDIA_SOURCE_CHANGED value
+     * @property {number} SYNC_ME=22 SYNC_ME value
+     * @property {number} SYNCED=23 SYNCED value
+     * @property {number} BUFFERING=24 BUFFERING value
+     * @property {number} BUFFERED=25 BUFFERED value
+     * @property {number} WAITING_FOR_CLIENTS=26 WAITING_FOR_CLIENTS value
+     * @property {number} CLIENTS_SYNCYED=27 CLIENTS_SYNCYED value
+     * @property {number} FINISHED_MOVIE=28 FINISHED_MOVIE value
+     * @property {number} PLAYING=29 PLAYING value
+     * @property {number} CLIENT_READY=30 CLIENT_READY value
+     * @property {number} MESSAGE_EDITED=31 MESSAGE_EDITED value
+     * @property {number} MESSAGE_DELETED=32 MESSAGE_DELETED value
+     * @property {number} USER_UPDATED=33 USER_UPDATED value
      */
     proto.EMSG = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -1298,22 +1286,20 @@ $root.proto = (function() {
         values[valuesById[17] = "THEATER_PAUSE"] = 17;
         values[valuesById[18] = "NEW_NOTIFICATION"] = 18;
         values[valuesById[19] = "FRIEND_REQUEST_ACCEPTED"] = 19;
-        values[valuesById[20] = "THEATER_DESCRIPTION_CHANGED"] = 20;
-        values[valuesById[21] = "THEATER_VIDEO_PLAYER_ACCESS_CHANGED"] = 21;
-        values[valuesById[22] = "THEATER_PRIVACY_CHANGED"] = 22;
-        values[valuesById[23] = "THEATER_MEDIA_SOURCE_CHANGED"] = 23;
-        values[valuesById[24] = "SYNC_ME"] = 24;
-        values[valuesById[25] = "SYNCED"] = 25;
-        values[valuesById[26] = "BUFFERING"] = 26;
-        values[valuesById[27] = "BUFFERED"] = 27;
-        values[valuesById[28] = "WAITING_FOR_CLIENTS"] = 28;
-        values[valuesById[29] = "CLIENTS_SYNCYED"] = 29;
-        values[valuesById[30] = "FINISHED_MOVIE"] = 30;
-        values[valuesById[31] = "PLAYING"] = 31;
-        values[valuesById[32] = "CLIENT_READY"] = 32;
-        values[valuesById[33] = "MESSAGE_EDITED"] = 33;
-        values[valuesById[34] = "MESSAGE_DELETED"] = 34;
-        values[valuesById[35] = "USER_UPDATED"] = 35;
+        values[valuesById[20] = "THEATER_UPDATED"] = 20;
+        values[valuesById[21] = "THEATER_MEDIA_SOURCE_CHANGED"] = 21;
+        values[valuesById[22] = "SYNC_ME"] = 22;
+        values[valuesById[23] = "SYNCED"] = 23;
+        values[valuesById[24] = "BUFFERING"] = 24;
+        values[valuesById[25] = "BUFFERED"] = 25;
+        values[valuesById[26] = "WAITING_FOR_CLIENTS"] = 26;
+        values[valuesById[27] = "CLIENTS_SYNCYED"] = 27;
+        values[valuesById[28] = "FINISHED_MOVIE"] = 28;
+        values[valuesById[29] = "PLAYING"] = 29;
+        values[valuesById[30] = "CLIENT_READY"] = 30;
+        values[valuesById[31] = "MESSAGE_EDITED"] = 31;
+        values[valuesById[32] = "MESSAGE_DELETED"] = 32;
+        values[valuesById[33] = "USER_UPDATED"] = 33;
         return values;
     })();
 
