@@ -17093,7 +17093,7 @@ $root.proto = (function() {
          * @interface IAddSubtitlesRequest
          * @property {proto.IAuthenticateRequest|null} [authRequest] AddSubtitlesRequest authRequest
          * @property {string|null} [mediaSourceId] AddSubtitlesRequest mediaSourceId
-         * @property {proto.ISubtitle|null} [subtitle] AddSubtitlesRequest subtitle
+         * @property {Array.<proto.ISubtitle>|null} [subtitles] AddSubtitlesRequest subtitles
          */
 
         /**
@@ -17105,6 +17105,7 @@ $root.proto = (function() {
          * @param {proto.IAddSubtitlesRequest=} [properties] Properties to set
          */
         function AddSubtitlesRequest(properties) {
+            this.subtitles = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -17128,12 +17129,12 @@ $root.proto = (function() {
         AddSubtitlesRequest.prototype.mediaSourceId = "";
 
         /**
-         * AddSubtitlesRequest subtitle.
-         * @member {proto.ISubtitle|null|undefined} subtitle
+         * AddSubtitlesRequest subtitles.
+         * @member {Array.<proto.ISubtitle>} subtitles
          * @memberof proto.AddSubtitlesRequest
          * @instance
          */
-        AddSubtitlesRequest.prototype.subtitle = null;
+        AddSubtitlesRequest.prototype.subtitles = $util.emptyArray;
 
         /**
          * Creates a new AddSubtitlesRequest instance using the specified properties.
@@ -17163,8 +17164,9 @@ $root.proto = (function() {
                 $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.mediaSourceId);
-            if (message.subtitle != null && message.hasOwnProperty("subtitle"))
-                $root.proto.Subtitle.encode(message.subtitle, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.subtitles != null && message.subtitles.length)
+                for (var i = 0; i < message.subtitles.length; ++i)
+                    $root.proto.Subtitle.encode(message.subtitles[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
@@ -17206,7 +17208,9 @@ $root.proto = (function() {
                     message.mediaSourceId = reader.string();
                     break;
                 case 3:
-                    message.subtitle = $root.proto.Subtitle.decode(reader, reader.uint32());
+                    if (!(message.subtitles && message.subtitles.length))
+                        message.subtitles = [];
+                    message.subtitles.push($root.proto.Subtitle.decode(reader, reader.uint32()));
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -17251,10 +17255,14 @@ $root.proto = (function() {
             if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
                 if (!$util.isString(message.mediaSourceId))
                     return "mediaSourceId: string expected";
-            if (message.subtitle != null && message.hasOwnProperty("subtitle")) {
-                var error = $root.proto.Subtitle.verify(message.subtitle);
-                if (error)
-                    return "subtitle." + error;
+            if (message.subtitles != null && message.hasOwnProperty("subtitles")) {
+                if (!Array.isArray(message.subtitles))
+                    return "subtitles: array expected";
+                for (var i = 0; i < message.subtitles.length; ++i) {
+                    var error = $root.proto.Subtitle.verify(message.subtitles[i]);
+                    if (error)
+                        return "subtitles." + error;
+                }
             }
             return null;
         };
@@ -17278,10 +17286,15 @@ $root.proto = (function() {
             }
             if (object.mediaSourceId != null)
                 message.mediaSourceId = String(object.mediaSourceId);
-            if (object.subtitle != null) {
-                if (typeof object.subtitle !== "object")
-                    throw TypeError(".proto.AddSubtitlesRequest.subtitle: object expected");
-                message.subtitle = $root.proto.Subtitle.fromObject(object.subtitle);
+            if (object.subtitles) {
+                if (!Array.isArray(object.subtitles))
+                    throw TypeError(".proto.AddSubtitlesRequest.subtitles: array expected");
+                message.subtitles = [];
+                for (var i = 0; i < object.subtitles.length; ++i) {
+                    if (typeof object.subtitles[i] !== "object")
+                        throw TypeError(".proto.AddSubtitlesRequest.subtitles: object expected");
+                    message.subtitles[i] = $root.proto.Subtitle.fromObject(object.subtitles[i]);
+                }
             }
             return message;
         };
@@ -17299,17 +17312,21 @@ $root.proto = (function() {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.subtitles = [];
             if (options.defaults) {
                 object.authRequest = null;
                 object.mediaSourceId = "";
-                object.subtitle = null;
             }
             if (message.authRequest != null && message.hasOwnProperty("authRequest"))
                 object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
             if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
                 object.mediaSourceId = message.mediaSourceId;
-            if (message.subtitle != null && message.hasOwnProperty("subtitle"))
-                object.subtitle = $root.proto.Subtitle.toObject(message.subtitle, options);
+            if (message.subtitles && message.subtitles.length) {
+                object.subtitles = [];
+                for (var j = 0; j < message.subtitles.length; ++j)
+                    object.subtitles[j] = $root.proto.Subtitle.toObject(message.subtitles[j], options);
+            }
             return object;
         };
 

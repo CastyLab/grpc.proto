@@ -158,8 +158,8 @@ message FollowedTheatersResponse {
 
 message AddSubtitlesRequest {
     AuthenticateRequest auth_request = 1;
-    string media_source_id = 2;
-    Subtitle subtitle = 3;
+    string media_source_id           = 2;
+    repeated Subtitle subtitles      = 3;
 }
 
 message SubtitlesResponse {

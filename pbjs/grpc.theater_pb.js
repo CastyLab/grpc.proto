@@ -386,7 +386,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.proto.AddSubtitlesRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.proto.AddSubtitlesRequest.repeatedFields_, null);
 };
 goog.inherits(proto.proto.AddSubtitlesRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -4897,6 +4897,13 @@ proto.proto.FollowedTheatersResponse.prototype.clearResultList = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.proto.AddSubtitlesRequest.repeatedFields_ = [3];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -4930,7 +4937,8 @@ proto.proto.AddSubtitlesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f),
     mediaSourceId: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    subtitle: (f = msg.getSubtitle()) && proto.proto.Subtitle.toObject(includeInstance, f)
+    subtitlesList: jspb.Message.toObjectList(msg.getSubtitlesList(),
+    proto.proto.Subtitle.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -4979,7 +4987,7 @@ proto.proto.AddSubtitlesRequest.deserializeBinaryFromReader = function(msg, read
     case 3:
       var value = new proto.proto.Subtitle;
       reader.readMessage(value,proto.proto.Subtitle.deserializeBinaryFromReader);
-      msg.setSubtitle(value);
+      msg.addSubtitles(value);
       break;
     default:
       reader.skipField();
@@ -5025,9 +5033,9 @@ proto.proto.AddSubtitlesRequest.serializeBinaryToWriter = function(message, writ
       f
     );
   }
-  f = message.getSubtitle();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getSubtitlesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
       3,
       f,
       proto.proto.Subtitle.serializeBinaryToWriter
@@ -5092,39 +5100,40 @@ proto.proto.AddSubtitlesRequest.prototype.setMediaSourceId = function(value) {
 
 
 /**
- * optional Subtitle subtitle = 3;
- * @return {?proto.proto.Subtitle}
+ * repeated Subtitle subtitles = 3;
+ * @return {!Array<!proto.proto.Subtitle>}
  */
-proto.proto.AddSubtitlesRequest.prototype.getSubtitle = function() {
-  return /** @type{?proto.proto.Subtitle} */ (
-    jspb.Message.getWrapperField(this, proto.proto.Subtitle, 3));
+proto.proto.AddSubtitlesRequest.prototype.getSubtitlesList = function() {
+  return /** @type{!Array<!proto.proto.Subtitle>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.proto.Subtitle, 3));
 };
 
 
 /**
- * @param {?proto.proto.Subtitle|undefined} value
+ * @param {!Array<!proto.proto.Subtitle>} value
  * @return {!proto.proto.AddSubtitlesRequest} returns this
 */
-proto.proto.AddSubtitlesRequest.prototype.setSubtitle = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
+proto.proto.AddSubtitlesRequest.prototype.setSubtitlesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
 };
 
 
 /**
- * Clears the message field making it undefined.
+ * @param {!proto.proto.Subtitle=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.proto.Subtitle}
+ */
+proto.proto.AddSubtitlesRequest.prototype.addSubtitles = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.proto.Subtitle, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
  * @return {!proto.proto.AddSubtitlesRequest} returns this
  */
-proto.proto.AddSubtitlesRequest.prototype.clearSubtitle = function() {
-  return this.setSubtitle(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.proto.AddSubtitlesRequest.prototype.hasSubtitle = function() {
-  return jspb.Message.getField(this, 3) != null;
+proto.proto.AddSubtitlesRequest.prototype.clearSubtitlesList = function() {
+  return this.setSubtitlesList([]);
 };
 
 
