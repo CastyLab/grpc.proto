@@ -1121,6 +1121,86 @@ proto.proto.UserServicePromiseClient.prototype.getFriend =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.AuthenticateRequest,
+ *   !proto.proto.PendingFriendRequests>}
+ */
+const methodDescriptor_UserService_GetPendingFriendRequests = new grpc.web.MethodDescriptor(
+  '/proto.UserService/GetPendingFriendRequests',
+  grpc.web.MethodType.UNARY,
+  grpc_base_pb.AuthenticateRequest,
+  proto.proto.PendingFriendRequests,
+  /**
+   * @param {!proto.proto.AuthenticateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.PendingFriendRequests.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.AuthenticateRequest,
+ *   !proto.proto.PendingFriendRequests>}
+ */
+const methodInfo_UserService_GetPendingFriendRequests = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.proto.PendingFriendRequests,
+  /**
+   * @param {!proto.proto.AuthenticateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.PendingFriendRequests.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.AuthenticateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.PendingFriendRequests)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.PendingFriendRequests>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.UserServiceClient.prototype.getPendingFriendRequests =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.UserService/GetPendingFriendRequests',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_GetPendingFriendRequests,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.AuthenticateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.PendingFriendRequests>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.UserServicePromiseClient.prototype.getPendingFriendRequests =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.UserService/GetPendingFriendRequests',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_GetPendingFriendRequests);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.FriendRequest,
  *   !proto.proto.Friend>}
  */

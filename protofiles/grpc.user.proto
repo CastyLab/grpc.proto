@@ -83,7 +83,8 @@ message UpdateActivityRequest {
 message FriendRequest {
     string  request_id  = 1;
     string  friend_id   = 2;
-    AuthenticateRequest auth_request = 3;
+    User    friend      = 3;
+    AuthenticateRequest auth_request = 4;
 }
 
 message CreateUserRequest {
@@ -173,6 +174,13 @@ message TwoFactorAuthRequest {
 }
 // end of two factor authentication messages
 
+message PendingFriendRequests {
+    int64         code    = 1;
+    string        status  = 2;
+    string        message = 3;
+    repeated FriendRequest result  = 4;
+}
+
 service UserService {
 
     // Websocket requests only
@@ -194,6 +202,7 @@ service UserService {
 
     // FriendZone
     rpc GetFriend(FriendRequest) returns (FriendResponse);
+    rpc GetPendingFriendRequests(AuthenticateRequest) returns (PendingFriendRequests);
     rpc GetFriendRequest(FriendRequest) returns (Friend);
     rpc SendFriendRequest(FriendRequest) returns (Response);
     rpc AcceptFriendRequest(FriendRequest) returns (Response);

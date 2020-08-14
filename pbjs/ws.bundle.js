@@ -3988,6 +3988,7 @@ $root.proto = (function() {
          * @interface IFriendRequest
          * @property {string|null} [requestId] FriendRequest requestId
          * @property {string|null} [friendId] FriendRequest friendId
+         * @property {proto.IUser|null} [friend] FriendRequest friend
          * @property {proto.IAuthenticateRequest|null} [authRequest] FriendRequest authRequest
          */
 
@@ -4021,6 +4022,14 @@ $root.proto = (function() {
          * @instance
          */
         FriendRequest.prototype.friendId = "";
+
+        /**
+         * FriendRequest friend.
+         * @member {proto.IUser|null|undefined} friend
+         * @memberof proto.FriendRequest
+         * @instance
+         */
+        FriendRequest.prototype.friend = null;
 
         /**
          * FriendRequest authRequest.
@@ -4058,8 +4067,10 @@ $root.proto = (function() {
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.requestId);
             if (message.friendId != null && message.hasOwnProperty("friendId"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.friendId);
+            if (message.friend != null && message.hasOwnProperty("friend"))
+                $root.proto.User.encode(message.friend, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             if (message.authRequest != null && message.hasOwnProperty("authRequest"))
-                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -4101,6 +4112,9 @@ $root.proto = (function() {
                     message.friendId = reader.string();
                     break;
                 case 3:
+                    message.friend = $root.proto.User.decode(reader, reader.uint32());
+                    break;
+                case 4:
                     message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
                     break;
                 default:
@@ -4144,6 +4158,11 @@ $root.proto = (function() {
             if (message.friendId != null && message.hasOwnProperty("friendId"))
                 if (!$util.isString(message.friendId))
                     return "friendId: string expected";
+            if (message.friend != null && message.hasOwnProperty("friend")) {
+                var error = $root.proto.User.verify(message.friend);
+                if (error)
+                    return "friend." + error;
+            }
             if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
                 var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
                 if (error)
@@ -4168,6 +4187,11 @@ $root.proto = (function() {
                 message.requestId = String(object.requestId);
             if (object.friendId != null)
                 message.friendId = String(object.friendId);
+            if (object.friend != null) {
+                if (typeof object.friend !== "object")
+                    throw TypeError(".proto.FriendRequest.friend: object expected");
+                message.friend = $root.proto.User.fromObject(object.friend);
+            }
             if (object.authRequest != null) {
                 if (typeof object.authRequest !== "object")
                     throw TypeError(".proto.FriendRequest.authRequest: object expected");
@@ -4192,12 +4216,15 @@ $root.proto = (function() {
             if (options.defaults) {
                 object.requestId = "";
                 object.friendId = "";
+                object.friend = null;
                 object.authRequest = null;
             }
             if (message.requestId != null && message.hasOwnProperty("requestId"))
                 object.requestId = message.requestId;
             if (message.friendId != null && message.hasOwnProperty("friendId"))
                 object.friendId = message.friendId;
+            if (message.friend != null && message.hasOwnProperty("friend"))
+                object.friend = $root.proto.User.toObject(message.friend, options);
             if (message.authRequest != null && message.hasOwnProperty("authRequest"))
                 object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
             return object;
@@ -7731,6 +7758,296 @@ $root.proto = (function() {
         return TwoFactorAuthRequest;
     })();
 
+    proto.PendingFriendRequests = (function() {
+
+        /**
+         * Properties of a PendingFriendRequests.
+         * @memberof proto
+         * @interface IPendingFriendRequests
+         * @property {number|Long|null} [code] PendingFriendRequests code
+         * @property {string|null} [status] PendingFriendRequests status
+         * @property {string|null} [message] PendingFriendRequests message
+         * @property {Array.<proto.IFriendRequest>|null} [result] PendingFriendRequests result
+         */
+
+        /**
+         * Constructs a new PendingFriendRequests.
+         * @memberof proto
+         * @classdesc Represents a PendingFriendRequests.
+         * @implements IPendingFriendRequests
+         * @constructor
+         * @param {proto.IPendingFriendRequests=} [properties] Properties to set
+         */
+        function PendingFriendRequests(properties) {
+            this.result = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * PendingFriendRequests code.
+         * @member {number|Long} code
+         * @memberof proto.PendingFriendRequests
+         * @instance
+         */
+        PendingFriendRequests.prototype.code = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * PendingFriendRequests status.
+         * @member {string} status
+         * @memberof proto.PendingFriendRequests
+         * @instance
+         */
+        PendingFriendRequests.prototype.status = "";
+
+        /**
+         * PendingFriendRequests message.
+         * @member {string} message
+         * @memberof proto.PendingFriendRequests
+         * @instance
+         */
+        PendingFriendRequests.prototype.message = "";
+
+        /**
+         * PendingFriendRequests result.
+         * @member {Array.<proto.IFriendRequest>} result
+         * @memberof proto.PendingFriendRequests
+         * @instance
+         */
+        PendingFriendRequests.prototype.result = $util.emptyArray;
+
+        /**
+         * Creates a new PendingFriendRequests instance using the specified properties.
+         * @function create
+         * @memberof proto.PendingFriendRequests
+         * @static
+         * @param {proto.IPendingFriendRequests=} [properties] Properties to set
+         * @returns {proto.PendingFriendRequests} PendingFriendRequests instance
+         */
+        PendingFriendRequests.create = function create(properties) {
+            return new PendingFriendRequests(properties);
+        };
+
+        /**
+         * Encodes the specified PendingFriendRequests message. Does not implicitly {@link proto.PendingFriendRequests.verify|verify} messages.
+         * @function encode
+         * @memberof proto.PendingFriendRequests
+         * @static
+         * @param {proto.IPendingFriendRequests} message PendingFriendRequests message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PendingFriendRequests.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.code != null && message.hasOwnProperty("code"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.code);
+            if (message.status != null && message.hasOwnProperty("status"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.status);
+            if (message.message != null && message.hasOwnProperty("message"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
+            if (message.result != null && message.result.length)
+                for (var i = 0; i < message.result.length; ++i)
+                    $root.proto.FriendRequest.encode(message.result[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified PendingFriendRequests message, length delimited. Does not implicitly {@link proto.PendingFriendRequests.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.PendingFriendRequests
+         * @static
+         * @param {proto.IPendingFriendRequests} message PendingFriendRequests message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        PendingFriendRequests.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a PendingFriendRequests message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.PendingFriendRequests
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.PendingFriendRequests} PendingFriendRequests
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PendingFriendRequests.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.PendingFriendRequests();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.code = reader.int64();
+                    break;
+                case 2:
+                    message.status = reader.string();
+                    break;
+                case 3:
+                    message.message = reader.string();
+                    break;
+                case 4:
+                    if (!(message.result && message.result.length))
+                        message.result = [];
+                    message.result.push($root.proto.FriendRequest.decode(reader, reader.uint32()));
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a PendingFriendRequests message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.PendingFriendRequests
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.PendingFriendRequests} PendingFriendRequests
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        PendingFriendRequests.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a PendingFriendRequests message.
+         * @function verify
+         * @memberof proto.PendingFriendRequests
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        PendingFriendRequests.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (!$util.isInteger(message.code) && !(message.code && $util.isInteger(message.code.low) && $util.isInteger(message.code.high)))
+                    return "code: integer|Long expected";
+            if (message.status != null && message.hasOwnProperty("status"))
+                if (!$util.isString(message.status))
+                    return "status: string expected";
+            if (message.message != null && message.hasOwnProperty("message"))
+                if (!$util.isString(message.message))
+                    return "message: string expected";
+            if (message.result != null && message.hasOwnProperty("result")) {
+                if (!Array.isArray(message.result))
+                    return "result: array expected";
+                for (var i = 0; i < message.result.length; ++i) {
+                    var error = $root.proto.FriendRequest.verify(message.result[i]);
+                    if (error)
+                        return "result." + error;
+                }
+            }
+            return null;
+        };
+
+        /**
+         * Creates a PendingFriendRequests message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.PendingFriendRequests
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.PendingFriendRequests} PendingFriendRequests
+         */
+        PendingFriendRequests.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.PendingFriendRequests)
+                return object;
+            var message = new $root.proto.PendingFriendRequests();
+            if (object.code != null)
+                if ($util.Long)
+                    (message.code = $util.Long.fromValue(object.code)).unsigned = false;
+                else if (typeof object.code === "string")
+                    message.code = parseInt(object.code, 10);
+                else if (typeof object.code === "number")
+                    message.code = object.code;
+                else if (typeof object.code === "object")
+                    message.code = new $util.LongBits(object.code.low >>> 0, object.code.high >>> 0).toNumber();
+            if (object.status != null)
+                message.status = String(object.status);
+            if (object.message != null)
+                message.message = String(object.message);
+            if (object.result) {
+                if (!Array.isArray(object.result))
+                    throw TypeError(".proto.PendingFriendRequests.result: array expected");
+                message.result = [];
+                for (var i = 0; i < object.result.length; ++i) {
+                    if (typeof object.result[i] !== "object")
+                        throw TypeError(".proto.PendingFriendRequests.result: object expected");
+                    message.result[i] = $root.proto.FriendRequest.fromObject(object.result[i]);
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a PendingFriendRequests message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.PendingFriendRequests
+         * @static
+         * @param {proto.PendingFriendRequests} message PendingFriendRequests
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        PendingFriendRequests.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.arrays || options.defaults)
+                object.result = [];
+            if (options.defaults) {
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.code = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.code = options.longs === String ? "0" : 0;
+                object.status = "";
+                object.message = "";
+            }
+            if (message.code != null && message.hasOwnProperty("code"))
+                if (typeof message.code === "number")
+                    object.code = options.longs === String ? String(message.code) : message.code;
+                else
+                    object.code = options.longs === String ? $util.Long.prototype.toString.call(message.code) : options.longs === Number ? new $util.LongBits(message.code.low >>> 0, message.code.high >>> 0).toNumber() : message.code;
+            if (message.status != null && message.hasOwnProperty("status"))
+                object.status = message.status;
+            if (message.message != null && message.hasOwnProperty("message"))
+                object.message = message.message;
+            if (message.result && message.result.length) {
+                object.result = [];
+                for (var j = 0; j < message.result.length; ++j)
+                    object.result[j] = $root.proto.FriendRequest.toObject(message.result[j], options);
+            }
+            return object;
+        };
+
+        /**
+         * Converts this PendingFriendRequests to JSON.
+         * @function toJSON
+         * @memberof proto.PendingFriendRequests
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        PendingFriendRequests.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return PendingFriendRequests;
+    })();
+
     proto.UserService = (function() {
 
         /**
@@ -8189,6 +8506,39 @@ $root.proto = (function() {
          * @instance
          * @param {proto.IFriendRequest} request FriendRequest message or plain object
          * @returns {Promise<proto.FriendResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.UserService#getPendingFriendRequests}.
+         * @memberof proto.UserService
+         * @typedef GetPendingFriendRequestsCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.PendingFriendRequests} [response] PendingFriendRequests
+         */
+
+        /**
+         * Calls GetPendingFriendRequests.
+         * @function getPendingFriendRequests
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IAuthenticateRequest} request AuthenticateRequest message or plain object
+         * @param {proto.UserService.GetPendingFriendRequestsCallback} callback Node-style callback called with the error, if any, and PendingFriendRequests
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserService.prototype.getPendingFriendRequests = function getPendingFriendRequests(request, callback) {
+            return this.rpcCall(getPendingFriendRequests, $root.proto.AuthenticateRequest, $root.proto.PendingFriendRequests, request, callback);
+        }, "name", { value: "GetPendingFriendRequests" });
+
+        /**
+         * Calls GetPendingFriendRequests.
+         * @function getPendingFriendRequests
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IAuthenticateRequest} request AuthenticateRequest message or plain object
+         * @returns {Promise<proto.PendingFriendRequests>} Promise
          * @variation 2
          */
 
