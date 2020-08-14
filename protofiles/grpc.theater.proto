@@ -156,6 +156,19 @@ message FollowedTheatersResponse {
     repeated Theater result = 4;
 }
 
+message AddSubtitlesRequest {
+    AuthenticateRequest auth_request = 1;
+    string media_source_id = 2;
+    Subtitle subtitle = 3;
+}
+
+message SubtitlesResponse {
+    int64    code            = 1;
+    string   status          = 2;
+    string   message         = 3;
+    repeated Subtitle result = 4;
+}
+
 service TheaterService {
     rpc Invite(InviteFriendsTheaterRequest) returns (Response);
     rpc GetFollowedTheaters(AuthenticateRequest) returns (FollowedTheatersResponse);
@@ -163,10 +176,11 @@ service TheaterService {
     rpc Unfollow(TheaterAuthRequest) returns (Response);
     rpc GetTheater(GetTheaterRequest) returns (UserTheaterResponse);
     rpc UpdateTheater(TheaterAuthRequest) returns (Response);
+    rpc AddSubtitles(AddSubtitlesRequest) returns (SubtitlesResponse);
+    rpc RemoveSubtitle(RemoveSubtitleRequest) returns (Response);
     rpc GetSubtitles(MediaSourceAuthRequest) returns (TheaterSubtitlesResponse);
     rpc GetMediaSources(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
     rpc SelectMediaSource(MediaSourceAuthRequest) returns (Response);
     rpc RemoveMediaSource(MediaSourceRemoveRequest) returns (Response);
     rpc AddMediaSource(MediaSourceAuthRequest) returns (Response);
-    rpc RemoveSubtitle(RemoveSubtitleRequest) returns (Response);
 }

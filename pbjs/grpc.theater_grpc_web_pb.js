@@ -559,6 +559,166 @@ proto.proto.TheaterServicePromiseClient.prototype.updateTheater =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.AddSubtitlesRequest,
+ *   !proto.proto.SubtitlesResponse>}
+ */
+const methodDescriptor_TheaterService_AddSubtitles = new grpc.web.MethodDescriptor(
+  '/proto.TheaterService/AddSubtitles',
+  grpc.web.MethodType.UNARY,
+  proto.proto.AddSubtitlesRequest,
+  proto.proto.SubtitlesResponse,
+  /**
+   * @param {!proto.proto.AddSubtitlesRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.SubtitlesResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.AddSubtitlesRequest,
+ *   !proto.proto.SubtitlesResponse>}
+ */
+const methodInfo_TheaterService_AddSubtitles = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.proto.SubtitlesResponse,
+  /**
+   * @param {!proto.proto.AddSubtitlesRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.SubtitlesResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.AddSubtitlesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.SubtitlesResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.SubtitlesResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.TheaterServiceClient.prototype.addSubtitles =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.TheaterService/AddSubtitles',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_AddSubtitles,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.AddSubtitlesRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.SubtitlesResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.TheaterServicePromiseClient.prototype.addSubtitles =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.TheaterService/AddSubtitles',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_AddSubtitles);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.RemoveSubtitleRequest,
+ *   !proto.proto.Response>}
+ */
+const methodDescriptor_TheaterService_RemoveSubtitle = new grpc.web.MethodDescriptor(
+  '/proto.TheaterService/RemoveSubtitle',
+  grpc.web.MethodType.UNARY,
+  proto.proto.RemoveSubtitleRequest,
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.RemoveSubtitleRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.RemoveSubtitleRequest,
+ *   !proto.proto.Response>}
+ */
+const methodInfo_TheaterService_RemoveSubtitle = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.RemoveSubtitleRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.RemoveSubtitleRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.TheaterServiceClient.prototype.removeSubtitle =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.TheaterService/RemoveSubtitle',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_RemoveSubtitle,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.RemoveSubtitleRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.TheaterServicePromiseClient.prototype.removeSubtitle =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.TheaterService/RemoveSubtitle',
+      request,
+      metadata || {},
+      methodDescriptor_TheaterService_RemoveSubtitle);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.MediaSourceAuthRequest,
  *   !proto.proto.TheaterSubtitlesResponse>}
  */
@@ -953,86 +1113,6 @@ proto.proto.TheaterServicePromiseClient.prototype.addMediaSource =
       request,
       metadata || {},
       methodDescriptor_TheaterService_AddMediaSource);
-};
-
-
-/**
- * @const
- * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.RemoveSubtitleRequest,
- *   !proto.proto.Response>}
- */
-const methodDescriptor_TheaterService_RemoveSubtitle = new grpc.web.MethodDescriptor(
-  '/proto.TheaterService/RemoveSubtitle',
-  grpc.web.MethodType.UNARY,
-  proto.proto.RemoveSubtitleRequest,
-  grpc_base_pb.Response,
-  /**
-   * @param {!proto.proto.RemoveSubtitleRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  grpc_base_pb.Response.deserializeBinary
-);
-
-
-/**
- * @const
- * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.RemoveSubtitleRequest,
- *   !proto.proto.Response>}
- */
-const methodInfo_TheaterService_RemoveSubtitle = new grpc.web.AbstractClientBase.MethodInfo(
-  grpc_base_pb.Response,
-  /**
-   * @param {!proto.proto.RemoveSubtitleRequest} request
-   * @return {!Uint8Array}
-   */
-  function(request) {
-    return request.serializeBinary();
-  },
-  grpc_base_pb.Response.deserializeBinary
-);
-
-
-/**
- * @param {!proto.proto.RemoveSubtitleRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @param {function(?grpc.web.Error, ?proto.proto.Response)}
- *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
- *     The XHR Node Readable Stream
- */
-proto.proto.TheaterServiceClient.prototype.removeSubtitle =
-    function(request, metadata, callback) {
-  return this.client_.rpcCall(this.hostname_ +
-      '/proto.TheaterService/RemoveSubtitle',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_RemoveSubtitle,
-      callback);
-};
-
-
-/**
- * @param {!proto.proto.RemoveSubtitleRequest} request The
- *     request proto
- * @param {?Object<string, string>} metadata User defined
- *     call metadata
- * @return {!Promise<!proto.proto.Response>}
- *     A native promise that resolves to the response
- */
-proto.proto.TheaterServicePromiseClient.prototype.removeSubtitle =
-    function(request, metadata) {
-  return this.client_.unaryCall(this.hostname_ +
-      '/proto.TheaterService/RemoveSubtitle',
-      request,
-      metadata || {},
-      methodDescriptor_TheaterService_RemoveSubtitle);
 };
 
 
