@@ -12788,6 +12788,8 @@ $root.proto = (function() {
                 case 3:
                 case 4:
                 case 5:
+                case 6:
+                case 7:
                     break;
                 }
             if (message.banner != null && message.hasOwnProperty("banner"))
@@ -12867,6 +12869,14 @@ $root.proto = (function() {
             case "LOCAL_PATH":
             case 5:
                 message.type = 5;
+                break;
+            case "SPOTIFY":
+            case 6:
+                message.type = 6;
+                break;
+            case "M3U8":
+            case 7:
+                message.type = 7;
                 break;
             }
             if (object.banner != null)
@@ -13006,6 +13016,8 @@ $root.proto = (function() {
          * @property {number} SOUND_CLOUD=3 SOUND_CLOUD value
          * @property {number} DOWNLOAD_URI=4 DOWNLOAD_URI value
          * @property {number} LOCAL_PATH=5 LOCAL_PATH value
+         * @property {number} SPOTIFY=6 SPOTIFY value
+         * @property {number} M3U8=7 M3U8 value
          */
         MediaSource.Type = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -13015,6 +13027,8 @@ $root.proto = (function() {
             values[valuesById[3] = "SOUND_CLOUD"] = 3;
             values[valuesById[4] = "DOWNLOAD_URI"] = 4;
             values[valuesById[5] = "LOCAL_PATH"] = 5;
+            values[valuesById[6] = "SPOTIFY"] = 6;
+            values[valuesById[7] = "M3U8"] = 7;
             return values;
         })();
 

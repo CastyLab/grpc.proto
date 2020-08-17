@@ -50,6 +50,8 @@ message MediaSource {
         SOUND_CLOUD   = 3;
         DOWNLOAD_URI  = 4;
         LOCAL_PATH    = 5;
+        SPOTIFY       = 6;
+        M3U8          = 7;
     }
     string    id                  = 1;
     string    title               = 2;

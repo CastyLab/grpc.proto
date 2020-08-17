@@ -1344,7 +1344,9 @@ proto.proto.MediaSource.Type = {
   TORRENT: 2,
   SOUND_CLOUD: 3,
   DOWNLOAD_URI: 4,
-  LOCAL_PATH: 5
+  LOCAL_PATH: 5,
+  SPOTIFY: 6,
+  M3U8: 7
 };
 
 /**
