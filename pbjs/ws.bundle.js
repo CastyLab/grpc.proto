@@ -12509,7 +12509,6 @@ $root.proto = (function() {
          * @property {proto.MediaSource.Type|null} [type] MediaSource type
          * @property {string|null} [banner] MediaSource banner
          * @property {string|null} [uri] MediaSource uri
-         * @property {number|Long|null} [lastPlayedTime] MediaSource lastPlayedTime
          * @property {Array.<proto.ISubtitle>|null} [subtitles] MediaSource subtitles
          * @property {string|null} [userId] MediaSource userId
          * @property {number|Long|null} [length] MediaSource length
@@ -12572,14 +12571,6 @@ $root.proto = (function() {
          * @instance
          */
         MediaSource.prototype.uri = "";
-
-        /**
-         * MediaSource lastPlayedTime.
-         * @member {number|Long} lastPlayedTime
-         * @memberof proto.MediaSource
-         * @instance
-         */
-        MediaSource.prototype.lastPlayedTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * MediaSource subtitles.
@@ -12655,19 +12646,17 @@ $root.proto = (function() {
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.banner);
             if (message.uri != null && message.hasOwnProperty("uri"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.uri);
-            if (message.lastPlayedTime != null && message.hasOwnProperty("lastPlayedTime"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.lastPlayedTime);
             if (message.subtitles != null && message.subtitles.length)
                 for (var i = 0; i < message.subtitles.length; ++i)
-                    $root.proto.Subtitle.encode(message.subtitles[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                    $root.proto.Subtitle.encode(message.subtitles[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             if (message.userId != null && message.hasOwnProperty("userId"))
-                writer.uint32(/* id 8, wireType 2 =*/66).string(message.userId);
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.userId);
             if (message.length != null && message.hasOwnProperty("length"))
-                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.length);
+                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.length);
             if (message.createdAt != null && message.hasOwnProperty("createdAt"))
-                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
-                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             return writer;
         };
 
@@ -12718,23 +12707,20 @@ $root.proto = (function() {
                     message.uri = reader.string();
                     break;
                 case 6:
-                    message.lastPlayedTime = reader.int64();
-                    break;
-                case 7:
                     if (!(message.subtitles && message.subtitles.length))
                         message.subtitles = [];
                     message.subtitles.push($root.proto.Subtitle.decode(reader, reader.uint32()));
                     break;
-                case 8:
+                case 7:
                     message.userId = reader.string();
                     break;
-                case 9:
+                case 8:
                     message.length = reader.int64();
                     break;
-                case 10:
+                case 9:
                     message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
-                case 11:
+                case 10:
                     message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 default:
@@ -12798,9 +12784,6 @@ $root.proto = (function() {
             if (message.uri != null && message.hasOwnProperty("uri"))
                 if (!$util.isString(message.uri))
                     return "uri: string expected";
-            if (message.lastPlayedTime != null && message.hasOwnProperty("lastPlayedTime"))
-                if (!$util.isInteger(message.lastPlayedTime) && !(message.lastPlayedTime && $util.isInteger(message.lastPlayedTime.low) && $util.isInteger(message.lastPlayedTime.high)))
-                    return "lastPlayedTime: integer|Long expected";
             if (message.subtitles != null && message.hasOwnProperty("subtitles")) {
                 if (!Array.isArray(message.subtitles))
                     return "subtitles: array expected";
@@ -12883,15 +12866,6 @@ $root.proto = (function() {
                 message.banner = String(object.banner);
             if (object.uri != null)
                 message.uri = String(object.uri);
-            if (object.lastPlayedTime != null)
-                if ($util.Long)
-                    (message.lastPlayedTime = $util.Long.fromValue(object.lastPlayedTime)).unsigned = false;
-                else if (typeof object.lastPlayedTime === "string")
-                    message.lastPlayedTime = parseInt(object.lastPlayedTime, 10);
-                else if (typeof object.lastPlayedTime === "number")
-                    message.lastPlayedTime = object.lastPlayedTime;
-                else if (typeof object.lastPlayedTime === "object")
-                    message.lastPlayedTime = new $util.LongBits(object.lastPlayedTime.low >>> 0, object.lastPlayedTime.high >>> 0).toNumber();
             if (object.subtitles) {
                 if (!Array.isArray(object.subtitles))
                     throw TypeError(".proto.MediaSource.subtitles: array expected");
@@ -12947,11 +12921,6 @@ $root.proto = (function() {
                 object.type = options.enums === String ? "UNKNOWN" : 0;
                 object.banner = "";
                 object.uri = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.lastPlayedTime = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.lastPlayedTime = options.longs === String ? "0" : 0;
                 object.userId = "";
                 if ($util.Long) {
                     var long = new $util.Long(0, 0, false);
@@ -12971,11 +12940,6 @@ $root.proto = (function() {
                 object.banner = message.banner;
             if (message.uri != null && message.hasOwnProperty("uri"))
                 object.uri = message.uri;
-            if (message.lastPlayedTime != null && message.hasOwnProperty("lastPlayedTime"))
-                if (typeof message.lastPlayedTime === "number")
-                    object.lastPlayedTime = options.longs === String ? String(message.lastPlayedTime) : message.lastPlayedTime;
-                else
-                    object.lastPlayedTime = options.longs === String ? $util.Long.prototype.toString.call(message.lastPlayedTime) : options.longs === Number ? new $util.LongBits(message.lastPlayedTime.low >>> 0, message.lastPlayedTime.high >>> 0).toNumber() : message.lastPlayedTime;
             if (message.subtitles && message.subtitles.length) {
                 object.subtitles = [];
                 for (var j = 0; j < message.subtitles.length; ++j)
@@ -17441,6 +17405,39 @@ $root.proto = (function() {
         /**
          * Calls GetMediaSources.
          * @function getMediaSources
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @returns {Promise<proto.TheaterMediaSourcesResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.TheaterService#getMediaSource}.
+         * @memberof proto.TheaterService
+         * @typedef GetMediaSourceCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.TheaterMediaSourcesResponse} [response] TheaterMediaSourcesResponse
+         */
+
+        /**
+         * Calls GetMediaSource.
+         * @function getMediaSource
+         * @memberof proto.TheaterService
+         * @instance
+         * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
+         * @param {proto.TheaterService.GetMediaSourceCallback} callback Node-style callback called with the error, if any, and TheaterMediaSourcesResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(TheaterService.prototype.getMediaSource = function getMediaSource(request, callback) {
+            return this.rpcCall(getMediaSource, $root.proto.MediaSourceAuthRequest, $root.proto.TheaterMediaSourcesResponse, request, callback);
+        }, "name", { value: "GetMediaSource" });
+
+        /**
+         * Calls GetMediaSource.
+         * @function getMediaSource
          * @memberof proto.TheaterService
          * @instance
          * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object

@@ -58,12 +58,11 @@ message MediaSource {
     Type      type                = 3;
     string    banner              = 4;
     string    uri                 = 5;
-    int64     last_played_time    = 6;
-    repeated  Subtitle subtitles  = 7;
-    string    user_id             = 8;
-    int64     length              = 9;
-    google.protobuf.Timestamp  created_at  = 10;
-    google.protobuf.Timestamp  updated_at  = 11;
+    repeated  Subtitle subtitles  = 6;
+    string    user_id             = 7;
+    int64     length              = 8;
+    google.protobuf.Timestamp  created_at  = 9;
+    google.protobuf.Timestamp  updated_at  = 10;
 }
 
 message Theater {
@@ -182,6 +181,7 @@ service TheaterService {
     rpc RemoveSubtitle(RemoveSubtitleRequest) returns (Response);
     rpc GetSubtitles(MediaSourceAuthRequest) returns (TheaterSubtitlesResponse);
     rpc GetMediaSources(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
+    rpc GetMediaSource(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
     rpc SelectMediaSource(MediaSourceAuthRequest) returns (Response);
     rpc RemoveMediaSource(MediaSourceRemoveRequest) returns (Response);
     rpc AddMediaSource(MediaSourceAuthRequest) returns (Response);

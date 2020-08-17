@@ -1095,7 +1095,7 @@ proto.proto.Subtitle.prototype.hasUpdatedAt = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.proto.MediaSource.repeatedFields_ = [7];
+proto.proto.MediaSource.repeatedFields_ = [6];
 
 
 
@@ -1133,11 +1133,10 @@ proto.proto.MediaSource.toObject = function(includeInstance, msg) {
     type: jspb.Message.getFieldWithDefault(msg, 3, 0),
     banner: jspb.Message.getFieldWithDefault(msg, 4, ""),
     uri: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    lastPlayedTime: jspb.Message.getFieldWithDefault(msg, 6, 0),
     subtitlesList: jspb.Message.toObjectList(msg.getSubtitlesList(),
     proto.proto.Subtitle.toObject, includeInstance),
-    userId: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    length: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    userId: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    length: jspb.Message.getFieldWithDefault(msg, 8, 0),
     createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
@@ -1197,28 +1196,24 @@ proto.proto.MediaSource.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUri(value);
       break;
     case 6:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setLastPlayedTime(value);
-      break;
-    case 7:
       var value = new proto.proto.Subtitle;
       reader.readMessage(value,proto.proto.Subtitle.deserializeBinaryFromReader);
       msg.addSubtitles(value);
       break;
-    case 8:
+    case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setUserId(value);
       break;
-    case 9:
+    case 8:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setLength(value);
       break;
-    case 10:
+    case 9:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setCreatedAt(value);
       break;
-    case 11:
+    case 10:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setUpdatedAt(value);
@@ -1287,17 +1282,10 @@ proto.proto.MediaSource.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getLastPlayedTime();
-  if (f !== 0) {
-    writer.writeInt64(
-      6,
-      f
-    );
-  }
   f = message.getSubtitlesList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      7,
+      6,
       f,
       proto.proto.Subtitle.serializeBinaryToWriter
     );
@@ -1305,21 +1293,21 @@ proto.proto.MediaSource.serializeBinaryToWriter = function(message, writer) {
   f = message.getUserId();
   if (f.length > 0) {
     writer.writeString(
-      8,
+      7,
       f
     );
   }
   f = message.getLength();
   if (f !== 0) {
     writer.writeInt64(
-      9,
+      8,
       f
     );
   }
   f = message.getCreatedAt();
   if (f != null) {
     writer.writeMessage(
-      10,
+      9,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -1327,7 +1315,7 @@ proto.proto.MediaSource.serializeBinaryToWriter = function(message, writer) {
   f = message.getUpdatedAt();
   if (f != null) {
     writer.writeMessage(
-      11,
+      10,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -1440,30 +1428,12 @@ proto.proto.MediaSource.prototype.setUri = function(value) {
 
 
 /**
- * optional int64 last_played_time = 6;
- * @return {number}
- */
-proto.proto.MediaSource.prototype.getLastPlayedTime = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.proto.MediaSource} returns this
- */
-proto.proto.MediaSource.prototype.setLastPlayedTime = function(value) {
-  return jspb.Message.setProto3IntField(this, 6, value);
-};
-
-
-/**
- * repeated Subtitle subtitles = 7;
+ * repeated Subtitle subtitles = 6;
  * @return {!Array<!proto.proto.Subtitle>}
  */
 proto.proto.MediaSource.prototype.getSubtitlesList = function() {
   return /** @type{!Array<!proto.proto.Subtitle>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.proto.Subtitle, 7));
+    jspb.Message.getRepeatedWrapperField(this, proto.proto.Subtitle, 6));
 };
 
 
@@ -1472,7 +1442,7 @@ proto.proto.MediaSource.prototype.getSubtitlesList = function() {
  * @return {!proto.proto.MediaSource} returns this
 */
 proto.proto.MediaSource.prototype.setSubtitlesList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 7, value);
+  return jspb.Message.setRepeatedWrapperField(this, 6, value);
 };
 
 
@@ -1482,7 +1452,7 @@ proto.proto.MediaSource.prototype.setSubtitlesList = function(value) {
  * @return {!proto.proto.Subtitle}
  */
 proto.proto.MediaSource.prototype.addSubtitles = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 7, opt_value, proto.proto.Subtitle, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.proto.Subtitle, opt_index);
 };
 
 
@@ -1496,11 +1466,11 @@ proto.proto.MediaSource.prototype.clearSubtitlesList = function() {
 
 
 /**
- * optional string user_id = 8;
+ * optional string user_id = 7;
  * @return {string}
  */
 proto.proto.MediaSource.prototype.getUserId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
 
@@ -1509,16 +1479,16 @@ proto.proto.MediaSource.prototype.getUserId = function() {
  * @return {!proto.proto.MediaSource} returns this
  */
 proto.proto.MediaSource.prototype.setUserId = function(value) {
-  return jspb.Message.setProto3StringField(this, 8, value);
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
 /**
- * optional int64 length = 9;
+ * optional int64 length = 8;
  * @return {number}
  */
 proto.proto.MediaSource.prototype.getLength = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
@@ -1527,17 +1497,17 @@ proto.proto.MediaSource.prototype.getLength = function() {
  * @return {!proto.proto.MediaSource} returns this
  */
 proto.proto.MediaSource.prototype.setLength = function(value) {
-  return jspb.Message.setProto3IntField(this, 9, value);
+  return jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
 /**
- * optional google.protobuf.Timestamp created_at = 10;
+ * optional google.protobuf.Timestamp created_at = 9;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.MediaSource.prototype.getCreatedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 10));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9));
 };
 
 
@@ -1546,7 +1516,7 @@ proto.proto.MediaSource.prototype.getCreatedAt = function() {
  * @return {!proto.proto.MediaSource} returns this
 */
 proto.proto.MediaSource.prototype.setCreatedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 10, value);
+  return jspb.Message.setWrapperField(this, 9, value);
 };
 
 
@@ -1564,17 +1534,17 @@ proto.proto.MediaSource.prototype.clearCreatedAt = function() {
  * @return {boolean}
  */
 proto.proto.MediaSource.prototype.hasCreatedAt = function() {
-  return jspb.Message.getField(this, 10) != null;
+  return jspb.Message.getField(this, 9) != null;
 };
 
 
 /**
- * optional google.protobuf.Timestamp updated_at = 11;
+ * optional google.protobuf.Timestamp updated_at = 10;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.MediaSource.prototype.getUpdatedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 11));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 10));
 };
 
 
@@ -1583,7 +1553,7 @@ proto.proto.MediaSource.prototype.getUpdatedAt = function() {
  * @return {!proto.proto.MediaSource} returns this
 */
 proto.proto.MediaSource.prototype.setUpdatedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 11, value);
+  return jspb.Message.setWrapperField(this, 10, value);
 };
 
 
@@ -1601,7 +1571,7 @@ proto.proto.MediaSource.prototype.clearUpdatedAt = function() {
  * @return {boolean}
  */
 proto.proto.MediaSource.prototype.hasUpdatedAt = function() {
-  return jspb.Message.getField(this, 11) != null;
+  return jspb.Message.getField(this, 10) != null;
 };
 
 
