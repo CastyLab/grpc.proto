@@ -5,7 +5,6 @@ option go_package = ".;proto";
 
 import "grpc.base.proto";
 import "grpc.auth.proto";
-import "ws.enums.proto";
 import "google/protobuf/timestamp.proto";
 
 message Friend {
@@ -35,12 +34,11 @@ message User {
     bool                       verified         = 10;
     string                     avatar           = 11;
     Activity                   activity         = 12;
-    PERSONAL_STATE             state            = 13;
-    bool                       two_fa_enabled   = 14;
-    string                     two_fa_token     = 15;
-    google.protobuf.Timestamp  last_login       = 16;
-    google.protobuf.Timestamp  joined_at        = 17;
-    google.protobuf.Timestamp  updated_at       = 18;
+    bool                       two_fa_enabled   = 13;
+    string                     two_fa_token     = 14;
+    google.protobuf.Timestamp  last_login       = 15;
+    google.protobuf.Timestamp  joined_at        = 16;
+    google.protobuf.Timestamp  updated_at       = 17;
 }
 
 message Notification {
@@ -64,15 +62,6 @@ message Notification {
     google.protobuf.Timestamp  created_at    = 11;
     google.protobuf.Timestamp  updated_at    = 12;
 
-}
-
-message RollbackStatesRequest {
-    repeated string users_ids = 1;
-}
-
-message UpdateStateRequest {
-    PERSONAL_STATE state = 1;
-    AuthenticateRequest auth_request = 2;
 }
 
 message UpdateActivityRequest {
@@ -183,11 +172,7 @@ message PendingFriendRequests {
 
 service UserService {
 
-    // Websocket requests only
-    rpc RollbackStates(RollbackStatesRequest) returns (Response);
-
     // User Profile
-    rpc UpdateState(UpdateStateRequest) returns (Response);
     rpc UpdateActivity(UpdateActivityRequest) returns (Response);
     rpc RemoveActivity(AuthenticateRequest) returns (Response);
     rpc GetUser(AuthenticateRequest) returns (GetUserResponse);
