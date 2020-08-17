@@ -11710,6 +11710,216 @@ $root.proto = (function() {
         return TheaterVideoPlayer;
     })();
 
+    proto.MediaSourceChangedEvent = (function() {
+
+        /**
+         * Properties of a MediaSourceChangedEvent.
+         * @memberof proto
+         * @interface IMediaSourceChangedEvent
+         * @property {string|null} [theaterId] MediaSourceChangedEvent theaterId
+         * @property {string|null} [mediaSourceId] MediaSourceChangedEvent mediaSourceId
+         */
+
+        /**
+         * Constructs a new MediaSourceChangedEvent.
+         * @memberof proto
+         * @classdesc Represents a MediaSourceChangedEvent.
+         * @implements IMediaSourceChangedEvent
+         * @constructor
+         * @param {proto.IMediaSourceChangedEvent=} [properties] Properties to set
+         */
+        function MediaSourceChangedEvent(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * MediaSourceChangedEvent theaterId.
+         * @member {string} theaterId
+         * @memberof proto.MediaSourceChangedEvent
+         * @instance
+         */
+        MediaSourceChangedEvent.prototype.theaterId = "";
+
+        /**
+         * MediaSourceChangedEvent mediaSourceId.
+         * @member {string} mediaSourceId
+         * @memberof proto.MediaSourceChangedEvent
+         * @instance
+         */
+        MediaSourceChangedEvent.prototype.mediaSourceId = "";
+
+        /**
+         * Creates a new MediaSourceChangedEvent instance using the specified properties.
+         * @function create
+         * @memberof proto.MediaSourceChangedEvent
+         * @static
+         * @param {proto.IMediaSourceChangedEvent=} [properties] Properties to set
+         * @returns {proto.MediaSourceChangedEvent} MediaSourceChangedEvent instance
+         */
+        MediaSourceChangedEvent.create = function create(properties) {
+            return new MediaSourceChangedEvent(properties);
+        };
+
+        /**
+         * Encodes the specified MediaSourceChangedEvent message. Does not implicitly {@link proto.MediaSourceChangedEvent.verify|verify} messages.
+         * @function encode
+         * @memberof proto.MediaSourceChangedEvent
+         * @static
+         * @param {proto.IMediaSourceChangedEvent} message MediaSourceChangedEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediaSourceChangedEvent.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.theaterId);
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.mediaSourceId);
+            return writer;
+        };
+
+        /**
+         * Encodes the specified MediaSourceChangedEvent message, length delimited. Does not implicitly {@link proto.MediaSourceChangedEvent.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.MediaSourceChangedEvent
+         * @static
+         * @param {proto.IMediaSourceChangedEvent} message MediaSourceChangedEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        MediaSourceChangedEvent.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a MediaSourceChangedEvent message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.MediaSourceChangedEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.MediaSourceChangedEvent} MediaSourceChangedEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediaSourceChangedEvent.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.MediaSourceChangedEvent();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.theaterId = reader.string();
+                    break;
+                case 2:
+                    message.mediaSourceId = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a MediaSourceChangedEvent message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.MediaSourceChangedEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.MediaSourceChangedEvent} MediaSourceChangedEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        MediaSourceChangedEvent.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a MediaSourceChangedEvent message.
+         * @function verify
+         * @memberof proto.MediaSourceChangedEvent
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        MediaSourceChangedEvent.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                if (!$util.isString(message.theaterId))
+                    return "theaterId: string expected";
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                if (!$util.isString(message.mediaSourceId))
+                    return "mediaSourceId: string expected";
+            return null;
+        };
+
+        /**
+         * Creates a MediaSourceChangedEvent message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.MediaSourceChangedEvent
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.MediaSourceChangedEvent} MediaSourceChangedEvent
+         */
+        MediaSourceChangedEvent.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.MediaSourceChangedEvent)
+                return object;
+            var message = new $root.proto.MediaSourceChangedEvent();
+            if (object.theaterId != null)
+                message.theaterId = String(object.theaterId);
+            if (object.mediaSourceId != null)
+                message.mediaSourceId = String(object.mediaSourceId);
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a MediaSourceChangedEvent message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.MediaSourceChangedEvent
+         * @static
+         * @param {proto.MediaSourceChangedEvent} message MediaSourceChangedEvent
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        MediaSourceChangedEvent.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.theaterId = "";
+                object.mediaSourceId = "";
+            }
+            if (message.theaterId != null && message.hasOwnProperty("theaterId"))
+                object.theaterId = message.theaterId;
+            if (message.mediaSourceId != null && message.hasOwnProperty("mediaSourceId"))
+                object.mediaSourceId = message.mediaSourceId;
+            return object;
+        };
+
+        /**
+         * Converts this MediaSourceChangedEvent to JSON.
+         * @function toJSON
+         * @memberof proto.MediaSourceChangedEvent
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        MediaSourceChangedEvent.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return MediaSourceChangedEvent;
+    })();
+
     /**
      * PRIVACY enum.
      * @name proto.PRIVACY

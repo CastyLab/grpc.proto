@@ -19,3 +19,8 @@ message TheaterVideoPlayer {
     string                     user_id       = 6;
     google.protobuf.Timestamp  sent_at       = 7;
 }
+
+message MediaSourceChangedEvent {
+    string  theater_id       = 1;
+    string  media_source_id  = 2;
+}
