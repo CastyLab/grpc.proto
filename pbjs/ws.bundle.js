@@ -17661,7 +17661,7 @@ $root.proto = (function() {
          * @typedef SelectMediaSourceCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {proto.Response} [response] Response
+         * @param {proto.TheaterMediaSourcesResponse} [response] TheaterMediaSourcesResponse
          */
 
         /**
@@ -17670,12 +17670,12 @@ $root.proto = (function() {
          * @memberof proto.TheaterService
          * @instance
          * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
-         * @param {proto.TheaterService.SelectMediaSourceCallback} callback Node-style callback called with the error, if any, and Response
+         * @param {proto.TheaterService.SelectMediaSourceCallback} callback Node-style callback called with the error, if any, and TheaterMediaSourcesResponse
          * @returns {undefined}
          * @variation 1
          */
         Object.defineProperty(TheaterService.prototype.selectMediaSource = function selectMediaSource(request, callback) {
-            return this.rpcCall(selectMediaSource, $root.proto.MediaSourceAuthRequest, $root.proto.Response, request, callback);
+            return this.rpcCall(selectMediaSource, $root.proto.MediaSourceAuthRequest, $root.proto.TheaterMediaSourcesResponse, request, callback);
         }, "name", { value: "SelectMediaSource" });
 
         /**
@@ -17684,7 +17684,7 @@ $root.proto = (function() {
          * @memberof proto.TheaterService
          * @instance
          * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
-         * @returns {Promise<proto.Response>} Promise
+         * @returns {Promise<proto.TheaterMediaSourcesResponse>} Promise
          * @variation 2
          */
 
@@ -17727,7 +17727,7 @@ $root.proto = (function() {
          * @typedef AddMediaSourceCallback
          * @type {function}
          * @param {Error|null} error Error, if any
-         * @param {proto.Response} [response] Response
+         * @param {proto.TheaterMediaSourcesResponse} [response] TheaterMediaSourcesResponse
          */
 
         /**
@@ -17736,12 +17736,12 @@ $root.proto = (function() {
          * @memberof proto.TheaterService
          * @instance
          * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
-         * @param {proto.TheaterService.AddMediaSourceCallback} callback Node-style callback called with the error, if any, and Response
+         * @param {proto.TheaterService.AddMediaSourceCallback} callback Node-style callback called with the error, if any, and TheaterMediaSourcesResponse
          * @returns {undefined}
          * @variation 1
          */
         Object.defineProperty(TheaterService.prototype.addMediaSource = function addMediaSource(request, callback) {
-            return this.rpcCall(addMediaSource, $root.proto.MediaSourceAuthRequest, $root.proto.Response, request, callback);
+            return this.rpcCall(addMediaSource, $root.proto.MediaSourceAuthRequest, $root.proto.TheaterMediaSourcesResponse, request, callback);
         }, "name", { value: "AddMediaSource" });
 
         /**
@@ -17750,7 +17750,7 @@ $root.proto = (function() {
          * @memberof proto.TheaterService
          * @instance
          * @param {proto.IMediaSourceAuthRequest} request MediaSourceAuthRequest message or plain object
-         * @returns {Promise<proto.Response>} Promise
+         * @returns {Promise<proto.TheaterMediaSourcesResponse>} Promise
          * @variation 2
          */
 

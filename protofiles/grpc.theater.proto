@@ -182,7 +182,7 @@ service TheaterService {
     rpc GetSubtitles(MediaSourceAuthRequest) returns (TheaterSubtitlesResponse);
     rpc GetMediaSources(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
     rpc GetMediaSource(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
-    rpc SelectMediaSource(MediaSourceAuthRequest) returns (Response);
+    rpc SelectMediaSource(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
     rpc RemoveMediaSource(MediaSourceRemoveRequest) returns (Response);
-    rpc AddMediaSource(MediaSourceAuthRequest) returns (Response);
+    rpc AddMediaSource(MediaSourceAuthRequest) returns (TheaterMediaSourcesResponse);
 }

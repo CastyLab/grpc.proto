@@ -960,13 +960,13 @@ proto.proto.TheaterServicePromiseClient.prototype.getMediaSource =
  * @const
  * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.MediaSourceAuthRequest,
- *   !proto.proto.Response>}
+ *   !proto.proto.TheaterMediaSourcesResponse>}
  */
 const methodDescriptor_TheaterService_SelectMediaSource = new grpc.web.MethodDescriptor(
   '/proto.TheaterService/SelectMediaSource',
   grpc.web.MethodType.UNARY,
   proto.proto.MediaSourceAuthRequest,
-  grpc_base_pb.Response,
+  proto.proto.TheaterMediaSourcesResponse,
   /**
    * @param {!proto.proto.MediaSourceAuthRequest} request
    * @return {!Uint8Array}
@@ -974,7 +974,7 @@ const methodDescriptor_TheaterService_SelectMediaSource = new grpc.web.MethodDes
   function(request) {
     return request.serializeBinary();
   },
-  grpc_base_pb.Response.deserializeBinary
+  proto.proto.TheaterMediaSourcesResponse.deserializeBinary
 );
 
 
@@ -982,10 +982,10 @@ const methodDescriptor_TheaterService_SelectMediaSource = new grpc.web.MethodDes
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.proto.MediaSourceAuthRequest,
- *   !proto.proto.Response>}
+ *   !proto.proto.TheaterMediaSourcesResponse>}
  */
 const methodInfo_TheaterService_SelectMediaSource = new grpc.web.AbstractClientBase.MethodInfo(
-  grpc_base_pb.Response,
+  proto.proto.TheaterMediaSourcesResponse,
   /**
    * @param {!proto.proto.MediaSourceAuthRequest} request
    * @return {!Uint8Array}
@@ -993,7 +993,7 @@ const methodInfo_TheaterService_SelectMediaSource = new grpc.web.AbstractClientB
   function(request) {
     return request.serializeBinary();
   },
-  grpc_base_pb.Response.deserializeBinary
+  proto.proto.TheaterMediaSourcesResponse.deserializeBinary
 );
 
 
@@ -1002,9 +1002,9 @@ const methodInfo_TheaterService_SelectMediaSource = new grpc.web.AbstractClientB
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ * @param {function(?grpc.web.Error, ?proto.proto.TheaterMediaSourcesResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.TheaterMediaSourcesResponse>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.proto.TheaterServiceClient.prototype.selectMediaSource =
@@ -1023,7 +1023,7 @@ proto.proto.TheaterServiceClient.prototype.selectMediaSource =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.proto.Response>}
+ * @return {!Promise<!proto.proto.TheaterMediaSourcesResponse>}
  *     A native promise that resolves to the response
  */
 proto.proto.TheaterServicePromiseClient.prototype.selectMediaSource =
@@ -1120,13 +1120,13 @@ proto.proto.TheaterServicePromiseClient.prototype.removeMediaSource =
  * @const
  * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.MediaSourceAuthRequest,
- *   !proto.proto.Response>}
+ *   !proto.proto.TheaterMediaSourcesResponse>}
  */
 const methodDescriptor_TheaterService_AddMediaSource = new grpc.web.MethodDescriptor(
   '/proto.TheaterService/AddMediaSource',
   grpc.web.MethodType.UNARY,
   proto.proto.MediaSourceAuthRequest,
-  grpc_base_pb.Response,
+  proto.proto.TheaterMediaSourcesResponse,
   /**
    * @param {!proto.proto.MediaSourceAuthRequest} request
    * @return {!Uint8Array}
@@ -1134,7 +1134,7 @@ const methodDescriptor_TheaterService_AddMediaSource = new grpc.web.MethodDescri
   function(request) {
     return request.serializeBinary();
   },
-  grpc_base_pb.Response.deserializeBinary
+  proto.proto.TheaterMediaSourcesResponse.deserializeBinary
 );
 
 
@@ -1142,10 +1142,10 @@ const methodDescriptor_TheaterService_AddMediaSource = new grpc.web.MethodDescri
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
  *   !proto.proto.MediaSourceAuthRequest,
- *   !proto.proto.Response>}
+ *   !proto.proto.TheaterMediaSourcesResponse>}
  */
 const methodInfo_TheaterService_AddMediaSource = new grpc.web.AbstractClientBase.MethodInfo(
-  grpc_base_pb.Response,
+  proto.proto.TheaterMediaSourcesResponse,
   /**
    * @param {!proto.proto.MediaSourceAuthRequest} request
    * @return {!Uint8Array}
@@ -1153,7 +1153,7 @@ const methodInfo_TheaterService_AddMediaSource = new grpc.web.AbstractClientBase
   function(request) {
     return request.serializeBinary();
   },
-  grpc_base_pb.Response.deserializeBinary
+  proto.proto.TheaterMediaSourcesResponse.deserializeBinary
 );
 
 
@@ -1162,9 +1162,9 @@ const methodInfo_TheaterService_AddMediaSource = new grpc.web.AbstractClientBase
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ * @param {function(?grpc.web.Error, ?proto.proto.TheaterMediaSourcesResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.TheaterMediaSourcesResponse>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.proto.TheaterServiceClient.prototype.addMediaSource =
@@ -1183,7 +1183,7 @@ proto.proto.TheaterServiceClient.prototype.addMediaSource =
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.proto.Response>}
+ * @return {!Promise<!proto.proto.TheaterMediaSourcesResponse>}
  *     A native promise that resolves to the response
  */
 proto.proto.TheaterServicePromiseClient.prototype.addMediaSource =
