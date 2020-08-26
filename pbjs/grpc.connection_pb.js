@@ -92,12 +92,13 @@ proto.proto.Connection.prototype.toObject = function(opt_includeInstance) {
 proto.proto.Connection.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    accessToken: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    refreshedToken: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    showActivity: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
-    userId: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    serviceUserId: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    type: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    accessToken: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    refreshedToken: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    showActivity: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
+    userId: jspb.Message.getFieldWithDefault(msg, 8, ""),
     createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
@@ -142,34 +143,38 @@ proto.proto.Connection.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
+      msg.setServiceUserId(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
+    case 4:
       var value = /** @type {!proto.proto.Connection.Type} */ (reader.readEnum());
       msg.setType(value);
       break;
-    case 4:
+    case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setAccessToken(value);
       break;
-    case 5:
+    case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setRefreshedToken(value);
       break;
-    case 6:
+    case 7:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setShowActivity(value);
       break;
-    case 7:
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setUserId(value);
       break;
-    case 8:
+    case 9:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setCreatedAt(value);
       break;
-    case 9:
+    case 10:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setUpdatedAt(value);
@@ -210,52 +215,59 @@ proto.proto.Connection.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getName();
+  f = message.getServiceUserId();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
   f = message.getType();
   if (f !== 0.0) {
     writer.writeEnum(
-      3,
+      4,
       f
     );
   }
   f = message.getAccessToken();
   if (f.length > 0) {
     writer.writeString(
-      4,
+      5,
       f
     );
   }
   f = message.getRefreshedToken();
   if (f.length > 0) {
     writer.writeString(
-      5,
+      6,
       f
     );
   }
   f = message.getShowActivity();
   if (f) {
     writer.writeBool(
-      6,
+      7,
       f
     );
   }
   f = message.getUserId();
   if (f.length > 0) {
     writer.writeString(
-      7,
+      8,
       f
     );
   }
   f = message.getCreatedAt();
   if (f != null) {
     writer.writeMessage(
-      8,
+      9,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -263,7 +275,7 @@ proto.proto.Connection.serializeBinaryToWriter = function(message, writer) {
   f = message.getUpdatedAt();
   if (f != null) {
     writer.writeMessage(
-      9,
+      10,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -303,10 +315,10 @@ proto.proto.Connection.prototype.setId = function(value) {
 
 
 /**
- * optional string name = 2;
+ * optional string service_user_id = 2;
  * @return {string}
  */
-proto.proto.Connection.prototype.getName = function() {
+proto.proto.Connection.prototype.getServiceUserId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -315,17 +327,35 @@ proto.proto.Connection.prototype.getName = function() {
  * @param {string} value
  * @return {!proto.proto.Connection} returns this
  */
-proto.proto.Connection.prototype.setName = function(value) {
+proto.proto.Connection.prototype.setServiceUserId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional Type type = 3;
+ * optional string name = 3;
+ * @return {string}
+ */
+proto.proto.Connection.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.proto.Connection} returns this
+ */
+proto.proto.Connection.prototype.setName = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional Type type = 4;
  * @return {!proto.proto.Connection.Type}
  */
 proto.proto.Connection.prototype.getType = function() {
-  return /** @type {!proto.proto.Connection.Type} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {!proto.proto.Connection.Type} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
@@ -334,33 +364,15 @@ proto.proto.Connection.prototype.getType = function() {
  * @return {!proto.proto.Connection} returns this
  */
 proto.proto.Connection.prototype.setType = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
+  return jspb.Message.setProto3EnumField(this, 4, value);
 };
 
 
 /**
- * optional string access_token = 4;
+ * optional string access_token = 5;
  * @return {string}
  */
 proto.proto.Connection.prototype.getAccessToken = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.proto.Connection} returns this
- */
-proto.proto.Connection.prototype.setAccessToken = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
-};
-
-
-/**
- * optional string refreshed_token = 5;
- * @return {string}
- */
-proto.proto.Connection.prototype.getRefreshedToken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -369,17 +381,35 @@ proto.proto.Connection.prototype.getRefreshedToken = function() {
  * @param {string} value
  * @return {!proto.proto.Connection} returns this
  */
-proto.proto.Connection.prototype.setRefreshedToken = function(value) {
+proto.proto.Connection.prototype.setAccessToken = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional bool show_activity = 6;
+ * optional string refreshed_token = 6;
+ * @return {string}
+ */
+proto.proto.Connection.prototype.getRefreshedToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.proto.Connection} returns this
+ */
+proto.proto.Connection.prototype.setRefreshedToken = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional bool show_activity = 7;
  * @return {boolean}
  */
 proto.proto.Connection.prototype.getShowActivity = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 7, false));
 };
 
 
@@ -388,16 +418,16 @@ proto.proto.Connection.prototype.getShowActivity = function() {
  * @return {!proto.proto.Connection} returns this
  */
 proto.proto.Connection.prototype.setShowActivity = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 6, value);
+  return jspb.Message.setProto3BooleanField(this, 7, value);
 };
 
 
 /**
- * optional string user_id = 7;
+ * optional string user_id = 8;
  * @return {string}
  */
 proto.proto.Connection.prototype.getUserId = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
 
@@ -406,17 +436,17 @@ proto.proto.Connection.prototype.getUserId = function() {
  * @return {!proto.proto.Connection} returns this
  */
 proto.proto.Connection.prototype.setUserId = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
 /**
- * optional google.protobuf.Timestamp created_at = 8;
+ * optional google.protobuf.Timestamp created_at = 9;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.Connection.prototype.getCreatedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 8));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9));
 };
 
 
@@ -425,7 +455,7 @@ proto.proto.Connection.prototype.getCreatedAt = function() {
  * @return {!proto.proto.Connection} returns this
 */
 proto.proto.Connection.prototype.setCreatedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 8, value);
+  return jspb.Message.setWrapperField(this, 9, value);
 };
 
 
@@ -443,17 +473,17 @@ proto.proto.Connection.prototype.clearCreatedAt = function() {
  * @return {boolean}
  */
 proto.proto.Connection.prototype.hasCreatedAt = function() {
-  return jspb.Message.getField(this, 8) != null;
+  return jspb.Message.getField(this, 9) != null;
 };
 
 
 /**
- * optional google.protobuf.Timestamp updated_at = 9;
+ * optional google.protobuf.Timestamp updated_at = 10;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.Connection.prototype.getUpdatedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 10));
 };
 
 
@@ -462,7 +492,7 @@ proto.proto.Connection.prototype.getUpdatedAt = function() {
  * @return {!proto.proto.Connection} returns this
 */
 proto.proto.Connection.prototype.setUpdatedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 9, value);
+  return jspb.Message.setWrapperField(this, 10, value);
 };
 
 
@@ -480,7 +510,7 @@ proto.proto.Connection.prototype.clearUpdatedAt = function() {
  * @return {boolean}
  */
 proto.proto.Connection.prototype.hasUpdatedAt = function() {
-  return jspb.Message.getField(this, 9) != null;
+  return jspb.Message.getField(this, 10) != null;
 };
 
 

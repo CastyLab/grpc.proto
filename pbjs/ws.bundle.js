@@ -10115,6 +10115,7 @@ $root.proto = (function() {
          * @memberof proto
          * @interface IConnection
          * @property {string|null} [id] Connection id
+         * @property {string|null} [serviceUserId] Connection serviceUserId
          * @property {string|null} [name] Connection name
          * @property {proto.Connection.Type|null} [type] Connection type
          * @property {string|null} [accessToken] Connection accessToken
@@ -10147,6 +10148,14 @@ $root.proto = (function() {
          * @instance
          */
         Connection.prototype.id = "";
+
+        /**
+         * Connection serviceUserId.
+         * @member {string} serviceUserId
+         * @memberof proto.Connection
+         * @instance
+         */
+        Connection.prototype.serviceUserId = "";
 
         /**
          * Connection name.
@@ -10238,22 +10247,24 @@ $root.proto = (function() {
                 writer = $Writer.create();
             if (message.id != null && message.hasOwnProperty("id"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.serviceUserId != null && message.hasOwnProperty("serviceUserId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceUserId);
             if (message.name != null && message.hasOwnProperty("name"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
             if (message.type != null && message.hasOwnProperty("type"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
             if (message.accessToken != null && message.hasOwnProperty("accessToken"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.accessToken);
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.accessToken);
             if (message.refreshedToken != null && message.hasOwnProperty("refreshedToken"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.refreshedToken);
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.refreshedToken);
             if (message.showActivity != null && message.hasOwnProperty("showActivity"))
-                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.showActivity);
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.showActivity);
             if (message.userId != null && message.hasOwnProperty("userId"))
-                writer.uint32(/* id 7, wireType 2 =*/58).string(message.userId);
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.userId);
             if (message.createdAt != null && message.hasOwnProperty("createdAt"))
-                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
-                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             return writer;
         };
 
@@ -10292,27 +10303,30 @@ $root.proto = (function() {
                     message.id = reader.string();
                     break;
                 case 2:
-                    message.name = reader.string();
+                    message.serviceUserId = reader.string();
                     break;
                 case 3:
-                    message.type = reader.int32();
+                    message.name = reader.string();
                     break;
                 case 4:
-                    message.accessToken = reader.string();
+                    message.type = reader.int32();
                     break;
                 case 5:
-                    message.refreshedToken = reader.string();
+                    message.accessToken = reader.string();
                     break;
                 case 6:
-                    message.showActivity = reader.bool();
+                    message.refreshedToken = reader.string();
                     break;
                 case 7:
-                    message.userId = reader.string();
+                    message.showActivity = reader.bool();
                     break;
                 case 8:
-                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    message.userId = reader.string();
                     break;
                 case 9:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 10:
                     message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 default:
@@ -10353,6 +10367,9 @@ $root.proto = (function() {
             if (message.id != null && message.hasOwnProperty("id"))
                 if (!$util.isString(message.id))
                     return "id: string expected";
+            if (message.serviceUserId != null && message.hasOwnProperty("serviceUserId"))
+                if (!$util.isString(message.serviceUserId))
+                    return "serviceUserId: string expected";
             if (message.name != null && message.hasOwnProperty("name"))
                 if (!$util.isString(message.name))
                     return "name: string expected";
@@ -10408,6 +10425,8 @@ $root.proto = (function() {
             var message = new $root.proto.Connection();
             if (object.id != null)
                 message.id = String(object.id);
+            if (object.serviceUserId != null)
+                message.serviceUserId = String(object.serviceUserId);
             if (object.name != null)
                 message.name = String(object.name);
             switch (object.type) {
@@ -10476,6 +10495,7 @@ $root.proto = (function() {
             var object = {};
             if (options.defaults) {
                 object.id = "";
+                object.serviceUserId = "";
                 object.name = "";
                 object.type = options.enums === String ? "UNKNOWN" : 0;
                 object.accessToken = "";
@@ -10487,6 +10507,8 @@ $root.proto = (function() {
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
+            if (message.serviceUserId != null && message.hasOwnProperty("serviceUserId"))
+                object.serviceUserId = message.serviceUserId;
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
             if (message.type != null && message.hasOwnProperty("type"))
