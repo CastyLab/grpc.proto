@@ -7552,6 +7552,226 @@ $root.proto = (function() {
         return PendingFriendRequests;
     })();
 
+    proto.GetConnectionRequest = (function() {
+
+        /**
+         * Properties of a GetConnectionRequest.
+         * @memberof proto
+         * @interface IGetConnectionRequest
+         * @property {proto.IConnection|null} [connection] GetConnectionRequest connection
+         * @property {proto.IAuthenticateRequest|null} [authRequest] GetConnectionRequest authRequest
+         */
+
+        /**
+         * Constructs a new GetConnectionRequest.
+         * @memberof proto
+         * @classdesc Represents a GetConnectionRequest.
+         * @implements IGetConnectionRequest
+         * @constructor
+         * @param {proto.IGetConnectionRequest=} [properties] Properties to set
+         */
+        function GetConnectionRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GetConnectionRequest connection.
+         * @member {proto.IConnection|null|undefined} connection
+         * @memberof proto.GetConnectionRequest
+         * @instance
+         */
+        GetConnectionRequest.prototype.connection = null;
+
+        /**
+         * GetConnectionRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.GetConnectionRequest
+         * @instance
+         */
+        GetConnectionRequest.prototype.authRequest = null;
+
+        /**
+         * Creates a new GetConnectionRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.GetConnectionRequest
+         * @static
+         * @param {proto.IGetConnectionRequest=} [properties] Properties to set
+         * @returns {proto.GetConnectionRequest} GetConnectionRequest instance
+         */
+        GetConnectionRequest.create = function create(properties) {
+            return new GetConnectionRequest(properties);
+        };
+
+        /**
+         * Encodes the specified GetConnectionRequest message. Does not implicitly {@link proto.GetConnectionRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.GetConnectionRequest
+         * @static
+         * @param {proto.IGetConnectionRequest} message GetConnectionRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetConnectionRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.connection != null && message.hasOwnProperty("connection"))
+                $root.proto.Connection.encode(message.connection, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified GetConnectionRequest message, length delimited. Does not implicitly {@link proto.GetConnectionRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.GetConnectionRequest
+         * @static
+         * @param {proto.IGetConnectionRequest} message GetConnectionRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GetConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes a GetConnectionRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.GetConnectionRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.GetConnectionRequest} GetConnectionRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetConnectionRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.GetConnectionRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.connection = $root.proto.Connection.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes a GetConnectionRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.GetConnectionRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.GetConnectionRequest} GetConnectionRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GetConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies a GetConnectionRequest message.
+         * @function verify
+         * @memberof proto.GetConnectionRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        GetConnectionRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.connection != null && message.hasOwnProperty("connection")) {
+                var error = $root.proto.Connection.verify(message.connection);
+                if (error)
+                    return "connection." + error;
+            }
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates a GetConnectionRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.GetConnectionRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.GetConnectionRequest} GetConnectionRequest
+         */
+        GetConnectionRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.GetConnectionRequest)
+                return object;
+            var message = new $root.proto.GetConnectionRequest();
+            if (object.connection != null) {
+                if (typeof object.connection !== "object")
+                    throw TypeError(".proto.GetConnectionRequest.connection: object expected");
+                message.connection = $root.proto.Connection.fromObject(object.connection);
+            }
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.GetConnectionRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from a GetConnectionRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.GetConnectionRequest
+         * @static
+         * @param {proto.GetConnectionRequest} message GetConnectionRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        GetConnectionRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.connection = null;
+                object.authRequest = null;
+            }
+            if (message.connection != null && message.hasOwnProperty("connection"))
+                object.connection = $root.proto.Connection.toObject(message.connection, options);
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            return object;
+        };
+
+        /**
+         * Converts this GetConnectionRequest to JSON.
+         * @function toJSON
+         * @memberof proto.GetConnectionRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        GetConnectionRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return GetConnectionRequest;
+    })();
+
     proto.UserService = (function() {
 
         /**
@@ -8109,6 +8329,39 @@ $root.proto = (function() {
          * @instance
          * @param {proto.IAuthenticateRequest} request AuthenticateRequest message or plain object
          * @returns {Promise<proto.FriendsResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.UserService#getConnection}.
+         * @memberof proto.UserService
+         * @typedef GetConnectionCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.ConnectionsResponse} [response] ConnectionsResponse
+         */
+
+        /**
+         * Calls GetConnection.
+         * @function getConnection
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IGetConnectionRequest} request GetConnectionRequest message or plain object
+         * @param {proto.UserService.GetConnectionCallback} callback Node-style callback called with the error, if any, and ConnectionsResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserService.prototype.getConnection = function getConnection(request, callback) {
+            return this.rpcCall(getConnection, $root.proto.GetConnectionRequest, $root.proto.ConnectionsResponse, request, callback);
+        }, "name", { value: "GetConnection" });
+
+        /**
+         * Calls GetConnection.
+         * @function getConnection
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IGetConnectionRequest} request GetConnectionRequest message or plain object
+         * @returns {Promise<proto.ConnectionsResponse>} Promise
          * @variation 2
          */
 
@@ -10115,6 +10368,7 @@ $root.proto = (function() {
          * @memberof proto
          * @interface IConnection
          * @property {string|null} [id] Connection id
+         * @property {string|null} [serviceUserId] Connection serviceUserId
          * @property {string|null} [name] Connection name
          * @property {proto.Connection.Type|null} [type] Connection type
          * @property {string|null} [accessToken] Connection accessToken
@@ -10147,6 +10401,14 @@ $root.proto = (function() {
          * @instance
          */
         Connection.prototype.id = "";
+
+        /**
+         * Connection serviceUserId.
+         * @member {string} serviceUserId
+         * @memberof proto.Connection
+         * @instance
+         */
+        Connection.prototype.serviceUserId = "";
 
         /**
          * Connection name.
@@ -10238,22 +10500,24 @@ $root.proto = (function() {
                 writer = $Writer.create();
             if (message.id != null && message.hasOwnProperty("id"))
                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+            if (message.serviceUserId != null && message.hasOwnProperty("serviceUserId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.serviceUserId);
             if (message.name != null && message.hasOwnProperty("name"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.name);
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
             if (message.type != null && message.hasOwnProperty("type"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.type);
             if (message.accessToken != null && message.hasOwnProperty("accessToken"))
-                writer.uint32(/* id 4, wireType 2 =*/34).string(message.accessToken);
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.accessToken);
             if (message.refreshedToken != null && message.hasOwnProperty("refreshedToken"))
-                writer.uint32(/* id 5, wireType 2 =*/42).string(message.refreshedToken);
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.refreshedToken);
             if (message.showActivity != null && message.hasOwnProperty("showActivity"))
-                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.showActivity);
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.showActivity);
             if (message.userId != null && message.hasOwnProperty("userId"))
-                writer.uint32(/* id 7, wireType 2 =*/58).string(message.userId);
+                writer.uint32(/* id 8, wireType 2 =*/66).string(message.userId);
             if (message.createdAt != null && message.hasOwnProperty("createdAt"))
-                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
-                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             return writer;
         };
 
@@ -10292,27 +10556,30 @@ $root.proto = (function() {
                     message.id = reader.string();
                     break;
                 case 2:
-                    message.name = reader.string();
+                    message.serviceUserId = reader.string();
                     break;
                 case 3:
-                    message.type = reader.int32();
+                    message.name = reader.string();
                     break;
                 case 4:
-                    message.accessToken = reader.string();
+                    message.type = reader.int32();
                     break;
                 case 5:
-                    message.refreshedToken = reader.string();
+                    message.accessToken = reader.string();
                     break;
                 case 6:
-                    message.showActivity = reader.bool();
+                    message.refreshedToken = reader.string();
                     break;
                 case 7:
-                    message.userId = reader.string();
+                    message.showActivity = reader.bool();
                     break;
                 case 8:
-                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    message.userId = reader.string();
                     break;
                 case 9:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 10:
                     message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 default:
@@ -10353,6 +10620,9 @@ $root.proto = (function() {
             if (message.id != null && message.hasOwnProperty("id"))
                 if (!$util.isString(message.id))
                     return "id: string expected";
+            if (message.serviceUserId != null && message.hasOwnProperty("serviceUserId"))
+                if (!$util.isString(message.serviceUserId))
+                    return "serviceUserId: string expected";
             if (message.name != null && message.hasOwnProperty("name"))
                 if (!$util.isString(message.name))
                     return "name: string expected";
@@ -10408,6 +10678,8 @@ $root.proto = (function() {
             var message = new $root.proto.Connection();
             if (object.id != null)
                 message.id = String(object.id);
+            if (object.serviceUserId != null)
+                message.serviceUserId = String(object.serviceUserId);
             if (object.name != null)
                 message.name = String(object.name);
             switch (object.type) {
@@ -10476,6 +10748,7 @@ $root.proto = (function() {
             var object = {};
             if (options.defaults) {
                 object.id = "";
+                object.serviceUserId = "";
                 object.name = "";
                 object.type = options.enums === String ? "UNKNOWN" : 0;
                 object.accessToken = "";
@@ -10487,6 +10760,8 @@ $root.proto = (function() {
             }
             if (message.id != null && message.hasOwnProperty("id"))
                 object.id = message.id;
+            if (message.serviceUserId != null && message.hasOwnProperty("serviceUserId"))
+                object.serviceUserId = message.serviceUserId;
             if (message.name != null && message.hasOwnProperty("name"))
                 object.name = message.name;
             if (message.type != null && message.hasOwnProperty("type"))
