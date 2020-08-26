@@ -1,0 +1,27 @@
+syntax = "proto3";
+package proto;
+
+option go_package = ".;proto";
+
+import "google/protobuf/timestamp.proto";
+
+message Connection {
+    enum Type {
+        UNKNOWN     = 0;
+        GOOGLE      = 1;
+        YOUTUBE     = 2;
+        GITHUB      = 3;
+        DISCORD     = 4;
+        SPOTIFY     = 5;
+        SOUND_CLOUD = 6;
+    }
+    string                     id              = 1;
+    string                     name            = 2;
+    Type                       type            = 3;
+    string                     access_token    = 4;
+    string                     refreshed_token = 5;
+    bool                       show_activity   = 6;
+    string                     user_id         = 7;
+    google.protobuf.Timestamp  created_at      = 8;
+    google.protobuf.Timestamp  updated_at      = 9;
+}
