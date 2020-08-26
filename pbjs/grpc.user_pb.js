@@ -16,6 +16,8 @@ var grpc_base_pb = require('./grpc.base_pb.js');
 goog.object.extend(proto, grpc_base_pb);
 var grpc_auth_pb = require('./grpc.auth_pb.js');
 goog.object.extend(proto, grpc_auth_pb);
+var grpc_connection_pb = require('./grpc.connection_pb.js');
+goog.object.extend(proto, grpc_connection_pb);
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.proto.Activity', null, global);

@@ -198,6 +198,77 @@ func (x *Connection) GetUpdatedAt() *timestamp.Timestamp {
 	return nil
 }
 
+type ConnectionsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Code    int64         `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Status  string        `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Message string        `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	Result  []*Connection `protobuf:"bytes,4,rep,name=result,proto3" json:"result,omitempty"`
+}
+
+func (x *ConnectionsResponse) Reset() {
+	*x = ConnectionsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_grpc_connection_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ConnectionsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConnectionsResponse) ProtoMessage() {}
+
+func (x *ConnectionsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_grpc_connection_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConnectionsResponse.ProtoReflect.Descriptor instead.
+func (*ConnectionsResponse) Descriptor() ([]byte, []int) {
+	return file_grpc_connection_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ConnectionsResponse) GetCode() int64 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *ConnectionsResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ConnectionsResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ConnectionsResponse) GetResult() []*Connection {
+	if x != nil {
+		return x.Result
+	}
+	return nil
+}
+
 var File_grpc_connection_proto protoreflect.FileDescriptor
 
 var file_grpc_connection_proto_rawDesc = []byte{
@@ -233,8 +304,16 @@ var file_grpc_connection_proto_rawDesc = []byte{
 	0x47, 0x49, 0x54, 0x48, 0x55, 0x42, 0x10, 0x03, 0x12, 0x0b, 0x0a, 0x07, 0x44, 0x49, 0x53, 0x43,
 	0x4f, 0x52, 0x44, 0x10, 0x04, 0x12, 0x0b, 0x0a, 0x07, 0x53, 0x50, 0x4f, 0x54, 0x49, 0x46, 0x59,
 	0x10, 0x05, 0x12, 0x0f, 0x0a, 0x0b, 0x53, 0x4f, 0x55, 0x4e, 0x44, 0x5f, 0x43, 0x4c, 0x4f, 0x55,
-	0x44, 0x10, 0x06, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x44, 0x10, 0x06, 0x22, 0x86, 0x01, 0x0a, 0x13, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x63,
+	0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12,
+	0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61,
+	0x67, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x12, 0x29, 0x0a, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x04, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x11, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x43, 0x6f, 0x6e, 0x6e, 0x65, 0x63,
+	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x06, 0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x09, 0x5a, 0x07,
+	0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -250,21 +329,23 @@ func file_grpc_connection_proto_rawDescGZIP() []byte {
 }
 
 var file_grpc_connection_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_grpc_connection_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_grpc_connection_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_grpc_connection_proto_goTypes = []interface{}{
 	(Connection_Type)(0),        // 0: proto.Connection.Type
 	(*Connection)(nil),          // 1: proto.Connection
-	(*timestamp.Timestamp)(nil), // 2: google.protobuf.Timestamp
+	(*ConnectionsResponse)(nil), // 2: proto.ConnectionsResponse
+	(*timestamp.Timestamp)(nil), // 3: google.protobuf.Timestamp
 }
 var file_grpc_connection_proto_depIdxs = []int32{
 	0, // 0: proto.Connection.type:type_name -> proto.Connection.Type
-	2, // 1: proto.Connection.created_at:type_name -> google.protobuf.Timestamp
-	2, // 2: proto.Connection.updated_at:type_name -> google.protobuf.Timestamp
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	3, // 1: proto.Connection.created_at:type_name -> google.protobuf.Timestamp
+	3, // 2: proto.Connection.updated_at:type_name -> google.protobuf.Timestamp
+	1, // 3: proto.ConnectionsResponse.result:type_name -> proto.Connection
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_grpc_connection_proto_init() }
@@ -285,6 +366,18 @@ func file_grpc_connection_proto_init() {
 				return nil
 			}
 		}
+		file_grpc_connection_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ConnectionsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -292,7 +385,7 @@ func file_grpc_connection_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_grpc_connection_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
