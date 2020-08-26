@@ -17,6 +17,8 @@ grpc.web = require('grpc-web');
 
 
 var grpc_base_pb = require('./grpc.base_pb.js')
+
+var grpc_connection_pb = require('./grpc.connection_pb.js')
 const proto = {};
 proto.proto = require('./grpc.auth_pb.js');
 
