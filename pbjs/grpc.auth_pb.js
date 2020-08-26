@@ -839,7 +839,8 @@ proto.proto.OAUTHRequest.prototype.toObject = function(opt_includeInstance) {
 proto.proto.OAUTHRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     service: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    code: jspb.Message.getFieldWithDefault(msg, 2, "")
+    code: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -884,6 +885,11 @@ proto.proto.OAUTHRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setCode(value);
       break;
+    case 3:
+      var value = new grpc_base_pb.AuthenticateRequest;
+      reader.readMessage(value,grpc_base_pb.AuthenticateRequest.deserializeBinaryFromReader);
+      msg.setAuthRequest(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -927,6 +933,14 @@ proto.proto.OAUTHRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getAuthRequest();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      grpc_base_pb.AuthenticateRequest.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -963,6 +977,43 @@ proto.proto.OAUTHRequest.prototype.getCode = function() {
  */
 proto.proto.OAUTHRequest.prototype.setCode = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional AuthenticateRequest auth_request = 3;
+ * @return {?proto.proto.AuthenticateRequest}
+ */
+proto.proto.OAUTHRequest.prototype.getAuthRequest = function() {
+  return /** @type{?proto.proto.AuthenticateRequest} */ (
+    jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 3));
+};
+
+
+/**
+ * @param {?proto.proto.AuthenticateRequest|undefined} value
+ * @return {!proto.proto.OAUTHRequest} returns this
+*/
+proto.proto.OAUTHRequest.prototype.setAuthRequest = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.proto.OAUTHRequest} returns this
+ */
+proto.proto.OAUTHRequest.prototype.clearAuthRequest = function() {
+  return this.setAuthRequest(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.proto.OAUTHRequest.prototype.hasAuthRequest = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 

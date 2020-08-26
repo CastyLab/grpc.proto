@@ -26,8 +26,9 @@ message RefreshTokenRequest {
 }
 
 message OAUTHRequest {
-    Connection.Type  service   = 1;
-    string           code      = 2;
+    Connection.Type     service      = 1;
+    string              code         = 2;
+    AuthenticateRequest auth_request = 3;
 }
 
 service AuthService {

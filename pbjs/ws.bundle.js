@@ -9987,6 +9987,7 @@ $root.proto = (function() {
          * @interface IOAUTHRequest
          * @property {proto.Connection.Type|null} [service] OAUTHRequest service
          * @property {string|null} [code] OAUTHRequest code
+         * @property {proto.IAuthenticateRequest|null} [authRequest] OAUTHRequest authRequest
          */
 
         /**
@@ -10021,6 +10022,14 @@ $root.proto = (function() {
         OAUTHRequest.prototype.code = "";
 
         /**
+         * OAUTHRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.OAUTHRequest
+         * @instance
+         */
+        OAUTHRequest.prototype.authRequest = null;
+
+        /**
          * Creates a new OAUTHRequest instance using the specified properties.
          * @function create
          * @memberof proto.OAUTHRequest
@@ -10048,6 +10057,8 @@ $root.proto = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.service);
             if (message.code != null && message.hasOwnProperty("code"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.code);
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
@@ -10087,6 +10098,9 @@ $root.proto = (function() {
                     break;
                 case 2:
                     message.code = reader.string();
+                    break;
+                case 3:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -10139,6 +10153,11 @@ $root.proto = (function() {
             if (message.code != null && message.hasOwnProperty("code"))
                 if (!$util.isString(message.code))
                     return "code: string expected";
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
             return null;
         };
 
@@ -10186,6 +10205,11 @@ $root.proto = (function() {
             }
             if (object.code != null)
                 message.code = String(object.code);
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.OAUTHRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
             return message;
         };
 
@@ -10205,11 +10229,14 @@ $root.proto = (function() {
             if (options.defaults) {
                 object.service = options.enums === String ? "UNKNOWN" : 0;
                 object.code = "";
+                object.authRequest = null;
             }
             if (message.service != null && message.hasOwnProperty("service"))
                 object.service = options.enums === String ? $root.proto.Connection.Type[message.service] : message.service;
             if (message.code != null && message.hasOwnProperty("code"))
                 object.code = message.code;
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
             return object;
         };
 
