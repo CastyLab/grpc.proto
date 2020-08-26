@@ -1361,6 +1361,86 @@ proto.proto.UserServicePromiseClient.prototype.getFriends =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.GetConnectionRequest,
+ *   !proto.proto.ConnectionsResponse>}
+ */
+const methodDescriptor_UserService_GetConnection = new grpc.web.MethodDescriptor(
+  '/proto.UserService/GetConnection',
+  grpc.web.MethodType.UNARY,
+  proto.proto.GetConnectionRequest,
+  grpc_connection_pb.ConnectionsResponse,
+  /**
+   * @param {!proto.proto.GetConnectionRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_connection_pb.ConnectionsResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.GetConnectionRequest,
+ *   !proto.proto.ConnectionsResponse>}
+ */
+const methodInfo_UserService_GetConnection = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_connection_pb.ConnectionsResponse,
+  /**
+   * @param {!proto.proto.GetConnectionRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_connection_pb.ConnectionsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.GetConnectionRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.ConnectionsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.ConnectionsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.UserServiceClient.prototype.getConnection =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.UserService/GetConnection',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_GetConnection,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.GetConnectionRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.ConnectionsResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.UserServicePromiseClient.prototype.getConnection =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.UserService/GetConnection',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_GetConnection);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.AuthenticateRequest,
  *   !proto.proto.ConnectionsResponse>}
  */
