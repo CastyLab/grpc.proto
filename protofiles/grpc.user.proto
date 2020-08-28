@@ -171,7 +171,7 @@ message PendingFriendRequests {
     repeated FriendRequest result  = 4;
 }
 
-message GetConnectionRequest {
+message ConnectionRequest {
     Connection           connection    = 1;
     AuthenticateRequest  auth_request  = 2;
 }
@@ -199,8 +199,9 @@ service UserService {
     rpc AcceptFriendRequest(FriendRequest) returns (Response);
     rpc GetFriends(AuthenticateRequest) returns (FriendsResponse);
 
-    rpc GetConnection(GetConnectionRequest) returns (ConnectionsResponse);
+    rpc GetConnection(ConnectionRequest) returns (ConnectionsResponse);
     rpc GetConnections(AuthenticateRequest) returns (ConnectionsResponse);
+    rpc UpdateConnection(ConnectionRequest) returns (ConnectionsResponse);
 
     // Notifications
     rpc GetNotifications(AuthenticateRequest) returns (NotificationResponse);

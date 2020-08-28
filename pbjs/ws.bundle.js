@@ -7552,25 +7552,25 @@ $root.proto = (function() {
         return PendingFriendRequests;
     })();
 
-    proto.GetConnectionRequest = (function() {
+    proto.ConnectionRequest = (function() {
 
         /**
-         * Properties of a GetConnectionRequest.
+         * Properties of a ConnectionRequest.
          * @memberof proto
-         * @interface IGetConnectionRequest
-         * @property {proto.IConnection|null} [connection] GetConnectionRequest connection
-         * @property {proto.IAuthenticateRequest|null} [authRequest] GetConnectionRequest authRequest
+         * @interface IConnectionRequest
+         * @property {proto.IConnection|null} [connection] ConnectionRequest connection
+         * @property {proto.IAuthenticateRequest|null} [authRequest] ConnectionRequest authRequest
          */
 
         /**
-         * Constructs a new GetConnectionRequest.
+         * Constructs a new ConnectionRequest.
          * @memberof proto
-         * @classdesc Represents a GetConnectionRequest.
-         * @implements IGetConnectionRequest
+         * @classdesc Represents a ConnectionRequest.
+         * @implements IConnectionRequest
          * @constructor
-         * @param {proto.IGetConnectionRequest=} [properties] Properties to set
+         * @param {proto.IConnectionRequest=} [properties] Properties to set
          */
-        function GetConnectionRequest(properties) {
+        function ConnectionRequest(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -7578,43 +7578,43 @@ $root.proto = (function() {
         }
 
         /**
-         * GetConnectionRequest connection.
+         * ConnectionRequest connection.
          * @member {proto.IConnection|null|undefined} connection
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @instance
          */
-        GetConnectionRequest.prototype.connection = null;
+        ConnectionRequest.prototype.connection = null;
 
         /**
-         * GetConnectionRequest authRequest.
+         * ConnectionRequest authRequest.
          * @member {proto.IAuthenticateRequest|null|undefined} authRequest
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @instance
          */
-        GetConnectionRequest.prototype.authRequest = null;
+        ConnectionRequest.prototype.authRequest = null;
 
         /**
-         * Creates a new GetConnectionRequest instance using the specified properties.
+         * Creates a new ConnectionRequest instance using the specified properties.
          * @function create
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @static
-         * @param {proto.IGetConnectionRequest=} [properties] Properties to set
-         * @returns {proto.GetConnectionRequest} GetConnectionRequest instance
+         * @param {proto.IConnectionRequest=} [properties] Properties to set
+         * @returns {proto.ConnectionRequest} ConnectionRequest instance
          */
-        GetConnectionRequest.create = function create(properties) {
-            return new GetConnectionRequest(properties);
+        ConnectionRequest.create = function create(properties) {
+            return new ConnectionRequest(properties);
         };
 
         /**
-         * Encodes the specified GetConnectionRequest message. Does not implicitly {@link proto.GetConnectionRequest.verify|verify} messages.
+         * Encodes the specified ConnectionRequest message. Does not implicitly {@link proto.ConnectionRequest.verify|verify} messages.
          * @function encode
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @static
-         * @param {proto.IGetConnectionRequest} message GetConnectionRequest message or plain object to encode
+         * @param {proto.IConnectionRequest} message ConnectionRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        GetConnectionRequest.encode = function encode(message, writer) {
+        ConnectionRequest.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.connection != null && message.hasOwnProperty("connection"))
@@ -7625,33 +7625,33 @@ $root.proto = (function() {
         };
 
         /**
-         * Encodes the specified GetConnectionRequest message, length delimited. Does not implicitly {@link proto.GetConnectionRequest.verify|verify} messages.
+         * Encodes the specified ConnectionRequest message, length delimited. Does not implicitly {@link proto.ConnectionRequest.verify|verify} messages.
          * @function encodeDelimited
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @static
-         * @param {proto.IGetConnectionRequest} message GetConnectionRequest message or plain object to encode
+         * @param {proto.IConnectionRequest} message ConnectionRequest message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        GetConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+        ConnectionRequest.encodeDelimited = function encodeDelimited(message, writer) {
             return this.encode(message, writer).ldelim();
         };
 
         /**
-         * Decodes a GetConnectionRequest message from the specified reader or buffer.
+         * Decodes a ConnectionRequest message from the specified reader or buffer.
          * @function decode
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {proto.GetConnectionRequest} GetConnectionRequest
+         * @returns {proto.ConnectionRequest} ConnectionRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        GetConnectionRequest.decode = function decode(reader, length) {
+        ConnectionRequest.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.GetConnectionRequest();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.ConnectionRequest();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -7670,30 +7670,30 @@ $root.proto = (function() {
         };
 
         /**
-         * Decodes a GetConnectionRequest message from the specified reader or buffer, length delimited.
+         * Decodes a ConnectionRequest message from the specified reader or buffer, length delimited.
          * @function decodeDelimited
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @returns {proto.GetConnectionRequest} GetConnectionRequest
+         * @returns {proto.ConnectionRequest} ConnectionRequest
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        GetConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
+        ConnectionRequest.decodeDelimited = function decodeDelimited(reader) {
             if (!(reader instanceof $Reader))
                 reader = new $Reader(reader);
             return this.decode(reader, reader.uint32());
         };
 
         /**
-         * Verifies a GetConnectionRequest message.
+         * Verifies a ConnectionRequest message.
          * @function verify
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @static
          * @param {Object.<string,*>} message Plain object to verify
          * @returns {string|null} `null` if valid, otherwise the reason why it is not
          */
-        GetConnectionRequest.verify = function verify(message) {
+        ConnectionRequest.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
             if (message.connection != null && message.hasOwnProperty("connection")) {
@@ -7710,40 +7710,40 @@ $root.proto = (function() {
         };
 
         /**
-         * Creates a GetConnectionRequest message from a plain object. Also converts values to their respective internal types.
+         * Creates a ConnectionRequest message from a plain object. Also converts values to their respective internal types.
          * @function fromObject
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @static
          * @param {Object.<string,*>} object Plain object
-         * @returns {proto.GetConnectionRequest} GetConnectionRequest
+         * @returns {proto.ConnectionRequest} ConnectionRequest
          */
-        GetConnectionRequest.fromObject = function fromObject(object) {
-            if (object instanceof $root.proto.GetConnectionRequest)
+        ConnectionRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.ConnectionRequest)
                 return object;
-            var message = new $root.proto.GetConnectionRequest();
+            var message = new $root.proto.ConnectionRequest();
             if (object.connection != null) {
                 if (typeof object.connection !== "object")
-                    throw TypeError(".proto.GetConnectionRequest.connection: object expected");
+                    throw TypeError(".proto.ConnectionRequest.connection: object expected");
                 message.connection = $root.proto.Connection.fromObject(object.connection);
             }
             if (object.authRequest != null) {
                 if (typeof object.authRequest !== "object")
-                    throw TypeError(".proto.GetConnectionRequest.authRequest: object expected");
+                    throw TypeError(".proto.ConnectionRequest.authRequest: object expected");
                 message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
             }
             return message;
         };
 
         /**
-         * Creates a plain object from a GetConnectionRequest message. Also converts values to other types if specified.
+         * Creates a plain object from a ConnectionRequest message. Also converts values to other types if specified.
          * @function toObject
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @static
-         * @param {proto.GetConnectionRequest} message GetConnectionRequest
+         * @param {proto.ConnectionRequest} message ConnectionRequest
          * @param {$protobuf.IConversionOptions} [options] Conversion options
          * @returns {Object.<string,*>} Plain object
          */
-        GetConnectionRequest.toObject = function toObject(message, options) {
+        ConnectionRequest.toObject = function toObject(message, options) {
             if (!options)
                 options = {};
             var object = {};
@@ -7759,17 +7759,17 @@ $root.proto = (function() {
         };
 
         /**
-         * Converts this GetConnectionRequest to JSON.
+         * Converts this ConnectionRequest to JSON.
          * @function toJSON
-         * @memberof proto.GetConnectionRequest
+         * @memberof proto.ConnectionRequest
          * @instance
          * @returns {Object.<string,*>} JSON object
          */
-        GetConnectionRequest.prototype.toJSON = function toJSON() {
+        ConnectionRequest.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return GetConnectionRequest;
+        return ConnectionRequest;
     })();
 
     proto.UserService = (function() {
@@ -8346,13 +8346,13 @@ $root.proto = (function() {
          * @function getConnection
          * @memberof proto.UserService
          * @instance
-         * @param {proto.IGetConnectionRequest} request GetConnectionRequest message or plain object
+         * @param {proto.IConnectionRequest} request ConnectionRequest message or plain object
          * @param {proto.UserService.GetConnectionCallback} callback Node-style callback called with the error, if any, and ConnectionsResponse
          * @returns {undefined}
          * @variation 1
          */
         Object.defineProperty(UserService.prototype.getConnection = function getConnection(request, callback) {
-            return this.rpcCall(getConnection, $root.proto.GetConnectionRequest, $root.proto.ConnectionsResponse, request, callback);
+            return this.rpcCall(getConnection, $root.proto.ConnectionRequest, $root.proto.ConnectionsResponse, request, callback);
         }, "name", { value: "GetConnection" });
 
         /**
@@ -8360,7 +8360,7 @@ $root.proto = (function() {
          * @function getConnection
          * @memberof proto.UserService
          * @instance
-         * @param {proto.IGetConnectionRequest} request GetConnectionRequest message or plain object
+         * @param {proto.IConnectionRequest} request ConnectionRequest message or plain object
          * @returns {Promise<proto.ConnectionsResponse>} Promise
          * @variation 2
          */
@@ -8394,6 +8394,39 @@ $root.proto = (function() {
          * @memberof proto.UserService
          * @instance
          * @param {proto.IAuthenticateRequest} request AuthenticateRequest message or plain object
+         * @returns {Promise<proto.ConnectionsResponse>} Promise
+         * @variation 2
+         */
+
+        /**
+         * Callback as used by {@link proto.UserService#updateConnection}.
+         * @memberof proto.UserService
+         * @typedef UpdateConnectionCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.ConnectionsResponse} [response] ConnectionsResponse
+         */
+
+        /**
+         * Calls UpdateConnection.
+         * @function updateConnection
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IConnectionRequest} request ConnectionRequest message or plain object
+         * @param {proto.UserService.UpdateConnectionCallback} callback Node-style callback called with the error, if any, and ConnectionsResponse
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserService.prototype.updateConnection = function updateConnection(request, callback) {
+            return this.rpcCall(updateConnection, $root.proto.ConnectionRequest, $root.proto.ConnectionsResponse, request, callback);
+        }, "name", { value: "UpdateConnection" });
+
+        /**
+         * Calls UpdateConnection.
+         * @function updateConnection
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IConnectionRequest} request ConnectionRequest message or plain object
          * @returns {Promise<proto.ConnectionsResponse>} Promise
          * @variation 2
          */

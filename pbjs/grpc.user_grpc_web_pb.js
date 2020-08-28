@@ -1361,16 +1361,16 @@ proto.proto.UserServicePromiseClient.prototype.getFriends =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.GetConnectionRequest,
+ *   !proto.proto.ConnectionRequest,
  *   !proto.proto.ConnectionsResponse>}
  */
 const methodDescriptor_UserService_GetConnection = new grpc.web.MethodDescriptor(
   '/proto.UserService/GetConnection',
   grpc.web.MethodType.UNARY,
-  proto.proto.GetConnectionRequest,
+  proto.proto.ConnectionRequest,
   grpc_connection_pb.ConnectionsResponse,
   /**
-   * @param {!proto.proto.GetConnectionRequest} request
+   * @param {!proto.proto.ConnectionRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -1383,13 +1383,13 @@ const methodDescriptor_UserService_GetConnection = new grpc.web.MethodDescriptor
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.GetConnectionRequest,
+ *   !proto.proto.ConnectionRequest,
  *   !proto.proto.ConnectionsResponse>}
  */
 const methodInfo_UserService_GetConnection = new grpc.web.AbstractClientBase.MethodInfo(
   grpc_connection_pb.ConnectionsResponse,
   /**
-   * @param {!proto.proto.GetConnectionRequest} request
+   * @param {!proto.proto.ConnectionRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
@@ -1400,7 +1400,7 @@ const methodInfo_UserService_GetConnection = new grpc.web.AbstractClientBase.Met
 
 
 /**
- * @param {!proto.proto.GetConnectionRequest} request The
+ * @param {!proto.proto.ConnectionRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
@@ -1421,7 +1421,7 @@ proto.proto.UserServiceClient.prototype.getConnection =
 
 
 /**
- * @param {!proto.proto.GetConnectionRequest} request The
+ * @param {!proto.proto.ConnectionRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
@@ -1515,6 +1515,86 @@ proto.proto.UserServicePromiseClient.prototype.getConnections =
       request,
       metadata || {},
       methodDescriptor_UserService_GetConnections);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.ConnectionRequest,
+ *   !proto.proto.ConnectionsResponse>}
+ */
+const methodDescriptor_UserService_UpdateConnection = new grpc.web.MethodDescriptor(
+  '/proto.UserService/UpdateConnection',
+  grpc.web.MethodType.UNARY,
+  proto.proto.ConnectionRequest,
+  grpc_connection_pb.ConnectionsResponse,
+  /**
+   * @param {!proto.proto.ConnectionRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_connection_pb.ConnectionsResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.ConnectionRequest,
+ *   !proto.proto.ConnectionsResponse>}
+ */
+const methodInfo_UserService_UpdateConnection = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_connection_pb.ConnectionsResponse,
+  /**
+   * @param {!proto.proto.ConnectionRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_connection_pb.ConnectionsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.ConnectionRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.ConnectionsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.ConnectionsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.UserServiceClient.prototype.updateConnection =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.UserService/UpdateConnection',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_UpdateConnection,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.ConnectionRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.ConnectionsResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.UserServicePromiseClient.prototype.updateConnection =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.UserService/UpdateConnection',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_UpdateConnection);
 };
 
 

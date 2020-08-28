@@ -21,13 +21,13 @@ goog.object.extend(proto, grpc_connection_pb);
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.proto.Activity', null, global);
+goog.exportSymbol('proto.proto.ConnectionRequest', null, global);
 goog.exportSymbol('proto.proto.CreateNotificationRequest', null, global);
 goog.exportSymbol('proto.proto.CreateUserRequest', null, global);
 goog.exportSymbol('proto.proto.Friend', null, global);
 goog.exportSymbol('proto.proto.FriendRequest', null, global);
 goog.exportSymbol('proto.proto.FriendResponse', null, global);
 goog.exportSymbol('proto.proto.FriendsResponse', null, global);
-goog.exportSymbol('proto.proto.GetConnectionRequest', null, global);
 goog.exportSymbol('proto.proto.GetFriendRequest', null, global);
 goog.exportSymbol('proto.proto.GetUserResponse', null, global);
 goog.exportSymbol('proto.proto.Notification', null, global);
@@ -494,16 +494,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.proto.GetConnectionRequest = function(opt_data) {
+proto.proto.ConnectionRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.proto.GetConnectionRequest, jspb.Message);
+goog.inherits(proto.proto.ConnectionRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.proto.GetConnectionRequest.displayName = 'proto.proto.GetConnectionRequest';
+  proto.proto.ConnectionRequest.displayName = 'proto.proto.ConnectionRequest';
 }
 
 
@@ -6018,8 +6018,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.proto.GetConnectionRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.proto.GetConnectionRequest.toObject(opt_includeInstance, this);
+proto.proto.ConnectionRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.proto.ConnectionRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -6028,11 +6028,11 @@ proto.proto.GetConnectionRequest.prototype.toObject = function(opt_includeInstan
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.proto.GetConnectionRequest} msg The msg instance to transform.
+ * @param {!proto.proto.ConnectionRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.proto.GetConnectionRequest.toObject = function(includeInstance, msg) {
+proto.proto.ConnectionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     connection: (f = msg.getConnection()) && grpc_connection_pb.Connection.toObject(includeInstance, f),
     authRequest: (f = msg.getAuthRequest()) && grpc_base_pb.AuthenticateRequest.toObject(includeInstance, f)
@@ -6049,23 +6049,23 @@ proto.proto.GetConnectionRequest.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.proto.GetConnectionRequest}
+ * @return {!proto.proto.ConnectionRequest}
  */
-proto.proto.GetConnectionRequest.deserializeBinary = function(bytes) {
+proto.proto.ConnectionRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.proto.GetConnectionRequest;
-  return proto.proto.GetConnectionRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.proto.ConnectionRequest;
+  return proto.proto.ConnectionRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.proto.GetConnectionRequest} msg The message object to deserialize into.
+ * @param {!proto.proto.ConnectionRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.proto.GetConnectionRequest}
+ * @return {!proto.proto.ConnectionRequest}
  */
-proto.proto.GetConnectionRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.proto.ConnectionRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -6095,9 +6095,9 @@ proto.proto.GetConnectionRequest.deserializeBinaryFromReader = function(msg, rea
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.proto.GetConnectionRequest.prototype.serializeBinary = function() {
+proto.proto.ConnectionRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.proto.GetConnectionRequest.serializeBinaryToWriter(this, writer);
+  proto.proto.ConnectionRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -6105,11 +6105,11 @@ proto.proto.GetConnectionRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.proto.GetConnectionRequest} message
+ * @param {!proto.proto.ConnectionRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.proto.GetConnectionRequest.serializeBinaryToWriter = function(message, writer) {
+proto.proto.ConnectionRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getConnection();
   if (f != null) {
@@ -6134,7 +6134,7 @@ proto.proto.GetConnectionRequest.serializeBinaryToWriter = function(message, wri
  * optional Connection connection = 1;
  * @return {?proto.proto.Connection}
  */
-proto.proto.GetConnectionRequest.prototype.getConnection = function() {
+proto.proto.ConnectionRequest.prototype.getConnection = function() {
   return /** @type{?proto.proto.Connection} */ (
     jspb.Message.getWrapperField(this, grpc_connection_pb.Connection, 1));
 };
@@ -6142,18 +6142,18 @@ proto.proto.GetConnectionRequest.prototype.getConnection = function() {
 
 /**
  * @param {?proto.proto.Connection|undefined} value
- * @return {!proto.proto.GetConnectionRequest} returns this
+ * @return {!proto.proto.ConnectionRequest} returns this
 */
-proto.proto.GetConnectionRequest.prototype.setConnection = function(value) {
+proto.proto.ConnectionRequest.prototype.setConnection = function(value) {
   return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.proto.GetConnectionRequest} returns this
+ * @return {!proto.proto.ConnectionRequest} returns this
  */
-proto.proto.GetConnectionRequest.prototype.clearConnection = function() {
+proto.proto.ConnectionRequest.prototype.clearConnection = function() {
   return this.setConnection(undefined);
 };
 
@@ -6162,7 +6162,7 @@ proto.proto.GetConnectionRequest.prototype.clearConnection = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.proto.GetConnectionRequest.prototype.hasConnection = function() {
+proto.proto.ConnectionRequest.prototype.hasConnection = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
@@ -6171,7 +6171,7 @@ proto.proto.GetConnectionRequest.prototype.hasConnection = function() {
  * optional AuthenticateRequest auth_request = 2;
  * @return {?proto.proto.AuthenticateRequest}
  */
-proto.proto.GetConnectionRequest.prototype.getAuthRequest = function() {
+proto.proto.ConnectionRequest.prototype.getAuthRequest = function() {
   return /** @type{?proto.proto.AuthenticateRequest} */ (
     jspb.Message.getWrapperField(this, grpc_base_pb.AuthenticateRequest, 2));
 };
@@ -6179,18 +6179,18 @@ proto.proto.GetConnectionRequest.prototype.getAuthRequest = function() {
 
 /**
  * @param {?proto.proto.AuthenticateRequest|undefined} value
- * @return {!proto.proto.GetConnectionRequest} returns this
+ * @return {!proto.proto.ConnectionRequest} returns this
 */
-proto.proto.GetConnectionRequest.prototype.setAuthRequest = function(value) {
+proto.proto.ConnectionRequest.prototype.setAuthRequest = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.proto.GetConnectionRequest} returns this
+ * @return {!proto.proto.ConnectionRequest} returns this
  */
-proto.proto.GetConnectionRequest.prototype.clearAuthRequest = function() {
+proto.proto.ConnectionRequest.prototype.clearAuthRequest = function() {
   return this.setAuthRequest(undefined);
 };
 
@@ -6199,7 +6199,7 @@ proto.proto.GetConnectionRequest.prototype.clearAuthRequest = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.proto.GetConnectionRequest.prototype.hasAuthRequest = function() {
+proto.proto.ConnectionRequest.prototype.hasAuthRequest = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
