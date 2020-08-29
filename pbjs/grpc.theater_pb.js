@@ -1137,6 +1137,7 @@ proto.proto.MediaSource.toObject = function(includeInstance, msg) {
     proto.proto.Subtitle.toObject, includeInstance),
     userId: jspb.Message.getFieldWithDefault(msg, 7, ""),
     length: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    artist: jspb.Message.getFieldWithDefault(msg, 9, ""),
     createdAt: (f = msg.getCreatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
@@ -1209,11 +1210,15 @@ proto.proto.MediaSource.deserializeBinaryFromReader = function(msg, reader) {
       msg.setLength(value);
       break;
     case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setArtist(value);
+      break;
+    case 10:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setCreatedAt(value);
       break;
-    case 10:
+    case 11:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setUpdatedAt(value);
@@ -1304,10 +1309,17 @@ proto.proto.MediaSource.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getArtist();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
+      f
+    );
+  }
   f = message.getCreatedAt();
   if (f != null) {
     writer.writeMessage(
-      9,
+      10,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -1315,7 +1327,7 @@ proto.proto.MediaSource.serializeBinaryToWriter = function(message, writer) {
   f = message.getUpdatedAt();
   if (f != null) {
     writer.writeMessage(
-      10,
+      11,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -1502,12 +1514,30 @@ proto.proto.MediaSource.prototype.setLength = function(value) {
 
 
 /**
- * optional google.protobuf.Timestamp created_at = 9;
+ * optional string artist = 9;
+ * @return {string}
+ */
+proto.proto.MediaSource.prototype.getArtist = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.proto.MediaSource} returns this
+ */
+proto.proto.MediaSource.prototype.setArtist = function(value) {
+  return jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp created_at = 10;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.MediaSource.prototype.getCreatedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 9));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 10));
 };
 
 
@@ -1516,7 +1546,7 @@ proto.proto.MediaSource.prototype.getCreatedAt = function() {
  * @return {!proto.proto.MediaSource} returns this
 */
 proto.proto.MediaSource.prototype.setCreatedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 9, value);
+  return jspb.Message.setWrapperField(this, 10, value);
 };
 
 
@@ -1534,17 +1564,17 @@ proto.proto.MediaSource.prototype.clearCreatedAt = function() {
  * @return {boolean}
  */
 proto.proto.MediaSource.prototype.hasCreatedAt = function() {
-  return jspb.Message.getField(this, 9) != null;
+  return jspb.Message.getField(this, 10) != null;
 };
 
 
 /**
- * optional google.protobuf.Timestamp updated_at = 10;
+ * optional google.protobuf.Timestamp updated_at = 11;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.proto.MediaSource.prototype.getUpdatedAt = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 10));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 11));
 };
 
 
@@ -1553,7 +1583,7 @@ proto.proto.MediaSource.prototype.getUpdatedAt = function() {
  * @return {!proto.proto.MediaSource} returns this
 */
 proto.proto.MediaSource.prototype.setUpdatedAt = function(value) {
-  return jspb.Message.setWrapperField(this, 10, value);
+  return jspb.Message.setWrapperField(this, 11, value);
 };
 
 
@@ -1571,7 +1601,7 @@ proto.proto.MediaSource.prototype.clearUpdatedAt = function() {
  * @return {boolean}
  */
 proto.proto.MediaSource.prototype.hasUpdatedAt = function() {
-  return jspb.Message.getField(this, 10) != null;
+  return jspb.Message.getField(this, 11) != null;
 };
 
 

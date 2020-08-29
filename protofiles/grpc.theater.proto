@@ -61,8 +61,9 @@ message MediaSource {
     repeated  Subtitle subtitles  = 6;
     string    user_id             = 7;
     int64     length              = 8;
-    google.protobuf.Timestamp  created_at  = 9;
-    google.protobuf.Timestamp  updated_at  = 10;
+    string    artist              = 9;
+    google.protobuf.Timestamp  created_at  = 10;
+    google.protobuf.Timestamp  updated_at  = 11;
 }
 
 message Theater {

@@ -13820,6 +13820,7 @@ $root.proto = (function() {
          * @property {Array.<proto.ISubtitle>|null} [subtitles] MediaSource subtitles
          * @property {string|null} [userId] MediaSource userId
          * @property {number|Long|null} [length] MediaSource length
+         * @property {string|null} [artist] MediaSource artist
          * @property {google.protobuf.ITimestamp|null} [createdAt] MediaSource createdAt
          * @property {google.protobuf.ITimestamp|null} [updatedAt] MediaSource updatedAt
          */
@@ -13905,6 +13906,14 @@ $root.proto = (function() {
         MediaSource.prototype.length = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
+         * MediaSource artist.
+         * @member {string} artist
+         * @memberof proto.MediaSource
+         * @instance
+         */
+        MediaSource.prototype.artist = "";
+
+        /**
          * MediaSource createdAt.
          * @member {google.protobuf.ITimestamp|null|undefined} createdAt
          * @memberof proto.MediaSource
@@ -13961,10 +13970,12 @@ $root.proto = (function() {
                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.userId);
             if (message.length != null && message.hasOwnProperty("length"))
                 writer.uint32(/* id 8, wireType 0 =*/64).int64(message.length);
+            if (message.artist != null && message.hasOwnProperty("artist"))
+                writer.uint32(/* id 9, wireType 2 =*/74).string(message.artist);
             if (message.createdAt != null && message.hasOwnProperty("createdAt"))
-                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.createdAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
             if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
-                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             return writer;
         };
 
@@ -14026,9 +14037,12 @@ $root.proto = (function() {
                     message.length = reader.int64();
                     break;
                 case 9:
-                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    message.artist = reader.string();
                     break;
                 case 10:
+                    message.createdAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 11:
                     message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 default:
@@ -14107,6 +14121,9 @@ $root.proto = (function() {
             if (message.length != null && message.hasOwnProperty("length"))
                 if (!$util.isInteger(message.length) && !(message.length && $util.isInteger(message.length.low) && $util.isInteger(message.length.high)))
                     return "length: integer|Long expected";
+            if (message.artist != null && message.hasOwnProperty("artist"))
+                if (!$util.isString(message.artist))
+                    return "artist: string expected";
             if (message.createdAt != null && message.hasOwnProperty("createdAt")) {
                 var error = $root.google.protobuf.Timestamp.verify(message.createdAt);
                 if (error)
@@ -14195,6 +14212,8 @@ $root.proto = (function() {
                     message.length = object.length;
                 else if (typeof object.length === "object")
                     message.length = new $util.LongBits(object.length.low >>> 0, object.length.high >>> 0).toNumber();
+            if (object.artist != null)
+                message.artist = String(object.artist);
             if (object.createdAt != null) {
                 if (typeof object.createdAt !== "object")
                     throw TypeError(".proto.MediaSource.createdAt: object expected");
@@ -14235,6 +14254,7 @@ $root.proto = (function() {
                     object.length = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
                 } else
                     object.length = options.longs === String ? "0" : 0;
+                object.artist = "";
                 object.createdAt = null;
                 object.updatedAt = null;
             }
@@ -14260,6 +14280,8 @@ $root.proto = (function() {
                     object.length = options.longs === String ? String(message.length) : message.length;
                 else
                     object.length = options.longs === String ? $util.Long.prototype.toString.call(message.length) : options.longs === Number ? new $util.LongBits(message.length.low >>> 0, message.length.high >>> 0).toNumber() : message.length;
+            if (message.artist != null && message.hasOwnProperty("artist"))
+                object.artist = message.artist;
             if (message.createdAt != null && message.hasOwnProperty("createdAt"))
                 object.createdAt = $root.google.protobuf.Timestamp.toObject(message.createdAt, options);
             if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
