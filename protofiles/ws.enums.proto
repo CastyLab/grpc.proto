@@ -54,4 +54,5 @@ enum EMSG {
 
     // USER events
     USER_UPDATED                        = 33;
+    SELF_PERSONAL_STATE_CHANGED         = 34;
 }
