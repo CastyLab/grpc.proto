@@ -18,6 +18,8 @@ grpc.web = require('grpc-web');
 
 var grpc_base_pb = require('./grpc.base_pb.js')
 
+var ws_enums_pb = require('./ws.enums_pb.js')
+
 var grpc_auth_pb = require('./grpc.auth_pb.js')
 
 var grpc_connection_pb = require('./grpc.connection_pb.js')
@@ -75,6 +77,86 @@ proto.proto.UserServicePromiseClient =
    */
   this.hostname_ = hostname;
 
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.UpdateStateRequest,
+ *   !proto.proto.Response>}
+ */
+const methodDescriptor_UserService_UpdateState = new grpc.web.MethodDescriptor(
+  '/proto.UserService/UpdateState',
+  grpc.web.MethodType.UNARY,
+  proto.proto.UpdateStateRequest,
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.UpdateStateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.UpdateStateRequest,
+ *   !proto.proto.Response>}
+ */
+const methodInfo_UserService_UpdateState = new grpc.web.AbstractClientBase.MethodInfo(
+  grpc_base_pb.Response,
+  /**
+   * @param {!proto.proto.UpdateStateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  grpc_base_pb.Response.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.UpdateStateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.Response)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.Response>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.UserServiceClient.prototype.updateState =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.UserService/UpdateState',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_UpdateState,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.UpdateStateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.Response>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.UserServicePromiseClient.prototype.updateState =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.UserService/UpdateState',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_UpdateState);
 };
 
 
