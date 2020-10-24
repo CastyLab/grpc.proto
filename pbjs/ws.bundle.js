@@ -983,6 +983,9 @@ $root.proto = (function() {
                 case 32:
                 case 33:
                 case 34:
+                case 35:
+                case 36:
+                case 37:
                     break;
                 }
             if (message.data != null && message.hasOwnProperty("data"))
@@ -1145,9 +1148,21 @@ $root.proto = (function() {
             case 33:
                 message.type = 33;
                 break;
-            case "SELF_PERSONAL_STATE_CHANGED":
+            case "SELF_USER_UPDATED":
             case 34:
                 message.type = 34;
+                break;
+            case "SELF_PERSONAL_STATE_CHANGED":
+            case 35:
+                message.type = 35;
+                break;
+            case "SELF_PERSONAL_ACTIVITY_CHANGED":
+            case 36:
+                message.type = 36;
+                break;
+            case "SELF_FRIEND_REQUEST_ACCEPTED":
+            case 37:
+                message.type = 37;
                 break;
             }
             if (object.data != null)
@@ -1268,7 +1283,10 @@ $root.proto = (function() {
      * @property {number} MESSAGE_EDITED=31 MESSAGE_EDITED value
      * @property {number} MESSAGE_DELETED=32 MESSAGE_DELETED value
      * @property {number} USER_UPDATED=33 USER_UPDATED value
-     * @property {number} SELF_PERSONAL_STATE_CHANGED=34 SELF_PERSONAL_STATE_CHANGED value
+     * @property {number} SELF_USER_UPDATED=34 SELF_USER_UPDATED value
+     * @property {number} SELF_PERSONAL_STATE_CHANGED=35 SELF_PERSONAL_STATE_CHANGED value
+     * @property {number} SELF_PERSONAL_ACTIVITY_CHANGED=36 SELF_PERSONAL_ACTIVITY_CHANGED value
+     * @property {number} SELF_FRIEND_REQUEST_ACCEPTED=37 SELF_FRIEND_REQUEST_ACCEPTED value
      */
     proto.EMSG = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -1306,7 +1324,10 @@ $root.proto = (function() {
         values[valuesById[31] = "MESSAGE_EDITED"] = 31;
         values[valuesById[32] = "MESSAGE_DELETED"] = 32;
         values[valuesById[33] = "USER_UPDATED"] = 33;
-        values[valuesById[34] = "SELF_PERSONAL_STATE_CHANGED"] = 34;
+        values[valuesById[34] = "SELF_USER_UPDATED"] = 34;
+        values[valuesById[35] = "SELF_PERSONAL_STATE_CHANGED"] = 35;
+        values[valuesById[36] = "SELF_PERSONAL_ACTIVITY_CHANGED"] = 36;
+        values[valuesById[37] = "SELF_FRIEND_REQUEST_ACCEPTED"] = 37;
         return values;
     })();
 
