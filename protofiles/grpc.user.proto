@@ -4,6 +4,7 @@ package proto;
 option go_package = ".;proto";
 
 import "grpc.base.proto";
+import "ws.enums.proto";
 import "grpc.auth.proto";
 import "grpc.connection.proto";
 import "google/protobuf/timestamp.proto";
@@ -34,12 +35,13 @@ message User {
     bool                       is_staff         = 9;
     bool                       verified         = 10;
     string                     avatar           = 11;
-    Activity                   activity         = 12;
-    bool                       two_fa_enabled   = 13;
-    string                     two_fa_token     = 14;
-    google.protobuf.Timestamp  last_login       = 15;
-    google.protobuf.Timestamp  joined_at        = 16;
-    google.protobuf.Timestamp  updated_at       = 17;
+    PERSONAL_STATE             state            = 12;
+    Activity                   activity         = 13;
+    bool                       two_fa_enabled   = 14;
+    string                     two_fa_token     = 15;
+    google.protobuf.Timestamp  last_login       = 16;
+    google.protobuf.Timestamp  joined_at        = 17;
+    google.protobuf.Timestamp  updated_at       = 18;
 }
 
 message Notification {
@@ -176,9 +178,14 @@ message ConnectionRequest {
     AuthenticateRequest  auth_request  = 2;
 }
 
-service UserService {
+message UpdateStateRequest {
+    PERSONAL_STATE       state         = 1;
+    AuthenticateRequest  auth_request  = 2;
+}
 
+service UserService {
     // User Profile
+    rpc UpdateState(UpdateStateRequest) returns (Response);
     rpc UpdateActivity(UpdateActivityRequest) returns (Response);
     rpc RemoveActivity(AuthenticateRequest) returns (Response);
     rpc GetUser(AuthenticateRequest) returns (GetUserResponse);
@@ -207,5 +214,4 @@ service UserService {
     rpc GetNotifications(AuthenticateRequest) returns (NotificationResponse);
     rpc CreateNotification(CreateNotificationRequest) returns (NotificationResponse);
     rpc ReadAllNotifications(AuthenticateRequest) returns (NotificationResponse);
-
 }

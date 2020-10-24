@@ -2247,6 +2247,7 @@ $root.proto = (function() {
          * @property {boolean|null} [isStaff] User isStaff
          * @property {boolean|null} [verified] User verified
          * @property {string|null} [avatar] User avatar
+         * @property {proto.PERSONAL_STATE|null} [state] User state
          * @property {proto.IActivity|null} [activity] User activity
          * @property {boolean|null} [twoFaEnabled] User twoFaEnabled
          * @property {string|null} [twoFaToken] User twoFaToken
@@ -2359,6 +2360,14 @@ $root.proto = (function() {
         User.prototype.avatar = "";
 
         /**
+         * User state.
+         * @member {proto.PERSONAL_STATE} state
+         * @memberof proto.User
+         * @instance
+         */
+        User.prototype.state = 0;
+
+        /**
          * User activity.
          * @member {proto.IActivity|null|undefined} activity
          * @memberof proto.User
@@ -2452,18 +2461,20 @@ $root.proto = (function() {
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.verified);
             if (message.avatar != null && message.hasOwnProperty("avatar"))
                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.avatar);
+            if (message.state != null && message.hasOwnProperty("state"))
+                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.state);
             if (message.activity != null && message.hasOwnProperty("activity"))
-                $root.proto.Activity.encode(message.activity, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                $root.proto.Activity.encode(message.activity, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
             if (message.twoFaEnabled != null && message.hasOwnProperty("twoFaEnabled"))
-                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.twoFaEnabled);
+                writer.uint32(/* id 14, wireType 0 =*/112).bool(message.twoFaEnabled);
             if (message.twoFaToken != null && message.hasOwnProperty("twoFaToken"))
-                writer.uint32(/* id 14, wireType 2 =*/114).string(message.twoFaToken);
+                writer.uint32(/* id 15, wireType 2 =*/122).string(message.twoFaToken);
             if (message.lastLogin != null && message.hasOwnProperty("lastLogin"))
-                $root.google.protobuf.Timestamp.encode(message.lastLogin, writer.uint32(/* id 15, wireType 2 =*/122).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.lastLogin, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.joinedAt != null && message.hasOwnProperty("joinedAt"))
-                $root.google.protobuf.Timestamp.encode(message.joinedAt, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.joinedAt, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
             if (message.updatedAt != null && message.hasOwnProperty("updatedAt"))
-                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                $root.google.protobuf.Timestamp.encode(message.updatedAt, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
             return writer;
         };
 
@@ -2532,21 +2543,24 @@ $root.proto = (function() {
                     message.avatar = reader.string();
                     break;
                 case 12:
-                    message.activity = $root.proto.Activity.decode(reader, reader.uint32());
+                    message.state = reader.int32();
                     break;
                 case 13:
-                    message.twoFaEnabled = reader.bool();
+                    message.activity = $root.proto.Activity.decode(reader, reader.uint32());
                     break;
                 case 14:
-                    message.twoFaToken = reader.string();
+                    message.twoFaEnabled = reader.bool();
                     break;
                 case 15:
-                    message.lastLogin = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    message.twoFaToken = reader.string();
                     break;
                 case 16:
-                    message.joinedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    message.lastLogin = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 case 17:
+                    message.joinedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                    break;
+                case 18:
                     message.updatedAt = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                     break;
                 default:
@@ -2617,6 +2631,17 @@ $root.proto = (function() {
             if (message.avatar != null && message.hasOwnProperty("avatar"))
                 if (!$util.isString(message.avatar))
                     return "avatar: string expected";
+            if (message.state != null && message.hasOwnProperty("state"))
+                switch (message.state) {
+                default:
+                    return "state: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    break;
+                }
             if (message.activity != null && message.hasOwnProperty("activity")) {
                 var error = $root.proto.Activity.verify(message.activity);
                 if (error)
@@ -2680,6 +2705,28 @@ $root.proto = (function() {
                 message.verified = Boolean(object.verified);
             if (object.avatar != null)
                 message.avatar = String(object.avatar);
+            switch (object.state) {
+            case "OFFLINE":
+            case 0:
+                message.state = 0;
+                break;
+            case "ONLINE":
+            case 1:
+                message.state = 1;
+                break;
+            case "IDLE":
+            case 2:
+                message.state = 2;
+                break;
+            case "BUSY":
+            case 3:
+                message.state = 3;
+                break;
+            case "INVISIBLE":
+            case 4:
+                message.state = 4;
+                break;
+            }
             if (object.activity != null) {
                 if (typeof object.activity !== "object")
                     throw TypeError(".proto.User.activity: object expected");
@@ -2732,6 +2779,7 @@ $root.proto = (function() {
                 object.isStaff = false;
                 object.verified = false;
                 object.avatar = "";
+                object.state = options.enums === String ? "OFFLINE" : 0;
                 object.activity = null;
                 object.twoFaEnabled = false;
                 object.twoFaToken = "";
@@ -2761,6 +2809,8 @@ $root.proto = (function() {
                 object.verified = message.verified;
             if (message.avatar != null && message.hasOwnProperty("avatar"))
                 object.avatar = message.avatar;
+            if (message.state != null && message.hasOwnProperty("state"))
+                object.state = options.enums === String ? $root.proto.PERSONAL_STATE[message.state] : message.state;
             if (message.activity != null && message.hasOwnProperty("activity"))
                 object.activity = $root.proto.Activity.toObject(message.activity, options);
             if (message.twoFaEnabled != null && message.hasOwnProperty("twoFaEnabled"))
@@ -7772,6 +7822,249 @@ $root.proto = (function() {
         return ConnectionRequest;
     })();
 
+    proto.UpdateStateRequest = (function() {
+
+        /**
+         * Properties of an UpdateStateRequest.
+         * @memberof proto
+         * @interface IUpdateStateRequest
+         * @property {proto.PERSONAL_STATE|null} [state] UpdateStateRequest state
+         * @property {proto.IAuthenticateRequest|null} [authRequest] UpdateStateRequest authRequest
+         */
+
+        /**
+         * Constructs a new UpdateStateRequest.
+         * @memberof proto
+         * @classdesc Represents an UpdateStateRequest.
+         * @implements IUpdateStateRequest
+         * @constructor
+         * @param {proto.IUpdateStateRequest=} [properties] Properties to set
+         */
+        function UpdateStateRequest(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UpdateStateRequest state.
+         * @member {proto.PERSONAL_STATE} state
+         * @memberof proto.UpdateStateRequest
+         * @instance
+         */
+        UpdateStateRequest.prototype.state = 0;
+
+        /**
+         * UpdateStateRequest authRequest.
+         * @member {proto.IAuthenticateRequest|null|undefined} authRequest
+         * @memberof proto.UpdateStateRequest
+         * @instance
+         */
+        UpdateStateRequest.prototype.authRequest = null;
+
+        /**
+         * Creates a new UpdateStateRequest instance using the specified properties.
+         * @function create
+         * @memberof proto.UpdateStateRequest
+         * @static
+         * @param {proto.IUpdateStateRequest=} [properties] Properties to set
+         * @returns {proto.UpdateStateRequest} UpdateStateRequest instance
+         */
+        UpdateStateRequest.create = function create(properties) {
+            return new UpdateStateRequest(properties);
+        };
+
+        /**
+         * Encodes the specified UpdateStateRequest message. Does not implicitly {@link proto.UpdateStateRequest.verify|verify} messages.
+         * @function encode
+         * @memberof proto.UpdateStateRequest
+         * @static
+         * @param {proto.IUpdateStateRequest} message UpdateStateRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UpdateStateRequest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.state != null && message.hasOwnProperty("state"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                $root.proto.AuthenticateRequest.encode(message.authRequest, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Encodes the specified UpdateStateRequest message, length delimited. Does not implicitly {@link proto.UpdateStateRequest.verify|verify} messages.
+         * @function encodeDelimited
+         * @memberof proto.UpdateStateRequest
+         * @static
+         * @param {proto.IUpdateStateRequest} message UpdateStateRequest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UpdateStateRequest.encodeDelimited = function encodeDelimited(message, writer) {
+            return this.encode(message, writer).ldelim();
+        };
+
+        /**
+         * Decodes an UpdateStateRequest message from the specified reader or buffer.
+         * @function decode
+         * @memberof proto.UpdateStateRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {proto.UpdateStateRequest} UpdateStateRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UpdateStateRequest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.UpdateStateRequest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.state = reader.int32();
+                    break;
+                case 2:
+                    message.authRequest = $root.proto.AuthenticateRequest.decode(reader, reader.uint32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Decodes an UpdateStateRequest message from the specified reader or buffer, length delimited.
+         * @function decodeDelimited
+         * @memberof proto.UpdateStateRequest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @returns {proto.UpdateStateRequest} UpdateStateRequest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UpdateStateRequest.decodeDelimited = function decodeDelimited(reader) {
+            if (!(reader instanceof $Reader))
+                reader = new $Reader(reader);
+            return this.decode(reader, reader.uint32());
+        };
+
+        /**
+         * Verifies an UpdateStateRequest message.
+         * @function verify
+         * @memberof proto.UpdateStateRequest
+         * @static
+         * @param {Object.<string,*>} message Plain object to verify
+         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+         */
+        UpdateStateRequest.verify = function verify(message) {
+            if (typeof message !== "object" || message === null)
+                return "object expected";
+            if (message.state != null && message.hasOwnProperty("state"))
+                switch (message.state) {
+                default:
+                    return "state: enum value expected";
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    break;
+                }
+            if (message.authRequest != null && message.hasOwnProperty("authRequest")) {
+                var error = $root.proto.AuthenticateRequest.verify(message.authRequest);
+                if (error)
+                    return "authRequest." + error;
+            }
+            return null;
+        };
+
+        /**
+         * Creates an UpdateStateRequest message from a plain object. Also converts values to their respective internal types.
+         * @function fromObject
+         * @memberof proto.UpdateStateRequest
+         * @static
+         * @param {Object.<string,*>} object Plain object
+         * @returns {proto.UpdateStateRequest} UpdateStateRequest
+         */
+        UpdateStateRequest.fromObject = function fromObject(object) {
+            if (object instanceof $root.proto.UpdateStateRequest)
+                return object;
+            var message = new $root.proto.UpdateStateRequest();
+            switch (object.state) {
+            case "OFFLINE":
+            case 0:
+                message.state = 0;
+                break;
+            case "ONLINE":
+            case 1:
+                message.state = 1;
+                break;
+            case "IDLE":
+            case 2:
+                message.state = 2;
+                break;
+            case "BUSY":
+            case 3:
+                message.state = 3;
+                break;
+            case "INVISIBLE":
+            case 4:
+                message.state = 4;
+                break;
+            }
+            if (object.authRequest != null) {
+                if (typeof object.authRequest !== "object")
+                    throw TypeError(".proto.UpdateStateRequest.authRequest: object expected");
+                message.authRequest = $root.proto.AuthenticateRequest.fromObject(object.authRequest);
+            }
+            return message;
+        };
+
+        /**
+         * Creates a plain object from an UpdateStateRequest message. Also converts values to other types if specified.
+         * @function toObject
+         * @memberof proto.UpdateStateRequest
+         * @static
+         * @param {proto.UpdateStateRequest} message UpdateStateRequest
+         * @param {$protobuf.IConversionOptions} [options] Conversion options
+         * @returns {Object.<string,*>} Plain object
+         */
+        UpdateStateRequest.toObject = function toObject(message, options) {
+            if (!options)
+                options = {};
+            var object = {};
+            if (options.defaults) {
+                object.state = options.enums === String ? "OFFLINE" : 0;
+                object.authRequest = null;
+            }
+            if (message.state != null && message.hasOwnProperty("state"))
+                object.state = options.enums === String ? $root.proto.PERSONAL_STATE[message.state] : message.state;
+            if (message.authRequest != null && message.hasOwnProperty("authRequest"))
+                object.authRequest = $root.proto.AuthenticateRequest.toObject(message.authRequest, options);
+            return object;
+        };
+
+        /**
+         * Converts this UpdateStateRequest to JSON.
+         * @function toJSON
+         * @memberof proto.UpdateStateRequest
+         * @instance
+         * @returns {Object.<string,*>} JSON object
+         */
+        UpdateStateRequest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return UpdateStateRequest;
+    })();
+
     proto.UserService = (function() {
 
         /**
@@ -7803,6 +8096,39 @@ $root.proto = (function() {
         UserService.create = function create(rpcImpl, requestDelimited, responseDelimited) {
             return new this(rpcImpl, requestDelimited, responseDelimited);
         };
+
+        /**
+         * Callback as used by {@link proto.UserService#updateState}.
+         * @memberof proto.UserService
+         * @typedef UpdateStateCallback
+         * @type {function}
+         * @param {Error|null} error Error, if any
+         * @param {proto.Response} [response] Response
+         */
+
+        /**
+         * Calls UpdateState.
+         * @function updateState
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IUpdateStateRequest} request UpdateStateRequest message or plain object
+         * @param {proto.UserService.UpdateStateCallback} callback Node-style callback called with the error, if any, and Response
+         * @returns {undefined}
+         * @variation 1
+         */
+        Object.defineProperty(UserService.prototype.updateState = function updateState(request, callback) {
+            return this.rpcCall(updateState, $root.proto.UpdateStateRequest, $root.proto.Response, request, callback);
+        }, "name", { value: "UpdateState" });
+
+        /**
+         * Calls UpdateState.
+         * @function updateState
+         * @memberof proto.UserService
+         * @instance
+         * @param {proto.IUpdateStateRequest} request UpdateStateRequest message or plain object
+         * @returns {Promise<proto.Response>} Promise
+         * @variation 2
+         */
 
         /**
          * Callback as used by {@link proto.UserService#updateActivity}.
