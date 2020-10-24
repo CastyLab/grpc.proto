@@ -982,6 +982,7 @@ $root.proto = (function() {
                 case 31:
                 case 32:
                 case 33:
+                case 34:
                     break;
                 }
             if (message.data != null && message.hasOwnProperty("data"))
@@ -1144,6 +1145,10 @@ $root.proto = (function() {
             case 33:
                 message.type = 33;
                 break;
+            case "SELF_PERSONAL_STATE_CHANGED":
+            case 34:
+                message.type = 34;
+                break;
             }
             if (object.data != null)
                 if (typeof object.data === "string")
@@ -1263,6 +1268,7 @@ $root.proto = (function() {
      * @property {number} MESSAGE_EDITED=31 MESSAGE_EDITED value
      * @property {number} MESSAGE_DELETED=32 MESSAGE_DELETED value
      * @property {number} USER_UPDATED=33 USER_UPDATED value
+     * @property {number} SELF_PERSONAL_STATE_CHANGED=34 SELF_PERSONAL_STATE_CHANGED value
      */
     proto.EMSG = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -1300,6 +1306,7 @@ $root.proto = (function() {
         values[valuesById[31] = "MESSAGE_EDITED"] = 31;
         values[valuesById[32] = "MESSAGE_DELETED"] = 32;
         values[valuesById[33] = "USER_UPDATED"] = 33;
+        values[valuesById[34] = "SELF_PERSONAL_STATE_CHANGED"] = 34;
         return values;
     })();
 

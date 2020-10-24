@@ -62,7 +62,8 @@ proto.proto.EMSG = {
   CLIENT_READY: 30,
   MESSAGE_EDITED: 31,
   MESSAGE_DELETED: 32,
-  USER_UPDATED: 33
+  USER_UPDATED: 33,
+  SELF_PERSONAL_STATE_CHANGED: 34
 };
 
 goog.object.extend(exports, proto.proto);
