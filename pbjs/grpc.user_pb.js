@@ -1057,7 +1057,6 @@ proto.proto.User.toObject = function(includeInstance, msg) {
     state: jspb.Message.getFieldWithDefault(msg, 12, 0),
     activity: (f = msg.getActivity()) && proto.proto.Activity.toObject(includeInstance, f),
     twoFaEnabled: jspb.Message.getBooleanFieldWithDefault(msg, 14, false),
-    twoFaToken: jspb.Message.getFieldWithDefault(msg, 15, ""),
     lastLogin: (f = msg.getLastLogin()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     joinedAt: (f = msg.getJoinedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatedAt: (f = msg.getUpdatedAt()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
@@ -1153,10 +1152,6 @@ proto.proto.User.deserializeBinaryFromReader = function(msg, reader) {
     case 14:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setTwoFaEnabled(value);
-      break;
-    case 15:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setTwoFaToken(value);
       break;
     case 16:
       var value = new google_protobuf_timestamp_pb.Timestamp;
@@ -1298,13 +1293,6 @@ proto.proto.User.serializeBinaryToWriter = function(message, writer) {
   if (f) {
     writer.writeBool(
       14,
-      f
-    );
-  }
-  f = message.getTwoFaToken();
-  if (f.length > 0) {
-    writer.writeString(
-      15,
       f
     );
   }
@@ -1603,24 +1591,6 @@ proto.proto.User.prototype.getTwoFaEnabled = function() {
  */
 proto.proto.User.prototype.setTwoFaEnabled = function(value) {
   return jspb.Message.setProto3BooleanField(this, 14, value);
-};
-
-
-/**
- * optional string two_fa_token = 15;
- * @return {string}
- */
-proto.proto.User.prototype.getTwoFaToken = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 15, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.proto.User} returns this
- */
-proto.proto.User.prototype.setTwoFaToken = function(value) {
-  return jspb.Message.setProto3StringField(this, 15, value);
 };
 
 

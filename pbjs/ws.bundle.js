@@ -2278,7 +2278,6 @@ $root.proto = (function() {
          * @property {proto.PERSONAL_STATE|null} [state] User state
          * @property {proto.IActivity|null} [activity] User activity
          * @property {boolean|null} [twoFaEnabled] User twoFaEnabled
-         * @property {string|null} [twoFaToken] User twoFaToken
          * @property {google.protobuf.ITimestamp|null} [lastLogin] User lastLogin
          * @property {google.protobuf.ITimestamp|null} [joinedAt] User joinedAt
          * @property {google.protobuf.ITimestamp|null} [updatedAt] User updatedAt
@@ -2412,14 +2411,6 @@ $root.proto = (function() {
         User.prototype.twoFaEnabled = false;
 
         /**
-         * User twoFaToken.
-         * @member {string} twoFaToken
-         * @memberof proto.User
-         * @instance
-         */
-        User.prototype.twoFaToken = "";
-
-        /**
          * User lastLogin.
          * @member {google.protobuf.ITimestamp|null|undefined} lastLogin
          * @memberof proto.User
@@ -2495,8 +2486,6 @@ $root.proto = (function() {
                 $root.proto.Activity.encode(message.activity, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
             if (message.twoFaEnabled != null && message.hasOwnProperty("twoFaEnabled"))
                 writer.uint32(/* id 14, wireType 0 =*/112).bool(message.twoFaEnabled);
-            if (message.twoFaToken != null && message.hasOwnProperty("twoFaToken"))
-                writer.uint32(/* id 15, wireType 2 =*/122).string(message.twoFaToken);
             if (message.lastLogin != null && message.hasOwnProperty("lastLogin"))
                 $root.google.protobuf.Timestamp.encode(message.lastLogin, writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
             if (message.joinedAt != null && message.hasOwnProperty("joinedAt"))
@@ -2578,9 +2567,6 @@ $root.proto = (function() {
                     break;
                 case 14:
                     message.twoFaEnabled = reader.bool();
-                    break;
-                case 15:
-                    message.twoFaToken = reader.string();
                     break;
                 case 16:
                     message.lastLogin = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -2678,9 +2664,6 @@ $root.proto = (function() {
             if (message.twoFaEnabled != null && message.hasOwnProperty("twoFaEnabled"))
                 if (typeof message.twoFaEnabled !== "boolean")
                     return "twoFaEnabled: boolean expected";
-            if (message.twoFaToken != null && message.hasOwnProperty("twoFaToken"))
-                if (!$util.isString(message.twoFaToken))
-                    return "twoFaToken: string expected";
             if (message.lastLogin != null && message.hasOwnProperty("lastLogin")) {
                 var error = $root.google.protobuf.Timestamp.verify(message.lastLogin);
                 if (error)
@@ -2762,8 +2745,6 @@ $root.proto = (function() {
             }
             if (object.twoFaEnabled != null)
                 message.twoFaEnabled = Boolean(object.twoFaEnabled);
-            if (object.twoFaToken != null)
-                message.twoFaToken = String(object.twoFaToken);
             if (object.lastLogin != null) {
                 if (typeof object.lastLogin !== "object")
                     throw TypeError(".proto.User.lastLogin: object expected");
@@ -2810,7 +2791,6 @@ $root.proto = (function() {
                 object.state = options.enums === String ? "OFFLINE" : 0;
                 object.activity = null;
                 object.twoFaEnabled = false;
-                object.twoFaToken = "";
                 object.lastLogin = null;
                 object.joinedAt = null;
                 object.updatedAt = null;
@@ -2843,8 +2823,6 @@ $root.proto = (function() {
                 object.activity = $root.proto.Activity.toObject(message.activity, options);
             if (message.twoFaEnabled != null && message.hasOwnProperty("twoFaEnabled"))
                 object.twoFaEnabled = message.twoFaEnabled;
-            if (message.twoFaToken != null && message.hasOwnProperty("twoFaToken"))
-                object.twoFaToken = message.twoFaToken;
             if (message.lastLogin != null && message.hasOwnProperty("lastLogin"))
                 object.lastLogin = $root.google.protobuf.Timestamp.toObject(message.lastLogin, options);
             if (message.joinedAt != null && message.hasOwnProperty("joinedAt"))
