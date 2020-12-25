@@ -1443,6 +1443,86 @@ proto.proto.UserServicePromiseClient.prototype.getFriends =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.AuthenticateRequest,
+ *   !proto.proto.FriendsResponse>}
+ */
+const methodDescriptor_UserService_GetOnlineFriends = new grpc.web.MethodDescriptor(
+  '/proto.UserService/GetOnlineFriends',
+  grpc.web.MethodType.UNARY,
+  grpc_base_pb.AuthenticateRequest,
+  proto.proto.FriendsResponse,
+  /**
+   * @param {!proto.proto.AuthenticateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.FriendsResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.AuthenticateRequest,
+ *   !proto.proto.FriendsResponse>}
+ */
+const methodInfo_UserService_GetOnlineFriends = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.proto.FriendsResponse,
+  /**
+   * @param {!proto.proto.AuthenticateRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.FriendsResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.AuthenticateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.FriendsResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.FriendsResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.UserServiceClient.prototype.getOnlineFriends =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.UserService/GetOnlineFriends',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_GetOnlineFriends,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.AuthenticateRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.FriendsResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.UserServicePromiseClient.prototype.getOnlineFriends =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.UserService/GetOnlineFriends',
+      request,
+      metadata || {},
+      methodDescriptor_UserService_GetOnlineFriends);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
  *   !proto.proto.ConnectionRequest,
  *   !proto.proto.ConnectionsResponse>}
  */

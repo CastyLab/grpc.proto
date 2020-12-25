@@ -58,4 +58,13 @@ enum EMSG {
     SELF_PERSONAL_STATE_CHANGED         = 35;
     SELF_PERSONAL_ACTIVITY_CHANGED      = 36;
     SELF_FRIEND_REQUEST_ACCEPTED        = 37;
+
+    JOIN_THEATER                        = 38;
+    LEAVE_THEATER                       = 39;
+    NEW_FRIEND                          = 40;
+    REMOVED_FRIEND                      = 41;
+
+    CALLLING                            = 42;
+    DECLINED                            = 43;
+    ANSWERED                            = 44;
 }

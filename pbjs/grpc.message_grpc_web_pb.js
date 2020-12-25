@@ -159,52 +159,52 @@ proto.proto.MessagesServicePromiseClient.prototype.getUserMessages =
 /**
  * @const
  * @type {!grpc.web.MethodDescriptor<
- *   !proto.proto.CreateMessageRequest,
- *   !proto.proto.CreateMessageResponse>}
+ *   !proto.proto.MessageRequest,
+ *   !proto.proto.MessageResponse>}
  */
 const methodDescriptor_MessagesService_CreateMessage = new grpc.web.MethodDescriptor(
   '/proto.MessagesService/CreateMessage',
   grpc.web.MethodType.UNARY,
-  proto.proto.CreateMessageRequest,
-  proto.proto.CreateMessageResponse,
+  proto.proto.MessageRequest,
+  proto.proto.MessageResponse,
   /**
-   * @param {!proto.proto.CreateMessageRequest} request
+   * @param {!proto.proto.MessageRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.proto.CreateMessageResponse.deserializeBinary
+  proto.proto.MessageResponse.deserializeBinary
 );
 
 
 /**
  * @const
  * @type {!grpc.web.AbstractClientBase.MethodInfo<
- *   !proto.proto.CreateMessageRequest,
- *   !proto.proto.CreateMessageResponse>}
+ *   !proto.proto.MessageRequest,
+ *   !proto.proto.MessageResponse>}
  */
 const methodInfo_MessagesService_CreateMessage = new grpc.web.AbstractClientBase.MethodInfo(
-  proto.proto.CreateMessageResponse,
+  proto.proto.MessageResponse,
   /**
-   * @param {!proto.proto.CreateMessageRequest} request
+   * @param {!proto.proto.MessageRequest} request
    * @return {!Uint8Array}
    */
   function(request) {
     return request.serializeBinary();
   },
-  proto.proto.CreateMessageResponse.deserializeBinary
+  proto.proto.MessageResponse.deserializeBinary
 );
 
 
 /**
- * @param {!proto.proto.CreateMessageRequest} request The
+ * @param {!proto.proto.MessageRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @param {function(?grpc.web.Error, ?proto.proto.CreateMessageResponse)}
+ * @param {function(?grpc.web.Error, ?proto.proto.MessageResponse)}
  *     callback The callback function(error, response)
- * @return {!grpc.web.ClientReadableStream<!proto.proto.CreateMessageResponse>|undefined}
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.MessageResponse>|undefined}
  *     The XHR Node Readable Stream
  */
 proto.proto.MessagesServiceClient.prototype.createMessage =
@@ -219,11 +219,11 @@ proto.proto.MessagesServiceClient.prototype.createMessage =
 
 
 /**
- * @param {!proto.proto.CreateMessageRequest} request The
+ * @param {!proto.proto.MessageRequest} request The
  *     request proto
  * @param {?Object<string, string>} metadata User defined
  *     call metadata
- * @return {!Promise<!proto.proto.CreateMessageResponse>}
+ * @return {!Promise<!proto.proto.MessageResponse>}
  *     A native promise that resolves to the response
  */
 proto.proto.MessagesServicePromiseClient.prototype.createMessage =
@@ -233,6 +233,246 @@ proto.proto.MessagesServicePromiseClient.prototype.createMessage =
       request,
       metadata || {},
       methodDescriptor_MessagesService_CreateMessage);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.MessageRequest,
+ *   !proto.proto.MessageResponse>}
+ */
+const methodDescriptor_MessagesService_EditMessage = new grpc.web.MethodDescriptor(
+  '/proto.MessagesService/EditMessage',
+  grpc.web.MethodType.UNARY,
+  proto.proto.MessageRequest,
+  proto.proto.MessageResponse,
+  /**
+   * @param {!proto.proto.MessageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.MessageResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.MessageRequest,
+ *   !proto.proto.MessageResponse>}
+ */
+const methodInfo_MessagesService_EditMessage = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.proto.MessageResponse,
+  /**
+   * @param {!proto.proto.MessageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.MessageResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.MessageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.MessageResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.MessageResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.MessagesServiceClient.prototype.editMessage =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.MessagesService/EditMessage',
+      request,
+      metadata || {},
+      methodDescriptor_MessagesService_EditMessage,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.MessageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.MessageResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.MessagesServicePromiseClient.prototype.editMessage =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.MessagesService/EditMessage',
+      request,
+      metadata || {},
+      methodDescriptor_MessagesService_EditMessage);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.MessageRequest,
+ *   !proto.proto.MessageResponse>}
+ */
+const methodDescriptor_MessagesService_DeleteMessage = new grpc.web.MethodDescriptor(
+  '/proto.MessagesService/DeleteMessage',
+  grpc.web.MethodType.UNARY,
+  proto.proto.MessageRequest,
+  proto.proto.MessageResponse,
+  /**
+   * @param {!proto.proto.MessageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.MessageResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.MessageRequest,
+ *   !proto.proto.MessageResponse>}
+ */
+const methodInfo_MessagesService_DeleteMessage = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.proto.MessageResponse,
+  /**
+   * @param {!proto.proto.MessageRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.MessageResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.MessageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.MessageResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.MessageResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.MessagesServiceClient.prototype.deleteMessage =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.MessagesService/DeleteMessage',
+      request,
+      metadata || {},
+      methodDescriptor_MessagesService_DeleteMessage,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.MessageRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.MessageResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.MessagesServicePromiseClient.prototype.deleteMessage =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.MessagesService/DeleteMessage',
+      request,
+      metadata || {},
+      methodDescriptor_MessagesService_DeleteMessage);
+};
+
+
+/**
+ * @const
+ * @type {!grpc.web.MethodDescriptor<
+ *   !proto.proto.CreateAttachmentRequest,
+ *   !proto.proto.AttachmentResponse>}
+ */
+const methodDescriptor_MessagesService_CreateAttachment = new grpc.web.MethodDescriptor(
+  '/proto.MessagesService/CreateAttachment',
+  grpc.web.MethodType.UNARY,
+  proto.proto.CreateAttachmentRequest,
+  proto.proto.AttachmentResponse,
+  /**
+   * @param {!proto.proto.CreateAttachmentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.AttachmentResponse.deserializeBinary
+);
+
+
+/**
+ * @const
+ * @type {!grpc.web.AbstractClientBase.MethodInfo<
+ *   !proto.proto.CreateAttachmentRequest,
+ *   !proto.proto.AttachmentResponse>}
+ */
+const methodInfo_MessagesService_CreateAttachment = new grpc.web.AbstractClientBase.MethodInfo(
+  proto.proto.AttachmentResponse,
+  /**
+   * @param {!proto.proto.CreateAttachmentRequest} request
+   * @return {!Uint8Array}
+   */
+  function(request) {
+    return request.serializeBinary();
+  },
+  proto.proto.AttachmentResponse.deserializeBinary
+);
+
+
+/**
+ * @param {!proto.proto.CreateAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @param {function(?grpc.web.Error, ?proto.proto.AttachmentResponse)}
+ *     callback The callback function(error, response)
+ * @return {!grpc.web.ClientReadableStream<!proto.proto.AttachmentResponse>|undefined}
+ *     The XHR Node Readable Stream
+ */
+proto.proto.MessagesServiceClient.prototype.createAttachment =
+    function(request, metadata, callback) {
+  return this.client_.rpcCall(this.hostname_ +
+      '/proto.MessagesService/CreateAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_MessagesService_CreateAttachment,
+      callback);
+};
+
+
+/**
+ * @param {!proto.proto.CreateAttachmentRequest} request The
+ *     request proto
+ * @param {?Object<string, string>} metadata User defined
+ *     call metadata
+ * @return {!Promise<!proto.proto.AttachmentResponse>}
+ *     A native promise that resolves to the response
+ */
+proto.proto.MessagesServicePromiseClient.prototype.createAttachment =
+    function(request, metadata) {
+  return this.client_.unaryCall(this.hostname_ +
+      '/proto.MessagesService/CreateAttachment',
+      request,
+      metadata || {},
+      methodDescriptor_MessagesService_CreateAttachment);
 };
 
 
