@@ -67,4 +67,6 @@ enum EMSG {
     CALLLING                            = 42;
     DECLINED                            = 43;
     ANSWERED                            = 44;
+
+    GET_FRIEND_STATE                    = 45;
 }

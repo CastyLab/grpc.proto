@@ -993,6 +993,7 @@ $root.proto = (function() {
                 case 42:
                 case 43:
                 case 44:
+                case 45:
                     break;
                 }
             if (message.data != null && message.hasOwnProperty("data"))
@@ -1199,6 +1200,10 @@ $root.proto = (function() {
             case 44:
                 message.type = 44;
                 break;
+            case "GET_FRIEND_STATE":
+            case 45:
+                message.type = 45;
+                break;
             }
             if (object.data != null)
                 if (typeof object.data === "string")
@@ -1329,6 +1334,7 @@ $root.proto = (function() {
      * @property {number} CALLLING=42 CALLLING value
      * @property {number} DECLINED=43 DECLINED value
      * @property {number} ANSWERED=44 ANSWERED value
+     * @property {number} GET_FRIEND_STATE=45 GET_FRIEND_STATE value
      */
     proto.EMSG = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -1377,6 +1383,7 @@ $root.proto = (function() {
         values[valuesById[42] = "CALLLING"] = 42;
         values[valuesById[43] = "DECLINED"] = 43;
         values[valuesById[44] = "ANSWERED"] = 44;
+        values[valuesById[45] = "GET_FRIEND_STATE"] = 45;
         return values;
     })();
 
