@@ -1,7 +1,7 @@
 compile:
 	echo "Compile protobuffers for Golang... \n";
 	protoc -I=protofiles \
-          --go-grpc_out=proto \
+          --go_out=proto --go-grpc_out=proto \
           protofiles/*.proto
 
 	echo "Compile {Websocket} protobuffers for JavaScript... \n";
