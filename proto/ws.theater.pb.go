@@ -162,6 +162,100 @@ func (x *TheaterVideoPlayer) GetSentAt() *timestamp.Timestamp {
 	return nil
 }
 
+type JoinTheaterMsgEvent struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TheaterId string `protobuf:"bytes,1,opt,name=theater_id,json=theaterId,proto3" json:"theater_id,omitempty"`
+}
+
+func (x *JoinTheaterMsgEvent) Reset() {
+	*x = JoinTheaterMsgEvent{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ws_theater_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *JoinTheaterMsgEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JoinTheaterMsgEvent) ProtoMessage() {}
+
+func (x *JoinTheaterMsgEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_ws_theater_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use JoinTheaterMsgEvent.ProtoReflect.Descriptor instead.
+func (*JoinTheaterMsgEvent) Descriptor() ([]byte, []int) {
+	return file_ws_theater_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *JoinTheaterMsgEvent) GetTheaterId() string {
+	if x != nil {
+		return x.TheaterId
+	}
+	return ""
+}
+
+type LeaveTheaterMsgEvent struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TheaterId string `protobuf:"bytes,1,opt,name=theater_id,json=theaterId,proto3" json:"theater_id,omitempty"`
+}
+
+func (x *LeaveTheaterMsgEvent) Reset() {
+	*x = LeaveTheaterMsgEvent{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_ws_theater_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LeaveTheaterMsgEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LeaveTheaterMsgEvent) ProtoMessage() {}
+
+func (x *LeaveTheaterMsgEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_ws_theater_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LeaveTheaterMsgEvent.ProtoReflect.Descriptor instead.
+func (*LeaveTheaterMsgEvent) Descriptor() ([]byte, []int) {
+	return file_ws_theater_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *LeaveTheaterMsgEvent) GetTheaterId() string {
+	if x != nil {
+		return x.TheaterId
+	}
+	return ""
+}
+
 type MediaSourceChangedEvent struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -174,7 +268,7 @@ type MediaSourceChangedEvent struct {
 func (x *MediaSourceChangedEvent) Reset() {
 	*x = MediaSourceChangedEvent{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ws_theater_proto_msgTypes[1]
+		mi := &file_ws_theater_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -187,7 +281,7 @@ func (x *MediaSourceChangedEvent) String() string {
 func (*MediaSourceChangedEvent) ProtoMessage() {}
 
 func (x *MediaSourceChangedEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_ws_theater_proto_msgTypes[1]
+	mi := &file_ws_theater_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -200,7 +294,7 @@ func (x *MediaSourceChangedEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MediaSourceChangedEvent.ProtoReflect.Descriptor instead.
 func (*MediaSourceChangedEvent) Descriptor() ([]byte, []int) {
-	return file_ws_theater_proto_rawDescGZIP(), []int{1}
+	return file_ws_theater_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *MediaSourceChangedEvent) GetTheaterId() string {
@@ -245,14 +339,21 @@ var file_ws_theater_proto_rawDesc = []byte{
 	0x74, 0x41, 0x74, 0x22, 0x2d, 0x0a, 0x05, 0x53, 0x74, 0x61, 0x74, 0x65, 0x12, 0x0b, 0x0a, 0x07,
 	0x49, 0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x4c, 0x41,
 	0x59, 0x49, 0x4e, 0x47, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x50, 0x41, 0x55, 0x53, 0x45, 0x44,
-	0x10, 0x02, 0x22, 0x60, 0x0a, 0x17, 0x4d, 0x65, 0x64, 0x69, 0x61, 0x53, 0x6f, 0x75, 0x72, 0x63,
-	0x65, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x64, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x1d, 0x0a,
-	0x0a, 0x74, 0x68, 0x65, 0x61, 0x74, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x09, 0x74, 0x68, 0x65, 0x61, 0x74, 0x65, 0x72, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0f,
-	0x6d, 0x65, 0x64, 0x69, 0x61, 0x5f, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6d, 0x65, 0x64, 0x69, 0x61, 0x53, 0x6f, 0x75, 0x72,
-	0x63, 0x65, 0x49, 0x64, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x10, 0x02, 0x22, 0x34, 0x0a, 0x13, 0x4a, 0x6f, 0x69, 0x6e, 0x54, 0x68, 0x65, 0x61, 0x74, 0x65,
+	0x72, 0x4d, 0x73, 0x67, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x74, 0x68, 0x65,
+	0x61, 0x74, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x74,
+	0x68, 0x65, 0x61, 0x74, 0x65, 0x72, 0x49, 0x64, 0x22, 0x35, 0x0a, 0x14, 0x4c, 0x65, 0x61, 0x76,
+	0x65, 0x54, 0x68, 0x65, 0x61, 0x74, 0x65, 0x72, 0x4d, 0x73, 0x67, 0x45, 0x76, 0x65, 0x6e, 0x74,
+	0x12, 0x1d, 0x0a, 0x0a, 0x74, 0x68, 0x65, 0x61, 0x74, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x74, 0x68, 0x65, 0x61, 0x74, 0x65, 0x72, 0x49, 0x64, 0x22,
+	0x60, 0x0a, 0x17, 0x4d, 0x65, 0x64, 0x69, 0x61, 0x53, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x43, 0x68,
+	0x61, 0x6e, 0x67, 0x65, 0x64, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x74, 0x68,
+	0x65, 0x61, 0x74, 0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
+	0x74, 0x68, 0x65, 0x61, 0x74, 0x65, 0x72, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0f, 0x6d, 0x65, 0x64,
+	0x69, 0x61, 0x5f, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0d, 0x6d, 0x65, 0x64, 0x69, 0x61, 0x53, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x49,
+	0x64, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -268,18 +369,20 @@ func file_ws_theater_proto_rawDescGZIP() []byte {
 }
 
 var file_ws_theater_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_ws_theater_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_ws_theater_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_ws_theater_proto_goTypes = []interface{}{
 	(TheaterVideoPlayer_State)(0),   // 0: proto.TheaterVideoPlayer.State
 	(*TheaterVideoPlayer)(nil),      // 1: proto.TheaterVideoPlayer
-	(*MediaSourceChangedEvent)(nil), // 2: proto.MediaSourceChangedEvent
-	(*MediaSource)(nil),             // 3: proto.MediaSource
-	(*timestamp.Timestamp)(nil),     // 4: google.protobuf.Timestamp
+	(*JoinTheaterMsgEvent)(nil),     // 2: proto.JoinTheaterMsgEvent
+	(*LeaveTheaterMsgEvent)(nil),    // 3: proto.LeaveTheaterMsgEvent
+	(*MediaSourceChangedEvent)(nil), // 4: proto.MediaSourceChangedEvent
+	(*MediaSource)(nil),             // 5: proto.MediaSource
+	(*timestamp.Timestamp)(nil),     // 6: google.protobuf.Timestamp
 }
 var file_ws_theater_proto_depIdxs = []int32{
-	3, // 0: proto.TheaterVideoPlayer.media_source:type_name -> proto.MediaSource
+	5, // 0: proto.TheaterVideoPlayer.media_source:type_name -> proto.MediaSource
 	0, // 1: proto.TheaterVideoPlayer.state:type_name -> proto.TheaterVideoPlayer.State
-	4, // 2: proto.TheaterVideoPlayer.sent_at:type_name -> google.protobuf.Timestamp
+	6, // 2: proto.TheaterVideoPlayer.sent_at:type_name -> google.protobuf.Timestamp
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -307,6 +410,30 @@ func file_ws_theater_proto_init() {
 			}
 		}
 		file_ws_theater_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*JoinTheaterMsgEvent); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ws_theater_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LeaveTheaterMsgEvent); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_ws_theater_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MediaSourceChangedEvent); i {
 			case 0:
 				return &v.state
@@ -325,7 +452,7 @@ func file_ws_theater_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_ws_theater_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

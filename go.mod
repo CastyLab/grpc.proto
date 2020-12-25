@@ -8,5 +8,6 @@ require (
 	github.com/gobwas/ws v1.0.3
 	github.com/golang/protobuf v1.4.1
 	google.golang.org/grpc v1.28.0
-	google.golang.org/protobuf v1.24.0
+	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.0.1 // indirect
+	google.golang.org/protobuf v1.25.0
 )

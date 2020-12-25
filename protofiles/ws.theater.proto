@@ -20,6 +20,14 @@ message TheaterVideoPlayer {
     google.protobuf.Timestamp  sent_at       = 7;
 }
 
+message JoinTheaterMsgEvent {
+    string theater_id = 1;
+}
+
+message LeaveTheaterMsgEvent {
+    string theater_id = 1;
+}
+
 message MediaSourceChangedEvent {
     string  theater_id       = 1;
     string  media_source_id  = 2;
